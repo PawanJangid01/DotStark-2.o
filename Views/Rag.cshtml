@@ -89,8 +89,8 @@
     .icon-box-sm svg { width: 20px; height: 20px; }
 
     /* ---- Sections ---- */
-    .section { padding: 6rem 0; border-top: 1px solid var(--border); }
-    .section-alt { background: var(--accent-bg); }
+    .section { padding: 5rem 0; }
+    .section-alt { background: var(--cool-grey); }
     .section-header { max-width: 640px; margin: 0 auto 4rem; text-align: center; }
     .section-header h2 { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 600; }
     .section-header p { margin-top: 1rem; color: var(--muted); font-size: 1.0625rem; }
@@ -133,9 +133,20 @@
     .industry-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
 
     /* ---- Privacy Card ---- */
-    .privacy-card { padding: 2rem 2.5rem; max-width: 640px; margin: 0 auto; }
-    .privacy-card h3 { font-size: 1.25rem; font-weight: 600; margin: 0.75rem 0; }
-    .privacy-card > p { font-size: 0.875rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.7; }
+    .privacy-split {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @@media (min-width: 768px) {
+      .privacy-split { grid-template-columns: 1fr 1fr; }
+    }
+    .privacy-text h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 600; margin-bottom: 1rem; }
+    .privacy-text p { color: var(--muted); line-height: 1.7; font-size: 1rem; }
+    .privacy-card { padding: 2.5rem; height: 100%; }
+    .privacy-card .check-list li { font-size: 0.9375rem; padding: 0.625rem 0; border-bottom: 1px solid var(--border); }
+    .privacy-card .check-list li:last-child { border-bottom: none; }
     .check-list { list-style: none; }
     .check-list li {
       display: flex; align-items: center; gap: 0.75rem;
@@ -218,10 +229,10 @@
 
 <!-- 1. HERO -->
 <section class="hero">
-  <div class="grid-pattern"></div>
+
   <div class="container" style="position:relative">
     <div class="fade-up">
-      <h1>RAG Solutions for Intelligent Knowledge Systems</h1>
+      <h1>RAG Solutions For Intelligent Knowledge Systems</h1>
       <p class="subtitle">Build AI systems that securely retrieve, understand, and generate insights from your business data.</p>
       <p class="subtext">Dotstark 2.0 helps enterprises design and deploy RAG based solutions that enable intelligent search, knowledge automation, and accurate decision-making at scale.</p>
       <div class="cta-wrap">
@@ -288,7 +299,7 @@
   </div>
 </section>
 
-<!-- 3. WHY RAG + USE CASES + PRIVACY -->
+<!-- 3. WHY RAG + USE CASES-->
 <section class="section section-alt">
   <div class="container">
     <div class="section-header fade-up">
@@ -336,19 +347,28 @@
       </div>
     </div>
 
-    <!-- Privacy -->
-    <div class="card privacy-card fade-up">
-      <div class="icon-box">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+  </div>
+</section>
+
+<!-- 3b. PRIVACY -->
+<section class="section">
+  <div class="container">
+    <div class="privacy-split fade-up">
+      <div class="privacy-text">
+        <div class="icon-box" style="margin-bottom:1.5rem;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h2>Why Privacy Matters</h2>
+        <p>RAG ensures your data stays within your control. Instead of sending sensitive information to external systems, it retrieves and processes data securely within your infrastructure or controlled environments.</p>
       </div>
-      <h3>Why Privacy Matters</h3>
-      <p>RAG ensures your data stays within your control. Instead of sending sensitive information to external systems, it retrieves and processes data securely within your infrastructure or controlled environments.</p>
-      <ul class="check-list">
-        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg> Keeps sensitive data secure</li>
-        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg> Reduces risk of data leakage</li>
-        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg> Ensures compliance with industry standards</li>
-        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg> Improves trust in AI systems</li>
-      </ul>
+      <div class="card privacy-card">
+        <ul class="check-list">
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg> Keeps sensitive data secure</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg> Reduces risk of data leakage</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg> Ensures compliance with industry standards</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg> Improves trust in AI systems</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -380,7 +400,6 @@
   <div class="container">
     <div class="rag365-grid fade-up">
       <div>
-        <span class="badge">Product</span>
         <h2>RAG 365 – Our AI Knowledge Platform</h2>
         <p>RAG 365 is our enterprise-grade AI platform that enables organizations to quickly deploy intelligent knowledge systems without building from scratch.</p>
         <a href="#" class="btn-primary">
@@ -443,7 +462,7 @@
 @* <section class="section section-alt cta-section">
   <div class="container">
     <div class="fade-up">
-      <h2>Build Intelligent Knowledge Systems with RAG</h2>
+      <h2>Build Intelligent Knowledge Systems With RAG</h2>
       <p>Partner with Dotstark 2.0 to implement scalable RAG solutions tailored to your business needs.</p>
       <div class="cta-wrap">
         <a href="#" class="btn-primary">
@@ -458,10 +477,10 @@
  <section id="contact" class="cta-section section-padding-trust">
    <div class="container">
      <div class="inner">
-       <h2>Build Intelligent Knowledge Systems with RAG</h2>
+       <h2>Build Intelligent Knowledge Systems With RAG</h2>
        <p>Partner with Dotstark 2.0 to implement scalable RAG solutions tailored to your business needs.</p>
        <div class="btn-group">
-         <a href="/contact-us" class="btn btn-white">Book a Consultation</a>
+         <a href="/contact-us" class="btn btn-white">Talk to an Expert</a>
        </div>
      </div>
    </div>
