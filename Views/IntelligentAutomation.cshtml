@@ -1,0 +1,427 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.IntelligentAutomation>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "MasterLayout.cshtml";
+}
+@section Styles {
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primarycss: 228, 100%, 55%;
+      --bg: #ffffff;
+      --surface: #f5f5f5;
+      --border: #e5e5e5;
+      --text-bright: #000000;
+      --text-base: #1a1a1a;
+      --text-dim: #6b7280;
+      --text-muted: #9ca3af;
+      --primary-color: hsl(228, 100%, 55%);
+      --primary-light: hsl(228, 100%, 72%);
+      --primary-bg: hsl(228, 100%, 96%);
+      --radius: 0.75rem;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text-base);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .section-padding { padding-left: 1.5rem; padding-right: 1.5rem; }
+    @@media (min-width: 768px) { .section-padding { padding-left: 2rem; padding-right: 2rem; } }
+    @@media (min-width: 1024px) { .section-padding { padding-left: 4rem; padding-right: 4rem; } }
+
+    .gradient-text {
+      background: linear-gradient(to right, hsl(228,100%,55%), hsl(228,100%,72%));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .surface-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .glow-border {
+      box-shadow: 0 0 0 1px var(--border), 0 0 20px -8px hsla(var(--primarycss), 0.3);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.875rem 2rem;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: #fff;
+      box-shadow: 0 0 24px -4px hsla(var(--primarycss), 0.4);
+    }
+    .btn-primary:hover {
+      background: hsl(228, 100%, 48%);
+      box-shadow: 0 0 32px -4px hsla(var(--primarycss), 0.6);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-base);
+      border: 1px solid hsla(var(--primarycss), 0.4);
+    }
+    .btn-outline:hover {
+      background: hsla(var(--primarycss), 0.1);
+      border-color: var(--primary-color);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      opacity: 0.03;
+      background-image: linear-gradient(var(--primary-color) 1px, transparent 1px), linear-gradient(90deg, var(--primary-color) 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
+    .hero-content { position: relative; max-width: 56rem; margin: 0 auto; text-align: center; width: 100%; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      background: var(--primary-bg);
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.25rem, 5vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.5rem;
+      color: var(--text-bright);
+      text-wrap: balance;
+    }
+    .hero .sub { font-size: 1.125rem; color: var(--text-dim); max-width: 40rem; margin: 0 auto 1rem; }
+    .hero .sub2 { font-size: 1rem; color: var(--text-muted); max-width: 36rem; margin: 0 auto 2.5rem; }
+
+    /* ---- SECTION HEADERS ---- */
+    .section-label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--primary-color);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-size: clamp(1.875rem, 3vw, 3rem);
+      font-weight: 700;
+      color: var(--text-bright);
+      text-wrap: balance;
+      margin-bottom: 1.5rem;
+    }
+    .section-desc { font-size: 1.125rem; color: var(--text-dim); max-width: 48rem; margin: 0 auto; }
+
+    /* ---- SOLUTIONS GRID ---- */
+    .solutions-grid { display: grid; gap: 1.5rem; }
+    @@media (min-width: 768px) { .solutions-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .solution-card { padding: 2rem; transition: border-color 0.3s; }
+    .solution-card:hover { border-color: hsla(var(--primarycss), 0.3); }
+
+    .icon-box {
+      width: 3rem; height: 3rem; border-radius: 0.5rem;
+      background: var(--primary-bg); display: flex; align-items: center; justify-content: center;
+      color: var(--primary-color); margin-bottom: 1.5rem;
+    }
+    .icon-box svg { width: 1.5rem; height: 1.5rem; }
+
+    .solution-card h3 { font-size: 1.25rem; font-weight: 700; color: var(--text-bright); margin-bottom: 0.75rem; }
+    .solution-card .desc { color: var(--text-dim); margin-bottom: 1rem; }
+    .solution-card .highlight { font-size: 0.875rem; color: var(--text-muted); font-style: italic; margin-bottom: 1.5rem; }
+    .cap-label { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.75rem; }
+    .cap-list { list-style: none; }
+    .cap-list li {
+      display: flex; align-items: flex-start; gap: 0.625rem;
+      font-size: 0.875rem; color: var(--text-dim); margin-bottom: 0.5rem;
+    }
+    .cap-list li svg { width: 1rem; height: 1rem; color: var(--primary-color); flex-shrink: 0; margin-top: 0.125rem; }
+
+    /* ---- MID CTA ---- */
+    .mid-cta {
+      padding: 5rem 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .mid-cta h2 { font-size: clamp(1.5rem, 2.5vw, 2.25rem); font-weight: 700; color: var(--text-bright); margin-bottom: 1rem; text-wrap: balance; }
+    .mid-cta p { font-size: 1.125rem; color: var(--text-dim); max-width: 40rem; margin: 0 auto 2rem; }
+
+    /* ---- BENEFITS ---- */
+    .benefits-grid { display: grid; gap: 1.5rem; }
+    @@media (min-width: 640px) { .benefits-grid { grid-template-columns: repeat(2, 1fr); } }
+    @@media (min-width: 1024px) { .benefits-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .benefit-card {
+      display: flex; gap: 1.25rem; padding: 1.5rem;
+      border-radius: var(--radius); border: 1px solid var(--border);
+      background: rgba(250,250,250,0.5); transition: border-color 0.3s;
+    }
+    .benefit-card:hover { border-color: hsla(var(--primarycss), 0.2); }
+    .benefit-card h3 { font-size: 1.125rem; font-weight: 600; color: var(--text-bright); margin-bottom: 0.5rem; }
+    .benefit-card p { color: var(--text-dim); }
+
+    /* ---- CASE STUDY ---- */
+    .case-study-section { border-top: 1px solid var(--border); }
+    .case-study { padding: 2rem; }
+    @@media (min-width: 768px) { .case-study { padding: 3rem; } }
+    @@media (min-width: 1024px) { .case-study { padding: 4rem; } }
+    .case-study .label-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .case-study .label-row svg { width: 1.25rem; height: 1.25rem; color: var(--primary-color); }
+    .case-study h2 { font-size: clamp(1.5rem, 2.5vw, 2.25rem); font-weight: 700; color: var(--text-bright); margin-bottom: 1.5rem; text-wrap: balance; }
+    .case-study p { font-size: 1.125rem; color: var(--text-dim); max-width: 48rem; margin-bottom: 1rem; }
+
+    /* ---- DELIVERY STEPS ---- */
+    .step-card {
+      display: flex; gap: 1.5rem; padding: 1.5rem;
+      border-radius: var(--radius); border: 1px solid var(--border);
+      background: rgba(250,250,250,0.5); transition: border-color 0.3s;
+      margin-bottom: 1rem;
+    }
+    @@media (min-width: 768px) { .step-card { gap: 2rem; padding: 2rem; } }
+    .step-card:hover { border-color: hsla(var(--primarycss), 0.2); }
+    .step-num { font-size: clamp(1.5rem, 2vw, 2.25rem); font-weight: 900; color: hsla(var(--primarycss), 0.2); line-height: 1; flex-shrink: 0; padding-top: 0.25rem; }
+    .step-card h3 { font-size: 1.125rem; font-weight: 600; color: var(--text-bright); margin-bottom: 0.5rem; }
+    .step-card p { color: var(--text-dim); }
+
+    /* ---- FINAL CTA ---- */
+    .final-cta {
+      padding: 5rem 0 7rem;
+      text-align: center;
+    }
+    .final-cta h2 { font-size: clamp(1.5rem, 2.5vw, 2.25rem); font-weight: 700; color: var(--text-bright); margin-bottom: 1rem; text-wrap: balance; }
+    .final-cta p { font-size: 1.125rem; color: var(--text-dim); max-width: 40rem; margin: 0 auto 2rem; }
+    .final-cta .btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  </style>
+}
+
+  <!-- HERO -->
+  <section class="hero section-padding">
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="reveal">
+   <br>
+      </div>
+      <h1 class="reveal">Automate Smarter. Operate Faster. <span class="gradient-text">Scale Without Limits.</span></h1>
+      <p class="sub reveal">Harness the power of Intelligent Automation to eliminate manual effort, streamline complex workflows, and drive consistent results across your entire organization.</p>
+      <p class="sub2 reveal">DotStark 2.0 delivers end-to-end intelligent automation solutions — combining RPA, AI, and process orchestration to transform how your business operates.</p>
+      <div class="reveal">
+        <a href="#" class="btn btn-primary">Schedule a Free Consultation <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTIONS -->
+  <section class="section-padding" style="padding-top:6rem;padding-bottom:6rem">
+    <div style="max-width:72rem;margin:0 auto">
+      <div class="reveal" style="text-align:center;margin-bottom:4rem">
+        <p class="section-label">Our Intelligent Automation Solutions</p>
+        <h2 class="section-title">Automation Solutions Built for Your Business</h2>
+        <p class="section-desc">From front-office interactions to back-office operations, our intelligent automation capabilities are designed to integrate seamlessly with your existing systems and deliver measurable outcomes from day one.</p>
+      </div>
+      <div class="solutions-grid">
+
+        <div class="surface-card glow-border solution-card reveal">
+          <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
+          <h3>Robotic Process Automation (RPA)</h3>
+          <p class="desc">Our RPA solutions deploy software bots that mimic human actions to automate high-volume, rule-based tasks across applications and systems.</p>
+          <p class="highlight">Seamlessly integrates with your existing ERP, CRM, and legacy systems without disrupting infrastructure.</p>
+          <p class="cap-label">Key Capabilities:</p>
+          <ul class="cap-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Automated data extraction, entry, and reconciliation</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Cross-application workflow execution</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Exception handling and escalation workflows</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Audit trails and compliance reporting</span></li>
+          </ul>
+        </div>
+
+        <div class="surface-card glow-border solution-card reveal">
+          <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg></div>
+          <h3>Intelligent Document Processing (IDP)</h3>
+          <p class="desc">Our IDP solution uses AI, OCR, and machine learning to automatically extract, classify, and validate data from structured and unstructured documents.</p>
+          <p class="highlight">Reduce manual document handling by up to 90% while improving data accuracy and processing speed.</p>
+          <p class="cap-label">Key Capabilities:</p>
+          <ul class="cap-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Multi-format document ingestion (PDF, image, email, scanned docs)</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>AI-powered data extraction and classification</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Automated validation and error flagging</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Integration with downstream business systems</span></li>
+          </ul>
+        </div>
+
+        <div class="surface-card glow-border solution-card reveal">
+          <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg></div>
+          <h3>Business Process Orchestration</h3>
+          <p class="desc">Go beyond individual task automation with end-to-end process orchestration. We coordinate people, systems, and bots for seamless workflows.</p>
+          <p class="highlight">From approval workflows to multi-step operational processes — every step runs on time and in sync.</p>
+          <p class="cap-label">Key Capabilities:</p>
+          <ul class="cap-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>End-to-end workflow design and automation</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Human-in-the-loop task management</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Real-time process monitoring and SLA tracking</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Dynamic routing and conditional logic</span></li>
+          </ul>
+        </div>
+
+        <div class="surface-card glow-border solution-card reveal">
+          <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.5a2.5 2.5 0 0 0-4.96-.46 2.5 2.5 0 0 0-1.98 3 2.5 2.5 0 0 0-1.32 4.24 3 3 0 0 0 .34 5.58 2.5 2.5 0 0 0 2.96 3.08A2.5 2.5 0 0 0 12 19.5a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 12 4.5"/><path d="m15.7 10.4-.9.4"/><path d="m9.2 13.2-.9.4"/><path d="m13.6 15.7-.4-.9"/><path d="m10.8 9.2-.4-.9"/><path d="m15.7 13.5-.9-.4"/><path d="m9.2 10.9-.9-.4"/><path d="m10.5 15.7.4-.9"/><path d="m13.1 9.2.4-.9"/></svg></div>
+          <h3>AI-Powered Automation</h3>
+          <p class="desc">Combine the reliability of automation with the intelligence of AI. Handle complex, judgment-intensive tasks that learn and continuously improve.</p>
+          <p class="highlight">From predictive automation to NLP, we bring cognitive capabilities to your operational workflows.</p>
+          <p class="cap-label">Key Capabilities:</p>
+          <ul class="cap-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Predictive decision-making and recommendations</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>NLP for email, chat, and document workflows</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Anomaly detection and proactive alerts</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Self-learning models that improve over time</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MID CTA -->
+  <section class="section-padding mid-cta">
+    <div class="reveal" style="max-width:48rem;margin:0 auto">
+      <h2>Ready to automate your most critical business processes?</h2>
+      <p>Let DotStark 2.0 identify the highest-impact automation opportunities in your organization and build a roadmap tailored to your goals.</p>
+      <a href="#" class="btn btn-primary">Let's Build Your Automation Roadmap <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+    </div>
+  </section>
+
+  <!-- WHY AUTOMATION -->
+  <section class="section-padding" style="padding-top:6rem;padding-bottom:6rem">
+    <div style="max-width:72rem;margin:0 auto">
+      <div class="reveal" style="text-align:center;margin-bottom:4rem">
+        <p class="section-label">Business Impact</p>
+        <h2 class="section-title">How Intelligent Automation Transforms Your Business</h2>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card reveal">
+          <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <div><h3>Eliminate Operational Bottlenecks</h3><p>Automation removes the manual steps that slow your teams down — processing documents, updating records, routing approvals — so work moves faster with fewer errors.</p></div>
+        </div>
+        <div class="benefit-card reveal">
+          <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <div><h3>Reduce Costs at Scale</h3><p>By automating repetitive, high-volume tasks, businesses significantly reduce operational costs while freeing up talent for higher-value work.</p></div>
+        </div>
+        <div class="benefit-card reveal">
+          <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div><h3>Achieve 24/7 Operational Continuity</h3><p>Automated systems run round-the-clock with consistent accuracy — ensuring your processes never pause, even outside business hours.</p></div>
+        </div>
+        <div class="benefit-card reveal">
+          <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <div><h3>Improve Compliance and Accuracy</h3><p>Automated workflows execute with precision every time, generating complete audit trails and reducing the risk of human error in regulated processes.</p></div>
+        </div>
+        <div class="benefit-card reveal">
+          <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div>
+          <div><h3>Accelerate Digital Transformation</h3><p>Intelligent automation connects legacy systems, enables data-driven decisions, and accelerates your overall digital transformation journey.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDY -->
+  <section class="section-padding case-study-section" style="padding-top:6rem;padding-bottom:6rem">
+    <div style="max-width:60rem;margin:0 auto">
+      <div class="surface-card glow-border case-study reveal">
+        <div class="label-row">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+          <span class="section-label" style="margin-bottom:0">Business Impact</span>
+        </div>
+        <h2>How a Financial Services Firm Cut Processing Time by 70% with Intelligent Automation</h2>
+        <p>A mid-sized financial services company was struggling with manual invoice processing, compliance reporting, and customer onboarding — all handled through siloed, labor-intensive workflows.</p>
+        <p style="margin-bottom:2rem">DotStark 2.0 deployed a combined RPA and IDP solution that automated document intake, data extraction, validation, and downstream system updates. Within 90 days, the firm reduced processing time by 70%, eliminated data entry errors, and freed over 1,200 hours per month of staff capacity.</p>
+        <a href="#" class="btn btn-outline">View Case Study <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DELIVERY PROCESS -->
+  <section class="section-padding" style="padding-top:6rem;padding-bottom:6rem">
+    <div style="max-width:60rem;margin:0 auto">
+      <div class="reveal" style="text-align:center;margin-bottom:4rem">
+        <p class="section-label">Our Process</p>
+        <h2 class="section-title">Our Proven Automation Delivery Approach</h2>
+        <p class="section-desc">We follow a structured, outcome-focused methodology to ensure every automation initiative delivers real and lasting value.</p>
+      </div>
+      <div>
+        <div class="step-card reveal"><div class="step-num">01</div><div><h3>Process Discovery & Assessment</h3><p>We analyze your existing workflows to identify the highest-impact automation opportunities — evaluating complexity, volume, and business value.</p></div></div>
+        <div class="step-card reveal"><div class="step-num">02</div><div><h3>Solution Design</h3><p>Our team designs a tailored automation architecture — selecting the right tools, frameworks, and integration patterns for your specific environment.</p></div></div>
+        <div class="step-card reveal"><div class="step-num">03</div><div><h3>Build & Configure</h3><p>We develop, configure, and test automation bots and workflows in a controlled environment before deployment, ensuring reliability and accuracy.</p></div></div>
+        <div class="step-card reveal"><div class="step-num">04</div><div><h3>Deploy & Integrate</h3><p>Automation is deployed into your live environment with seamless integration into existing systems and minimal disruption to ongoing operations.</p></div></div>
+        <div class="step-card reveal"><div class="step-num">05</div><div><h3>Monitor, Optimize & Scale</h3><p>Post-deployment, we continuously monitor performance, resolve exceptions, and optimize workflows — helping you scale automation across more processes over time.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="section-padding final-cta">
+    <div class="reveal" style="max-width:48rem;margin:0 auto">
+      <h2>Start Your Intelligent Automation Journey Today</h2>
+      <p>Partner with DotStark 2.0 to design, deploy, and scale intelligent automation solutions that streamline your operations and accelerate business growth.</p>
+      <div class="btn-group">
+        <a href="#" class="btn btn-primary">Talk to an Expert <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <a href="#" class="btn btn-outline">Explore Our Services</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+

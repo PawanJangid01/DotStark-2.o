@@ -1,0 +1,404 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Products>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "MasterLayout.cshtml";
+}
+@section Styles {
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primarycss:228,100%,55%;
+  --bg:#ffffff;
+  --fg:#111111;
+  --surface:#f5f5f5;
+  --border:#e5e5e5;
+  --muted:#6b7280;
+  --secondary-bg:#f0f4ff;
+  --radius:0.75rem;
+}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased;line-height:1.6}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+
+/* Layout */
+.section{padding:5rem 1.5rem}
+.container{max-width:72rem;margin:0 auto}
+.text-center{text-align:center}
+.grid-2{display:grid;grid-template-columns:1fr;gap:1.5rem}
+.grid-3{display:grid;grid-template-columns:1fr;gap:1.5rem}
+.grid-4{display:grid;grid-template-columns:1fr;gap:1.5rem}
+@@media(min-width:640px){.grid-2,.grid-3{grid-template-columns:repeat(2,1fr)}.sm-grid-3{grid-template-columns:repeat(3,1fr)}}
+@@media(min-width:768px){.grid-3{grid-template-columns:repeat(3,1fr)}.grid-2{grid-template-columns:repeat(2,1fr)}.grid-4{grid-template-columns:repeat(2,1fr)}}
+@@media(min-width:1024px){.grid-4{grid-template-columns:repeat(4,1fr)}}
+
+/* Typography */
+.gradient-text{background:linear-gradient(135deg,hsl(228,100%,55%),hsl(228,100%,72%));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.label{font-size:.75rem;font-weight:600;color:hsl(var(--primarycss));text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem}
+.heading{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.hero-heading{font-size:clamp(2.25rem,5vw,4rem);font-weight:800;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.25rem}
+.subtext{font-size:1.125rem;color:var(--muted);max-width:48rem;margin:0 auto 2rem}
+.muted{color:var(--muted)}
+
+/* Cards */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem}
+.stat-card{text-align:center}
+.stat-value{font-size:1.875rem;font-weight:700}
+.stat-label{font-size:.875rem;font-weight:600;margin-top:.25rem}
+.stat-sub{font-size:.75rem;color:var(--muted);margin-top:.25rem}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.875rem 2rem;border-radius:var(--radius);font-weight:600;font-size:1rem;border:none;cursor:pointer;transition:all .2s}
+.btn-primary{background:hsl(var(--primarycss));color:#fff;box-shadow:0 0 24px -4px hsla(var(--primarycss),.4)}
+.btn-primary:hover{background:hsl(228,100%,48%);box-shadow:0 0 32px -4px hsla(var(--primarycss),.6)}
+.btn-outline{background:transparent;border:1px solid hsla(var(--primarycss),.4);color:var(--fg)}
+.btn-outline:hover{background:hsla(var(--primarycss),.1);border-color:hsl(var(--primarycss))}
+.btn-group{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}
+
+/* Pill Badge */
+.pill{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;border-radius:9999px;border:1px solid var(--border);background:var(--secondary-bg);font-size:.875rem;color:var(--muted);margin-bottom:2rem}
+.pill-dot{width:.5rem;height:.5rem;border-radius:50%;background:hsl(var(--primarycss))}
+
+/* Icon box */
+.icon-box{width:2.5rem;height:2.5rem;border-radius:.5rem;background:hsla(var(--primarycss),.1);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;color:hsl(var(--primarycss));font-weight:700;font-size:1rem}
+
+/* Tag */
+.tag{font-size:.7rem;font-weight:600;color:hsl(var(--primarycss));text-transform:uppercase;letter-spacing:.08em}
+
+/* Mockup */
+.mockup{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem}
+.mockup-query{background:hsla(var(--primarycss),.08);border:1px solid hsla(var(--primarycss),.2);border-radius:.5rem;padding:1rem;margin-bottom:1rem}
+.mockup-response{background:var(--secondary-bg);border:1px solid var(--border);border-radius:.5rem;padding:1rem}
+.mockup-label{font-size:.875rem;font-weight:600;color:hsl(var(--primarycss));margin-bottom:.5rem}
+.mockup-result{font-size:.75rem;padding:.5rem;border-radius:.25rem;background:var(--bg);border:1px solid var(--border);margin-bottom:.5rem;color:var(--muted)}
+.mockup-result.active{background:hsla(var(--primarycss),.05);border-color:hsla(var(--primarycss),.2);color:var(--fg);font-weight:500}
+.mockup-result .ts{color:hsl(var(--primarycss));font-family:monospace}
+
+/* Step number */
+.step-num{font-size:2.5rem;font-weight:900;opacity:.2}
+
+/* Border section */
+.bordered{border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+
+/* Reveal animation */
+.reveal{opacity:0;transform:translateY(20px);filter:blur(4px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0);filter:blur(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* Grid bg */
+.grid-bg{position:relative;overflow:hidden}
+.grid-bg::before{content:'';position:absolute;inset:0;opacity:.03;background-image:linear-gradient(hsl(var(--primarycss)) 1px,transparent 1px),linear-gradient(90deg,hsl(var(--primarycss)) 1px,transparent 1px);background-size:64px 64px}
+
+/* Hero specific */
+.hero{min-height:85vh;display:flex;align-items:center;justify-content:center}
+
+/* Responsive padding */
+@@media(min-width:768px){.section{padding:6rem 2rem}}
+@@media(min-width:1024px){.section{padding:7rem 4rem}}
+
+/* Lists */
+ul.feature-list{list-style:disc;padding-left:1.25rem;font-size:.875rem;color:var(--muted)}
+ul.feature-list li{margin-bottom:.25rem}
+</style>
+}
+
+<!-- HERO -->
+<section class="section hero grid-bg">
+<div class="container text-center" style="position:relative">
+  <div class="reveal"><span class="pill"><span class="pill-dot"></span>AI-Powered Enterprise Products</span></div>
+  <h1 class="hero-heading reveal reveal-delay-1">Intelligence that works <span class="gradient-text">for you.</span></h1>
+  <p class="subtext reveal reveal-delay-2">Two category-defining AI products that turn raw organisational data — documents and lecture recordings — into structured, searchable, actionable intelligence.</p>
+  <div class="btn-group reveal reveal-delay-3">
+    <a href="#rag365" class="btn btn-primary">Explore RAG365 →</a>
+    <a href="#reclass" class="btn btn-outline">Explore ReClass AI →</a>
+  </div>
+</div>
+</section>
+
+<!-- RAG365 HERO -->
+<section id="rag365" class="section">
+<div class="container">
+  <div class="reveal"><span class="pill"><span class="pill-dot"></span>Enterprise Knowledge Retrieval</span></div>
+  <div class="grid-2" style="align-items:start">
+    <div>
+      <h2 class="hero-heading reveal reveal-delay-1"><span class="gradient-text">RAG365</span></h2>
+      <p class="reveal reveal-delay-1" style="font-size:1.25rem;font-weight:600;margin-bottom:1rem">Stop Searching. Start Asking.</p>
+      <p class="muted reveal reveal-delay-2" style="margin-bottom:2rem">RAG365 converts your entire internal knowledge base — contracts, memos, PDFs, policies — into a private AI assistant that answers questions in seconds, with source citations, zero hallucinations, and zero public web exposure.</p>
+      <div class="btn-group reveal reveal-delay-3" style="justify-content:flex-start">
+        <a href="#cta" class="btn btn-primary">Book a Demo →</a>
+        <a href="#rag365-features" class="btn btn-outline">See Features →</a>
+      </div>
+    </div>
+    <div class="mockup reveal reveal-delay-3">
+      <div class="mockup-query">
+        <p class="mockup-label">User Query</p>
+        <p style="font-size:.875rem">"What are the compliance requirements for the Jakarta project based on our 2024 internal memos?"</p>
+      </div>
+      <div class="mockup-response">
+        <p class="mockup-label">RAG365 Response</p>
+        <p style="font-size:.875rem;margin-bottom:.75rem">Based on '2024 Compliance Strategy.pdf', the Jakarta project requires:</p>
+        <ul class="feature-list">
+          <li>Data residency on local servers</li>
+          <li>Bi-annual audit logs</li>
+          <li>Regulatory sign-off from local authority</li>
+        </ul>
+        <p style="font-size:.7rem;color:var(--muted);margin-top:.75rem;padding-top:.5rem;border-top:1px solid var(--border)">Source: Doc ID #4492 | 2024 Compliance Strategy.pdf</p>
+      </div>
+    </div>
+  </div>
+  <div class="grid-3 sm-grid-3 reveal reveal-delay-4" style="margin-top:3rem">
+    <div class="card stat-card"><p class="stat-value gradient-text">75%</p><p class="stat-label">Less Search Time</p><p class="stat-sub">vs. manual document hunting</p></div>
+    <div class="card stat-card"><p class="stat-value gradient-text">0</p><p class="stat-label">Hallucinations</p><p class="stat-sub">Zero public web exposure</p></div>
+    <div class="card stat-card"><p class="stat-value gradient-text">24/7</p><p class="stat-label">Knowledge Access</p><p class="stat-sub">Real-time in any meeting</p></div>
+  </div>
+</div>
+</section>
+
+<!-- RAG365 FEATURES -->
+<section id="rag365-features" class="section" style="background:var(--secondary-bg)">
+<div class="container">
+  <div class="text-center reveal">
+    <p class="label">What RAG365 Does</p>
+    <h2 class="heading">Every answer. Every document. Instantly.</h2>
+    <p class="subtext">RAG365 indexes your entire internal knowledge base and makes it conversationally queryable — in real time, with no public web, no hallucinations.</p>
+  </div>
+  <div class="grid-3">
+    <div class="card reveal reveal-delay-1"><div class="icon-box">🔒</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Private Knowledge Index</h3><p class="tag" style="margin-bottom:.75rem">Zero External Exposure</p><p style="font-size:.875rem;color:var(--muted)">All your PDFs, contracts, memos and policies ingested into a secure, encrypted retrieval index. No data ever leaves your environment.</p></div>
+    <div class="card reveal reveal-delay-2"><div class="icon-box">💬</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Natural Language Querying</h3><p class="tag" style="margin-bottom:.75rem">Semantic Understanding</p><p style="font-size:.875rem;color:var(--muted)">Ask questions the way you'd ask a colleague. RAG365 understands intent, not just keywords.</p></div>
+    <div class="card reveal reveal-delay-3"><div class="icon-box">✓</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Source-Cited Responses</h3><p class="tag" style="margin-bottom:.75rem">Full Traceability</p><p style="font-size:.875rem;color:var(--muted)">Every answer references its exact source — document name, version, and Doc ID.</p></div>
+    <div class="card reveal reveal-delay-1"><div class="icon-box">🧠</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Context-Aware Intelligence</h3><p class="tag" style="margin-bottom:.75rem">Industry-Tailored</p><p style="font-size:.875rem;color:var(--muted)">RAG365 is trained on your industry vocabulary, contract formats, and internal naming conventions.</p></div>
+    <div class="card reveal reveal-delay-2"><div class="icon-box">⚡</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Real-Time Access</h3><p class="tag" style="margin-bottom:.75rem">Instant Retrieval</p><p style="font-size:.875rem;color:var(--muted)">Surface relevant intelligence mid-conversation, mid-meeting, mid-negotiation.</p></div>
+    <div class="card reveal reveal-delay-3"><div class="icon-box">🔌</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Platform Agnostic</h3><p class="tag" style="margin-bottom:.75rem">Zero Disruption</p><p style="font-size:.875rem;color:var(--muted)">Integrates with your current document storage and toolstack — no migration required.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- RAG365 HOW IT WORKS -->
+<section class="section">
+<div class="container">
+  <div class="text-center reveal">
+    <p class="label">How It Works</p>
+    <h2 class="heading">Ask. Retrieve. Act.</h2>
+    <p class="subtext">From document upload to cited answer in seconds. RAG365's four-stage process is invisible to your team — they just ask.</p>
+  </div>
+  <div class="grid-4">
+    <div class="card reveal reveal-delay-1"><span class="step-num gradient-text">01</span><h3 style="font-size:1.125rem;font-weight:600;margin:.5rem 0">Ingest Your Knowledge Base</h3><p style="font-size:.875rem;color:var(--muted)">Connect your document repositories — SharePoint, Google Drive, local drives. RAG365 ingests all files into its private secure index.</p></div>
+    <div class="card reveal reveal-delay-2"><span class="step-num gradient-text">02</span><h3 style="font-size:1.125rem;font-weight:600;margin:.5rem 0">AI Semantic Processing</h3><p style="font-size:.875rem;color:var(--muted)">The RAG engine vectorises every document — converting content into a semantic knowledge graph.</p></div>
+    <div class="card reveal reveal-delay-3"><span class="step-num gradient-text">03</span><h3 style="font-size:1.125rem;font-weight:600;margin:.5rem 0">Ask in Natural Language</h3><p style="font-size:.875rem;color:var(--muted)">Your team asks questions and RAG365 retrieves the most relevant content and cites the source — in under two seconds.</p></div>
+    <div class="card reveal reveal-delay-4"><span class="step-num gradient-text">04</span><h3 style="font-size:1.125rem;font-weight:600;margin:.5rem 0">Verify, Act & Iterate</h3><p style="font-size:.875rem;color:var(--muted)">Every answer includes a clickable source reference. Teams verify and continue querying in a natural thread.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- RAG365 IMPACT -->
+<section class="section" style="background:var(--secondary-bg)">
+<div class="container">
+  <div class="text-center reveal">
+    <p class="label">Proven Impact</p>
+    <h2 class="heading">Results that speak for themselves.</h2>
+  </div>
+  <div class="grid-3 sm-grid-3" style="margin-bottom:2rem">
+    <div class="card stat-card reveal reveal-delay-1"><p class="stat-value gradient-text">75%</p><p class="stat-label">Faster Document Retrieval</p><p class="stat-sub">Verified answers in under 2 seconds.</p></div>
+    <div class="card stat-card reveal reveal-delay-2"><p class="stat-value gradient-text">0</p><p class="stat-label">Public Web Hallucinations</p><p class="stat-sub">Every answer from internal docs only.</p></div>
+    <div class="card stat-card reveal reveal-delay-3"><p class="stat-value gradient-text">100%</p><p class="stat-label">Source Traceability</p><p class="stat-sub">Full chain of provenance, every time.</p></div>
+    <div class="card stat-card reveal reveal-delay-1"><p class="stat-value gradient-text">24/7</p><p class="stat-label">Live Meeting Intelligence</p><p class="stat-sub">Real-time during pitches and reviews.</p></div>
+    <div class="card stat-card reveal reveal-delay-2"><p class="stat-value gradient-text">↑</p><p class="stat-label">Team Confidence</p><p class="stat-sub">Trust in all client-facing outputs.</p></div>
+    <div class="card stat-card reveal reveal-delay-3"><p class="stat-value gradient-text">↓</p><p class="stat-label">Operational Cost</p><p class="stat-sub">Hundreds of recovered hours per week.</p></div>
+  </div>
+  <div class="grid-2">
+    <div class="card reveal reveal-delay-2"><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.75rem">Productivity Impact</h3><p style="font-size:.875rem;color:var(--muted)">The 75% reduction in search time represents a transformative reclaim of consultant-hours. Staff who previously spent 45–60 minutes per day hunting documents now access verified answers in seconds. At scale, this translates to hundreds of recovered working hours per week.</p></div>
+    <div class="card reveal reveal-delay-3"><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.75rem">Strategic Impact</h3><p style="font-size:.875rem;color:var(--muted)">Real-time intelligence surfaced during live client meetings gave consultants an immediate competitive edge. Source-cited responses eliminated inconsistency risk, building both internal trust and confidence in all client-facing outputs.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- RAG365 USE CASES -->
+<section class="section">
+<div class="container">
+  <div class="text-center reveal">
+    <p class="label">Use Cases</p>
+    <h2 class="heading">Built for teams that move fast.</h2>
+    <p class="subtext">RAG365 is deployed across industries where knowledge retrieval speed and accuracy directly affect outcomes.</p>
+  </div>
+  <div class="grid-2">
+    <div class="card reveal reveal-delay-1"><p class="tag">Consultancy & Professional Services</p><h3 style="font-size:1.125rem;font-weight:600;margin:.5rem 0">Real-Time Client Intelligence</h3><p style="font-size:.875rem;color:var(--muted);margin-bottom:1rem">Surface relevant engagement history, compliance clauses, and precedent documents mid-meeting.</p><p style="font-size:.875rem;font-weight:500;color:hsl(var(--primarycss))">Outcome: Faster proposal cycles, higher client meeting confidence</p></div>
+    <div class="card reveal reveal-delay-2"><p class="tag">Legal & Compliance</p><h3 style="font-size:1.125rem;font-weight:600;margin:.5rem 0">Instant Regulatory Retrieval</h3><p style="font-size:.875rem;color:var(--muted);margin-bottom:1rem">Query thousands of contracts and policy files using natural language. Retrieve relevant clauses with exact citations.</p><p style="font-size:.875rem;font-weight:500;color:hsl(var(--primarycss))">Outcome: Reduced review time, improved compliance accuracy</p></div>
+    <div class="card reveal reveal-delay-3"><p class="tag">Finance & Banking</p><h3 style="font-size:1.125rem;font-weight:600;margin:.5rem 0">Audit-Ready Knowledge Access</h3><p style="font-size:.875rem;color:var(--muted);margin-bottom:1rem">Give compliance teams immediate access to all internal policy documents with full source citations.</p><p style="font-size:.875rem;font-weight:500;color:hsl(var(--primarycss))">Outcome: Reduced audit preparation time, higher regulatory confidence</p></div>
+    <div class="card reveal reveal-delay-4"><p class="tag">HR & Operations</p><h3 style="font-size:1.125rem;font-weight:600;margin:.5rem 0">Internal Policy Q&A</h3><p style="font-size:.875rem;color:var(--muted);margin-bottom:1rem">Employees ask questions about HR policies and operational guidelines in plain language.</p><p style="font-size:.875rem;font-weight:500;color:hsl(var(--primarycss))">Outcome: Lower HR ticket volume, higher employee self-service rate</p></div>
+  </div>
+</div>
+</section>
+
+<!-- MID CTA -->
+<section class="section bordered">
+<div class="container text-center">
+  <div class="reveal">
+    <h2 class="heading">Ready to automate your most critical business processes?</h2>
+    <p class="subtext">Let DotStark 2.0 identify the highest-impact automation opportunities in your organization and build a roadmap tailored to your goals.</p>
+    <a href="#cta" class="btn btn-primary">Let's Build Your Automation Roadmap →</a>
+  </div>
+</div>
+</section>
+
+<!-- RECLASS HERO -->
+<section id="reclass" class="section">
+<div class="container">
+  <div class="reveal"><span class="pill"><span class="pill-dot"></span>EdTech & Higher Education</span></div>
+  <div class="grid-2" style="align-items:start">
+    <div>
+      <h2 class="hero-heading reveal reveal-delay-1"><span class="gradient-text">ReClass AI</span></h2>
+      <p class="reveal reveal-delay-1" style="font-size:1.25rem;font-weight:600;margin-bottom:1rem">From Raw Video to Actionable Results.</p>
+      <p class="muted reveal reveal-delay-2" style="margin-bottom:2rem">ReClass AI transforms traditional lecture recordings into structured, searchable digital knowledge assets — with AI-generated summaries, semantic topic navigation, and a 24/7 AI Tutor, all grounded exclusively in your course content.</p>
+      <div class="btn-group reveal reveal-delay-3" style="justify-content:flex-start">
+        <a href="#cta" class="btn btn-primary">Book a Demo →</a>
+        <a href="#reclass-features" class="btn btn-outline">See Features →</a>
+      </div>
+    </div>
+    <div class="mockup reveal reveal-delay-3">
+      <div class="mockup-query">
+        <p class="mockup-label">Transcript Search — "Macroeconomics"</p>
+        <div class="mockup-result"><span class="ts">02:15</span> — Introduction to Macroeconomics</div>
+        <div class="mockup-result active"><span class="ts">14:30</span> — Supply and Demand Curves <span style="color:hsl(var(--primarycss));font-size:.6rem;margin-left:.25rem">ACTIVE</span></div>
+        <div class="mockup-result"><span class="ts">28:45</span> — Fiscal Policy</div>
+      </div>
+      <div class="mockup-response">
+        <p class="mockup-label">AI Tutor — Key Takeaways</p>
+        <ul class="feature-list">
+          <li>Supply, Demand and Equilibrium</li>
+          <li>Fiscal vs. Monetary Policy</li>
+          <li>GDP, Inflation, Unemployment</li>
+          <li>The Role of Central Banks</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="grid-3 sm-grid-3 reveal reveal-delay-4" style="margin-top:3rem">
+    <div class="card stat-card"><p class="stat-value gradient-text">3×</p><p class="stat-label">Faster Revision</p><p class="stat-sub">Students locate any concept in seconds</p></div>
+    <div class="card stat-card"><p class="stat-value gradient-text">+40%</p><p class="stat-label">Retention Rate</p><p class="stat-sub">Improved knowledge retention measured</p></div>
+    <div class="card stat-card"><p class="stat-value gradient-text">100%</p><p class="stat-label">Auto-Processed</p><p class="stat-sub">Zero manual effort from educators</p></div>
+  </div>
+</div>
+</section>
+
+<!-- RECLASS FEATURES -->
+<section id="reclass-features" class="section" style="background:var(--secondary-bg)">
+<div class="container">
+  <div class="text-center reveal">
+    <p class="label">What ReClass AI Does</p>
+    <h2 class="heading">Every lecture. Fully structured. Always searchable.</h2>
+    <p class="subtext">ReClass AI automatically transforms raw video recordings into interactive, AI-powered learning assets — with zero effort from educators.</p>
+  </div>
+  <div class="grid-3">
+    <div class="card reveal reveal-delay-1"><div class="icon-box">🎙</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">AI Transcription</h3><p class="tag" style="margin-bottom:.75rem">Fully Automated</p><p style="font-size:.875rem;color:var(--muted)">Automatic speech-to-text with speaker differentiation and millisecond-accurate timestamps.</p></div>
+    <div class="card reveal reveal-delay-2"><div class="icon-box">📑</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Topic Segmentation</h3><p class="tag" style="margin-bottom:.75rem">Zero Manual Tagging</p><p style="font-size:.875rem;color:var(--muted)">AI identifies distinct subject sections and assigns descriptive labels with precise timestamps.</p></div>
+    <div class="card reveal reveal-delay-3"><div class="icon-box">🔍</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Semantic Topic Search</h3><p class="tag" style="margin-bottom:.75rem">Concept-Level Retrieval</p><p style="font-size:.875rem;color:var(--muted)">Students search by concept, not keyword. ReClass AI understands meaning.</p></div>
+    <div class="card reveal reveal-delay-1"><div class="icon-box">📝</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">AI-Generated Summaries</h3><p class="tag" style="margin-bottom:.75rem">Instant Post-Lecture</p><p style="font-size:.875rem;color:var(--muted)">Structured summaries available to students immediately after the lecture ends.</p></div>
+    <div class="card reveal reveal-delay-2"><div class="icon-box">🤖</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">AI Tutor Interface</h3><p class="tag" style="margin-bottom:.75rem">Lecture-Grounded Only</p><p style="font-size:.875rem;color:var(--muted)">A conversational AI tutor grounded exclusively in the lecture transcript.</p></div>
+    <div class="card reveal reveal-delay-3"><div class="icon-box">📊</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Learning Analytics</h3><p class="tag" style="margin-bottom:.75rem">Institutional Insights</p><p style="font-size:.875rem;color:var(--muted)">See which topics generate the most queries and where comprehension gaps exist.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- RECLASS HOW IT WORKS -->
+<section class="section">
+<div class="container">
+  <div class="text-center reveal">
+    <p class="label">How It Works</p>
+    <h2 class="heading">Record. Process. Learn smarter.</h2>
+    <p class="subtext">ReClass AI works silently in the background — educators teach as normal, and the platform handles everything.</p>
+  </div>
+  <div class="grid-4">
+    <div class="card reveal reveal-delay-1"><span class="step-num gradient-text">01</span><h3 style="font-size:1.125rem;font-weight:600;margin:.5rem 0">Classroom Recording</h3><p style="font-size:.875rem;color:var(--muted)">ReClass AI securely records and stores the live classroom session with zero change to how educators teach.</p></div>
+    <div class="card reveal reveal-delay-2"><span class="step-num gradient-text">02</span><h3 style="font-size:1.125rem;font-weight:600;margin:.5rem 0">AI Engine Processing</h3><p style="font-size:.875rem;color:var(--muted)">Transcribing speech, identifying topic segments, generating summaries, and creating a semantic search index.</p></div>
+    <div class="card reveal reveal-delay-3"><span class="step-num gradient-text">03</span><h3 style="font-size:1.125rem;font-weight:600;margin:.5rem 0">Structured Asset Published</h3><p style="font-size:.875rem;color:var(--muted)">Students receive a navigable video player with timestamped topic index, transcript, summary, and AI Tutor.</p></div>
+    <div class="card reveal reveal-delay-4"><span class="step-num gradient-text">04</span><h3 style="font-size:1.125rem;font-weight:600;margin:.5rem 0">Navigate, Ask & Retain</h3><p style="font-size:.875rem;color:var(--muted)">Students search by concept, jump to precise moments, and ask the AI Tutor structured questions.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- RECLASS IMPACT -->
+<section class="section" style="background:var(--secondary-bg)">
+<div class="container">
+  <div class="text-center reveal">
+    <p class="label">Measured Impact</p>
+    <h2 class="heading">Better learning. Better outcomes.</h2>
+  </div>
+  <div class="grid-3 sm-grid-3" style="margin-bottom:2rem">
+    <div class="card stat-card reveal reveal-delay-1"><p class="stat-value gradient-text">3×</p><p class="stat-label">Faster Revision</p><p class="stat-sub">Targeted, precise review in seconds.</p></div>
+    <div class="card stat-card reveal reveal-delay-2"><p class="stat-value gradient-text">+40%</p><p class="stat-label">Knowledge Retention</p><p class="stat-sub">Measurably higher vs. passive watching.</p></div>
+    <div class="card stat-card reveal reveal-delay-3"><p class="stat-value gradient-text">100%</p><p class="stat-label">Fully Automated</p><p class="stat-sub">Zero additional workload for educators.</p></div>
+    <div class="card stat-card reveal reveal-delay-1"><p class="stat-value gradient-text">24/7</p><p class="stat-label">AI Tutor Access</p><p class="stat-sub">Lecture-grounded answers at any hour.</p></div>
+    <div class="card stat-card reveal reveal-delay-2"><p class="stat-value gradient-text">↑</p><p class="stat-label">Engagement</p><p class="stat-sub">Higher engagement scores.</p></div>
+    <div class="card stat-card reveal reveal-delay-3"><p class="stat-value gradient-text">↓</p><p class="stat-label">Drop-out Rates</p><p class="stat-sub">Reduced course abandonment.</p></div>
+  </div>
+  <div class="grid-2">
+    <div class="card reveal reveal-delay-2"><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.75rem">Student Impact</h3><p style="font-size:.875rem;color:var(--muted)">Students jump directly to the precise topic — zero re-watching required. The AI Tutor provides instant lecture-grounded summaries and answers, replacing the need to wait for office hours.</p></div>
+    <div class="card reveal reveal-delay-3"><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.75rem">Institutional Impact</h3><p style="font-size:.875rem;color:var(--muted)">Institutions gain insight into which topics generate the most queries, where comprehension gaps exist, and which segments drive re-engagement. Educators receive actionable signals with zero additional workload.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- RECLASS USE CASES -->
+<section class="section">
+<div class="container">
+  <div class="text-center reveal">
+    <p class="label">Use Cases</p>
+    <h2 class="heading">Transforming how knowledge is accessed.</h2>
+    <p class="subtext">ReClass AI is deployed wherever recorded knowledge needs to become an active, searchable, and intelligent learning asset.</p>
+  </div>
+  <div class="grid-2">
+    <div class="card reveal reveal-delay-1"><p class="tag">Universities & Colleges</p><h3 style="font-size:1.125rem;font-weight:600;margin:.5rem 0">Lecture-to-Learning Asset</h3><p style="font-size:.875rem;color:var(--muted);margin-bottom:1rem">Every recorded lecture becomes a structured, searchable knowledge asset available immediately after it ends.</p><p style="font-size:.875rem;font-weight:500;color:hsl(var(--primarycss))">Outcome: Higher engagement, better exam performance</p></div>
+    <div class="card reveal reveal-delay-2"><p class="tag">Professional Training</p><h3 style="font-size:1.125rem;font-weight:600;margin:.5rem 0">Corporate Learning Libraries</h3><p style="font-size:.875rem;color:var(--muted);margin-bottom:1rem">Transform training recordings into searchable, reusable knowledge assets with AI Tutor follow-ups.</p><p style="font-size:.875rem;font-weight:500;color:hsl(var(--primarycss))">Outcome: Reduced onboarding time, higher training recall</p></div>
+    <div class="card reveal reveal-delay-3"><p class="tag">Online Education Platforms</p><h3 style="font-size:1.125rem;font-weight:600;margin:.5rem 0">Intelligent Course Navigation</h3><p style="font-size:.875rem;color:var(--muted);margin-bottom:1rem">Add semantic search and AI tutoring to any existing video course library — without re-recording.</p><p style="font-size:.875rem;font-weight:500;color:hsl(var(--primarycss))">Outcome: Higher course completion rates</p></div>
+    <div class="card reveal reveal-delay-4"><p class="tag">Institutional Analytics</p><h3 style="font-size:1.125rem;font-weight:600;margin:.5rem 0">Data-Driven Course Design</h3><p style="font-size:.875rem;color:var(--muted);margin-bottom:1rem">Understand which topics drive queries, where comprehension drops, and redesign courses with evidence.</p><p style="font-size:.875rem;font-weight:500;color:hsl(var(--primarycss))">Outcome: Improved teaching quality, lower drop-out rates</p></div>
+  </div>
+</div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="cta" class="section bordered">
+<div class="container text-center">
+  <div class="reveal">
+    <p class="label">Get Started</p>
+    <h2 class="heading">Ready to transform your knowledge?</h2>
+    <p class="subtext">Book a personalised demo and see RAG365 or ReClass AI working with your own documents and content.</p>
+  </div>
+  <div class="grid-2" style="max-width:56rem;margin:0 auto">
+    <div class="card reveal reveal-delay-1" style="text-align:left">
+      <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:.5rem"><span class="gradient-text">RAG365</span></h3>
+      <p style="font-size:.875rem;color:var(--muted);margin-bottom:1.5rem">Turn your documents into answers. See how RAG365 handles your specific document library in a live 30-minute demo. No setup required.</p>
+      <a href="#" class="btn btn-primary">Book RAG365 Demo →</a>
+    </div>
+    <div class="card reveal reveal-delay-2" style="text-align:left">
+      <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:.5rem"><span class="gradient-text">ReClass AI</span></h3>
+      <p style="font-size:.875rem;color:var(--muted);margin-bottom:1.5rem">Bring your lectures to life with AI. Upload one of your existing lecture recordings and we'll show you exactly what ReClass AI produces — live.</p>
+      <a href="#" class="btn btn-primary">Book ReClass Demo →</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>

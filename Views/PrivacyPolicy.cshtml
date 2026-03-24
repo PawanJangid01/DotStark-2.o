@@ -1,0 +1,719 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.PrivacyPolicy>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "MasterLayout.cshtml";
+}
+@section Styles {
+    <style>
+        /* ── Breadcrumb ── */
+        .breadcrumb-bar {
+            background: var(--cool-grey);
+            padding: 0.85rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            list-style: none;
+            font-size: 0.875rem;
+            color: var(--muted);
+        }
+
+        .breadcrumb li+li::before {
+            content: '/';
+            margin-right: 0.5rem;
+            color: var(--muted);
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            transition: opacity 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            opacity: 0.75;
+        }
+
+        .breadcrumb .active {
+            color: var(--foreground);
+            font-weight: 500;
+        }
+
+        /* ── Hero ── */
+        .pp-hero {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 100%);
+            padding: 5rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .pp-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 80% at 50% 0%, rgba(27, 84, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .pp-hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            color: var(--foreground);
+            position: relative;
+        }
+
+        .pp-hero h1 span {
+            color: var(--primary);
+        }
+
+        .pp-hero p {
+            margin-top: 1rem;
+            color: var(--muted);
+            font-size: 1rem;
+            position: relative;
+        }
+    </style>
+    <style>
+        /* ── Content layout ── */
+        .pp-content {
+            padding: 5rem 0 6rem;
+            background: var(--background);
+        }
+
+        .pp-layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        /* Sidebar TOC */
+        .pp-toc {
+            position: sticky;
+            top: 5rem;
+        }
+
+        .pp-toc h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+
+        .pp-toc ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .pp-toc a {
+            display: block;
+            padding: 0.4rem 0.75rem;
+            font-size: 0.875rem;
+            color: var(--muted);
+            border-left: 2px solid var(--border);
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .pp-toc a:hover,
+        .pp-toc a.active {
+            color: var(--primary);
+            border-left-color: var(--primary);
+        }
+
+        /* Body text */
+        .pp-body {
+            min-width: 0;
+        }
+
+        .pp-body p {
+            font-size: 0.9375rem;
+            color: #444;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+
+        .pp-body h2 {
+            font-size: 1.35rem;
+            color: var(--foreground);
+            margin: 2.5rem 0 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-10);
+            scroll-margin-top: 5rem;
+        }
+
+        .pp-body h2 .section-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.75rem;
+            height: 1.75rem;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-right: 0.6rem;
+            vertical-align: middle;
+        }
+
+        .pp-body h3 {
+            font-size: 1.05rem;
+            color: var(--foreground);
+            margin: 1.75rem 0 0.5rem;
+        }
+
+        .pp-body h4 {
+            font-size: 0.95rem;
+            color: var(--foreground);
+            margin: 1.25rem 0 0.4rem;
+            font-weight: 600;
+        }
+
+        .pp-body ul {
+            list-style: none;
+            margin: 0.5rem 0 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .pp-body ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            font-size: 0.9375rem;
+            color: #444;
+            line-height: 1.7;
+        }
+
+        .pp-body ul li::before {
+            content: '';
+            flex-shrink: 0;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary);
+            margin-top: 0.55rem;
+        }
+
+        .pp-body ul li strong {
+            color: var(--foreground);
+        }
+
+        .pp-body a {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        /* Intro card */
+        .pp-intro-card {
+            background: #f0f4ff;
+            border-radius: 0.75rem;
+            padding: 2rem 2.25rem;
+            margin-bottom: 2.5rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .pp-intro-card p {
+            color: #444;
+            margin-bottom: 0;
+        }
+
+        .pp-intro-card p+p {
+            margin-top: 0.75rem;
+        }
+
+        /* Meta badges */
+        .pp-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .pp-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--primary-10);
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.35rem 0.85rem;
+            border-radius: 2rem;
+        }
+
+        .pp-badge svg {
+            flex-shrink: 0;
+        }
+
+        /* Cookie type blocks */
+        .cookie-block {
+            background: var(--cool-grey);
+            border-radius: 0.5rem;
+            padding: 1.25rem 1.5rem;
+            margin: 0.75rem 0;
+        }
+
+        .cookie-block strong {
+            color: var(--foreground);
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .cookie-block p {
+            margin-bottom: 0.3rem;
+            font-size: 0.875rem;
+        }
+
+        .cookie-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Contact CTA */
+        .pp-contact-cta {
+            margin-top: 3rem;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 100%);
+            border-radius: 0.75rem;
+            padding: 2.5rem;
+            text-align: center;
+            border: 1px solid rgba(27, 84, 255, 0.15);
+
+
+
+        }
+
+        .pp-contact-cta h3 {
+            color: var(--foreground);
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pp-contact-cta p {
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Responsive */
+        @@media (max-width: 900px) {
+            .pp-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .pp-toc {
+                position: static;
+                background: var(--cool-grey);
+                border-radius: 0.5rem;
+                padding: 1.25rem 1.5rem;
+            }
+
+            .pp-toc ul {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .pp-toc a {
+                border-left: none;
+                border-bottom: 2px solid var(--border);
+                padding: 0.3rem 0.5rem;
+            }
+
+            .pp-toc a:hover,
+            .pp-toc a.active {
+                border-bottom-color: var(--primary);
+                border-left-color: transparent;
+            }
+        }
+
+        @@media (max-width: 600px) {
+            .pp-hero {
+                padding: 3.5rem 0 3rem;
+            }
+
+            .pp-content {
+                padding: 3rem 0 4rem;
+            }
+
+            .pp-intro-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+    }
+
+    <!-- ═══ BREADCRUMB ═══ -->
+    <div class="breadcrumb-bar">
+        <div class="container">
+            <ol class="breadcrumb" aria-label="breadcrumb">
+                <li><a href="index 1.html">Home</a></li>
+                <li class="active" aria-current="page">Privacy Policy</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="pp-hero">
+        <div class="container">
+            <h1>Privacy <span>Policy</span></h1>
+            <p>How we collect, use, and protect your information.</p>
+        </div>
+    </section>
+
+    <!-- ═══ CONTENT ═══ -->
+    <main class="pp-content">
+        <div class="container">
+            <div class="pp-layout">
+
+                <!-- Sidebar TOC -->
+                <aside class="pp-toc" aria-label="Table of contents">
+                    <h3>On this page</h3>
+                    <ul>
+                        <li><a href="#intro">Introduction</a></li>
+                        <li><a href="#definitions">Definitions</a></li>
+                        <li><a href="#collecting">Collecting Your Data</a></li>
+                        <li><a href="#use">Use of Data</a></li>
+                        <li><a href="#retention">Retention</a></li>
+                        <li><a href="#transfer">Transfer</a></li>
+                        <li><a href="#delete">Delete Your Data</a></li>
+                        <li><a href="#disclosure">Disclosure</a></li>
+                        <li><a href="#security">Security</a></li>
+                        <li><a href="#children">Children's Privacy</a></li>
+                        <li><a href="#links">Other Websites</a></li>
+                        <li><a href="#changes">Changes</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </aside>
+
+                <!-- Body -->
+                <article class="pp-body">
+
+                    <div class="pp-meta">
+                        <span class="pp-badge">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                            </svg>
+                            Last updated: February 02, 2024
+                        </span>
+                        <span class="pp-badge">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg>
+                            GDPR Compliant
+                        </span>
+                    </div>
+
+                    <div class="pp-intro-card" id="intro">
+                        <p>This Privacy Policy describes Our policies and procedures on the collection, use and
+                            disclosure of Your information when You use the Service and tells You about Your privacy
+                            rights and how the law protects You.</p>
+                        <p>We use Your Personal data to provide and improve the Service. By using the Service, You agree
+                            to the collection and use of information in accordance with this Privacy Policy.</p>
+                    </div>
+
+                    <!-- 1. Definitions -->
+                    <h2 id="definitions"><span class="section-num">1</span>Interpretation and Definitions</h2>
+                    <h3>Interpretation</h3>
+                    <p>The words of which the initial letter is capitalized have meanings defined under the following
+                        conditions. The following definitions shall have the same meaning regardless of whether they
+                        appear in singular or in plural.</p>
+                    <h3>Definitions</h3>
+                    <p>For the purposes of this Privacy Policy:</p>
+                    <ul>
+                        <li><strong>Account</strong> means a unique account created for You to access our Service or
+                            parts of our Service.</li>
+                        <li><strong>Affiliate</strong> means an entity that controls, is controlled by or is under
+                            common control with a party, where "control" means ownership of 50% or more of the shares,
+                            equity interest or other securities entitled to vote for election of directors or other
+                            managing authority.</li>
+                        <li><strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this
+                            Agreement) refers to Dotstark, 3101 N. Central Ave, STE 183#3541, Phoenix, Arizona, 85012,
+                            USA.</li>
+                        <li><strong>Cookies</strong> are small files that are placed on Your computer, mobile device or
+                            any other device by a website, containing the details of Your browsing history on that
+                            website among its many uses.</li>
+                        <li><strong>Country</strong> refers to: Arizona, United States.</li>
+                        <li><strong>Device</strong> means any device that can access the Service such as a computer, a
+                            cellphone or a digital tablet.</li>
+                        <li><strong>Personal Data</strong> is any information that relates to an identified or
+                            identifiable individual.</li>
+                        <li><strong>Service</strong> refers to the Website.</li>
+                        <li><strong>Service Provider</strong> means any natural or legal person who processes the data
+                            on behalf of the Company. It refers to third-party companies or individuals employed by the
+                            Company to facilitate the Service, to provide the Service on behalf of the Company, to
+                            perform services related to the Service or to assist the Company in analyzing how the
+                            Service is used.</li>
+                        <li><strong>Usage Data</strong> refers to data collected automatically, either generated by the
+                            use of the Service or from the Service infrastructure itself (for example, the duration of a
+                            page visit).</li>
+                        <li><strong>Website</strong> refers to Dotstark, accessible from <a href="https://dotstark.com/"
+                                target="_blank" rel="noopener">https://dotstark.com/</a>.</li>
+                        <li><strong>You</strong> means the individual accessing or using the Service, or the company, or
+                            other legal entity on behalf of which such individual is accessing or using the Service, as
+                            applicable.</li>
+                    </ul>
+
+                    <!-- 2. Collecting -->
+                    <h2 id="collecting"><span class="section-num">2</span>Collecting and Using Your Personal Data</h2>
+                    <h3>Types of Data Collected</h3>
+                    <h4>Personal Data</h4>
+                    <p>While using Our Service, We may ask You to provide Us with certain personally identifiable
+                        information that can be used to contact or identify You. Personally identifiable information may
+                        include, but is not limited to:</p>
+                    <ul>
+                        <li>Email address</li>
+                        <li>First name and last name</li>
+                        <li>Phone number</li>
+                        <li>Usage Data</li>
+                    </ul>
+
+                    <h4>Usage Data</h4>
+                    <p>Usage Data is collected automatically when using the Service.</p>
+                    <p>Usage Data may include information such as Your Device's Internet Protocol address (e.g. IP
+                        address), browser type, browser version, the pages of our Service that You visit, the time and
+                        date of Your visit, the time spent on those pages, unique device identifiers and other
+                        diagnostic data.</p>
+                    <p>When You access the Service by or through a mobile device, We may collect certain information
+                        automatically, including, but not limited to, the type of mobile device You use, Your mobile
+                        device unique ID, the IP address of Your mobile device, Your mobile operating system, the type
+                        of mobile Internet browser You use, unique device identifiers and other diagnostic data.</p>
+                    <p>We may also collect information that Your browser sends whenever You visit our Service or when
+                        You access the Service by or through a mobile device.</p>
+
+                    <h4>Tracking Technologies and Cookies</h4>
+                    <p>We use Cookies and similar tracking technologies to track the activity on Our Service and store
+                        certain information. Tracking technologies used are beacons, tags, and scripts to collect and
+                        track information and to improve and analyze Our Service. The technologies We use may include:
+                    </p>
+                    <ul>
+                        <li><strong>Cookies or Browser Cookies.</strong> A cookie is a small file placed on Your Device.
+                            You can instruct Your browser to refuse all Cookies or to indicate when a Cookie is being
+                            sent. However, if You do not accept Cookies, You may not be able to use some parts of our
+                            Service.</li>
+                        <li><strong>Web Beacons.</strong> Certain sections of our Service and our emails may contain
+                            small electronic files known as web beacons (also referred to as clear gifs, pixel tags, and
+                            single-pixel gifs) that permit the Company to count users who have visited those pages or
+                            opened an email and for other related website statistics.</li>
+                    </ul>
+                    <p>Cookies can be "Persistent" or "Session" Cookies. Persistent Cookies remain on Your personal
+                        computer or mobile device when You go offline, while Session Cookies are deleted as soon as You
+                        close Your web browser.</p>
+                    <p>We use both Session and Persistent Cookies for the purposes set out below:</p>
+
+                    <div class="cookie-block">
+                        <strong>Necessary / Essential Cookies</strong>
+                        <p>Type: Session Cookies &nbsp;|&nbsp; Administered by: Us</p>
+                        <p>Purpose: These Cookies are essential to provide You with services available through the
+                            Website and to enable You to use some of its features. They help to authenticate users and
+                            prevent fraudulent use of user accounts.</p>
+                    </div>
+                    <div class="cookie-block">
+                        <strong>Cookies Policy / Notice Acceptance Cookies</strong>
+                        <p>Type: Persistent Cookies &nbsp;|&nbsp; Administered by: Us</p>
+                        <p>Purpose: These Cookies identify if users have accepted the use of cookies on the Website.</p>
+                    </div>
+                    <div class="cookie-block">
+                        <strong>Functionality Cookies</strong>
+                        <p>Type: Persistent Cookies &nbsp;|&nbsp; Administered by: Us</p>
+                        <p>Purpose: These Cookies allow us to remember choices You make when You use the Website, such
+                            as remembering your login details or language preference, to provide You with a more
+                            personal experience.</p>
+                    </div>
+
+                    <!-- 3. Use -->
+                    <h2 id="use"><span class="section-num">3</span>Use of Your Personal Data</h2>
+                    <p>The Company may use Personal Data for the following purposes:</p>
+                    <ul>
+                        <li><strong>To provide and maintain our Service</strong>, including to monitor the usage of our
+                            Service.</li>
+                        <li><strong>To manage Your Account:</strong> to manage Your registration as a user of the
+                            Service.</li>
+                        <li><strong>For the performance of a contract:</strong> the development, compliance and
+                            undertaking of the purchase contract for the products, items or services You have purchased
+                            or of any other contract with Us through the Service.</li>
+                        <li><strong>To contact You:</strong> by email, telephone calls, SMS, or other equivalent forms
+                            of electronic communication regarding updates or informative communications related to the
+                            functionalities, products or contracted services.</li>
+                        <li><strong>To provide You</strong> with news, special offers and general information about
+                            other goods, services and events which we offer that are similar to those that you have
+                            already purchased or enquired about.</li>
+                        <li><strong>To manage Your requests:</strong> To attend and manage Your requests to Us.</li>
+                        <li><strong>For business transfers:</strong> We may use Your information to evaluate or conduct
+                            a merger, divestiture, restructuring, reorganization, dissolution, or other sale or transfer
+                            of some or all of Our assets.</li>
+                        <li><strong>For other purposes:</strong> data analysis, identifying usage trends, determining
+                            the effectiveness of our promotional campaigns and to evaluate and improve our Service,
+                            products, services, marketing and your experience.</li>
+                    </ul>
+                    <p>We may share Your personal information in the following situations:</p>
+                    <ul>
+                        <li><strong>With Service Providers:</strong> We may share Your personal information with Service
+                            Providers to monitor and analyze the use of our Service, to contact You.</li>
+                        <li><strong>For business transfers:</strong> We may share or transfer Your personal information
+                            in connection with any merger, sale of Company assets, financing, or acquisition of all or a
+                            portion of Our business to another company.</li>
+                        <li><strong>With Affiliates:</strong> We may share Your information with Our affiliates, in
+                            which case we will require those affiliates to honor this Privacy Policy.</li>
+                        <li><strong>With business partners:</strong> We may share Your information with Our business
+                            partners to offer You certain products, services or promotions.</li>
+                        <li><strong>With other users:</strong> when You share personal information or otherwise interact
+                            in the public areas with other users, such information may be viewed by all users and may be
+                            publicly distributed outside.</li>
+                        <li><strong>With Your consent:</strong> We may disclose Your personal information for any other
+                            purpose with Your consent.</li>
+                    </ul>
+
+                    <!-- 4. Retention -->
+                    <h2 id="retention"><span class="section-num">4</span>Retention of Your Personal Data</h2>
+                    <p>The Company will retain Your Personal Data only for as long as is necessary for the purposes set
+                        out in this Privacy Policy. We will retain and use Your Personal Data to the extent necessary to
+                        comply with our legal obligations, resolve disputes, and enforce our legal agreements and
+                        policies.</p>
+                    <p>The Company will also retain Usage Data for internal analysis purposes. Usage Data is generally
+                        retained for a shorter period of time, except when this data is used to strengthen the security
+                        or to improve the functionality of Our Service, or We are legally obligated to retain this data
+                        for longer time periods.</p>
+
+                    <!-- 5. Transfer -->
+                    <h2 id="transfer"><span class="section-num">5</span>Transfer of Your Personal Data</h2>
+                    <p>Your information, including Personal Data, is processed at the Company's operating offices and in
+                        any other places where the parties involved in the processing are located. It means that this
+                        information may be transferred to — and maintained on — computers located outside of Your state,
+                        province, country or other governmental jurisdiction where the data protection laws may differ
+                        than those from Your jurisdiction.</p>
+                    <p>Your consent to this Privacy Policy followed by Your submission of such information represents
+                        Your agreement to that transfer.</p>
+                    <p>The Company will take all steps reasonably necessary to ensure that Your data is treated securely
+                        and in accordance with this Privacy Policy and no transfer of Your Personal Data will take place
+                        to an organization or a country unless there are adequate controls in place including the
+                        security of Your data and other personal information.</p>
+
+                    <!-- 6. Delete -->
+                    <h2 id="delete"><span class="section-num">6</span>Delete Your Personal Data</h2>
+                    <p>You have the right to delete or request that We assist in deleting the Personal Data that We have
+                        collected about You.</p>
+                    <p>Our Service may give You the ability to delete certain information about You from within the
+                        Service.</p>
+                    <p>You may update, amend, or delete Your information at any time by signing in to Your Account, if
+                        you have one, and visiting the account settings section that allows you to manage Your personal
+                        information. You may also contact Us to request access to, correct, or delete any personal
+                        information that You have provided to Us.</p>
+                    <p>Please note, however, that We may need to retain certain information when we have a legal
+                        obligation or lawful basis to do so.</p>
+
+                    <!-- 7. Disclosure -->
+                    <h2 id="disclosure"><span class="section-num">7</span>Disclosure of Your Personal Data</h2>
+                    <h3>Business Transactions</h3>
+                    <p>If the Company is involved in a merger, acquisition or asset sale, Your Personal Data may be
+                        transferred. We will provide notice before Your Personal Data is transferred and becomes subject
+                        to a different Privacy Policy.</p>
+                    <h3>Law Enforcement</h3>
+                    <p>Under certain circumstances, the Company may be required to disclose Your Personal Data if
+                        required to do so by law or in response to valid requests by public authorities (e.g. a court or
+                        a government agency).</p>
+                    <h3>Other Legal Requirements</h3>
+                    <p>The Company may disclose Your Personal Data in the good faith belief that such action is
+                        necessary to:</p>
+                    <ul>
+                        <li>Comply with a legal obligation</li>
+                        <li>Protect and defend the rights or property of the Company</li>
+                        <li>Prevent or investigate possible wrongdoing in connection with the Service</li>
+                        <li>Protect the personal safety of Users of the Service or the public</li>
+                        <li>Protect against legal liability</li>
+                    </ul>
+
+                    <!-- 8. Security -->
+                    <h2 id="security"><span class="section-num">8</span>Security of Your Personal Data</h2>
+                    <p>The security of Your Personal Data is important to Us, but remember that no method of
+                        transmission over the Internet, or method of electronic storage is 100% secure. While We strive
+                        to use commercially acceptable means to protect Your Personal Data, We cannot guarantee its
+                        absolute security.</p>
+
+                    <!-- 9. Children -->
+                    <h2 id="children"><span class="section-num">9</span>Children's Privacy</h2>
+                    <p>Our Service does not address anyone under the age of 13. We do not knowingly collect personally
+                        identifiable information from anyone under the age of 13. If You are a parent or guardian and
+                        You are aware that Your child has provided Us with Personal Data, please contact Us. If We
+                        become aware that We have collected Personal Data from anyone under the age of 13 without
+                        verification of parental consent, We take steps to remove that information from Our servers.</p>
+                    <p>If We need to rely on consent as a legal basis for processing Your information and Your country
+                        requires consent from a parent, We may require Your parent's consent before We collect and use
+                        that information.</p>
+
+                    <!-- 10. Links -->
+                    <h2 id="links"><span class="section-num">10</span>Links to Other Websites</h2>
+                    <p>Our Service may contain links to other websites that are not operated by Us. If You click on a
+                        third party link, You will be directed to that third party's site. We strongly advise You to
+                        review the Privacy Policy of every site You visit.</p>
+                    <p>We have no control over and assume no responsibility for the content, privacy policies or
+                        practices of any third party sites or services.</p>
+
+                    <!-- 11. Changes -->
+                    <h2 id="changes"><span class="section-num">11</span>Changes to this Privacy Policy</h2>
+                    <p>We may update Our Privacy Policy from time to time. We will notify You of any changes by posting
+                        the new Privacy Policy on this page.</p>
+                    <p>We will let You know via email and/or a prominent notice on Our Service, prior to the change
+                        becoming effective and update the "Last updated" date at the top of this Privacy Policy.</p>
+                    <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this
+                        Privacy Policy are effective when they are posted on this page.</p>
+
+                    <!-- 12. Contact -->
+                    <h2 id="contact"><span class="section-num">12</span>Contact Us</h2>
+                    <p>If you have any questions about this Privacy Policy, You can contact us:</p>
+                    <ul>    
+                        <li>By email: <a href="mailto:support@dotstark.com">support@dotstark.com</a></li>
+                    </ul>
+
+                    <!-- CTA -->
+                    <div class="pp-contact-cta">
+                        <h3>Still have questions?</h3>
+                        <p>Our team is happy to walk you through how we handle your data.</p>
+                        <a href="mailto:support@dotstark.com" class="btn btn-primary">Get in
+                            Touch</a>
+                    </div>
+
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const toggle = document.getElementById('mobileToggle');
+        const nav = document.getElementById('mobileNav');
+        const iconMenu = document.getElementById('iconMenu');
+        const iconClose = document.getElementById('iconClose');
+        toggle.addEventListener('click', () => {
+            const open = nav.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', open);
+            iconMenu.style.display = open ? 'none' : 'block';
+            iconClose.style.display = open ? 'block' : 'none';
+        });
+
+        // TOC active highlight
+        const sections = document.querySelectorAll('.pp-body h2[id], #intro');
+        const tocLinks = document.querySelectorAll('.pp-toc a');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    tocLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+                    });
+                }
+            });
+        }, { rootMargin: '-20% 0px -70% 0px' });
+        sections.forEach(s => observer.observe(s));
+    </script>

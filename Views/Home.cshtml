@@ -1,0 +1,1580 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "MasterLayout.cshtml";
+}
+
+    @section Styles {
+        <style>
+/* ══════════════════════════════════════════════
+   1. HERO
+   ══════════════════════════════════════════════ */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: var(--background);
+    overflow: hidden;
+    padding-top: 80px;
+}
+
+/* VIDEO */
+.hero-video {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* CONTENT ABOVE VIDEO */
+.hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+    .hero .grid-pattern {
+        position: absolute;
+        inset: 0;
+        opacity: 0.03;
+        background-image: radial-gradient(#111 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+
+    .hero .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4rem;
+        align-items: center;
+    }
+
+@@media (min-width: 1024px) {
+    .hero .hero-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.hero h1 {
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    font-weight: 700;
+    color: var(--foreground);
+    margin-bottom: 1.5rem;
+}
+
+    .hero h1 span {
+        color: var(--primary);
+    }
+
+.hero .subtitle {
+    font-size: clamp(1.125rem, 2vw, 1.25rem);
+    font-family: var(--font-body);
+    color: var(--muted);
+    max-width: 36rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+}
+
+.hero .btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.ai-viz-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ai-viz {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    aspect-ratio: 1;
+}
+
+    .ai-viz svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .ai-viz .float-card {
+        position: absolute;
+        padding: 0.5rem 1rem;
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        font-size: 0.75rem;
+        font-family: var(--font-body);
+        color: var(--muted);
+        animation: float 4s ease-in-out infinite;
+        white-space: nowrap;
+    }
+
+        .ai-viz .float-card.top-right {
+            top: 2rem;
+            right: 0;
+        }
+
+        .ai-viz .float-card.bottom-left {
+            bottom: 4rem;
+            left: 0;
+            animation-delay: 1s;
+            animation-direction: reverse;
+        }
+
+@@keyframes float {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@@media (max-width: 1023px) {
+    .ai-viz-wrapper {
+        display: none;
+    }
+}
+
+/* ══════════════════════════════════════════════
+   2. TRUST
+   ══════════════════════════════════════════════ */
+
+/* ══════════════════════════════════════════════
+   3. SERVICES
+   ══════════════════════════════════════════════ */
+.services {
+    background: var(--background);
+}
+
+    .services .services-header {
+        max-width: 40rem;
+        margin-bottom: 5rem;
+    }
+
+        .services .services-header h2 {
+            font-size: clamp(1.875rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--foreground);
+            margin-bottom: 1.5rem;
+        }
+
+        .services .services-header p {
+            font-size: 1.125rem;
+            font-family: var(--font-body);
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+    .services .services-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+@@media (min-width: 768px) {
+    .services .services-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+    }
+}
+
+.service-block {
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+}
+
+    .service-block h3 {
+        font-size: clamp(1.5rem, 3vw, 1.875rem);
+        font-weight: 700;
+        color: var(--foreground);
+        margin-bottom: 0.75rem;
+    }
+
+    .service-block > p {
+        font-family: var(--font-body);
+        color: var(--muted);
+        margin-bottom: 2rem;
+    }
+
+    .service-block ul {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .service-block li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        font-family: var(--font-body);
+        font-size: 1rem;
+        color: var(--foreground);
+    }
+
+        .service-block li .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary);
+            flex-shrink: 0;
+            margin-top: 0.55rem;
+        }
+
+/* ══════════════════════════════════════════════
+   4. INNOVATION (dark)
+   ══════════════════════════════════════════════ */
+.innovation {
+    background: var(--void);
+    position: relative;
+    overflow: hidden;
+}
+
+    .innovation .dot-pattern {
+        position: absolute;
+        inset: 0;
+        opacity: 0.05;
+        background-image: radial-gradient(var(--primary) 1px, transparent 1px);
+        background-size: 30px 30px;
+    }
+
+    .innovation .container {
+        position: relative;
+        z-index: 1;
+    }
+
+    .innovation .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4rem;
+        align-items: center;
+    }
+
+@@media (min-width: 1024px) {
+    .innovation .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.innovation h2 {
+    font-size: clamp(1.875rem, 4vw, 3rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    line-height: 1.15;
+}
+
+.innovation > .container p {
+    font-size: 1.125rem;
+    font-family: var(--font-body);
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+}
+
+.innovation .example-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.innovation .example-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.innovation .example-num {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--primary-20);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 0.875rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.innovation .example-item span:last-child {
+    font-family: var(--font-body);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* ══════════════════════════════════════════════
+   5. SOLUTIONS
+   ══════════════════════════════════════════════ */
+.solutions {
+    background: var(--background);
+}
+
+    .solutions .solutions-header {
+        max-width: 40rem;
+        margin-bottom: 4rem;
+    }
+
+        .solutions .solutions-header h2 {
+            font-size: clamp(1.875rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--foreground);
+        }
+
+    .solutions .cards-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+@@media (min-width: 640px) {
+    .solutions .cards-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@@media (min-width: 1024px) {
+    .solutions .cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.solution-card {
+    padding: 2rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: border-color 0.2s;
+    cursor: pointer;
+    background-color: #ebebec59;
+}
+
+    .solution-card:hover {
+        border-color: var(--primary-30);
+    }
+
+    .solution-card .card-top {
+        margin-bottom: 1rem;
+    }
+
+    .solution-card h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--foreground);
+    }
+
+    .solution-card p {
+        font-family: var(--font-body);
+        color: var(--muted);
+        line-height: 1.7;
+    }
+
+/* ══════════════════════════════════════════════
+   6. PROCESS
+   ══════════════════════════════════════════════ */
+.process {
+    background: #f8faff;
+}
+
+    .process .process-header {
+        max-width: 48rem;
+        margin-bottom: 4rem;
+    }
+
+        .process .process-header h2 {
+            font-size: clamp(1.875rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--foreground);
+            margin-bottom: 0.75rem;
+        }
+
+.process-subtext {
+    font-family: var(--font-body);
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.process .steps-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@@media (min-width: 768px) {
+    .process .steps-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Step card */
+.step-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 2rem 1.5rem;
+    position: relative;
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+    overflow: hidden;
+}
+
+    .step-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--primary);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+
+    .step-card:hover {
+        border-color: var(--primary-30);
+        box-shadow: 0 8px 28px rgba(27, 84, 255, 0.1);
+        transform: translateY(-4px);
+    }
+
+        .step-card:hover::before {
+            transform: scaleX(1);
+        }
+
+.step-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    margin-bottom: 1.25rem;
+}
+
+.step-icon {
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.step-card h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--foreground);
+    margin-bottom: 0.5rem;
+}
+
+.step-card p {
+    font-family: var(--font-body);
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+/* ══════════════════════════════════════════════
+   7. CASE STUDIES
+   ══════════════════════════════════════════════ */
+.case-studies {
+    background: var(--background);
+}
+
+    .case-studies .section-top {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-bottom: 4rem;
+    }
+
+@@media (min-width: 768px) {
+    .case-studies .section-top {
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+}
+
+.case-studies .section-top h2 {
+    font-size: clamp(1.875rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--foreground);
+}
+
+.case-studies .link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary);
+    font-family: var(--font-body);
+    font-weight: 500;
+    transition: text-decoration 0.2s;
+}
+
+    .case-studies .link:hover {
+        text-decoration: auto;
+    }
+
+.case-studies .cases-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@@media (min-width: 768px) {
+    .case-studies .cases-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.case-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.2s;
+    cursor: pointer;
+}
+
+    .case-card:hover {
+        border-color: var(--primary-30);
+    }
+
+    .case-image {
+  width: 100%;
+  height: 220px; /* same as your placeholder height */
+  overflow: hidden;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.case-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* prevents stretching */
+  display: block;
+}
+
+    .case-card .image-placeholder {
+        height: 12rem;
+        background: var(--cool-grey);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(115, 115, 115, 0.3);
+        font-family: var(--font-heading);
+        font-size: 0.875rem;
+    }
+
+    .case-card .card-body {
+        padding: 1.5rem;
+        background-color: #eef2ff;
+    }
+
+    .case-card h3 {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: var(--foreground);
+        margin-bottom: 0.5rem;
+    }
+
+    .case-card p {
+        font-family: var(--font-body);
+        color: var(--muted);
+        font-size: 0.875rem;
+    }
+
+/* ══════════════════════════════════════════════
+   8. TESTIMONIALS
+   ══════════════════════════════════════════════ */
+.testimonials {
+    background: var(--cool-grey);
+    overflow: hidden;
+}
+
+/* Centered heading above the grid */
+.testi-heading {
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+
+    .testi-heading h2 {
+        font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+        font-weight: 700;
+        color: var(--foreground);
+        margin-top: 0.5rem;
+    }
+
+/* Equal 50/50 grid, equal height columns */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: stretch;
+}
+
+/* ── LEFT ── */
+.testi-left {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Slider wrapper with arrows flanking */
+.testi-slider-wrap {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+/* Arrow buttons */
+.testi-arrow {
+    width: auto;
+    height: auto;
+    border: none;          /* remove border */
+    background: transparent; /* remove background */
+    border-radius: 0;      /* remove circle */
+    padding: 0;
+    
+    font-size: 2rem;       /* increase arrow size */
+    color: var(--primary);
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Slider container */
+.testi-slider {
+    flex: 1;
+    position: relative;
+    min-height: 280px;
+    overflow: hidden;
+}
+
+/* Each slide stacked; only .active is visible */
+.testi-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+    .testi-slide.active {
+        opacity: 1;
+        transform: translateX(0);
+        pointer-events: auto;
+        position: relative;
+    }
+
+.testi-quote-icon {
+    width: 48px;
+    height: 36px;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.testi-slide blockquote {
+    font-size: 1.05rem;
+    color: #333;
+    line-height: 1.75;
+    font-style: italic;
+    margin: 0;
+}
+
+.testi-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.testi-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid var(--primary-20);
+}
+
+.testi-avatar.initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+    .testi-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.testi-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--foreground);
+    margin: 0 0 0.15rem;
+}
+
+.testi-role {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin: 0;
+}
+
+/* ── RIGHT ── */
+.testi-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.testi-featured-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+}
+
+.testi-video-wrap {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(27, 84, 255, 0.15);
+    aspect-ratio: 16 / 9;
+    background: #000;
+    flex: 1;
+}
+
+.testi-video-thumb {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+    .testi-video-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+.testi-video-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, transparent 55%);
+    display: flex;
+    align-items: flex-end;
+    padding: 1.25rem 1.5rem;
+}
+
+.testi-name-badge strong {
+    display: block;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.testi-name-badge span {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.78rem;
+}
+
+.testi-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(27, 84, 255, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+    .testi-play-btn:hover {
+        transform: translate(-50%, -50%) scale(1.1);
+        box-shadow: 0 6px 28px rgba(27, 84, 255, 0.55);
+    }
+
+    .testi-play-btn svg {
+        margin-left: 4px;
+    }
+
+@@media (max-width: 900px) {
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .testi-slider {
+        min-height: 240px;
+    }
+}
+
+@@media (max-width: 480px) {
+    .testi-play-btn {
+        width: 52px;
+        height: 52px;
+    }
+
+    .testi-slide blockquote {
+        font-size: 0.95rem;
+    }
+
+    .testi-arrow {
+        width: 36px;
+        height: 36px;
+        font-size: 1.3rem;
+    }
+}
+
+/* ══════════════════════════════════════════════
+   9. INSIGHTS
+   ══════════════════════════════════════════════ */
+.insights {
+    background: var(--background);
+}
+
+    .insights .section-top {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-bottom: 4rem;
+    }
+
+@@media (min-width: 768px) {
+    .insights .section-top {
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+}
+
+.insights .section-top h2 {
+    font-size: clamp(1.875rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--foreground);
+}
+
+.insights .link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary);
+    font-family: var(--font-body);
+    font-weight: 500;
+}
+
+    .insights .link:hover {
+        text-decoration: underline;
+    }
+
+.insights .posts-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@@media (min-width: 768px) {
+    .insights .posts-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.post-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.2s;
+    cursor: pointer;
+}
+
+    .post-card:hover {
+        border-color: var(--primary-30);
+    }
+
+    .post-card .image-placeholder {
+        height: 11rem;
+        background: var(--cool-grey);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(115, 115, 115, 0.3);
+        font-family: var(--font-heading);
+        font-size: 0.875rem;
+    }
+
+    .post-card .card-body {
+        padding: 1.5rem;
+    }
+
+    .post-card h3 {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: var(--foreground);
+        transition: color 0.2s;
+    }
+
+    .post-card:hover h3 {
+        color: var(--primary);
+
+
+            .global-presence h2 {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  margin-bottom: 0.75rem;
+}
+
+.global-presence p {
+  color: #d0e2ff;
+  max-width: 860px;
+  margin: 0 auto 1.5rem;
+}
+    }
+
+/* ══════════════════════════════════════════════
+   10. CTA
+   ══════════════════════════════════════════════ */
+.cta-section {
+    background: var(--primary);
+    text-align: center;
+}
+
+    .cta-section .inner {
+        max-width: 48rem;
+        margin: 0 auto;
+    }
+
+    .cta-section h2 {
+        font-size: clamp(1.875rem, 4vw, 3rem);
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 1.5rem;
+        line-height: 1.15;
+    }
+
+    .cta-section p {
+        font-size: 1.125rem;
+        font-family: var(--font-body);
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 2.5rem;
+        line-height: 1.7;
+    }
+
+    .cta-section .btn-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    /* Hide full address by default */
+.full-address {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.5;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Show full address on hover */
+.office-card:hover .full-address {
+    opacity: 1;
+    max-height: 200px;
+    margin-top: 0.5rem;
+}
+
+/* Optional: hide short address on hover */
+.office-card:hover .short-address {
+    display: none;
+}
+        </style>
+    }
+
+
+ <section class="hero">
+
+  <!-- Background Video -->
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="/images/dotstark_ai.mp4" type="video/mp4">
+  </video>
+
+  <!-- CONTENT -->
+  <div class="container">
+    <div class="hero-grid">
+
+      <div class="hero-content">
+        <div class="label-badge">
+          <span class="dot"></span>
+          AI-Powered Digital Solutions
+        </div>
+
+        <h1>Adaptive AI Platforms for <span>Modern Businesses</span></h1>
+
+        <p class="subtitle">
+          DS 2.0 helps organizations design and develop scalable AI-powered solutions.
+        </p>
+
+        <div class="btn-group">
+          <a href="/contact-us" class="btn btn-primary">Talk to an Expert</a>
+          <a href="/ai-demo" class="btn btn-outline">View Demo</a>
+        </div>
+      </div>
+
+      <div class="ai-viz-wrapper">
+        <div class="ai-viz">
+          <!-- your SVG stays same -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+  <!-- â•â•â• 2. TRUST â•â•â• -->
+  <section class="trust section-padding-trust">
+    <div class="container">
+      <p class="trust-label">Trusted by Forward-Thinking Businesses</p>
+      <div class="logos logos-with-images">
+        <img src="/images/bluespire.png" alt="FinTech" title="BlueSpire" />
+        <img src="/images/ai12z.png" alt="Healthcare" title="Ai12Z" />
+        <img src="/images/bha.png" alt="SaaS" title="BHA" />
+        <img src="/images/fisher.png" alt="Enterprise Platforms" title="Fisher" />
+        <img src="/images/ingram.png" alt="Retail" title="Ingram" />
+        <img src="/images/ltech.png" alt="Education" title="Ltech" />
+        <img src="/images/tavant.png" alt="Education" title="Tavant" />
+      </div>
+    </div>
+  </section>
+
+  <!-- â•â•â• 3. AI SOLUTIONS â•â•â• -->
+  <section id="solutions" class="solutions section-padding">
+    <div class="container">
+   <div class="testi-heading">
+     <h2>Excellence in Every Service</h2>
+   </div>
+      <div class="cards-grid">
+        <div class="solution-card">
+          <div class="card-top">
+            <h3>Generative AI &amp; RAG</h3>
+          </div>
+          <p>We design and build intelligent AI systems that automate operations, enhance decision-making, and enable
+            businesses to scale with confidence.</p>
+        </div>
+        <div class="solution-card">
+          <div class="card-top">
+            <h3>AI Platforms, MLOps &amp; Governance</h3>
+          </div>
+          <p>Develop scalable AI infrastructure with robust deployment pipelines, monitoring, and governance frameworks
+            to ensure reliability and responsible AI usage.</p>
+        </div>
+        <div class="solution-card">
+          <div class="card-top">
+            <h3>LLM Performance &amp; Reliability Engineering</h3>
+          </div>
+          <p>Optimize and evaluate large language model applications through benchmarking, observability, and continuous
+            performance tuning.</p>
+        </div>
+        <div class="solution-card">
+          <div class="card-top">
+            <h3>Vision AI</h3>
+          </div>
+          <p>Implement computer vision solutions for real-world applications such as quality control, monitoring, and
+            visual data analysis.</p>
+        </div>
+        <div class="solution-card">
+          <div class="card-top">
+            <h3>AI Automation &amp; Agentic Workflows</h3>
+          </div>
+          <p>Design end-to-end automation systems where AI agents perform tasks, streamline workflows, and improve
+            operational efficiency.</p>
+        </div>
+        <div class="solution-card">
+          <div class="card-top">
+            <h3>Predictive &amp; Decision Intelligence</h3>
+          </div>
+          <p>Leverage data-driven models for forecasting, strategic planning, and intelligent decision-making across
+            business processes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- â•â•â• 4. CASE STUDIES â•â•â• -->
+  <section id="case-studies" class="case-studies section-padding">
+    <div class="container">
+      <div class="section-top">
+        <div>
+          <h2>Real Solutions, Measurable Impact</h2>
+        </div>
+        <a href="#" class="link icon-arrow">View Case Studies</a>
+      </div>
+      <div class="cases-grid">
+        <div class="case-card">
+          <div class="case-image">
+           <img src="/images/invacare_2.jpg" alt="AI Customer Insights Platform">
+         </div>
+          <div class="card-body">
+            <span class="tag">Artificial Intelligence</span>
+            <h3>AI Customer Insights Platform</h3>
+            <p>Improved decision-making using real-time analytics.</p>
+          </div>
+        </div>
+        <div class="case-card">
+          <div class="case-image">
+          <img src="/images/kentico.jpg" alt="AI Customer Insights Platform">
+        </div>
+          <div class="card-body">
+            <span class="tag">Kentico</span>
+            <h3>Kentico Digital Experience Platform</h3>
+            <p>Migrated enterprise website to Xperience by Kentico.</p>
+          </div>
+        </div>
+        <div class="case-card">
+          <div class="case-image">
+          <img src="/images/ummalemaratpark_2.jpg" alt="AI Customer Insights Platform">
+        </div>
+          <div class="card-body">
+            <span class="tag">AI + Kentico</span>
+            <h3>AI Knowledge Assistant</h3>
+            <p>Built AI chatbot trained on enterprise documentation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- â•â•â• 5. NUMBERS SECTION â•â•â• -->
+  <div class="aboutus-stats-wrapper">
+    <div class="container">
+      <div class="content-row">
+        <div class="content-section">
+          <h2>Why DS 2.0?</h2>
+          <p>We believe intelligent systems should be simple, scalable, and built to deliver real impact. At DS 2.0, we
+            help businesses turn ideas into powerful AI solutions using emerging technologies and data-driven
+            approaches.</p>
+        </div>
+        <div class="numbers-section">
+          <div class="numbers-grid">
+            <div class="number-card">
+              <h2 class="numbers">500+</h2>
+              <p>Projects Delivered</p>
+            </div>
+            <div class="number-card">
+              <h2 class="numbers">400+</h2>
+              <p>Clients Served</p>
+            </div>
+            <div class="number-card">
+              <h2 class="numbers">6+</h2>
+              <p>Years of Excellence</p>
+            </div>
+            <div class="number-card">
+              <h2 class="numbers">99%</h2>
+              <p>Client Satisfaction</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- â•â•â• 6. PROCESS â•â•â• -->
+  <section id="process" class="process section-padding">
+    <div class="container">
+      <div class="process-header">
+        <h2>AI Solution Lifecycle</h2>
+        <p class="process-subtext">A proven four-step framework that takes your idea from discovery to a live, optimized
+          AI solution.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+ stroke="currentColor" stroke-width="1.8"
+ stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10"/>
+  <polygon points="16 8 14 14 8 16 10 10 16 8"/>
+</svg>
+          </div>
+          <h3><span>1.</span> Discover</h3>
+          <p>Understand business challenges, map data flows, and define measurable AI goals.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">
+         <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+ stroke="currentColor" stroke-width="1.8"
+ stroke-linecap="round" stroke-linejoin="round">
+  <polygon points="12 2 22 7 12 12 2 7 12 2"/>
+  <polyline points="2 17 12 22 22 17"/>
+  <polyline points="2 12 12 17 22 12"/>
+</svg>
+          </div>
+          <h3><span>2.</span> Architect</h3>
+          <p>Design scalable AI infrastructure, data pipelines, and integration blueprints.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6" />
+              <polyline points="8 6 2 12 8 18" />
+            </svg>
+          </div>
+          <h3><span>3.</span> Build</h3>
+          <p>Develop and deploy production-ready AI models, agents, and digital platforms.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+ stroke="currentColor" stroke-width="1.8"
+ stroke-linecap="round" stroke-linejoin="round">
+  <polyline points="3 17 9 11 13 15 21 7"/>
+  <polyline points="14 7 21 7 21 14"/>
+</svg>
+          </div>
+          <h3><span>4.</span> Optimize</h3>
+          <p>Monitor performance, retrain models, and continuously improve outcomes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- â•â•â• 7. TESTIMONIALS â•â•â• -->
+  <section class="testimonials section-padding">
+    <div class="container">
+      <div class="testi-heading">
+        <h2>Trusted by Businesses Around the World</h2>
+      </div>
+      <div class="testimonials-grid">
+
+        <!-- LEFT: one quote at a time, auto-slides -->
+        <div class="testi-left">
+          <div class="testi-slider-wrap">
+            <button class="testi-arrow testi-prev" id="testiPrev" aria-label="Previous testimonial">&#8249;</button>
+            <div class="testi-slider" id="testiSlider">
+
+              <div class="testi-slide active">
+                <svg class="testi-quote-icon" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M0 30V18C0 7 6 1 18 0l2 4C12 5 9 9 9 15h7v15H0zm22 0V18C22 7 28 1 40 0l2 4C34 5 31 9 31 15h7v15H22z"
+                    fill="currentColor" opacity="1" />
+                </svg>
+                <blockquote>"DotStark's expertise in AI platforms helped us significantly enhance our online
+                  capabilities and automate key workflows."</blockquote>
+                <div class="testi-author">
+                  <div class="testi-avatar initials">NW</div>
+                  <div>
+                    <p class="testi-name">Noah Wick</p>
+                    <p class="testi-role">Founder, TechVentures</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testi-slide">
+                <svg class="testi-quote-icon" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M0 30V18C0 7 6 1 18 0l2 4C12 5 9 9 9 15h7v15H0zm22 0V18C22 7 28 1 40 0l2 4C34 5 31 9 31 15h7v15H22z"
+                    fill="currentColor" opacity="1" />
+                </svg>
+                <blockquote>"The team delivered a production-ready RAG pipeline in record time. Exceptional technical
+                  depth and communication throughout."</blockquote>
+                <div class="testi-author">
+                  <div class="testi-avatar initials">SL</div>
+                  <div>
+                    <p class="testi-name">Sarah Lin</p>
+                    <p class="testi-role">CTO, DataBridge Inc.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testi-slide">
+                <svg class="testi-quote-icon" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M0 30V18C0 7 6 1 18 0l2 4C12 5 9 9 9 15h7v15H0zm22 0V18C22 7 28 1 40 0l2 4C34 5 31 9 31 15h7v15H22z"
+                    fill="currentColor" opacity="1" />
+                </svg>
+                <blockquote>"From architecture to deployment, DS 2.0 handled everything seamlessly. Our AI assistant now
+                  handles 60% of support queries."</blockquote>
+                <div class="testi-author">
+                  <div class="testi-avatar initials">MR</div>
+                  <div>
+                    <p class="testi-name">Marcus Reid</p>
+                    <p class="testi-role">VP Engineering, NovaSaaS</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testi-slide">
+                <svg class="testi-quote-icon" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M0 30V18C0 7 6 1 18 0l2 4C12 5 9 9 9 15h7v15H0zm22 0V18C22 7 28 1 40 0l2 4C34 5 31 9 31 15h7v15H22z"
+                    fill="currentColor" opacity="1" />
+                </svg>
+                <blockquote>"Incredible attention to detail. They built our predictive analytics dashboard on time a
+                  game-changer for our ops team."</blockquote>
+                <div class="testi-author">
+                  <div class="testi-avatar initials">PS</div>
+                  <div>
+                    <p class="testi-name">Priya Sharma</p>
+                    <p class="testi-role">Head of Product, FinEdge</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <button class="testi-arrow testi-next" id="testiNext" aria-label="Next testimonial">&#8250;</button>
+          </div>
+        </div>
+
+        <!-- RIGHT: featured video testimonial -->
+        <div class="testi-right">
+          <div class="testi-video-wrap" id="testiVideoWrap">
+            <div class="testi-video-thumb" id="testiThumb">
+              <img src="/images/Client_review_thumbnail.png" alt="Featured testimonial thumbnail" />
+              <div class="testi-video-overlay">
+                <div class="testi-name-badge">
+                  <strong>Alex Morgan</strong>
+                  <span>President &amp; Co-founder, CloudCore Inc.</span>
+                </div>
+              </div>
+              <button class="testi-play-btn" id="testiPlayBtn" aria-label="Play featured testimonial">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                  <polygon points="5,3 19,12 5,21" />
+                </svg>
+              </button>
+            </div>
+            <video id="testiVideo" controls preload="none" poster="./global-skyline.png"
+              style="display:none; width:100%; border-radius:12px;">
+              <source src="/images/future-ai.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- â•â•â• 8. TECHNOLOGY STACK â•â•â• -->
+  <section class="tech-stack-section section-padding">
+    <div class="container">
+      <div class="tech-stack-heading">
+        <h2>Our Technology Ecosystem</h2>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div class="tech-tabs" role="tablist">
+        <button class="tech-tab active" data-tab="ai-models" role="tab" aria-selected="true">AI Models</button>
+        <button class="tech-tab" data-tab="frameworks" role="tab" aria-selected="false">Frameworks</button>
+        <button class="tech-tab" data-tab="vectordb" role="tab" aria-selected="false">Data &amp; Vector DB</button>
+        <button class="tech-tab" data-tab="cloud" role="tab" aria-selected="false">Cloud &amp; Infra</button>
+        <button class="tech-tab" data-tab="mlops" role="tab" aria-selected="false">MLOps &amp; Tools</button>
+      </div>
+
+
+      <!-- Tab Panels -->
+      <div class="tech-icons-panel active" id="tab-ai-models">
+        <div class="tech-icons-row">
+          <div class="tech-icon-item"><img src="/images/openai.jpg" alt="OpenAI" /><span>OpenAI</span></div>
+          <div class="tech-icon-item"><img src="/images/Claude-ai-logo1.webp" alt="Claude" /><span>Claude</span></div>
+          <div class="tech-icon-item"><img src="/images/gemini-color.png" alt="Gemini" /><span>Gemini</span></div>
+          <div class="tech-icon-item"><img src="/images/Mistral.png" alt="Mistral" /><span>Mistral</span></div>
+        </div>
+      </div>
+
+      <div class="tech-icons-panel" id="tab-frameworks">
+        <div class="tech-icons-row">
+          <div class="tech-icon-item"><img src="/images/langchain.png" alt="LangChain" /><span>LangChain</span></div>
+          <div class="tech-icon-item"><img src="/images/LlamaIndex.png" alt="LlamaIndex" /><span>LlamaIndex</span>
+          </div>
+          <div class="tech-icon-item"><img src="/images/scikit-learn.png" alt="Scikit learn" /><span>Scikit Learn</span>
+          </div>
+          <div class="tech-icon-item"><img src="/images/tensorflow.png" alt="tensorflow" /><span>TensorFlow</span></div>
+        </div>
+      </div>
+
+      <div class="tech-icons-panel" id="tab-vectordb">
+        <div class="tech-icons-row">
+          <div class="tech-icon-item"><img src="/images/Pinecone.io.jpg" alt="Pinecone" /><span>Pinecone</span></div>
+          <div class="tech-icon-item"><img src="/images/weaviate.png" alt="Weaviate" /><span>Weaviate</span></div>
+          <div class="tech-icon-item"><img src="/images/faiss.png" alt="FAISS" /><span>FAISS</span></div>
+          <div class="tech-icon-item"><img src="/images/Chroma.png" alt="Chroma" /><span>Chroma</span></div>
+        </div>
+      </div>
+
+      <div class="tech-icons-panel" id="tab-cloud">
+        <div class="tech-icons-row">
+          <div class="tech-icon-item"><img src="/images/Amazon_Web_Services.png" alt="AWS" /><span>AWS</span></div>
+          <div class="tech-icon-item"><img src="/images/azure.jpg" alt="Azure" /><span>Azure</span></div>
+          <div class="tech-icon-item"><img src="/images/gcp.png" alt="GCP" /><span>GCP</span></div>
+          <div class="tech-icon-item"><img src="/images/docker.webp" alt="Docker" /><span>Docker</span></div>
+        </div>
+      </div>
+
+      <div class="tech-icons-panel" id="tab-mlops">
+        <div class="tech-icons-row">
+          <div class="tech-icon-item"><img src="/images/mlflow.png" alt="MLflow" /><span>MLflow</span></div>
+          <div class="tech-icon-item"><img src="/images/wandb.png" alt="Weights & Biases" /><span>Weights &amp;
+              Biases</span></div>
+          <div class="tech-icon-item"><img src="/images/Kubernetes.png" alt="Kubernetes" /><span>Kubernetes</span>
+          </div>
+          <div class="tech-icon-item"><img src="/images/cometml.png" alt="CometMl" /><span>CometML</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+ 
+
+  <!-- â•â•â• 9. INSIGHTS â•â•â• -->
+  <section id="insights" class="insights section-padding">
+    <div class="container">
+      <div class="section-top">
+        <div>
+          <h2>Thought Leadership</h2>
+        </div>
+        <a href="#" class="link icon-arrow">Explore Insights</a>
+      </div>
+      <div class="posts-grid">
+        <article class="post-card">
+             <div class="case-image">
+    <img src="/images/aicode.jpg" alt="AI Customer Insights Platform">
+  </div>
+          <div class="card-body">
+            <span class="tag">AI</span>
+            <h3>AI Agents for Enterprise Websites</h3>
+          </div>
+        </article>
+        <article class="post-card">
+            <div class="case-image">
+    <img src="/images/aira.webp" alt="Kentico AI Aira">
+  </div>
+          <div class="card-body">
+            <span class="tag">Aira</span>
+            <h3>Xperience by Kentico Migration with Aira</h3>
+          </div>
+        </article>
+        <article class="post-card">
+             <div class="case-image">
+    <img src="/images/data.jpg" alt="AI Customer Insights Platform">
+  </div>
+          <div class="card-body">
+            <span class="tag">Data</span>
+            <h3>Building Data Platforms for AI</h3>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+<!-- ═══ 10.5 GLOBAL PRESENCE ═══ -->
+<!-- â•â•â• 10.5 GLOBAL PRESENCE â•â•â• -->
+  <section class="global-presence section-padding">
+    <div class="container">
+      <div class="global-presence-header">
+        <h2>Our Worldwide Delivery Network</h2>
+        <p>From India to USA, Canada, and Europe â€” we partner with you across time zones to execute enterprise-grade
+          AI
+          solutions.</p>
+      </div>
+      <div class="offices-grid">
+        <div class="office-card">
+          <div class="office-photo">
+            <img src="/images/india_address.png" alt="India Office" />
+          </div>
+          <div class="office-info">
+            <h3>India</h3>
+              <p class="short-address">Jaipur, Rajasthan</p>
+             <div class="full-address">
+               1st Floor, Opp. Metro Pillar No. 97, New Sanganer Road,<br>
+               Jaipur - 302019 Rajasthan, India.<br><br>
+               Contact: +91 9680599916<br>
+               support@dotstark.com
+             </div>          
+          </div>
+        </div>
+        <div class="office-card">
+          <div class="office-photo">
+            <img src="/images/usa_address.png" alt="USA Office" />
+          </div>
+          <div class="office-info">
+            <h3>USA</h3>
+                <p class="short-address">New York, NY</p>
+             <div class="full-address">
+               3101 N. Central Ave,
+                STE 183#3541, Phoenix, Arizona<br><br>
+                Contact: +1 (602) 403-9958
+             </div> 
+          </div>
+        </div>
+        <div class="office-card">
+          <div class="office-photo">
+            <img src="/images/canada_address.png" alt="Canada Office" />
+          </div>
+          <div class="office-info">
+            <h3>Canada</h3>
+                <p class="short-address">Toronto, Ontario</p>
+             <div class="full-address">
+              26 Finch Crescent, London ON
+                 N6E 2E5, Canada<br><br>
+                Contact: +1 (647) 862-2190
+             </div> 
+          </div>
+        </div>
+        <div class="office-card">
+          <div class="office-photo">
+            <img src="/images/europe_address.png" alt="Europe Office" />
+          </div>
+          <div class="office-info">
+            <h3>Europe</h3>
+              <p class="short-address">London, UK</p>
+             <div class="full-address">
+             Plaza 33, No.1, Jalan Kemajuan,
+             Seksyen 13, 46200,
+             Petaling Jaya, Selangor, Malaysia<br><br>
+                Contact: +60 17-656 4127
+             </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+

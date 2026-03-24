@@ -1,0 +1,300 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.AiAgents>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "MasterLayout.cshtml";
+}
+
+@section Styles {
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#1b54ff;
+  --primary-light:#4d7aff;
+  --primary-glow:rgba(27,84,255,0.3);
+  --bg:#ffffff;
+  --surface:#f7f7f9;
+  --border:#e4e6ec;
+  --text:#000000;
+  --text-dim:#6b7280;
+  --text-muted:#9ca3af;
+  --radius:0.75rem;
+}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+/* Utility */
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+@@media(min-width:768px){.container{padding:0 32px}}
+@@media(min-width:1024px){.container{padding:0 64px}}
+.text-balance{text-wrap:balance}
+.text-pretty{text-wrap:pretty}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:inherit;font-weight:600;font-size:1rem;padding:14px 32px;border-radius:var(--radius);border:none;cursor:pointer;transition:all 0.25s cubic-bezier(0.16,1,0.3,1)}
+.btn:active{transform:scale(0.97)}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 0 24px -4px var(--primary-glow)}
+.btn-primary:hover{background:var(--primary-light);box-shadow:0 0 32px -4px rgba(27,84,255,0.5)}
+.btn-outline{background:transparent;color:var(--text);border:1.5px solid rgba(27,84,255,0.4)}
+.btn-outline:hover{background:rgba(27,84,255,0.06);border-color:var(--primary)}
+.btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* Scroll reveal */
+.reveal{opacity:0;transform:translateY(20px);filter:blur(4px);transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1),filter 0.7s cubic-bezier(0.16,1,0.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0);filter:blur(0)}
+
+/* Section label */
+.section-label{font-size:0.8rem;font-weight:600;color:var(--primary);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:16px}
+
+/* ===== HERO ===== */
+.hero{position:relative;min-height:85vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 24px 60px}
+.hero-grid{position:absolute;inset:0;opacity:0.03;background-image:linear-gradient(var(--primary) 1px,transparent 1px),linear-gradient(90deg,var(--primary) 1px,transparent 1px);background-size:64px 64px;pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;border:1px solid var(--border);background:var(--surface);font-size:0.875rem;color:var(--text-dim);margin-bottom:32px}
+.hero-badge svg{width:16px;height:16px;color:var(--primary);stroke:var(--primary);fill:none;stroke-width:2}
+.hero h1{font-size:clamp(2.25rem,5vw,4.25rem);font-weight:800;line-height:1.05;letter-spacing:-0.02em;margin-bottom:24px}
+.hero h1 span{background:linear-gradient(135deg,var(--primary),var(--primary-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .lead{font-size:clamp(1.05rem,2vw,1.25rem);color:var(--text-dim);max-width:640px;margin:0 auto 16px}
+.hero .sublead{font-size:1rem;color:var(--text-muted);max-width:560px;margin:0 auto 40px}
+
+/* ===== AGENTS ===== */
+.agents{padding:96px 0 80px}
+.agents-header{text-align:center;margin-bottom:64px}
+.agents-header h2{font-size:clamp(1.75rem,3.5vw,3rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:24px}
+.agents-header p{font-size:1.125rem;color:var(--text-dim);max-width:640px;margin:0 auto}
+.agents-grid{display:grid;gap:24px}
+@@media(min-width:768px){.agents-grid{grid-template-columns:repeat(3,1fr)}}
+.agent-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px;transition:border-color 0.3s ease,box-shadow 0.3s ease}
+.agent-card:hover{border-color:rgba(27,84,255,0.25);box-shadow:0 0 20px -8px var(--primary-glow)}
+.agent-icon{width:48px;height:48px;border-radius:12px;background:rgba(27,84,255,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:24px;color:var(--primary)}
+.agent-icon svg{width:24px;height:24px;stroke:var(--primary);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.agent-card h3{font-size:1.25rem;font-weight:700;margin-bottom:12px}
+.agent-card .desc{color:var(--text-dim);margin-bottom:16px}
+.agent-card .detail{font-size:0.875rem;color:var(--text-muted);margin-bottom:24px}
+.cap-label{font-size:0.875rem;font-weight:600;margin-bottom:12px}
+.cap-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.cap-list li{display:flex;align-items:flex-start;gap:10px;font-size:0.875rem;color:var(--text-dim)}
+.cap-list li svg{width:16px;height:16px;color:var(--primary);stroke:var(--primary);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-top:2px;flex-shrink:0}
+
+/* ===== CTA SECTIONS ===== */
+.cta-sections{padding:80px 24px;text-align:center}
+.cta-sections.bordered{border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.cta-sections h2{font-size:clamp(1.5rem,3vw,2.5rem);font-weight:800;letter-spacing:-0.01em;margin-bottom:16px}
+.cta-sections p{font-size:1.125rem;color:var(--text-dim);max-width:600px;margin:0 auto 32px}
+
+/* ══════════════════════════════════════════════
+   10. CTA
+   ══════════════════════════════════════════════ */
+.cta-section {
+    background: var(--primary);
+    text-align: center;
+}
+
+    .cta-section .inner {
+        max-width: 48rem;
+        margin: 0 auto;
+    }
+
+    .cta-section h2 {
+        font-size: clamp(1.875rem, 4vw, 3rem);
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 1.5rem;
+        line-height: 1.15;
+    }
+
+    .cta-section p {
+        font-size: 1.125rem;
+        font-family: var(--font-body);
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 2.5rem;
+        line-height: 1.7;
+    }
+
+    .cta-section .btn-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+/* ===== WHY AI ===== */
+.why-ai{padding:96px 0}
+.why-ai-header{text-align:center;margin-bottom:64px}
+.why-ai-header h2{font-size:clamp(1.75rem,3.5vw,3rem);font-weight:800;letter-spacing:-0.02em}
+.benefits-grid{display:grid;gap:24px}
+@@media(min-width:640px){.benefits-grid{grid-template-columns:repeat(2,1fr)}}
+.benefit-card{display:flex;gap:20px;padding:24px;border-radius:var(--radius);border:1px solid var(--border);background:rgba(247,247,249,0.5);transition:border-color 0.3s ease}
+.benefit-card:hover{border-color:rgba(27,84,255,0.2)}
+.benefit-icon{width:48px;height:48px;border-radius:12px;background:rgba(27,84,255,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--primary)}
+.benefit-icon svg{width:24px;height:24px;stroke:var(--primary);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.benefit-card h3{font-size:1.125rem;font-weight:600;margin-bottom:8px}
+.benefit-card p{color:var(--text-dim)}
+
+/* ===== CASE STUDY ===== */
+.case-study{padding:96px 0;border-top:1px solid var(--border)}
+.case-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:clamp(32px,5vw,64px);box-shadow:0 0 20px -8px var(--primary-glow)}
+.case-card .label-row{display:flex;align-items:center;gap:8px;margin-bottom:24px}
+.case-card .label-row svg{width:20px;height:20px;stroke:var(--primary);fill:none;stroke-width:2}
+.case-card h2{font-size:clamp(1.5rem,3vw,2.5rem);font-weight:800;letter-spacing:-0.01em;margin-bottom:24px}
+.case-card p{font-size:1.125rem;color:var(--text-dim);max-width:720px;margin-bottom:32px}
+</style>
+}
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div style="position:relative;max-width:960px;width:100%">
+    <div class="reveal" data-delay="0">
+    </div>
+    <h1 class="reveal text-balance" data-delay="100">AI Agents to Automate and <span>Scale Your Business</span></h1>
+    <p class="lead reveal text-pretty" data-delay="200">Deploy intelligent AI agents that handle tasks, streamline operations, and improve efficiency across your organization.</p>
+    <p class="sublead reveal text-pretty" data-delay="300">Dotstark 2.0 builds AI agents that work alongside your team—automating workflows, managing processes, and delivering real business outcomes.</p>
+    <div class="reveal" data-delay="400">
+      <a href="#" class="btn btn-primary">Talk to an Expert <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- AGENTS -->
+<section class="agents">
+  <div class="container">
+    <div class="agents-header reveal">
+      <p class="section-label">Our AI Agents</p>
+      <h2 class="text-balance">AI Agents for Every Business Function</h2>
+      <p class="text-pretty">Our AI agents work alongside your business to automate tasks, interact with systems, and streamline workflows. Built for seamless integration with your existing tools and processes.</p>
+    </div>
+    <div class="agents-grid">
+
+      <!-- SEO Agent -->
+      <div class="agent-card reveal" data-delay="0">
+        <div class="agent-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <h3>SEO Agent</h3>
+        <p class="desc text-pretty">Our SEO Agent automates end-to-end search optimization processes, helping businesses improve visibility and drive organic growth. It performs keyword research, content recommendations, technical audits, and performance tracking in a continuous and data-driven manner.</p>
+        <p class="desc text-pretty">The agent integrates seamlessly with your CMS, analytics tools, and content workflows to ensure real-time optimization and actionable insights.</p>
+        <p class="cap-label">Key Capabilities</p>
+        <ul class="cap-list">
+          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Automated keyword research and clustering</li>
+          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Content optimization recommendations</li>
+          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Technical SEO audits and fixes</li>
+          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Performance tracking and reporting</li>
+        </ul>
+      </div>
+
+      <!-- Appointment Agent -->
+      <div class="agent-card reveal" data-delay="100">
+        <div class="agent-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <h3>Appointment Agent</h3>
+        <p class="desc text-pretty">The Appointment Agent handles scheduling, bookings, reminders, and customer interactions without manual intervention. It ensures a smooth and efficient experience for both businesses and customers.</p>
+        <p class="desc text-pretty">It integrates with calendars, CRMs, and communication tools to manage appointments intelligently and reduce scheduling conflicts or missed opportunities.</p>
+        <p class="cap-label">Key Capabilities</p>
+        <ul class="cap-list">
+          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Automated scheduling and rescheduling</li>
+          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Calendar and CRM integration</li>
+          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Smart reminders and notifications</li>
+          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Conversational booking experience</li>
+        </ul>
+      </div>
+
+      <!-- Operations Agent -->
+      <div class="agent-card reveal" data-delay="200">
+        <div class="agent-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+        <h3>Operations Agent</h3>
+        <p class="desc text-pretty">The Operations Agent streamlines internal workflows by automating repetitive tasks and coordinating business processes across systems. It helps teams focus on high-value work while improving operational efficiency.</p>
+        <p class="desc text-pretty">The agent integrates with internal tools, databases, and APIs to execute tasks, monitor workflows, and ensure smooth operations across departments.</p>
+        <p class="cap-label">Key Capabilities</p>
+        <ul class="cap-list">
+          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Workflow automation and task execution</li>
+          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>System and API integrations</li>
+          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Process monitoring and optimization</li>
+          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Data-driven operational insights</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA 1 -->
+<section class="cta-sections bordered">
+  <div class="container reveal">
+    <h2 class="text-balance">Looking to build a custom AI agent for your business?</h2>
+    <p class="text-pretty">Let DotStark 2.0 design and deploy intelligent agents tailored to your workflows and goals.</p>
+    <a href="#" class="btn btn-primary">Let's Start Your Project <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
+</section>
+
+<!-- WHY AI -->
+<section class="why-ai">
+  <div class="container">
+    <div class="why-ai-header reveal">
+      <p class="section-label">Business Impact</p>
+      <h2 class="text-balance">How AI Agents Transform Your Business</h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal" data-delay="0">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <div><h3>Automate Repetitive Work</h3><p class="text-pretty">AI agents handle routine and repetitive tasks, freeing up your team to focus on strategic and high-impact activities.</p></div>
+      </div>
+      <div class="benefit-card reveal" data-delay="80">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div><h3>Improve Efficiency and Speed</h3><p class="text-pretty">Agents execute tasks faster and more consistently, reducing delays and improving overall operational performance.</p></div>
+      </div>
+      <div class="benefit-card reveal" data-delay="160">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+        <div><h3>Enable Scalable Operations</h3><p class="text-pretty">AI agents scale effortlessly with your business, handling increasing workloads without additional human effort.</p></div>
+      </div>
+      <div class="benefit-card reveal" data-delay="240">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 3-2 5.5-4 7.5S12 20 12 22c0-2-1-2.5-3-4.5S5 12 5 9a7 7 0 0 1 7-7z"/></svg></div>
+        <div><h3>Deliver Intelligent Decision Support</h3><p class="text-pretty">By analyzing data and providing real-time insights, AI agents help businesses make smarter and faster decisions.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY -->
+<section class="case-study">
+  <div class="container">
+    <div class="case-card reveal">
+      <div class="label-row">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span class="section-label" style="margin-bottom:0">Business Impact</span>
+      </div>
+      <h2 class="text-balance">How a Business Scaled Organic Growth with Our SEO Agent</h2>
+      <p class="text-pretty">A growing business implemented our AI SEO agent to automate keyword research, content optimization, and technical audits. By integrating the agent into their existing workflow, they were able to continuously optimize their website without manual effort.</p>
+          <div class="reveal" data-delay="400">
+      <a href="#" class="btn btn-primary">View Case Study<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA 2 -->
+ <section id="contact" class="cta-section section-padding-trust">
+   <div class="container">
+     <div class="inner">
+       <h2>Build &amp; Deploy AI Agents for Your Business</h2>
+       <p>Partner with Dotstark 2.0 to design and deploy intelligent AI agents that automate operations and drive growth.</p>
+       <div class="btn-group">
+         <a href="/contact-us" class="btn btn-white">Book a Consultation</a>
+       </div>
+     </div>
+   </div>
+ </section>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var els=document.querySelectorAll('.reveal');
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        var delay=parseInt(entry.target.getAttribute('data-delay'))||0;
+        setTimeout(function(){entry.target.classList.add('visible')},delay);
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.15});
+  els.forEach(function(el){observer.observe(el)});
+});
+</script>

@@ -1,0 +1,177 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+		Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DotStark AI</title>
+  <meta name="description"
+    content="We help enterprises unlock business value through AI-driven platforms and Kentico-powered digital experiences." />
+ <link rel="stylesheet" href="/css/styles.css" />
+ <link rel="icon" href="/images/ds_favicon.jpg" type="image/png" /> 
+
+  @RenderSection("Styles", required: false)
+</head>
+
+<body>
+
+  <!-- â•â•â• HEADER â•â•â• -->
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo">Dot<span>Stark</span></a>
+      <nav>
+        <a href="/rag">RAG</a>
+        <a href="/ai-agents">AI Agents</a>
+        <a href="/intelligent-automation">Intelligent Automation</a>
+        <a href="/products">Products</a>    
+        <a href="/insight">Insights</a>
+        <a href="/contact-us">Contact Us</a>
+      </nav>
+      <a href="#demo" class="header-cta">View Demo</a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu" aria-expanded="false">
+        <svg id="iconMenu" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+        <svg id="iconClose" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+  </header>
+
+  <!-- Mobile nav drawer -->
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="#rag">RAG</a>
+    <a href="#ai-agents">AI Agents</a>
+    <a href="#automation">Intelligent Automation</a>
+    <a href="#solutions">Products</a>
+    <a href="#insights">Insights</a>
+    <a href="#contact">Contact Us</a>
+    <a href="#demo" class="mobile-cta">View Demo</a>
+  </nav>
+
+         <!-- ✅ MAIN CONTENT -->
+        <main class="main">
+            @RenderBody()
+        </main>
+
+  <!-- â•â•â• 11. FOOTER â•â•â• -->
+  <footer class="footer section-padding">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="brand">
+          <div class="logo">Dot<span>Stark</span></div>
+          <p>Intelligent AI Platforms for Modern Businesses</p>
+        </div>
+        @* <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#">Artificial Intelligence</a></li>
+            <li><a href="#">Kentico Development</a></li>
+          </ul>
+        </div> *@
+        <div class="footer-col">
+          <h4>Solutions</h4>
+          <ul>
+            <li><a href="/rag">RAG</a></li>
+            <li><a href="/ai-agent">AI Agent</a></li>
+            <li><a href="#">Intelligent Automation</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/insight">About</a></li>
+            <li><a href="/insight">Products</a></li>
+            <li><a href="/insight">Insights</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:hello@dotstark.com" target="_blank" rel="noopener noreferrer">hr@dotstark.com</a></li>
+            <li><a href="https://www.linkedin.com/company/dotstark-technologies/posts/?feedView=all" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 DotStark. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms-conditions">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // â”€â”€ Testimonial slider â”€â”€
+    const slides = document.querySelectorAll('.testi-slide');
+    let current = 0;
+    let autoTimer;
+
+    function showSlide(n) {
+      slides[current].classList.remove('active');
+      current = (n + slides.length) % slides.length;
+      slides[current].classList.add('active');
+    }
+
+    function startAuto() {
+      autoTimer = setInterval(() => showSlide(current + 1), 8000);
+    }
+
+    document.getElementById('testiPrev').addEventListener('click', () => {
+      clearInterval(autoTimer);
+      showSlide(current - 1);
+      startAuto();
+    });
+
+    document.getElementById('testiNext').addEventListener('click', () => {
+      clearInterval(autoTimer);
+      showSlide(current + 1);
+      startAuto();
+    });
+
+    startAuto();
+
+    // â”€â”€ Featured video play â”€â”€
+    const playBtn = document.getElementById('testiPlayBtn');
+    const thumb = document.getElementById('testiThumb');
+    const video = document.getElementById('testiVideo');
+    if (playBtn) {
+      playBtn.addEventListener('click', () => {
+        thumb.style.display = 'none';
+        video.style.display = 'block';
+        video.play();
+      });
+    }
+
+    // Technology Stack tab switching
+    const techTabs = document.querySelectorAll('.tech-tab');
+    const techPanels = document.querySelectorAll('.tech-icons-panel');
+    const tabMap = {
+      'ai-models': 'tab-ai-models', frameworks: 'tab-frameworks',
+      vectordb: 'tab-vectordb', cloud: 'tab-cloud', mlops: 'tab-mlops'
+    };
+    techTabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        techTabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+        techPanels.forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        document.getElementById(tabMap[btn.dataset.tab]).classList.add('active');
+      });
+    });
+  </script>
+</body>
+
+</html>

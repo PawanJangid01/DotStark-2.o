@@ -1,0 +1,520 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.CaseStudy>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "MasterLayout.cshtml";
+}
+
+@section Styles {
+    <style>
+        /* ── Breadcrumb ── */
+        .breadcrumb-bar {
+            background: var(--cool-grey);
+            padding: 0.85rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            list-style: none;
+            font-size: 0.875rem;
+            color: var(--muted);
+        }
+
+        .breadcrumb li+li::before {
+            content: '/';
+            margin-right: 0.5rem;
+            color: var(--muted);
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            transition: opacity 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            opacity: 0.75;
+        }
+
+        .breadcrumb .active {
+            color: var(--foreground);
+            font-weight: 500;
+        }
+
+        /* ── Page wrapper ── */
+        .cs-page {
+            padding: 4rem 0 6rem;
+            background: var(--background);
+        }
+
+        /* ── Hero title + image ── */
+        .cs-hero-title {
+            font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+            color: var(--foreground);
+            font-family: var(--font-heading);
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            max-width: 860px;
+        }
+
+        .cs-hero-img {
+            width: 100%;
+            border-radius: 0.75rem;
+            object-fit: cover;
+            max-height: 460px;
+            background: var(--cool-grey);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .cs-hero-img-placeholder {
+            width: 100%;
+            height: 380px;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 100%);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+        }
+
+        /* ── Two-column layout ── */
+        .cs-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 3rem;
+            align-items: start;
+            margin-top: 3rem;
+        }
+
+        /* ── Main content ── */
+        .cs-content h4 {
+            font-size: 1.1rem;
+            color: var(--foreground);
+            margin: 2rem 0 0.6rem;
+            font-family: var(--font-heading);
+        }
+
+        .cs-content h4:first-child {
+            margin-top: 0;
+        }
+
+        .cs-content p {
+            font-size: 0.9375rem;
+            color: #444;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .cs-content ul {
+            list-style: none;
+            margin: 0.25rem 0 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .cs-content ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            font-size: 0.9375rem;
+            color: #444;
+            line-height: 1.7;
+        }
+
+        .cs-content ul li::before {
+            content: '';
+            flex-shrink: 0;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary);
+            margin-top: 0.58rem;
+        }
+
+        .cs-content ul li strong {
+            color: var(--foreground);
+        }
+
+        /* Nested list */
+        .cs-content ul ul {
+            margin: 0.4rem 0 0 1rem;
+        }
+
+        .cs-content ul ul li::before {
+            background: var(--primary-20);
+        }
+
+        /* Section divider */
+        .cs-section {
+            padding-top: 1.75rem;
+            margin-top: 1.75rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .cs-section:first-child {
+            border-top: none;
+            padding-top: 0;
+            margin-top: 0;
+        }
+
+        /* Results highlight cards */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1rem 0 1.25rem;
+        }
+
+        .result-card {
+            background: #f0f4ff;
+            border: 1px solid rgba(27, 84, 255, 0.12);
+            border-radius: 0.6rem;
+            padding: 1.1rem 1.25rem;
+        }
+
+        .result-card .stat {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: var(--font-heading);
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+
+        .result-card p {
+            font-size: 0.825rem;
+            color: var(--muted);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* ── Sidebar ── */
+        .cs-sidebar {
+            position: sticky;
+            top: 5rem;
+        }
+
+        .meta-box {
+            background: var(--cool-grey);
+            border-radius: 0.75rem;
+            padding: 1.75rem;
+            border: 1px solid var(--border);
+        }
+
+        .meta-box h3 {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            margin-bottom: 1.25rem;
+        }
+
+        .sidebar-item {
+            padding: 0.9rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .sidebar-item .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+            margin-bottom: 0.3rem;
+        }
+
+        .sidebar-item .value {
+            font-size: 0.875rem;
+            color: var(--foreground);
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.4rem;
+        }
+
+        .tech-tag {
+            background: var(--primary-10);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.65rem;
+            border-radius: 2rem;
+        }
+
+        /* ── CTA Banner ── */
+        .cs-cta-banner {
+            margin-top: 4rem;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 100%);
+            border: 1px solid rgba(27, 84, 255, 0.15);
+            border-radius: 0.75rem;
+            padding: 2.5rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .cs-cta-banner p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--foreground);
+            margin: 0;
+        }
+
+        /* ── Responsive ── */
+        @@media (max-width: 960px) {
+            .cs-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .cs-sidebar {
+                position: static;
+            }
+
+            .meta-box {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0;
+            }
+
+            .meta-box h3 {
+                grid-column: 1/-1;
+            }
+
+            .sidebar-item {
+                border-bottom: none;
+                border-right: 1px solid var(--border);
+                padding-right: 1rem;
+            }
+
+            .sidebar-item:nth-child(even) {
+                border-right: none;
+                padding-left: 1rem;
+            }
+        }
+
+        @@media (max-width: 600px) {
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cs-cta-banner {
+                padding: 1.75rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .meta-box {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar-item {
+                border-right: none;
+                padding-right: 0;
+                padding-left: 0 !important;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .sidebar-item:last-child {
+                border-bottom: none;
+            }
+        }
+        
+    </style>
+}
+  
+    <!-- ═══ BREADCRUMB ═══ -->
+    <div class="breadcrumb-bar">
+        <div class="container">
+            <ol class="breadcrumb" aria-label="breadcrumb">
+                <li><a href="index 1.html">Home</a></li>
+                <li><a href="index 1.html#case-studies">Case Studies</a></li>
+                <li class="active" aria-current="page">Auto Insurance Platform</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- ═══ MAIN ═══ -->
+    <main class="cs-page">
+        <div class="container">
+
+            <!-- Title + Hero Image -->
+            <h1 class="cs-hero-title">Driving Digital Innovation in Auto Insurance with a Seamless Self-Service Platform
+            </h1>
+            <div class="cs-hero-img-placeholder" role="img" aria-label="MyZen auto insurance platform screenshot">
+                Case Study Image
+            </div>
+
+            <!-- Two-column layout -->
+            <div class="cs-layout">
+
+                <!-- Left: main content -->
+                <article class="cs-content">
+
+                    <div class="cs-section">
+                        <h4>Project Overview</h4>
+                        <p>A digital-first auto insurance provider aimed to modernize its consumer website and customer
+                            portal by rebuilding the platform on <strong>Kentico Xperience 13 (K13)</strong>. The
+                            objective was to create a clean, intuitive, and mobile-friendly self-service experience that
+                            empowers customers to manage their insurance policies, renewals, and payments online with
+                            minimal effort.</p>
+                        <p>The transformation focused on simplicity, performance, and customer autonomy — aligning with
+                            the brand promise of hassle-free insurance.</p>
+                    </div>
+
+                    <div class="cs-section">
+                        <h4>Business Objectives</h4>
+                        <ul>
+                            <li>Enable customers to view, renew, and manage policies through a secure self-service
+                                portal.</li>
+                            <li>Simplify and accelerate online premium payments.</li>
+                            <li>Deliver a modern, minimalistic digital-first brand experience.</li>
+                            <li>Allow marketing teams to independently manage offers, FAQs, and policy content.</li>
+                            <li>Improve mobile usability, accessibility, and overall site performance.</li>
+                        </ul>
+                    </div>
+
+                    <div class="cs-section">
+                        <h4>Key Features &amp; Deliverables</h4>
+                        <ul>
+                            <li>Modular page templates in <strong>Kentico Xperience 13</strong> for homepage, plans,
+                                product details, and portal access.</li>
+                            <li>
+                                <strong>Self-service "My Account" dashboard</strong> allowing customers to:
+                                <ul>
+                                    <li>View policy details and renewal dates.</li>
+                                    <li>Download insurance documents.</li>
+                                    <li>Update personal and contact information.</li>
+                                    <li>Complete secure online premium payments.</li>
+                                </ul>
+                            </li>
+                            <li>Simplified product comparison for multiple plan tiers.</li>
+                            <li>CMS-driven FAQ and help center with categorized support topics.</li>
+                            <li>Fully responsive, mobile-first UI optimized for usability.</li>
+                            <li>Analytics integration to track portal usage, renewals, and payment success.</li>
+                        </ul>
+                    </div>
+
+                    <div class="cs-section">
+                        <h4>Challenges</h4>
+                        <ul>
+                            <li>Presenting complex insurance policies and pricing in a simple, user-friendly manner.
+                            </li>
+                            <li>Secure migration of existing customer and policy data.</li>
+                            <li>Reducing marketing dependency on developers through CMS workflows.</li>
+                            <li>Maintaining regulatory compliance and data privacy standards.</li>
+                            <li>Optimizing the end-to-end journey from quote to renewal across devices.</li>
+                        </ul>
+                    </div>
+
+                    <div class="cs-section">
+                        <h4>Solution Approach</h4>
+                        <ul>
+                            <li>Implemented <strong>Kentico Xperience 13</strong> with custom page types and reusable
+                                widgets (plan cards, banners, CTAs, FAQs).</li>
+                            <li>Designed a mobile-first interface with clear CTAs and minimal user steps.</li>
+                            <li>Integrated backend APIs for secure policy management and payment processing.</li>
+                            <li>Configured CMS workflows enabling rapid updates to promotions and content.</li>
+                            <li>Applied caching, lazy loading, and asset optimization for performance.</li>
+                            <li>Set up analytics dashboards for tracking conversions and user behavior.</li>
+                        </ul>
+                    </div>
+
+                    <div class="cs-section">
+                        <h4>Results</h4>
+                        <div class="results-grid">
+                            <div class="result-card">
+                                <div class="stat">30%</div>
+                                <p>Increase in active self-service portal users</p>
+                            </div>
+                            <div class="result-card">
+                                <div class="stat">25%</div>
+                                <p>Faster policy renewals and online payments</p>
+                            </div>
+                            <div class="result-card">
+                                <div class="stat">20%</div>
+                                <p>Improvement in mobile engagement metrics</p>
+                            </div>
+                            <div class="result-card">
+                                <div class="stat">35%</div>
+                                <p>Reduction in content publishing time for marketing teams</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cs-section">
+                        <h4>Conclusion</h4>
+                        <p>The Kentico Xperience 13-powered transformation delivered a modern, scalable, and
+                            customer-centric insurance platform. By enabling seamless self-service, improving
+                            performance, and simplifying content management, the solution significantly enhanced user
+                            satisfaction while supporting the insurer's digital-first growth strategy.</p>
+                    </div>
+
+                </article>
+
+                <!-- Right: sidebar -->
+                <aside class="cs-sidebar">
+                    <div class="meta-box">
+                        <h3>Project Details</h3>
+                        <div class="sidebar-item">
+                            <div class="label">Industry</div>
+                            <div class="value">Insurance / Motor Vehicle Insurance</div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="label">Previous Platform</div>
+                            <div class="value">Legacy Consumer Insurance Website / Limited Online Portal</div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="label">Technology</div>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Kentico XP 13</span>
+                                <span class="tech-tag">ASP.NET MVC</span>
+                                <span class="tech-tag">HTML5</span>
+                                <span class="tech-tag">CSS3</span>
+                                <span class="tech-tag">JavaScript</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+            </div>
+
+            <!-- CTA Banner -->
+            <div class="cs-cta-banner">
+                <p>What business challenges are you dealing with? We can help.</p>
+                <a href="index 1.html#contact" class="btn btn-primary">Get in touch</a>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        const toggle = document.getElementById('mobileToggle');
+        const nav = document.getElementById('mobileNav');
+        const iconMenu = document.getElementById('iconMenu');
+        const iconClose = document.getElementById('iconClose');
+        toggle.addEventListener('click', () => {
+            const open = nav.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', open);
+            iconMenu.style.display = open ? 'none' : 'block';
+            iconClose.style.display = open ? 'block' : 'none';
+        });
+    </script>

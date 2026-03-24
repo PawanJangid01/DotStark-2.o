@@ -1,0 +1,566 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.TermsAndConditions>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "MasterLayout.cshtml";
+}
+
+@section Styles {
+    <style>
+        /* ── Breadcrumb ── */
+        .breadcrumb-bar {
+            background: var(--cool-grey);
+            padding: 0.85rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            list-style: none;
+            font-size: 0.875rem;
+            color: var(--muted);
+        }
+
+        .breadcrumb li+li::before {
+            content: '/';
+            margin-right: 0.5rem;
+            color: var(--muted);
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            transition: opacity 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            opacity: 0.75;
+        }
+
+        .breadcrumb .active {
+            color: var(--foreground);
+            font-weight: 500;
+        }
+
+        /* ── Hero ── */
+        .tc-hero {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 100%);
+            padding: 5rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tc-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 80% at 50% 0%, rgba(27, 84, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .tc-hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            color: var(--foreground);
+            position: relative;
+        }
+
+        .tc-hero h1 span {
+            color: var(--primary);
+        }
+
+        .tc-hero p {
+            margin-top: 1rem;
+            color: var(--muted);
+            font-size: 1rem;
+            position: relative;
+        }
+
+        /* ── Content ── */
+        .tc-content {
+            padding: 5rem 0 6rem;
+            background: var(--background);
+        }
+
+        .tc-layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        /* Sticky sidebar TOC */
+        .tc-toc {
+            position: sticky;
+            top: 5rem;
+        }
+
+        .tc-toc h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+
+        .tc-toc ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .tc-toc a {
+            display: block;
+            padding: 0.4rem 0.75rem;
+            font-size: 0.875rem;
+            color: var(--muted);
+            border-left: 2px solid var(--border);
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .tc-toc a:hover,
+        .tc-toc a.active {
+            color: var(--primary);
+            border-left-color: var(--primary);
+        }
+
+        /* Main body */
+        .tc-body {
+            min-width: 0;
+        }
+
+        .tc-body p {
+            font-size: 0.9375rem;
+            color: #444;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+
+        .tc-body h2 {
+            font-size: 1.35rem;
+            color: var(--foreground);
+            margin: 2.5rem 0 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-10);
+            scroll-margin-top: 5rem;
+        }
+
+        .tc-body h2 .section-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.75rem;
+            height: 1.75rem;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-right: 0.6rem;
+            vertical-align: middle;
+        }
+
+        .tc-body ul {
+            list-style: none;
+            margin: 0.5rem 0 1.25rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .tc-body ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            font-size: 0.9375rem;
+            color: #444;
+            line-height: 1.7;
+        }
+
+        .tc-body ul li::before {
+            content: '';
+            flex-shrink: 0;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary);
+            margin-top: 0.55rem;
+        }
+
+        /* Intro card */
+        .tc-intro-card {
+            background: #f0f4ff;
+            border-radius: 0.75rem;
+            padding: 2rem 2.25rem;
+            margin-bottom: 2.5rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .tc-intro-card p {
+            color: #444;
+            margin-bottom: 0;
+        }
+
+        .tc-intro-card p+p {
+            margin-top: 0.75rem;
+        }
+
+        .tc-intro-card strong {
+            color: var(--foreground);
+        }
+
+        /* Last updated badge */
+        .tc-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tc-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--primary-10);
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.35rem 0.85rem;
+            border-radius: 2rem;
+        }
+
+        .tc-badge svg {
+            flex-shrink: 0;
+        }
+
+        /* Contact CTA */
+        .tc-contact-cta {
+            margin-top: 3rem;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 100%);
+            border-radius: 0.75rem;
+            padding: 2.5rem;
+            text-align: center;
+            border: 1px solid rgba(27, 84, 255, 0.15);
+        }
+
+        .tc-contact-cta h3 {
+            color: var(--foreground);
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tc-contact-cta p {
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* ── Responsive ── */
+        @@media (max-width: 900px) {
+            .tc-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .tc-toc {
+                position: static;
+                background: var(--cool-grey);
+                border-radius: 0.5rem;
+                padding: 1.25rem 1.5rem;
+            }
+
+            .tc-toc ul {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .tc-toc a {
+                border-left: none;
+                border-bottom: 2px solid var(--border);
+                padding: 0.3rem 0.5rem;
+            }
+
+            .tc-toc a:hover,
+            .tc-toc a.active {
+                border-bottom-color: var(--primary);
+                border-left-color: transparent;
+            }
+        }
+
+        @@media (max-width: 600px) {
+            .tc-hero {
+                padding: 3.5rem 0 3rem;
+            }
+
+            .tc-content {
+                padding: 3rem 0 4rem;
+            }
+
+            .tc-intro-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+}
+
+    <!-- ═══ BREADCRUMB ═══ -->
+    <div class="breadcrumb-bar">
+        <div class="container">
+            <ol class="breadcrumb" aria-label="breadcrumb">
+                <li><a href="index 1.html">Home</a></li>
+                <li class="active" aria-current="page">Terms and Conditions</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="tc-hero">
+        <div class="container">
+            <h1>Terms and <span>Conditions</span></h1>
+            <p>Please read these terms carefully before using our website.</p>
+        </div>
+    </section>
+
+    <!-- ═══ CONTENT ═══ -->
+    <main class="tc-content">
+        <div class="container">
+            <div class="tc-layout">
+
+                <!-- Sidebar TOC -->
+                <aside class="tc-toc" aria-label="Table of contents">
+                    <h3>On this page</h3>
+                    <ul>
+                        <li><a href="#intro">Introduction</a></li>
+                        <li><a href="#cookies">Cookies</a></li>
+                        <li><a href="#license">License</a></li>
+                        <li><a href="#hyperlinking">Hyperlinking</a></li>
+                        <li><a href="#iframes">iFrames</a></li>
+                        <li><a href="#content-liability">Content Liability</a></li>
+                        <li><a href="#reservation">Reservation of Rights</a></li>
+                        <li><a href="#removal">Removal of Links</a></li>
+                        <li><a href="#disclaimer">Disclaimer</a></li>
+                    </ul>
+                </aside>
+
+                <!-- Body -->
+                <article class="tc-body">
+
+                    <div class="tc-meta">
+                        <span class="tc-badge">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                            </svg>
+                            Last updated: March 2026
+                        </span>
+                        <span class="tc-badge">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg>
+                            Effective immediately
+                        </span>
+                    </div>
+
+                    <div class="tc-intro-card" id="intro">
+                        <p><strong>Welcome to Dotstark!</strong></p>
+                        <p>These terms and conditions outline the rules and regulations for the use of Dotstark's
+                            Website, located at <strong>https://dotstark.com/</strong>.</p>
+                        <p>By accessing this website we assume you accept these terms and conditions. Do not continue to
+                            use Dotstark if you do not agree to take all of the terms and conditions stated on this
+                            page.</p>
+                        <p>The following terminology applies to these Terms and Conditions, Privacy Statement and
+                            Disclaimer Notice and all Agreements: "Client", "You" and "Your" refers to you, the person
+                            logged on this website and compliant to the Company's terms and conditions. "The Company",
+                            "Ourselves", "We", "Our" and "Us", refers to our Company. "Party", "Parties", or "Us",
+                            refers to both the Client and ourselves. All terms refer to the offer, acceptance and
+                            consideration of payment necessary to undertake the process of our assistance to the Client
+                            in the most appropriate manner for the express purpose of meeting the Client's needs in
+                            respect of provision of the Company's stated services, in accordance with and subject to,
+                            prevailing law of us.</p>
+                    </div>
+
+                    <h2 id="cookies"><span class="section-num">1</span>Cookies</h2>
+                    <p>We employ the use of cookies. By accessing Dotstark, you agreed to use cookies in agreement with
+                        the Dotstark's Privacy Policy.</p>
+                    <p>Most interactive websites use cookies to let us retrieve the user's details for each visit.
+                        Cookies are used by our website to enable the functionality of certain areas to make it easier
+                        for people visiting our website. Some of our affiliate/advertising partners may also use
+                        cookies.</p>
+
+                    <h2 id="license"><span class="section-num">2</span>License</h2>
+                    <p>Unless otherwise stated, Dotstark and/or its licensors own the intellectual property rights for
+                        all material on Dotstark. All intellectual property rights are reserved. You may access this
+                        from Dotstark for your own personal use subjected to restrictions set in these terms and
+                        conditions.</p>
+                    <p>You must not:</p>
+                    <ul>
+                        <li>Republish material from Dotstark</li>
+                        <li>Sell, rent or sub-license material from Dotstark</li>
+                        <li>Reproduce, duplicate or copy material from Dotstark</li>
+                        <li>Redistribute content from Dotstark</li>
+                    </ul>
+                    <p>This Agreement shall begin on the date hereof.</p>
+                    <p>Parts of this website offer an opportunity for users to post and exchange opinions and
+                        information in certain areas of the website. Dotstark does not filter, edit, publish or review
+                        Comments prior to their presence on the website. Comments do not reflect the views and opinions
+                        of Dotstark, its agents and/or affiliates. Comments reflect the views and opinions of the person
+                        who post their views and opinions. To the extent permitted by applicable laws, Dotstark shall
+                        not be liable for the Comments or for any liability, damages or expenses caused and/or suffered
+                        as a result of any use of and/or posting of and/or appearance of the Comments on this website.
+                    </p>
+                    <p>Dotstark reserves the right to monitor all Comments and to remove any Comments which can be
+                        considered inappropriate, offensive or causes breach of these Terms and Conditions.</p>
+                    <p>You warrant and represent that:</p>
+                    <ul>
+                        <li>You are entitled to post the Comments on our website and have all necessary licenses and
+                            consents to do so</li>
+                        <li>The Comments do not invade any intellectual property right, including without limitation
+                            copyright, patent or trademark of any third party</li>
+                        <li>The Comments do not contain any defamatory, libelous, offensive, indecent or otherwise
+                            unlawful material which is an invasion of privacy</li>
+                        <li>The Comments will not be used to solicit or promote business or custom or present commercial
+                            activities or unlawful activity</li>
+                    </ul>
+                    <p>You hereby grant Dotstark a non-exclusive license to use, reproduce, edit and authorize others to
+                        use, reproduce and edit any of your Comments in any and all forms, formats or media.</p>
+
+                    <h2 id="hyperlinking"><span class="section-num">3</span>Hyperlinking to our Content</h2>
+                    <p>The following organizations may link to our Website without prior written approval:</p>
+                    <ul>
+                        <li>Government agencies</li>
+                        <li>Search engines</li>
+                        <li>News organizations</li>
+                        <li>Online directory distributors may link to our Website in the same manner as they hyperlink
+                            to the Websites of other listed businesses</li>
+                        <li>System wide Accredited Businesses except soliciting non-profit organizations, charity
+                            shopping malls, and charity fundraising groups which may not hyperlink to our Web site</li>
+                    </ul>
+                    <p>These organizations may link to our home page, to publications or to other Website information so
+                        long as the link: (a) is not in any way deceptive; (b) does not falsely imply sponsorship,
+                        endorsement or approval of the linking party and its products and/or services; and (c) fits
+                        within the context of the linking party's site.</p>
+                    <p>We may consider and approve other link requests from the following types of organizations:</p>
+                    <ul>
+                        <li>Commonly-known consumer and/or business information sources</li>
+                        <li>Dot.com community sites</li>
+                        <li>Associations or other groups representing charities</li>
+                        <li>Online directory distributors</li>
+                        <li>Internet portals</li>
+                        <li>Accounting, law and consulting firms</li>
+                        <li>Educational institutions and trade associations</li>
+                    </ul>
+                    <p>We will approve link requests from these organizations if we decide that: (a) the link would not
+                        make us look unfavorably to ourselves or to our accredited businesses; (b) the organization does
+                        not have any negative records with us; (c) the benefit to us from the visibility of the
+                        hyperlink compensates the absence of Dotstark; and (d) the link is in the context of general
+                        resource information.</p>
+                    <p>If you are one of the organizations listed above and are interested in linking to our website,
+                        you must inform us by sending an e-mail to Dotstark. Please include your name, your organization
+                        name, contact information as well as the URL of your site, a list of any URLs from which you
+                        intend to link to our Website, and a list of the URLs on our site to which you would like to
+                        link. Wait 2–3 weeks for a response.</p>
+                    <p>Approved organizations may hyperlink to our Website as follows:</p>
+                    <ul>
+                        <li>By use of our corporate name</li>
+                        <li>By use of the uniform resource locator being linked to</li>
+                        <li>By use of any other description of our Website being linked to that makes sense within the
+                            context and format of content on the linking party's site</li>
+                    </ul>
+                    <p>No use of Dotstark's logo or other artwork will be allowed for linking absent a trademark license
+                        agreement.</p>
+
+                    <h2 id="iframes"><span class="section-num">4</span>iFrames</h2>
+                    <p>Without prior approval and written permission, you may not create frames around our Webpages that
+                        alter in any way the visual presentation or appearance of our Website.</p>
+
+                    <h2 id="content-liability"><span class="section-num">5</span>Content Liability</h2>
+                    <p>We shall not be held responsible for any content that appears on your Website. You agree to
+                        protect and defend us against all claims that is rising on your Website. No link(s) should
+                        appear on any Website that may be interpreted as libelous, obscene or criminal, or which
+                        infringes, otherwise violates, or advocates the infringement or other violation of, any third
+                        party rights.</p>
+
+                    <h2 id="reservation"><span class="section-num">6</span>Reservation of Rights</h2>
+                    <p>We reserve the right to request that you remove all links or any particular link to our Website.
+                        You approve to immediately remove all links to our Website upon request. We also reserve the
+                        right to amend these terms and conditions and its linking policy at any time. By continuously
+                        linking to our Website, you agree to be bound to and follow these linking terms and conditions.
+                    </p>
+
+                    <h2 id="removal"><span class="section-num">7</span>Removal of Links from our Website</h2>
+                    <p>If you find any link on our Website that is offensive for any reason, you are free to contact and
+                        inform us any moment. We will consider requests to remove links but we are not obligated to do
+                        so or to respond to you directly.</p>
+                    <p>We do not ensure that the information on this website is correct, we do not warrant its
+                        completeness or accuracy; nor do we promise to ensure that the website remains available or that
+                        the material on the website is kept up to date.</p>
+
+                    <h2 id="disclaimer"><span class="section-num">8</span>Disclaimer</h2>
+                    <p>To the maximum extent permitted by applicable law, we exclude all representations, warranties and
+                        conditions relating to our website and the use of this website. Nothing in this disclaimer will:
+                    </p>
+                    <ul>
+                        <li>Limit or exclude our or your liability for death or personal injury</li>
+                        <li>Limit or exclude our or your liability for fraud or fraudulent misrepresentation</li>
+                        <li>Limit any of our or your liabilities in any way that is not permitted under applicable law
+                        </li>
+                        <li>Exclude any of our or your liabilities that may not be excluded under applicable law</li>
+                    </ul>
+                    <p>The limitations and prohibitions of liability set in this Section and elsewhere in this
+                        disclaimer: (a) are subject to the preceding paragraph; and (b) govern all liabilities arising
+                        under the disclaimer, including liabilities arising in contract, in tort and for breach of
+                        statutory duty.</p>
+                    <p>As long as the website and the information and services on the website are provided free of
+                        charge, we will not be liable for any loss or damage of any nature.</p>
+
+                    <!-- Contact CTA -->
+                    <div class="tc-contact-cta">
+                        <h3>Have questions about these terms?</h3>
+                        <p>Reach out to our team and we'll be happy to clarify anything.</p>
+                        <a href="mailto:hello@dotstark.com" class="btn btn-primary">Contact Us</a>
+                    </div>
+
+                </article>
+            </div>
+        </div>
+    </main>
+
+
+    <script>
+        // Mobile nav toggle
+        const toggle = document.getElementById('mobileToggle');
+        const nav = document.getElementById('mobileNav');
+        const iconMenu = document.getElementById('iconMenu');
+        const iconClose = document.getElementById('iconClose');
+
+        toggle.addEventListener('click', () => {
+            const open = nav.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', open);
+            iconMenu.style.display = open ? 'none' : 'block';
+            iconClose.style.display = open ? 'block' : 'none';
+        });
+
+        // TOC active highlight on scroll
+        const sections = document.querySelectorAll('.tc-body h2[id], #intro');
+        const tocLinks = document.querySelectorAll('.tc-toc a');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    tocLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+                    });
+                }
+            });
+        }, { rootMargin: '-20% 0px -70% 0px' });
+
+        sections.forEach(s => observer.observe(s));
+    </script>
