@@ -118,11 +118,31 @@
     const slides = document.querySelectorAll('.testi-slide');
     let current = 0;
     let autoTimer;
+            function typeText(slide) {
+          const blockquote = slide.querySelector("blockquote");
+          const fullText = blockquote.getAttribute("data-text") || blockquote.textContent;
+
+          blockquote.setAttribute("data-text", fullText);
+          blockquote.textContent = "";
+
+          let index = 0;
+          const speed = 40; // typing speed
+
+          const typing = setInterval(() => {
+            blockquote.textContent += fullText.charAt(index);
+            index++;
+
+            if (index >= fullText.length) {
+              clearInterval(typing);
+            }
+          }, speed);
+        }
 
     function showSlide(n) {
       slides[current].classList.remove('active');
       current = (n + slides.length) % slides.length;
       slides[current].classList.add('active');
+           typeText(slides[current]);
     }
 
     function startAuto() {
@@ -140,7 +160,7 @@
       showSlide(current + 1);
       startAuto();
     });
-
+        typeText(slides[current]);
     startAuto();
 
     // â”€â”€ Featured video play â”€â”€
