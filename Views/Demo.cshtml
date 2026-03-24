@@ -1,0 +1,578 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Demo>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "MasterLayout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --fg: #141a26;
+      --primary: #3b5bf6;
+      --primary-fg: #ffffff;
+      --muted: #6b7a8d;
+      --muted-bg: #f4f5f7;
+      --border: #e2e5ea;
+      --card: #ffffff;
+      --destructive: #e53e3e;
+      --radius: 0.75rem;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ===== INTRO SECTION ===== */
+    .intro-section {
+      border-bottom: 1px solid var(--border);
+      padding: 8rem 0;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.375rem 1rem;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      background: var(--muted-bg);
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .badge-dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+
+    .intro-content h1 {
+      font-size: 3.25rem;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.5rem;
+    }
+
+    .intro-content h1 span {
+      color: var(--primary);
+    }
+
+    .intro-content p {
+      font-size: 1.125rem;
+      color: var(--muted);
+      max-width: 28rem;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .benefits {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .benefits li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9375rem;
+    }
+
+    .check-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    /* ===== FORM CARD ===== */
+    .form-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+    }
+
+    .form-card h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .form-card .desc {
+      font-size: 0.9375rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .field {
+      margin-bottom: 1rem;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 0.375rem;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      height: 2.5rem;
+      padding: 0 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: calc(var(--radius) - 2px);
+      font-size: 0.875rem;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--fg);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(59, 91, 246, 0.15);
+    }
+
+    .field .error {
+      font-size: 0.75rem;
+      color: var(--destructive);
+      margin-top: 0.25rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      height: 2.75rem;
+      padding: 0 2rem;
+      background: var(--primary);
+      color: var(--primary-fg);
+      border: none;
+      border-radius: calc(var(--radius) - 2px);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: opacity 0.15s;
+      margin-top: 0.5rem;
+    }
+
+    .btn-primary:hover { opacity: 0.9; }
+
+    /* ===== VIDEO SECTION ===== */
+    .video-section {
+      padding: 5rem 0;
+    }
+
+    .video-section .section-header {
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    .video-section h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-top: 1rem;
+    }
+
+    .video-section .section-header p {
+      color: var(--muted);
+      margin-top: 0.5rem;
+          text-align: center;
+    }
+
+    .featured-player {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: var(--card);
+          margin: auto;
+    max-width: 700px;
+    }
+
+    .featured-player .video-wrapper {
+      position: relative;
+      padding-top: 56.25%;
+      background: var(--muted-bg);
+    }
+
+    .featured-player iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .featured-player .info {
+      padding: 1.5rem;
+    }
+
+    .featured-player .info h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .featured-player .info .duration {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    .more-demos {
+      margin-top: 3rem;
+    }
+
+    .more-demos h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .video-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--card);
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .video-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+
+    .video-card .thumb {
+      position: relative;
+      padding-top: 56.25%;
+      background: var(--muted-bg);
+      overflow: hidden;
+    }
+
+    .video-card .thumb img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-card .play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.1);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .video-card:hover .play-overlay { opacity: 1; }
+
+    .play-btn {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(59,91,246,0.3);
+    }
+
+    .play-btn svg { color: #fff; width: 1.25rem; height: 1.25rem; margin-left: 2px; }
+
+    .video-card .card-info {
+      padding: 1rem;
+    }
+
+    .video-card .card-info h4 {
+      font-size: 0.9375rem;
+      font-weight: 600;
+    }
+
+    .video-card .card-info .duration {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      margin-top: 0.375rem;
+    }
+
+    .hidden { display: none !important; }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+      .intro-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .intro-content h1 { font-size: 2.25rem; }
+      .video-grid { grid-template-columns: 1fr; }
+    }
+
+    @@media (min-width: 769px) and (max-width: 1024px) {
+      .video-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- INTRO SECTION -->
+  <div id="intro-section" class="intro-section">
+    <div class="container">
+      <div class="intro-grid">
+        <div class="intro-content">
+          @* <div class="badge"><span class="badge-dot"></span> Product Demo</div> *@
+          <h1>See our product <span>in action</span></h1>
+          <p>Watch a quick walkthrough of how our platform helps teams streamline support, automate workflows, and deliver faster resolutions.</p>
+          <ul class="benefits">
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Automate customer support</li>
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Manage conversations in one place</li>
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Improve team productivity</li>
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Use AI-powered workflows</li>
+          </ul>
+        </div>
+        <div>
+          <div class="form-card">
+            <h2>Watch the Demo</h2>
+            <p class="desc">Fill in your details to unlock instant access to our product demos.</p>
+            <form id="demo-form" novalidate>
+              <div class="form-row">
+                <div class="field">
+                  <label for="firstName">First Name</label>
+                  <input id="firstName" placeholder="Your first name" required>
+                  <div class="error" id="err-firstName"></div>
+                </div>
+                <div class="field">
+                  <label for="lastName">Last Name</label>
+                  <input id="lastName" placeholder="Your last name" required>
+                  <div class="error" id="err-lastName"></div>
+                </div>
+              </div>
+              <div class="field">
+                <label for="email">Work Email</label>
+                <input id="email" type="email" placeholder="email@company.com" required>
+                <div class="error" id="err-email"></div>
+              </div>
+              <div class="field">
+                <label for="company">Company Name</label>
+                <input id="company" placeholder="Your company name" required>
+                <div class="error" id="err-company"></div>
+              </div>
+              <div class="field">
+                <label for="companySize">Company Size</label>
+                <select id="companySize" required>
+                  <option value="">Select size</option>
+                  <option value="1-10">1–10</option>
+                  <option value="11-50">11–50</option>
+                  <option value="51-200">51–200</option>
+                  <option value="201-1000">201–1,000</option>
+                  <option value="1000+">1,000+</option>
+                </select>
+                <div class="error" id="err-companySize"></div>
+                </div>
+             <div class="field">
+               <label for="jobRole">Job Role</label>
+               <select id="jobRole" required>
+                 <option value="">Select Job Role</option>
+                 <option>Founder / Co-Founder</option>
+                 <option>CEO / CXO</option>
+                 <option>CTO / Technical Head</option>
+                 <option>Product Manager</option>
+                 <option>Project Manager</option>
+                 <option>Engineering Manager</option>
+                 <option>Software Developer / Engineer</option>
+                 <option>DevOps Engineer</option>
+                 <option>Data Analyst</option>
+                 <option>Data Scientist</option>
+                 <option>AI / ML Engineer</option>
+                 <option>IT Administrator</option>
+                 <option>Business Analyst</option>
+                 <option>Sales Manager</option>
+                 <option>Marketing Manager</option>
+                 <option>HR Manager</option>
+                 <option>Operations Manager</option>
+                 <option>Consultant</option>
+                 <option>Student</option>
+                 <option value="Other">Other</option>
+               </select>
+               <div class="error" id="err-jobRole"></div>
+             </div>
+              <button type="submit" class="btn-primary">Watch Demo →</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIDEO SECTION -->
+  <div id="video-section" class="video-section hidden">
+    <div class="container">
+      <div class="section-header">
+        <h2>Explore Our Demos</h2>
+        <p>Click any video below to watch it in the featured player.</p>
+      </div>
+
+      <div class="featured-player">
+        <div class="video-wrapper">
+          <iframe id="featured-iframe" src="" title="Featured Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="info">
+          <h3 id="featured-title"></h3>
+          <div class="duration">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span id="featured-duration"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="more-demos">
+        <h3>More Demos</h3>
+        <div class="video-grid" id="video-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const VIDEOS = [
+      { id: '1', title: 'AI Agent Demo', duration: '4:32', thumbnail: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=640&q=80', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
+      { id: '2', title: 'Helpdesk Demo', duration: '6:15', thumbnail: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=640&q=80', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
+      { id: '3', title: 'Inbox Demo', duration: '3:48', thumbnail: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=640&q=80', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
+      { id: '4', title: 'Workflow Automation Demo', duration: '5:21', thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=640&q=80', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
+    ];
+
+    let featuredId = '1';
+
+    function setFeatured(id) {
+      featuredId = id;
+      const v = VIDEOS.find(x => x.id === id);
+      document.getElementById('featured-iframe').src = v.videoUrl;
+      document.getElementById('featured-title').textContent = v.title;
+      document.getElementById('featured-duration').textContent = v.duration;
+      renderGrid();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderGrid() {
+      const grid = document.getElementById('video-grid');
+      grid.innerHTML = '';
+      VIDEOS.filter(v => v.id !== featuredId).forEach(v => {
+        const card = document.createElement('div');
+        card.className = 'video-card';
+        card.onclick = () => setFeatured(v.id);
+        card.innerHTML = `
+          <div class="thumb">
+            <img src="${v.thumbnail}" alt="${v.title}">
+            <div class="play-overlay">
+              <div class="play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+            </div>
+          </div>
+          <div class="card-info">
+            <h4>${v.title}</h4>
+            <div class="duration">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>${v.duration}</span>
+            </div>
+          </div>`;
+        grid.appendChild(card);
+      });
+    }
+
+    document.getElementById('demo-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      let valid = true;
+      const fields = [
+        { id: 'firstName', msg: 'First name is required' },
+        { id: 'lastName', msg: 'Last name is required' },
+        { id: 'email', msg: 'Work email is required' },
+        { id: 'company', msg: 'Company name is required' },
+        { id: 'companySize', msg: 'Select company size' },
+        { id: 'jobRole', msg: 'Job role is required' },
+      ];
+
+      fields.forEach(f => {
+        const el = document.getElementById(f.id);
+        const err = document.getElementById('err-' + f.id);
+        if (!el.value.trim()) {
+          err.textContent = f.msg;
+          valid = false;
+        } else {
+          err.textContent = '';
+        }
+      });
+
+      const emailEl = document.getElementById('email');
+      const emailErr = document.getElementById('err-email');
+      if (emailEl.value.trim() && !/^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/.test(emailEl.value)) {
+        emailErr.textContent = 'Enter a valid email';
+        valid = false;
+      }
+
+      if (valid) {
+        document.getElementById('intro-section').classList.add('hidden');
+        document.getElementById('video-section').classList.remove('hidden');
+        setFeatured('1');
+      }
+    });
+  </script>
+</body>
+</html>

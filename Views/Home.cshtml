@@ -320,6 +320,7 @@
    ══════════════════════════════════════════════ */
 .solutions {
     background: var(--background);
+    padding:5rem 0;
 }
 
     .solutions .solutions-header {
@@ -358,11 +359,73 @@
     transition: border-color 0.2s;
     cursor: pointer;
     background-color: #ebebec59;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+       
 
-    .solution-card:hover {
-        border-color: var(--primary-30);
+    .solution-card:hover,
+    .number-card{             
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px -5px rgba(0, 0, 0, 0.08);       
     }
+
+        .solution-card:before,
+        .number-card:before{
+            content: "";
+            position: absolute;
+            inset: 0;
+            padding: 2px; /* border thickness */
+            border-radius: 0.5rem;
+            --angle: 270deg;
+                background: conic-gradient( from var(--angle), transparent 0deg, transparent 300deg, var(--primary) 330deg, transparent 360deg );
+            z-index: 0;
+            opacity: 0;
+            pointer-events: none;
+            /* Keep only border */
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+
+        @@property --angle {
+            syntax: "<angle>";
+            inherits: false;
+            initial-value: 270deg;
+        }
+            .solution-card::after,
+        .number-card::after{
+            content: "";
+            position: absolute;
+            inset: 2px;
+            /* background: #fff; */
+            border-radius: 0.5rem;
+            z-index: 0;
+        }
+
+            .solution-card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+            .solution-card:hover::before,
+        .aboutus-stats-wrapper .number-card::before {
+            opacity: 1;
+            animation: snake-border 3.2s linear infinite;
+        }
+
+        @@keyframes snake-border {
+            from
+
+        {
+            --angle: 270deg;
+        }
+
+        to {
+            --angle: 630deg;
+        }
+
+        }
+
 
     .solution-card .card-top {
         margin-bottom: 1rem;
@@ -385,6 +448,7 @@
    ══════════════════════════════════════════════ */
 .process {
     background: #f8faff;
+    padding:5rem 0;
 }
 
     .process .process-header {
@@ -423,7 +487,7 @@
     background: #fff;
     border: 1px solid var(--border);
     border-radius: 1rem;
-    padding: 2rem 1.5rem;
+    padding: 1.2rem 1.5rem;
     position: relative;
     transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
     overflow: hidden;
@@ -491,6 +555,7 @@
    ══════════════════════════════════════════════ */
 .case-studies {
     background: var(--background);
+    padding: 0 0 5rem 0;
 }
 
     .case-studies .section-top {
@@ -556,8 +621,8 @@
   width: 100%;
   height: 220px; /* same as your placeholder height */
   overflow: hidden;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+  border-top-left-radius: var(--radius);
+            border-top-right-radius: var(--radius);
 }
 
 .case-image img {
@@ -580,7 +645,7 @@
 
     .case-card .card-body {
         padding: 1.5rem;
-        background-color: #eef2ff;
+            background-color: #ebebec59;
     }
 
     .case-card h3 {
@@ -686,6 +751,14 @@
         position: relative;
     }
 
+            .testi-slide blockquote {
+                border-right: 2px solid transparent;
+            }
+
+        .typing {
+            border-right: 2px solid #000;
+            white-space: normal;
+        }
 .testi-quote-icon {
     width: 48px;
     height: 36px;
@@ -699,7 +772,9 @@
     line-height: 1.75;
     font-style: italic;
     margin: 0;
+            
 }
+        
 
 .testi-author {
     display: flex;
@@ -868,6 +943,7 @@
    ══════════════════════════════════════════════ */
 .insights {
     background: var(--background);
+    padding:0  0;
 }
 
     .insights .section-top {
@@ -1003,27 +1079,100 @@
     }
 
     /* Hide full address by default */
-.full-address {
-    font-size: 0.8rem;
-    color: var(--muted);
-    line-height: 1.5;
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
+    .offices-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+    }
+        @@media (max-width: 900px) {
+            .offices-grid
 
-/* Show full address on hover */
-.office-card:hover .full-address {
-    opacity: 1;
-    max-height: 200px;
-    margin-top: 0.5rem;
-}
+        {
+            grid-template-columns: repeat(2, 1fr);
+        }
 
-/* Optional: hide short address on hover */
-.office-card:hover .short-address {
-    display: none;
-}
+        }
+
+        @@media (max-width: 480px) {
+            .offices-grid
+
+        {
+            grid-template-columns: 1fr;
+        }
+
+        }
+
+    /* CARD */
+    .office-card {
+        perspective: 1000px;
+    }
+
+    /* INNER */
+    .office-card-inner {
+        position: relative;
+        width: 100%;
+        height: 320px;
+        transition: transform .7s;
+        transform-style: preserve-3d;
+    }
+
+    /* FLIP */
+    .office-card:hover .office-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    /* FRONT & BACK */
+    .office-card-front,
+    .office-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 10px 25px rgba(0,0,0,.1);
+    }
+
+        /* FRONT DESIGN */
+        .office-card-front img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+    .office-info {
+        padding: 18px;
+    }
+
+        .office-info h3 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .office-info p {
+            color: #666;
+            margin-top: 5px;
+        }
+
+    /* BACK DESIGN */
+    .office-card-back {
+        transform: rotateY(180deg);
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+        .office-card-back h3 {
+            margin-bottom: 10px;
+        }
+
+        .office-card-back p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #444;
+        }
         </style>
     }
 
@@ -1040,10 +1189,10 @@
     <div class="hero-grid">
 
       <div class="hero-content">
-        <div class="label-badge">
+        @* <div class="label-badge">
           <span class="dot"></span>
           AI-Powered Digital Solutions
-        </div>
+        </div> *@
 
         <h1>Adaptive AI Platforms for <span>Modern Businesses</span></h1>
 
@@ -1173,7 +1322,8 @@
           <img src="/images/ummalemaratpark_2.jpg" alt="AI Customer Insights Platform">
         </div>
           <div class="card-body">
-            <span class="tag">AI + Kentico</span>
+            <span class="tag">AI</span>
+                    <span class="tag">Kentico</span>
             <h3>AI Knowledge Assistant</h3>
             <p>Built AI chatbot trained on enterprise documentation.</p>
           </div>
@@ -1300,7 +1450,7 @@
                 <blockquote>"DotStark's expertise in AI platforms helped us significantly enhance our online
                   capabilities and automate key workflows."</blockquote>
                 <div class="testi-author">
-                  <div class="testi-avatar initials">NW</div>
+                  <div class="testi-avatar initials">N</div>
                   <div>
                     <p class="testi-name">Noah Wick</p>
                     <p class="testi-role">Founder, TechVentures</p>
@@ -1317,7 +1467,7 @@
                 <blockquote>"The team delivered a production-ready RAG pipeline in record time. Exceptional technical
                   depth and communication throughout."</blockquote>
                 <div class="testi-author">
-                  <div class="testi-avatar initials">SL</div>
+                  <div class="testi-avatar initials">S</div>
                   <div>
                     <p class="testi-name">Sarah Lin</p>
                     <p class="testi-role">CTO, DataBridge Inc.</p>
@@ -1334,7 +1484,7 @@
                 <blockquote>"From architecture to deployment, DS 2.0 handled everything seamlessly. Our AI assistant now
                   handles 60% of support queries."</blockquote>
                 <div class="testi-author">
-                  <div class="testi-avatar initials">MR</div>
+                  <div class="testi-avatar initials">M</div>
                   <div>
                     <p class="testi-name">Marcus Reid</p>
                     <p class="testi-role">VP Engineering, NovaSaaS</p>
@@ -1351,7 +1501,7 @@
                 <blockquote>"Incredible attention to detail. They built our predictive analytics dashboard on time a
                   game-changer for our ops team."</blockquote>
                 <div class="testi-author">
-                  <div class="testi-avatar initials">PS</div>
+                  <div class="testi-avatar initials">P</div>
                   <div>
                     <p class="testi-name">Priya Sharma</p>
                     <p class="testi-role">Head of Product, FinEdge</p>
@@ -1371,8 +1521,8 @@
               <img src="/images/Client_review_thumbnail.png" alt="Featured testimonial thumbnail" />
               <div class="testi-video-overlay">
                 <div class="testi-name-badge">
-                  <strong>Alex Morgan</strong>
-                  <span>President &amp; Co-founder, CloudCore Inc.</span>
+                  <strong>Mark</strong>
+                  <span>CEO, USA</span>
                 </div>
               </div>
               <button class="testi-play-btn" id="testiPlayBtn" aria-label="Play featured testimonial">
@@ -1381,9 +1531,9 @@
                 </svg>
               </button>
             </div>
-            <video id="testiVideo" controls preload="none" poster="./global-skyline.png"
+                    <video id="testiVideo" style="width: 100%; display: inline-block;height:-webkit-fill-available;" controls preload="none" poster="./global-skyline.png"
               style="display:none; width:100%; border-radius:12px;">
-              <source src="/images/future-ai.mp4" type="video/mp4" />
+                        <source src="/media/Testimonial_Video.webm" type="video/webm" />
             </video>
           </div>
         </div>
@@ -1515,66 +1665,103 @@
           AI
           solutions.</p>
       </div>
-      <div class="offices-grid">
-        <div class="office-card">
-          <div class="office-photo">
-            <img src="/images/india_address.png" alt="India Office" />
-          </div>
-          <div class="office-info">
-            <h3>India</h3>
-              <p class="short-address">Jaipur, Rajasthan</p>
-             <div class="full-address">
-               1st Floor, Opp. Metro Pillar No. 97, New Sanganer Road,<br>
-               Jaipur - 302019 Rajasthan, India.<br><br>
-               Contact: +91 9680599916<br>
-               support@dotstark.com
-             </div>          
-          </div>
+        <div class="offices-grid">
+
+            <!-- INDIA -->
+            <div class="office-card">
+                <div class="office-card-inner">
+
+                    <div class="office-card-front">
+                        <img src="/images/india_address.png" alt="India Office">
+                        <div class="office-info">
+                            <h3>India</h3>
+                            <p>Jaipur, Rajasthan</p>
+                        </div>
+                    </div>
+
+                    <div class="office-card-back">
+                        <h3>India</h3>
+                        <p>
+                            1st Floor, Opp. Metro Pillar No. 97,<br>
+                            New Sanganer Road,<br>
+                            Jaipur - 302019 Rajasthan, India.<br><br>
+                            Contact: +91 9680599916<br>
+                            support@dotstark.com
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- USA -->
+            <div class="office-card">
+                <div class="office-card-inner">
+
+                    <div class="office-card-front">
+                        <img src="/images/usa_address.png" alt="USA Office">
+                        <div class="office-info">
+                            <h3>USA</h3>
+                            <p>New York, NY</p>
+                        </div>
+                    </div>
+
+                    <div class="office-card-back">
+                        <h3>USA</h3>
+                        <p>
+                            3101 N. Central Ave,<br>
+                            STE 183#3541, Phoenix, Arizona<br><br>
+                            Contact: +1 (602) 403-9958
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- CANADA -->
+            <div class="office-card">
+                <div class="office-card-inner">
+
+                    <div class="office-card-front">
+                        <img src="/images/canada_address.png" alt="Canada Office">
+                        <div class="office-info">
+                            <h3>Canada</h3>
+                            <p>Toronto, Ontario</p>
+                        </div>
+                    </div>
+
+                    <div class="office-card-back">
+                        <h3>Canada</h3>
+                        <p>
+                            26 Finch Crescent,<br>
+                            London ON N6E 2E5, Canada<br><br>
+                            Contact: +1 (647) 862-2190
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- EUROPE -->
+            <div class="office-card">
+                <div class="office-card-inner">
+
+                    <div class="office-card-front">
+                        <img src="/images/europe_address.png" alt="Europe Office">
+                        <div class="office-info">
+                            <h3>Europe</h3>
+                            <p>London, UK</p>
+                        </div>
+                    </div>
+
+                    <div class="office-card-back">
+                        <h3>Europe</h3>
+                        <p>Coming Soon</p>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
-        <div class="office-card">
-          <div class="office-photo">
-            <img src="/images/usa_address.png" alt="USA Office" />
-          </div>
-          <div class="office-info">
-            <h3>USA</h3>
-                <p class="short-address">New York, NY</p>
-             <div class="full-address">
-               3101 N. Central Ave,
-                STE 183#3541, Phoenix, Arizona<br><br>
-                Contact: +1 (602) 403-9958
-             </div> 
-          </div>
-        </div>
-        <div class="office-card">
-          <div class="office-photo">
-            <img src="/images/canada_address.png" alt="Canada Office" />
-          </div>
-          <div class="office-info">
-            <h3>Canada</h3>
-                <p class="short-address">Toronto, Ontario</p>
-             <div class="full-address">
-              26 Finch Crescent, London ON
-                 N6E 2E5, Canada<br><br>
-                Contact: +1 (647) 862-2190
-             </div> 
-          </div>
-        </div>
-        <div class="office-card">
-          <div class="office-photo">
-            <img src="/images/europe_address.png" alt="Europe Office" />
-          </div>
-          <div class="office-info">
-            <h3>Europe</h3>
-              <p class="short-address">London, UK</p>
-             <div class="full-address">
-             Plaza 33, No.1, Jalan Kemajuan,
-             Seksyen 13, 46200,
-             Petaling Jaya, Selangor, Malaysia<br><br>
-                Contact: +60 17-656 4127
-             </div> 
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
