@@ -7,81 +7,81 @@
 
 @section Styles {
     <style>
-        /* ── Breadcrumb ── */
-        .breadcrumb-bar {
-            background: var(--cool-grey);
-            padding: 0.85rem 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            list-style: none;
-            font-size: 0.875rem;
-            color: var(--muted);
-        }
-
-        .breadcrumb li+li::before {
-            content: '/';
-            margin-right: 0.5rem;
-            color: var(--muted);
-        }
-
-        .breadcrumb a {
-            color: var(--primary);
-            transition: opacity 0.2s;
-        }
-
-        .breadcrumb a:hover {
-            opacity: 0.75;
-        }
-
-        .breadcrumb .active {
-            color: var(--foreground);
-            font-weight: 500;
-        }
-
         /* ── Page wrapper ── */
         .cs-page {
-            padding: 4rem 0 6rem;
+            padding: 0 0 6rem;
             background: var(--background);
         }
 
-        /* ── Hero title + image ── */
-        .cs-hero-title {
-            font-size: clamp(1.6rem, 3.5vw, 2.5rem);
-            color: var(--foreground);
-            font-family: var(--font-heading);
-            line-height: 1.2;
-            margin-bottom: 2rem;
-            max-width: 860px;
-        }
-
-        .cs-hero-img {
+        /* ── Hero Banner ── */
+        .cs-banner {
+            position: relative;
             width: 100%;
-            border-radius: 0.75rem;
-            object-fit: cover;
-            max-height: 460px;
-            background: var(--cool-grey);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            height: 480px;
             overflow: hidden;
         }
 
-        .cs-hero-img-placeholder {
+        .cs-banner-img {
             width: 100%;
-            height: 380px;
-            background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 100%);
-            border-radius: 0.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--muted);
-            font-size: 0.9rem;
-            border: 1px solid var(--border);
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .cs-banner-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.15) 100%);
+        }
+
+        .cs-banner-content {
+            position: absolute;
+            bottom: 2.75rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        .cs-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.875rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .cs-banner-title {
+            font-size: clamp(1.4rem, 2.5vw, 2.25rem);
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+            font-family: var(--font-heading);
+            max-width: 620px;
+            white-space: nowrap;
+        }
+
+        .cs-banner-sub {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.65;
+            margin: 0;
+            max-width: 560px;
+        }
+
+        @@media (max-width: 600px) {
+            .cs-banner { height: 360px; }
+            .cs-banner-content { bottom: 1.75rem; padding: 0 1.25rem; }
         }
 
         /* ── Two-column layout ── */
@@ -380,49 +380,44 @@
     </style>
 }
   
-    <!-- ═══ BREADCRUMB ═══ -->
-    <div class="breadcrumb-bar">
-        <div class="container">
-            <ol class="breadcrumb" aria-label="breadcrumb">
-                <li><a href="/">Home</a></li>
-                <li><a href="/#case-studies">Case Studies</a></li>
-                <li class="active" aria-current="page">RAG365 — AI-Powered Knowledge Retrieval</li>
-            </ol>
+    <!-- ═══ HERO BANNER ═══ -->
+    <div class="cs-banner">
+        <img src="/images/ragbig.png" alt="RAG365 AI Knowledge Retrieval" class="cs-banner-img" />
+        <div class="cs-banner-overlay"></div>
+        <div class="cs-banner-content">
+            <span class="cs-tag">Case Study</span>
+            <h1 class="cs-banner-title">RAG365-AI-Powered Knowledge Retrieval</h1>
         </div>
     </div>
 
     <!-- ═══ MAIN ═══ -->
     <main class="cs-page">
         <div class="container">
-
-            <h1 class="cs-hero-title">RAG365 — AI-Powered Knowledge Retrieval</h1>
-            <img src="/images/ragbig.png" alt="RAG365 AI Knowledge Retrieval" class="cs-hero-img" />
-
             <div class="cs-layout">
 
                 <article class="cs-content">
 
                     <div class="cs-section">
                         <h4>Overview</h4>
-                        <p>RAG365 was deployed for a large consultancy firm managing thousands of internal documents, contracts, and compliance memos. The goal was to replace time-consuming manual document searching with instant AI-powered question-answering — grounded exclusively in internal sources.</p>
+                        <p>RAG365 was deployed for a large consultancy firm managing thousands of internal documents, contracts, and compliance memos. The goal was to replace time-consuming manual document searching with instant AI-powered question-answering-grounded exclusively in internal sources.</p>
                     </div>
 
                     <div class="cs-section">
                         <h4>Objectives</h4>
                         <ul>
-                            <li>Eliminate manual document searching — replace time-consuming retrieval with instant AI-powered question-answering from internal sources.</li>
-                            <li>Ensure answer reliability — provide only document-grounded responses with explicit source citations, preventing hallucination from external sources.</li>
-                            <li>Enable real-time knowledge access — surface relevant intelligence instantly during live client meetings, shifting the firm from reactive to proactive.</li>
+                            <li>Eliminate manual document searching-replace time-consuming retrieval with instant AI-powered question-answering from internal sources.</li>
+                            <li>Ensure answer reliability-provide only document-grounded responses with explicit source citations, preventing hallucination from external sources.</li>
+                            <li>Enable real-time knowledge access-surface relevant intelligence instantly during live client meetings, shifting the firm from reactive to proactive.</li>
                         </ul>
                     </div>
 
                     <div class="cs-section">
                         <h4>Challenges</h4>
                         <ul>
-                            <li>Thousands of scattered PDFs and contracts across multiple systems — no unified retrieval layer, no structure, and no searchability.</li>
-                            <li>Significant daily time loss — consultants spent hours per day manually searching documents before client calls, pitches, and proposals.</li>
-                            <li>Inconsistent information — different team members surfacing different or outdated answers, creating compliance and credibility risk.</li>
-                            <li>Zero on-demand access — no way to query institutional knowledge during live client engagements without manual interruption.</li>
+                            <li>Thousands of scattered PDFs and contracts across multiple systems-no unified retrieval layer, no structure, and no searchability.</li>
+                            <li>Significant daily time loss-consultants spent hours per day manually searching documents before client calls, pitches, and proposals.</li>
+                            <li>Inconsistent information-different team members surfacing different or outdated answers, creating compliance and credibility risk.</li>
+                            <li>Zero on-demand access-no way to query institutional knowledge during live client engagements without manual interruption.</li>
                         </ul>
                     </div>
 
@@ -432,7 +427,7 @@
                         <div class="solution-cards">
                             <div class="solution-card">
                                 <h5>Private Knowledge Index</h5>
-                                <p>All internal PDFs, contracts and memos ingested into a secure, encrypted retrieval index — no public web access at any stage.</p>
+                                <p>All internal PDFs, contracts and memos ingested into a secure, encrypted retrieval index-no public web access at any stage.</p>
                             </div>
                             <div class="solution-card">
                                 <h5>Natural Language Querying</h5>
@@ -444,11 +439,11 @@
                             </div>
                             <div class="solution-card">
                                 <h5>Context-Aware Processing</h5>
-                                <p>Tailored to the firm's industry vocabulary, contract formats, and internal naming conventions — not a generic AI model.</p>
+                                <p>Tailored to the firm's industry vocabulary, contract formats, and internal naming conventions-not a generic AI model.</p>
                             </div>
                             <div class="solution-card">
                                 <h5>Zero-Disruption Deployment</h5>
-                                <p>Integrated without changing how documents are stored or how staff work — platform-agnostic by design.</p>
+                                <p>Integrated without changing how documents are stored or how staff work-platform-agnostic by design.</p>
                             </div>
                         </div>
                     </div>
@@ -458,19 +453,19 @@
                         <div class="results-grid">
                             <div class="result-card">
                                 <div class="stat">75%</div>
-                                <p>Faster Retrieval — reduction in daily document search time per consultant</p>
+                                <p>Faster Retrieval-reduction in daily document search time per consultant</p>
                             </div>
                             <div class="result-card">
                                 <div class="stat">0</div>
-                                <p>Hallucinations — all answers grounded exclusively in internal documents</p>
+                                <p>Hallucinations-all answers grounded exclusively in internal documents</p>
                             </div>
                             <div class="result-card">
                                 <div class="stat">24/7</div>
-                                <p>Availability — real-time knowledge access during live client meetings</p>
+                                <p>Availability-real-time knowledge access during live client meetings</p>
                             </div>
                         </div>
                         <div class="impact-text">
-                            <strong>Productivity Impact:</strong> The 75% reduction in search time represents a transformative reclaim of consultant-hours. Staff who previously spent 45–60 minutes per day hunting documents now access verified answers in seconds. At scale, this translates to hundreds of recovered working hours per week — reinvested directly into billable client work.
+                            <strong>Productivity Impact:</strong> The 75% reduction in search time represents a transformative reclaim of consultant-hours. Staff who previously spent 45–60 minutes per day hunting documents now access verified answers in seconds. At scale, this translates to hundreds of recovered working hours per week-reinvested directly into billable client work.
                         </div>
                         <div class="impact-text">
                             <strong>Strategic Impact:</strong> Real-time intelligence surfaced during live client meetings gave consultants an immediate competitive edge. Source-cited responses eliminated inconsistency risk, building internal trust in the system and confidence in all client-facing outputs.
