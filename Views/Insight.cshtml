@@ -51,7 +51,8 @@
 
     /* ── Section Commons ── */
     .section { padding: 5rem; }
-    .section.alt { background: #ebebec; }
+    .hero { padding: 10rem 5rem 5rem; }
+    .section.alt { background: #ffffff; }
     .section-label {
       font-size: 12px; font-weight: 700; color: var(--ds-primary);
       text-transform: uppercase; letter-spacing: 3px; margin-bottom: 12px;
@@ -157,19 +158,17 @@
         justify-content: center;
     }
 
+    .case-card { overflow: hidden; max-width: 760px; margin: 0 auto; }
+    .case-bar { height: 8px; background: linear-gradient(90deg, var(--primary), var(--primary-60)); }
+    .case-body { padding: 2rem 3rem; }
+    .case-body h3 { font-size: 1.5rem; font-weight: 600; margin: 1rem 0; }
+    .case-body p { color: var(--muted); line-height: 1.7; margin-bottom: 2rem; }
+
   </style>
 }
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container">
-      <h1>Insights &amp; <span class="accent">Perspectives</span></h1>
-      <p>Expert insights on artificial intelligence, intelligent systems, and building scalable AI-driven solutions.</p>
-    </div>
-  </section>
-
   <!-- Case Studies -->
-  <section class="section alt">
+  <section class="hero alt">
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">Our Success Stories</h2>
@@ -221,7 +220,7 @@
   </section>
 
   <!-- Blogs -->
-  <section class="section">
+  <section class="section" style="background-color: #ebebec;">
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">Latest Insights</h2>
