@@ -309,6 +309,47 @@
             }
         }
 
+        /* ── Solution cards ── */
+        .solution-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0 1.25rem;
+        }
+
+        .solution-card {
+            background: var(--cool-grey);
+            border: 1px solid var(--border);
+            border-radius: 0.6rem;
+            padding: 1.25rem;
+        }
+
+        .solution-card h5 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .solution-card p {
+            font-size: 0.825rem;
+            color: var(--muted);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* ── Impact callout ── */
+        .impact-text {
+            background: #f0f4ff;
+            border-left: 3px solid var(--primary);
+            border-radius: 0 0.5rem 0.5rem 0;
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            font-size: 0.9375rem;
+            color: #444;
+            line-height: 1.7;
+        }
+
         @@media (max-width: 600px) {
             .results-grid {
                 grid-template-columns: 1fr;
@@ -343,9 +384,9 @@
     <div class="breadcrumb-bar">
         <div class="container">
             <ol class="breadcrumb" aria-label="breadcrumb">
-                <li><a href="index 1.html">Home</a></li>
-                <li><a href="index 1.html#case-studies">Case Studies</a></li>
-                <li class="active" aria-current="page">Auto Insurance Platform</li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/#case-studies">Case Studies</a></li>
+                <li class="active" aria-current="page">RAG365 — AI-Powered Knowledge Retrieval</li>
             </ol>
         </div>
     </div>
@@ -354,165 +395,126 @@
     <main class="cs-page">
         <div class="container">
 
-            <!-- Title + Hero Image -->
-            <h1 class="cs-hero-title">Driving Digital Innovation in Auto Insurance with a Seamless Self-Service Platform
-            </h1>
-            <img src="/images/ragbig.png" alt="MyZen auto insurance platform screenshot" class="cs-hero-img" />
+            <h1 class="cs-hero-title">RAG365 — AI-Powered Knowledge Retrieval</h1>
+            <img src="/images/ragbig.png" alt="RAG365 AI Knowledge Retrieval" class="cs-hero-img" />
 
-            <!-- Two-column layout -->
             <div class="cs-layout">
 
-                <!-- Left: main content -->
                 <article class="cs-content">
 
                     <div class="cs-section">
-                        <h4>Project Overview</h4>
-                        <p>A digital-first auto insurance provider aimed to modernize its consumer website and customer
-                            portal by rebuilding the platform on <strong>Kentico Xperience 13 (K13)</strong>. The
-                            objective was to create a clean, intuitive, and mobile-friendly self-service experience that
-                            empowers customers to manage their insurance policies, renewals, and payments online with
-                            minimal effort.</p>
-                        <p>The transformation focused on simplicity, performance, and customer autonomy — aligning with
-                            the brand promise of hassle-free insurance.</p>
+                        <h4>Overview</h4>
+                        <p>RAG365 was deployed for a large consultancy firm managing thousands of internal documents, contracts, and compliance memos. The goal was to replace time-consuming manual document searching with instant AI-powered question-answering — grounded exclusively in internal sources.</p>
                     </div>
 
                     <div class="cs-section">
-                        <h4>Business Objectives</h4>
+                        <h4>Objectives</h4>
                         <ul>
-                            <li>Enable customers to view, renew, and manage policies through a secure self-service
-                                portal.</li>
-                            <li>Simplify and accelerate online premium payments.</li>
-                            <li>Deliver a modern, minimalistic digital-first brand experience.</li>
-                            <li>Allow marketing teams to independently manage offers, FAQs, and policy content.</li>
-                            <li>Improve mobile usability, accessibility, and overall site performance.</li>
-                        </ul>
-                    </div>
-
-                    <div class="cs-section">
-                        <h4>Key Features &amp; Deliverables</h4>
-                        <ul>
-                            <li>Modular page templates in <strong>Kentico Xperience 13</strong> for homepage, plans,
-                                product details, and portal access.</li>
-                            <li>
-                                <strong>Self-service "My Account" dashboard</strong> allowing customers to:
-                                <ul>
-                                    <li>View policy details and renewal dates.</li>
-                                    <li>Download insurance documents.</li>
-                                    <li>Update personal and contact information.</li>
-                                    <li>Complete secure online premium payments.</li>
-                                </ul>
-                            </li>
-                            <li>Simplified product comparison for multiple plan tiers.</li>
-                            <li>CMS-driven FAQ and help center with categorized support topics.</li>
-                            <li>Fully responsive, mobile-first UI optimized for usability.</li>
-                            <li>Analytics integration to track portal usage, renewals, and payment success.</li>
+                            <li>Eliminate manual document searching — replace time-consuming retrieval with instant AI-powered question-answering from internal sources.</li>
+                            <li>Ensure answer reliability — provide only document-grounded responses with explicit source citations, preventing hallucination from external sources.</li>
+                            <li>Enable real-time knowledge access — surface relevant intelligence instantly during live client meetings, shifting the firm from reactive to proactive.</li>
                         </ul>
                     </div>
 
                     <div class="cs-section">
                         <h4>Challenges</h4>
                         <ul>
-                            <li>Presenting complex insurance policies and pricing in a simple, user-friendly manner.
-                            </li>
-                            <li>Secure migration of existing customer and policy data.</li>
-                            <li>Reducing marketing dependency on developers through CMS workflows.</li>
-                            <li>Maintaining regulatory compliance and data privacy standards.</li>
-                            <li>Optimizing the end-to-end journey from quote to renewal across devices.</li>
+                            <li>Thousands of scattered PDFs and contracts across multiple systems — no unified retrieval layer, no structure, and no searchability.</li>
+                            <li>Significant daily time loss — consultants spent hours per day manually searching documents before client calls, pitches, and proposals.</li>
+                            <li>Inconsistent information — different team members surfacing different or outdated answers, creating compliance and credibility risk.</li>
+                            <li>Zero on-demand access — no way to query institutional knowledge during live client engagements without manual interruption.</li>
                         </ul>
                     </div>
 
                     <div class="cs-section">
-                        <h4>Solution Approach</h4>
-                        <ul>
-                            <li>Implemented <strong>Kentico Xperience 13</strong> with custom page types and reusable
-                                widgets (plan cards, banners, CTAs, FAQs).</li>
-                            <li>Designed a mobile-first interface with clear CTAs and minimal user steps.</li>
-                            <li>Integrated backend APIs for secure policy management and payment processing.</li>
-                            <li>Configured CMS workflows enabling rapid updates to promotions and content.</li>
-                            <li>Applied caching, lazy loading, and asset optimization for performance.</li>
-                            <li>Set up analytics dashboards for tracking conversions and user behavior.</li>
-                        </ul>
-                    </div>
-
-                    <div class="cs-section">
-                        <h4>Results</h4>
-                        <div class="results-grid">
-                            <div class="result-card">
-                                <div class="stat">30%</div>
-                                <p>Increase in active self-service portal users</p>
+                        <h4>Solutions</h4>
+                        <p>RAG365 deployed a private Generative AI knowledge bot, purpose-built around the firm's internal document library:</p>
+                        <div class="solution-cards">
+                            <div class="solution-card">
+                                <h5>Private Knowledge Index</h5>
+                                <p>All internal PDFs, contracts and memos ingested into a secure, encrypted retrieval index — no public web access at any stage.</p>
                             </div>
-                            <div class="result-card">
-                                <div class="stat">25%</div>
-                                <p>Faster policy renewals and online payments</p>
+                            <div class="solution-card">
+                                <h5>Natural Language Querying</h5>
+                                <p>Staff ask plain-language questions and receive precise, synthesised answers instantly.</p>
                             </div>
-                            <div class="result-card">
-                                <div class="stat">20%</div>
-                                <p>Improvement in mobile engagement metrics</p>
+                            <div class="solution-card">
+                                <h5>Source-Cited Responses</h5>
+                                <p>Every answer references its source by name and Doc ID, enabling instant verification.</p>
                             </div>
-                            <div class="result-card">
-                                <div class="stat">35%</div>
-                                <p>Reduction in content publishing time for marketing teams</p>
+                            <div class="solution-card">
+                                <h5>Context-Aware Processing</h5>
+                                <p>Tailored to the firm's industry vocabulary, contract formats, and internal naming conventions — not a generic AI model.</p>
+                            </div>
+                            <div class="solution-card">
+                                <h5>Zero-Disruption Deployment</h5>
+                                <p>Integrated without changing how documents are stored or how staff work — platform-agnostic by design.</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="cs-section">
-                        <h4>Conclusion</h4>
-                        <p>The Kentico Xperience 13-powered transformation delivered a modern, scalable, and
-                            customer-centric insurance platform. By enabling seamless self-service, improving
-                            performance, and simplifying content management, the solution significantly enhanced user
-                            satisfaction while supporting the insurer's digital-first growth strategy.</p>
+                        <h4>Impact</h4>
+                        <div class="results-grid">
+                            <div class="result-card">
+                                <div class="stat">75%</div>
+                                <p>Faster Retrieval — reduction in daily document search time per consultant</p>
+                            </div>
+                            <div class="result-card">
+                                <div class="stat">0</div>
+                                <p>Hallucinations — all answers grounded exclusively in internal documents</p>
+                            </div>
+                            <div class="result-card">
+                                <div class="stat">24/7</div>
+                                <p>Availability — real-time knowledge access during live client meetings</p>
+                            </div>
+                        </div>
+                        <div class="impact-text">
+                            <strong>Productivity Impact:</strong> The 75% reduction in search time represents a transformative reclaim of consultant-hours. Staff who previously spent 45–60 minutes per day hunting documents now access verified answers in seconds. At scale, this translates to hundreds of recovered working hours per week — reinvested directly into billable client work.
+                        </div>
+                        <div class="impact-text">
+                            <strong>Strategic Impact:</strong> Real-time intelligence surfaced during live client meetings gave consultants an immediate competitive edge. Source-cited responses eliminated inconsistency risk, building internal trust in the system and confidence in all client-facing outputs.
+                        </div>
                     </div>
 
                 </article>
 
-                <!-- Right: sidebar -->
                 <aside class="cs-sidebar">
                     <div class="meta-box">
                         <h3>Project Details</h3>
                         <div class="sidebar-item">
-                            <div class="label">Industry</div>
-                            <div class="value">Insurance / Motor Vehicle Insurance</div>
+                            <div class="label">Product</div>
+                            <div class="value">RAG365</div>
                         </div>
                         <div class="sidebar-item">
-                            <div class="label">Previous Platform</div>
-                            <div class="value">Legacy Consumer Insurance Website / Limited Online Portal</div>
+                            <div class="label">Sector</div>
+                            <div class="value">Large Consultancy Firm</div>
                         </div>
                         <div class="sidebar-item">
                             <div class="label">Technology</div>
                             <div class="tech-tags">
-                                <span class="tech-tag">Kentico XP 13</span>
-                                <span class="tech-tag">ASP.NET MVC</span>
-                                <span class="tech-tag">HTML5</span>
-                                <span class="tech-tag">CSS3</span>
-                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">RAG</span>
+                                <span class="tech-tag">Generative AI</span>
+                                <span class="tech-tag">Vector Search</span>
+                                <span class="tech-tag">LLM</span>
+                                <span class="tech-tag">Private AI</span>
                             </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="label">Tagline</div>
+                            <div class="value">Stop Searching. Start Asking.</div>
                         </div>
                     </div>
                 </aside>
 
             </div>
 
-            <!-- CTA Banner -->
             <div style="text-align:center;margin-top:2.5rem;">
                 <div class="cs-cta-banner">
                     <p>What business challenges are you dealing with? We can help.</p>
-                    <a href="index 1.html#contact" class="btn btn-primary">Get in touch</a>
+                    <a href="/contact-us" class="btn btn-primary">Get in touch</a>
                 </div>
             </div>
 
         </div>
     </main>
-
-    <script>
-        const toggle = document.getElementById('mobileToggle');
-        const nav = document.getElementById('mobileNav');
-        const iconMenu = document.getElementById('iconMenu');
-        const iconClose = document.getElementById('iconClose');
-        toggle.addEventListener('click', () => {
-            const open = nav.classList.toggle('open');
-            toggle.setAttribute('aria-expanded', open);
-            iconMenu.style.display = open ? 'none' : 'block';
-            iconClose.style.display = open ? 'block' : 'none';
-        });
-    </script>
