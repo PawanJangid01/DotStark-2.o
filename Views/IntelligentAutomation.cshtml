@@ -106,13 +106,7 @@
       position: relative;
       overflow: hidden;
     }
-    .hero-grid {
-      position: absolute;
-      inset: 0;
-      opacity: 0.03;
-      background-image: linear-gradient(var(--primary-color) 1px, transparent 1px), linear-gradient(90deg, var(--primary-color) 1px, transparent 1px);
-      background-size: 64px 64px;
-    }
+    
     .hero-content { position: relative; max-width: 56rem; margin: 0 auto; text-align: center; width: 100%; }
     .hero-badge {
       display: inline-flex;
@@ -224,7 +218,7 @@
     }
     @@media (min-width: 768px) { .step-card { gap: 2rem; padding: 2rem; } }
     .step-card:hover { border-color: hsla(var(--primarycss), 0.2); }
-    .step-num { font-size: clamp(1.5rem, 2vw, 2.25rem); font-weight: 900; color: hsla(var(--primarycss), 0.2); line-height: 1; flex-shrink: 0; padding-top: 0.25rem; }
+    .step-num { font-size: clamp(1.5rem, 2vw, 2.25rem); font-weight: 900; color: hsl(228deg 100% 55% / 94%);); line-height: 1; flex-shrink: 0; padding-top: 0.25rem; }
     .step-card h3 { font-size: 1.125rem; font-weight: 600; color: var(--text-bright); margin-bottom: 0.5rem; }
     .step-card p { color: var(--text-dim); }
 
@@ -238,6 +232,7 @@
     .final-cta .btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
   </style>
 }
+
 
   <!-- HERO -->
   <section class="hero section-padding">
