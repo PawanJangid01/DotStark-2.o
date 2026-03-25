@@ -363,18 +363,17 @@
 }
        
 
-    .solution-card:hover,
-    .number-card{             
+    .solution-card:hover
+    {             
             transform: translateY(-5px);
             box-shadow: 0 8px 30px -5px rgba(0, 0, 0, 0.08);       
     }
 
-        .solution-card:before,
-        .number-card:before{
+        .solution-card:before{
             content: "";
             position: absolute;
             inset: 0;
-            padding: 2px; /* border thickness */
+            padding: 1px; /* border thickness */
             border-radius: 0.5rem;
             --angle: 270deg;
                 background: conic-gradient( from var(--angle), transparent 0deg, transparent 300deg, var(--primary) 330deg, transparent 360deg );
@@ -392,8 +391,8 @@
             inherits: false;
             initial-value: 270deg;
         }
-            .solution-card::after,
-        .number-card::after{
+            .solution-card::after
+        {
             content: "";
             position: absolute;
             inset: 2px;
@@ -407,8 +406,8 @@
             z-index: 2;
         }
 
-            .solution-card:hover::before,
-        .aboutus-stats-wrapper .number-card::before {
+            .solution-card:hover::before
+         {
             opacity: 1;
             animation: snake-border 3.2s linear infinite;
         }
@@ -493,7 +492,7 @@
     overflow: hidden;
 }
 
-    .step-card::before {
+    /* .step-card::before {
         content: '';
         position: absolute;
         top: 0;
@@ -504,7 +503,7 @@
         transform: scaleX(0);
         transform-origin: left;
         transition: transform 0.3s ease;
-    }
+    } */
 
     .step-card:hover {
         border-color: var(--primary-30);
@@ -1112,7 +1111,7 @@
         position: relative;
         width: 100%;
         height: 320px;
-        transition: transform .7s;
+        transition: transform 1.2s ease;
         transform-style: preserve-3d;
     }
 
@@ -1519,10 +1518,10 @@
             <div class="testi-video-thumb" id="testiThumb">
               <img src="/images/Client_review_thumbnail.png" alt="Featured testimonial thumbnail" />
               <div class="testi-video-overlay">
-                <div class="testi-name-badge">
+                @* <div class="testi-name-badge">
                   <strong>Mark</strong>
                   <span>CEO, USA</span>
-                </div>
+                </div> *@
               </div>
               <button class="testi-play-btn" id="testiPlayBtn" aria-label="Play featured testimonial">
                 <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">

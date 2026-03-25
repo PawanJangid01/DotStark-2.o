@@ -355,26 +355,83 @@ img {
     gap: 1rem;
 }
 
-    .aboutus-stats-wrapper .number-card {
-        background: #fff;
-        border: 1px solid var(--border);
-        border-radius: 0.5rem;
-        padding: 1.35rem 1rem;
-        margin: 0.4rem;
-        text-align: center;
-        box-shadow: 0 4px 16px rgba(27, 84, 255, 0.08);
-        min-height: 140px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-.aboutus-stats-wrapper .number-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(27, 84, 255, 0.15);
+@property --angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 270deg;
 }
 
+.aboutus-stats-wrapper .number-card {
+    position: relative;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 1.35rem 1rem;
+    margin: 0.4rem;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(27, 84, 255, 0.08);
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.number-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    opacity: 0;
+    border-radius: 1rem;
+    background: conic-gradient( from var(--angle), transparent 0deg, transparent 300deg, var(--primary) 330deg, transparent 360deg );
+    animation: rotateBorder 16s linear infinite;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+
+.number-card > * {
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes rotateBorder {
+    /* Card active period */
+    0% {
+        --angle: 270deg;
+        opacity: 1;
+    }
+
+    20% {
+        --angle: 630deg;
+        opacity: 1;
+    }
+    /* Hide border after animation */
+    21% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+.number-card:nth-child(1)::before {
+    animation-delay: 0s;
+}
+
+.number-card:nth-child(2)::before {
+    animation-delay: 4s;
+}
+
+.number-card:nth-child(3)::before {
+    animation-delay: 8s;
+}
+
+.number-card:nth-child(4)::before {
+    animation-delay: 12s;
+}
 .aboutus-stats-wrapper .number-card .numbers {
     font-size: clamp(2.2rem, 5vw, 3.25rem);
     font-weight: 600;
