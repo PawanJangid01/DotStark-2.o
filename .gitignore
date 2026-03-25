@@ -471,7 +471,7 @@ umbraco-package-schema.json
 /umbraco/Data/TEMP/
 
 # SQLite database files
-/umbraco/Data/*.sqlite.db
+#/umbraco/Data/*.sqlite.db
 /umbraco/Data/*.sqlite.db-shm
 /umbraco/Data/*.sqlite.db-wal
 
@@ -479,4 +479,4 @@ umbraco-package-schema.json
 /umbraco/Logs/
 
 # Media files
-/wwwroot/media/
+#/wwwroot/media/
