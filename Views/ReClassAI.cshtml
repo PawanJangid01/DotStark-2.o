@@ -8,17 +8,16 @@
 
 @section Styles {
     <style>
-        .breadcrumb-bar { background: var(--cool-grey); padding: 0.85rem 0; border-bottom: 1px solid var(--border); }
-        .breadcrumb { display: flex; align-items: center; gap: 0.5rem; list-style: none; font-size: 0.875rem; color: var(--muted); }
-        .breadcrumb li+li::before { content: '/'; margin-right: 0.5rem; color: var(--muted); }
-        .breadcrumb a { color: var(--primary); transition: opacity 0.2s; }
-        .breadcrumb a:hover { opacity: 0.75; }
-        .breadcrumb .active { color: var(--foreground); font-weight: 500; }
+        .cs-page { padding: 0 0 6rem; background: var(--background); }
 
-        .cs-page { padding: 4rem 0 6rem; background: var(--background); }
-
-        .cs-hero-title { font-size: clamp(1.6rem, 3.5vw, 2.5rem); color: var(--foreground); font-family: var(--font-heading); line-height: 1.2; margin-bottom: 2rem; max-width: 860px; }
-        .cs-hero-img { width: 100%; border-radius: 0.75rem; object-fit: cover; max-height: 460px; overflow: hidden; }
+        .cs-banner { position: relative; width: 100%; height: 480px; overflow: hidden; }
+        .cs-banner-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .cs-banner-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.15) 100%); }
+        .cs-banner-content { position: absolute; bottom: 2.75rem; left: 50%; transform: translateX(-50%); width: 100%; max-width: 1200px; padding: 0 2rem; }
+        .cs-tag { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; font-size: 0.72rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.875rem; backdrop-filter: blur(4px); }
+        .cs-banner-title { font-size: clamp(1.4rem, 2.5vw, 2.25rem); font-weight: 700; color: #fff; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 0.75rem; font-family: var(--font-heading); white-space: nowrap; }
+        .cs-banner-sub { font-size: 1rem; color: rgba(255,255,255,0.8); line-height: 1.65; margin: 0; max-width: 560px; }
+        @@media (max-width: 600px) { .cs-banner { height: 360px; } .cs-banner-content { bottom: 1.75rem; padding: 0 1.25rem; } }
 
         .cs-layout { display: grid; grid-template-columns: 1fr 300px; gap: 3rem; align-items: start; margin-top: 3rem; }
 
@@ -70,50 +69,46 @@
     </style>
 }
 
-    <!-- ═══ BREADCRUMB ═══ -->
-    <div class="breadcrumb-bar">
-        <div class="container">
-            <ol class="breadcrumb" aria-label="breadcrumb">
-                <li><a href="/">Home</a></li>
-                <li><a href="/#case-studies">Case Studies</a></li>
-                <li class="active" aria-current="page">ReClass AI — From Raw Video to Actionable Results</li>
-            </ol>
+    <!-- ═══ HERO BANNER ═══ -->
+    <div class="cs-banner">
+        <img src="/images/reclassbig.png" alt="ReClass AI platform" class="cs-banner-img" />
+        <div class="cs-banner-overlay"></div>
+        <div class="cs-banner-content">
+            <span class="cs-tag">Case Study</span>
+            <h1 class="cs-banner-title">ReClass AI-From Raw Video to Actionable Results</h1>
+        
         </div>
     </div>
 
     <!-- ═══ MAIN ═══ -->
     <main class="cs-page">
         <div class="container">
-
-            <h1 class="cs-hero-title">ReClass AI — From Raw Video to Actionable Results</h1>
-            <img src="/images/reclassbig.png" alt="ReClass AI platform" class="cs-hero-img" />
-
             <div class="cs-layout">
 
                 <article class="cs-content">
 
                     <div class="cs-section">
                         <h4>Overview</h4>
-                        <p>ReClass AI was built to close the gap between content delivered in the classroom and knowledge retained by students. The platform transforms passive lecture recordings into active, structured digital knowledge assets — searchable, summarised, and interactive.</p>
+                        <p>ReClass AI was built to close the gap between content delivered in the classroom and knowledge retained by students. The platform transforms passive lecture recordings into active, structured digital knowledge assets-searchable, summarised, and interactive.</p>
                     </div>
 
                     <div class="cs-section">
                         <h4>Objectives</h4>
                         <ul>
-                            <li>Transform passive lecture recordings into active, structured digital knowledge assets — searchable, summarised, and interactive.</li>
+                            <li>Transform passive lecture recordings into active, structured digital knowledge assets-searchable, summarised, and interactive.</li>
                             <li>Enable students to navigate directly to any concept within a lecture, eliminating time wasted scrubbing through full-length recordings.</li>
                             <li>Provide 24/7 AI-powered academic support through a lecture-grounded AI Tutor, reducing dependency on instructor availability outside contact hours.</li>
-                            <li>Generate institutional data insights — analytics on topic coverage and engagement patterns to inform course improvement decisions.</li>
+                            <li>Generate institutional data insights-analytics on topic coverage and engagement patterns to inform course improvement decisions.</li>
                         </ul>
                     </div>
 
                     <div class="cs-section">
                         <h4>Challenges</h4>
                         <ul>
-                            <li>Unstructured video archives — recordings stored as flat files with no topic segmentation, chapter markers, or searchable metadata.</li>
-                            <li>Passive revision behaviour — students re-watching 60–90 minute lectures to locate a single concept, leading to inefficiency and disengagement.</li>
-                            <li>No on-demand academic support — questions arising outside office hours go unanswered until the next tutorial, creating learning gaps.</li>
-                            <li>Zero learning analytics — no visibility into which segments students engaged with, where comprehension was weak, or which topics generated the most queries.</li>
+                            <li>Unstructured video archives-recordings stored as flat files with no topic segmentation, chapter markers, or searchable metadata.</li>
+                            <li>Passive revision behaviour-students re-watching 60–90 minute lectures to locate a single concept, leading to inefficiency and disengagement.</li>
+                            <li>No on-demand academic support-questions arising outside office hours go unanswered until the next tutorial, creating learning gaps.</li>
+                            <li>Zero learning analytics-no visibility into which segments students engaged with, where comprehension was weak, or which topics generated the most queries.</li>
                         </ul>
                     </div>
 
@@ -123,7 +118,7 @@
                         <div class="solution-cards">
                             <div class="solution-card">
                                 <h5>AI Transcription</h5>
-                                <p>Automatic speech-to-text with speaker differentiation and millisecond-level timestamp alignment — no manual effort required.</p>
+                                <p>Automatic speech-to-text with speaker differentiation and millisecond-level timestamp alignment-no manual effort required.</p>
                             </div>
                             <div class="solution-card">
                                 <h5>Topic Segmentation</h5>
@@ -131,7 +126,7 @@
                             </div>
                             <div class="solution-card">
                                 <h5>Semantic Search</h5>
-                                <p>Content is vectorised for concept-level retrieval — students land at the most relevant lecture moment, not just a keyword match.</p>
+                                <p>Content is vectorised for concept-level retrieval-students land at the most relevant lecture moment, not just a keyword match.</p>
                             </div>
                             <div class="solution-card">
                                 <h5>AI-Generated Summaries</h5>
@@ -139,7 +134,7 @@
                             </div>
                             <div class="solution-card">
                                 <h5>AI Tutor Interface</h5>
-                                <p>Conversational Q&amp;A grounded exclusively in the lecture transcript — students receive structured, source-accurate answers 24/7.</p>
+                                <p>Conversational Q&amp;A grounded exclusively in the lecture transcript-students receive structured, source-accurate answers 24/7.</p>
                             </div>
                             <div class="solution-card">
                                 <h5>Data Insights Dashboard</h5>
@@ -153,22 +148,22 @@
                         <div class="results-grid">
                             <div class="result-card">
                                 <div class="stat">3×</div>
-                                <p>Faster Review — students locate any concept in seconds vs. scrubbing full recordings</p>
+                                <p>Faster Review-students locate any concept in seconds vs. scrubbing full recordings</p>
                             </div>
                             <div class="result-card">
                                 <div class="stat">100%</div>
-                                <p>Automation — zero manual effort from educators, fully automated end-to-end</p>
+                                <p>Automation-zero manual effort from educators, fully automated end-to-end</p>
                             </div>
                             <div class="result-card">
                                 <div class="stat">+40%</div>
-                                <p>Retention — improved knowledge retention through structured, searchable content</p>
+                                <p>Retention-improved knowledge retention through structured, searchable content</p>
                             </div>
                         </div>
                         <div class="impact-text">
-                            <strong>Student Impact:</strong> Students navigating a Macroeconomics lecture jump directly to the precise topic — zero re-watching required. The AI Tutor provides instant lecture-grounded summaries and answers, replacing the need to wait for office hours for basic concept clarification.
+                            <strong>Student Impact:</strong> Students navigating a Macroeconomics lecture jump directly to the precise topic-zero re-watching required. The AI Tutor provides instant lecture-grounded summaries and answers, replacing the need to wait for office hours for basic concept clarification.
                         </div>
                         <div class="impact-text">
-                            <strong>Institutional Impact:</strong> Institutions gain a new data category — which topics generate the most student queries, where comprehension gaps exist, and which lecture segments drive the highest re-engagement. Educators receive actionable signals for improving course delivery with zero additional workload.
+                            <strong>Institutional Impact:</strong> Institutions gain a new data category-which topics generate the most student queries, where comprehension gaps exist, and which lecture segments drive the highest re-engagement. Educators receive actionable signals for improving course delivery with zero additional workload.
                         </div>
                     </div>
 

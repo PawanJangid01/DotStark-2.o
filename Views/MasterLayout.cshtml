@@ -113,19 +113,22 @@
     </div>
   </footer>
 
-  <script>
-    // â”€â”€ Testimonial slider â”€â”€
-    const slides = document.querySelectorAll('.testi-slide');
-    let current = 0;
-    let autoTimer;
-                           let typingInterval;
+    <script>
+        // ── Testimonial slider ──
+        const slides = document.querySelectorAll('.testi-slide');
+        let current = 0;
+        let autoTimer;
+        let typingInterval;
 
         function typeText(slide) {
+          if (!slide) return;
+
           clearInterval(typingInterval);
 
           const blockquote = slide.querySelector("blockquote");
+          if (!blockquote) return;
 
-          let fullText = blockquote.getAttribute("data-text") || blockquote.textContent;
+          let fullText = blockquote.getAttribute("data-text") || blockquote.textContent || "";
 
           // remove line breaks and extra spaces
           fullText = fullText.replace(/\s+/g, " ").trim();
@@ -145,60 +148,98 @@
             }
           }, speed);
         }
-    function showSlide(n) {
-      slides[current].classList.remove('active');
-      current = (n + slides.length) % slides.length;
-      slides[current].classList.add('active');
-           typeText(slides[current]);
-    }
 
-    function startAuto() {
-      autoTimer = setInterval(() => showSlide(current + 1), 8000);
-    }
+        function showSlide(n) {
+          if (!slides || slides.length === 0) return;
 
-    document.getElementById('testiPrev').addEventListener('click', () => {
-      clearInterval(autoTimer);
-      showSlide(current - 1);
-      startAuto();
-    });
+          if (slides[current]) {
+            slides[current].classList.remove('active');
+          }
 
-    document.getElementById('testiNext').addEventListener('click', () => {
-      clearInterval(autoTimer);
-      showSlide(current + 1);
-      startAuto();
-    });
-        typeText(slides[current]);
-    startAuto();
+          current = (n + slides.length) % slides.length;
 
-    // â”€â”€ Featured video play â”€â”€
-    const playBtn = document.getElementById('testiPlayBtn');
-    const thumb = document.getElementById('testiThumb');
-    const video = document.getElementById('testiVideo');
-    if (playBtn) {
-      playBtn.addEventListener('click', () => {
-        thumb.style.display = 'none';
-        video.style.display = 'block';
-        video.play();
-      });
-    }
+          if (slides[current]) {
+            slides[current].classList.add('active');
+            typeText(slides[current]);
+          }
+        }
 
-    // Technology Stack tab switching
-    const techTabs = document.querySelectorAll('.tech-tab');
-    const techPanels = document.querySelectorAll('.tech-icons-panel');
-    const tabMap = {
-      'ai-models': 'tab-ai-models', frameworks: 'tab-frameworks',
-      vectordb: 'tab-vectordb', cloud: 'tab-cloud', mlops: 'tab-mlops'
-    };
-    techTabs.forEach(btn => {
-      btn.addEventListener('click', () => {
-        techTabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
-        techPanels.forEach(p => p.classList.remove('active'));
-        btn.classList.add('active');
-        btn.setAttribute('aria-selected', 'true');
-        document.getElementById(tabMap[btn.dataset.tab]).classList.add('active');
-      });
-    });
-  </script>
+        function startAuto() {
+          if (!slides || slides.length === 0) return;
+          autoTimer = setInterval(() => showSlide(current + 1), 8000);
+        }
+
+        const testiPrev = document.getElementById('testiPrev');
+        if (testiPrev) {
+          testiPrev.addEventListener('click', () => {
+            clearInterval(autoTimer);
+            showSlide(current - 1);
+            startAuto();
+          });
+        }
+
+        const testiNext = document.getElementById('testiNext');
+        if (testiNext) {
+          testiNext.addEventListener('click', () => {
+            clearInterval(autoTimer);
+            showSlide(current + 1);
+            startAuto();
+          });
+        }
+
+        if (slides && slides.length > 0) {
+          typeText(slides[current]);
+          startAuto();
+        }
+
+        // ── Featured video play ──
+        const playBtn = document.getElementById('testiPlayBtn');
+        const thumb = document.getElementById('testiThumb');
+        const video = document.getElementById('testiVideo');
+
+        if (playBtn && thumb && video) {
+          playBtn.addEventListener('click', () => {
+            thumb.style.display = 'none';
+            video.style.display = 'block';
+            video.play();
+          });
+        }
+
+        // Technology Stack tab switching
+        const techTabs = document.querySelectorAll('.tech-tab');
+        const techPanels = document.querySelectorAll('.tech-icons-panel');
+
+        const tabMap = {
+          'ai-models': 'tab-ai-models',
+          frameworks: 'tab-frameworks',
+          vectordb: 'tab-vectordb',
+          cloud: 'tab-cloud',
+          mlops: 'tab-mlops'
+        };
+
+        if (techTabs && techTabs.length > 0) {
+          techTabs.forEach(btn => {
+            btn.addEventListener('click', () => {
+              techTabs.forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+              });
+
+              techPanels.forEach(p => p.classList.remove('active'));
+
+              btn.classList.add('active');
+              btn.setAttribute('aria-selected', 'true');
+
+              const panelId = tabMap[btn.dataset.tab];
+              const panel = document.getElementById(panelId);
+
+              if (panel) {
+                panel.classList.add('active');
+              }
+            });
+          });
+        }
+    </script>
 </body>
 
 </html>
