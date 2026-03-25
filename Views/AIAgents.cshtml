@@ -65,8 +65,73 @@ img{max-width:100%;display:block}
 .agents-header p{font-size:1.125rem;color:var(--text-dim);max-width:640px;margin:0 auto}
 .agents-grid{display:grid;gap:24px}
 @@media(min-width:768px){.agents-grid{grid-template-columns:repeat(3,1fr);align-items:stretch}}
-.agent-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px;transition:border-color 0.3s ease,box-shadow 0.3s ease;display:flex;flex-direction:column}
-.agent-card:hover{border-color:rgba(27,84,255,0.25);box-shadow:0 0 20px -8px var(--primary-glow)}
+
+        .agent-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column
+        }
+
+        .agent-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px -5px rgba(0, 0, 0, 0.08);
+        }
+
+        .agent-card:before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            padding: 1px; /* border thickness */
+            border-radius: 0.5rem;
+            --angle: 270deg;
+            background: conic-gradient( from var(--angle), transparent 0deg, transparent 300deg, var(--primary) 330deg, transparent 360deg );
+            z-index: 0;
+            opacity: 0;
+            pointer-events: none;
+            /* Keep only border */
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+
+        @@property --angle {
+            syntax: "<angle>";
+            inherits: false;
+            initial-value: 270deg;
+        }
+
+        .agent-card::after {
+            content: "";
+            position: absolute;
+            inset: 2px;
+            /* background: #fff; */
+            border-radius: 0.5rem;
+            z-index: 0;
+        }
+
+        .agent-card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .agent-card:hover::before {
+            opacity: 1;
+            animation: snake-border 3.2s linear infinite;
+        }
+
+        @@keyframes snake-border {
+            from {
+                --angle: 270deg;
+            }
+
+            to {
+                --angle: 630deg;
+            }
+        }
 .agent-icon{width:48px;height:48px;border-radius:12px;background:rgba(27,84,255,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:24px;color:var(--primary)}
 .agent-icon svg{width:24px;height:24px;stroke:var(--primary);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .agent-card h3{font-size:1.25rem;font-weight:700;margin-bottom:12px}
@@ -126,8 +191,21 @@ img{max-width:100%;display:block}
 .why-ai-header h2{font-size:clamp(1.75rem,3.5vw,3rem);font-weight:800;letter-spacing:-0.02em}
 .benefits-grid{display:grid;gap:24px}
 @@media(min-width:640px){.benefits-grid{grid-template-columns:repeat(2,1fr)}}
-.benefit-card{display:flex;gap:20px;padding:24px;border-radius:var(--radius);border:1px solid var(--border);background:rgba(247,247,249,0.5);transition:border-color 0.3s ease}
-.benefit-card:hover{border-color:rgba(27,84,255,0.2)}
+
+        .benefit-card {
+            display: flex;
+            gap: 20px;
+            padding: 24px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: rgba(247,247,249,0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .benefit-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 30px -5px rgba(0, 0, 0, 0.08);
+            }
 .benefit-icon{width:48px;height:48px;border-radius:12px;background:rgba(27,84,255,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--primary)}
 .benefit-icon svg{width:24px;height:24px;stroke:var(--primary);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .benefit-card h3{font-size:1.125rem;font-weight:600;margin-bottom:8px}
