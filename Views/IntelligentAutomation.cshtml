@@ -337,6 +337,49 @@
     .final-cta h2 { font-size: clamp(1.5rem, 2.5vw, 2.25rem); font-weight: 700; color: var(--text-bright); margin-bottom: 1rem; text-wrap: balance; }
     .final-cta p { font-size: 1.125rem; color: var(--text-dim); max-width: 40rem; margin: 0 auto 2rem; }
     .final-cta .btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    
+/* ===== CASE STUDY ===== */
+.case-study{padding:5rem 0;}
+.case-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius) ;box-shadow:0 0 20px -8px var(--primary-glow)}
+.case-card .label-row{display:flex;align-items:center;gap:8px;margin-bottom:24px}
+.case-card .label-row svg{width:20px;height:20px;stroke:var(--primary);fill:none;stroke-width:2}
+.case-card h2{font-size:clamp(1.5rem,3vw,2.5rem);font-weight:800;letter-spacing:-0.01em;margin-bottom:24px}
+.case-card p{font-size:1.125rem;color:var(--text-dim);max-width:720px;margin-bottom:32px}
+.case-card { overflow: hidden; max-width: 760px; margin: 0 auto; }
+    .case-bar { height: 8px; background: linear-gradient(90deg, hsl(228, 100%, 55%), hsl(228, 100%, 55%, 0.6)); }
+    .case-body { padding: 2rem 3rem; }
+    .case-body h3 { font-size: 1.5rem; font-weight: 600; margin: 1rem 0; }
+    .case-body p { color: var(--muted); line-height: 1.7; margin-bottom: 2rem; }
+
+
+.case-header { max-width: 640px; margin: 0 auto 4rem; text-align: center; }
+    .case-header h2 { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 600; }
+    .case-header p { margin-top: 1rem; color: var(--muted); font-size: 1.0625rem; }
+    .arrow-icon { display: inline-block; width: 16px; height: 16px; }
+    .badge {
+      display: inline-block; padding: 0.25rem 0.75rem;
+      background: var(--primary-10); color: var(--primary);
+      border-radius: 9999px; font-size: 0.75rem; font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .case-section{
+        padding: 5rem 0;
+    }
+
+      .case-section .btn-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      color: var(--primary); font-size: 0.875rem; font-weight: 500;
+      text-decoration: none; transition: opacity 0.2s;
+    }
+    .case-section .btn-link:hover { opacity: 0.8; }
+    .case-section .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    transition: box-shadow 0.3s;
+}
   </style>
 }
 
@@ -467,18 +510,27 @@
   </section>
 
   <!-- CASE STUDY -->
-  <section class="section-padding case-study-section" style="padding-top:5rem;padding-bottom:5rem">
-    <div style="max-width:60rem;margin:0 auto">
-      <div class="surface-card glow-border case-study reveal">
-        <div class="label-row">
-        </div>
-        <h2>How a Financial Services Firm Cut Processing Time by 70% with Intelligent Automation</h2>
-        <p>A mid-sized financial services company was struggling with manual invoice processing, compliance reporting, and customer onboarding-all handled through siloed, labor-intensive workflows.</p>
+   <section class="section case-section">
+  <div class="container">
+    <div class="case-header fade-up">
+      <h2>Our Work</h2>
+      <p>A real-world example of how we deliver impactful Intelligent Automation</p>
+    </div>
+    <div class="card case-card fade-up">
+      <div class="case-bar"></div>
+      <div class="case-body">
+        <span class="badge">Case Study</span>
+        <h3>How a Financial Services Firm Cut Processing Time by 70% with Intelligent Automation</h3>
+        <p>A mid-sized financial services company was struggling with manual invoice processing, compliance reporting, and customer onboarding — all handled through siloed, labor-intensive workflows.</p>
         <p style="margin-bottom:2rem">DotStark 2.0 deployed a combined RPA and IDP solution that automated document intake, data extraction, validation, and downstream system updates. Within 90 days, the firm reduced processing time by 70%, eliminated data entry errors, and freed over 1,200 hours per month of staff capacity.</p>
-        <a href="#" class="btn btn-outline">View Case Study <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <a href="#" class="btn-link">
+          Read More
+          <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- DELIVERY PROCESS -->
   <section class="section-padding" style="padding-top:5rem;padding-bottom:5rem">

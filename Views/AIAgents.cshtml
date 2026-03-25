@@ -54,7 +54,7 @@ img{max-width:100%;display:block}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;border:1px solid var(--border);background:var(--surface);font-size:0.875rem;color:var(--text-dim);margin-bottom:32px}
 .hero-badge svg{width:16px;height:16px;color:var(--primary);stroke:var(--primary);fill:none;stroke-width:2}
 .hero h1{font-size:clamp(2.25rem,5vw,4.25rem);font-weight:800;line-height:1.05;letter-spacing:-0.02em;margin-bottom:24px}
-.hero h1 span{background:linear-gradient(135deg,var(--primary),var(--primary-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero h1 span{background:hsl(228, 100%, 55%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero .lead{font-size:clamp(1.05rem,2vw,1.25rem);color:var(--text-dim);max-width:800px;margin:0 auto 16px}
 .hero .sublead{font-size:1rem;color:var(--text-muted);max-width:800px;margin:0 auto 40px}
 
@@ -213,11 +213,39 @@ img{max-width:100%;display:block}
 
 /* ===== CASE STUDY ===== */
 .case-study{padding:5rem 0;}
-.case-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:clamp(32px,5vw,64px);box-shadow:0 0 20px -8px var(--primary-glow)}
+.case-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius) ;box-shadow:0 0 20px -8px var(--primary-glow)}
 .case-card .label-row{display:flex;align-items:center;gap:8px;margin-bottom:24px}
 .case-card .label-row svg{width:20px;height:20px;stroke:var(--primary);fill:none;stroke-width:2}
 .case-card h2{font-size:clamp(1.5rem,3vw,2.5rem);font-weight:800;letter-spacing:-0.01em;margin-bottom:24px}
 .case-card p{font-size:1.125rem;color:var(--text-dim);max-width:720px;margin-bottom:32px}
+.case-card { overflow: hidden; max-width: 760px; margin: 0 auto; }
+    .case-bar { height: 8px; background: linear-gradient(90deg, hsl(228, 100%, 55%), hsl(228, 100%, 55%, 0.6)); }
+    .case-body { padding: 2rem 3rem; }
+    .case-body h3 { font-size: 1.5rem; font-weight: 600; margin: 1rem 0; }
+    .case-body p { color: var(--muted); line-height: 1.7; margin-bottom: 2rem; }
+
+
+.case-header { max-width: 640px; margin: 0 auto 4rem; text-align: center; }
+    .case-header h2 { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 600; }
+    .case-header p { margin-top: 1rem; color: var(--muted); font-size: 1.0625rem; }
+    .arrow-icon { display: inline-block; width: 16px; height: 16px; }
+    .badge {
+      display: inline-block; padding: 0.25rem 0.75rem;
+      background: var(--primary-10); color: var(--primary);
+      border-radius: 9999px; font-size: 0.75rem; font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .case-section{
+        padding: 5rem 0;
+    }
+
+      .case-section .btn-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      color: var(--primary); font-size: 0.875rem; font-weight: 500;
+      text-decoration: none; transition: opacity 0.2s;
+    }
+    .case-section .btn-link:hover { opacity: 0.8; }
 </style>
 }
 
@@ -335,17 +363,25 @@ img{max-width:100%;display:block}
   </div>
 </section>
 
-<!-- CASE STUDY -->
-<section class="case-study">
+
+<!-- 4. OUR WORK -->
+<section class="section case-section">
   <div class="container">
-    <div class="case-card reveal">
-      <div class="label-row">
-      </div>
-      <h2 class="text-balance">How a Business Scaled Organic Growth with Our SEO Agent</h2>
-      <p class="text-pretty">A growing business implemented our AI SEO agent to automate keyword research, content optimization, and technical audits. By integrating the agent into their existing workflow, they were able to continuously optimize their website without manual effort.</p>
-          <div class="reveal" data-delay="400">
-      <a href="#" class="btn btn-primary">View Case Study<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <div class="case-header fade-up">
+      <h2>Our Work</h2>
+      <p>A real-world example of how we deliver impactful on SEO Agent</p>
     </div>
+    <div class="card case-card fade-up">
+      <div class="case-bar"></div>
+      <div class="case-body">
+        <span class="badge">Case Study</span>
+        <h3>How a Business Scaled Organic Growth with Our SEO Agent</h3>
+        <p>A growing business implemented our AI SEO agent to automate keyword research, content optimization, and technical audits. By integrating the agent into their existing workflow, they were able to continuously optimize their website without manual effort.</p>
+        <a href="/case-study" class="btn-link">
+          Read More
+          <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 </section>
