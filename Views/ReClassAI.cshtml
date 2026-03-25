@@ -1,0 +1,215 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ReClassAi>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "MasterLayout.cshtml";
+}
+
+
+@section Styles {
+    <style>
+        .breadcrumb-bar { background: var(--cool-grey); padding: 0.85rem 0; border-bottom: 1px solid var(--border); }
+        .breadcrumb { display: flex; align-items: center; gap: 0.5rem; list-style: none; font-size: 0.875rem; color: var(--muted); }
+        .breadcrumb li+li::before { content: '/'; margin-right: 0.5rem; color: var(--muted); }
+        .breadcrumb a { color: var(--primary); transition: opacity 0.2s; }
+        .breadcrumb a:hover { opacity: 0.75; }
+        .breadcrumb .active { color: var(--foreground); font-weight: 500; }
+
+        .cs-page { padding: 4rem 0 6rem; background: var(--background); }
+
+        .cs-hero-title { font-size: clamp(1.6rem, 3.5vw, 2.5rem); color: var(--foreground); font-family: var(--font-heading); line-height: 1.2; margin-bottom: 2rem; max-width: 860px; }
+        .cs-hero-img { width: 100%; border-radius: 0.75rem; object-fit: cover; max-height: 460px; overflow: hidden; }
+
+        .cs-layout { display: grid; grid-template-columns: 1fr 300px; gap: 3rem; align-items: start; margin-top: 3rem; }
+
+        .cs-content h4 { font-size: 1.1rem; color: var(--foreground); margin: 2rem 0 0.6rem; font-family: var(--font-heading); }
+        .cs-content h4:first-child { margin-top: 0; }
+        .cs-content p { font-size: 0.9375rem; color: #444; line-height: 1.8; margin-bottom: 1rem; }
+        .cs-content ul { list-style: none; margin: 0.25rem 0 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+        .cs-content ul li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.9375rem; color: #444; line-height: 1.7; }
+        .cs-content ul li::before { content: ''; flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--primary); margin-top: 0.58rem; }
+        .cs-content ul li strong { color: var(--foreground); }
+
+        .cs-section { padding-top: 1.75rem; margin-top: 1.75rem; border-top: 1px solid var(--border); }
+        .cs-section:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+
+        .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1rem 0 1.25rem; }
+        .result-card { background: #f0f4ff; border: 1px solid rgba(27,84,255,0.12); border-radius: 0.6rem; padding: 1.1rem 1.25rem; }
+        .result-card .stat { font-size: 1.5rem; font-weight: 700; color: var(--primary); font-family: var(--font-heading); line-height: 1; margin-bottom: 0.3rem; }
+        .result-card p { font-size: 0.825rem; color: var(--muted); margin: 0; line-height: 1.4; }
+
+        .solution-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin: 1rem 0 1.25rem; }
+        .solution-card { background: var(--cool-grey); border: 1px solid var(--border); border-radius: 0.6rem; padding: 1.25rem; }
+        .solution-card h5 { font-size: 0.875rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; }
+        .solution-card p { font-size: 0.825rem; color: var(--muted); margin: 0; line-height: 1.6; }
+
+        .impact-text { background: #f0f4ff; border-left: 3px solid var(--primary); border-radius: 0 0.5rem 0.5rem 0; padding: 1rem 1.25rem; margin: 1rem 0; font-size: 0.9375rem; color: #444; line-height: 1.7; }
+
+        .cs-sidebar { position: sticky; top: 5rem; }
+        .meta-box { background: var(--cool-grey); border-radius: 0.75rem; padding: 1.75rem; border: 1px solid var(--border); }
+        .meta-box h3 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1.25rem; }
+        .sidebar-item { padding: 0.9rem 0; border-bottom: 1px solid var(--border); }
+        .sidebar-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .sidebar-item .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.3rem; }
+        .sidebar-item .value { font-size: 0.875rem; color: var(--foreground); font-weight: 500; line-height: 1.5; }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
+        .tech-tag { background: var(--primary-10); color: var(--primary); font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.65rem; border-radius: 2rem; }
+
+        .cs-cta-banner { background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 100%); border: 1px solid rgba(27,84,255,0.15); border-radius: 0.75rem; padding: 1.25rem 2rem; display: inline-flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+        .cs-cta-banner p { font-size: 1rem; font-weight: 600; color: var(--foreground); margin: 0; }
+
+        @@media (max-width: 960px) {
+            .cs-layout { grid-template-columns: 1fr; }
+            .cs-sidebar { position: static; }
+            .results-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @@media (max-width: 600px) {
+            .results-grid { grid-template-columns: 1fr; }
+            .cs-cta-banner { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+}
+
+    <!-- ═══ BREADCRUMB ═══ -->
+    <div class="breadcrumb-bar">
+        <div class="container">
+            <ol class="breadcrumb" aria-label="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li><a href="/#case-studies">Case Studies</a></li>
+                <li class="active" aria-current="page">ReClass AI — From Raw Video to Actionable Results</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- ═══ MAIN ═══ -->
+    <main class="cs-page">
+        <div class="container">
+
+            <h1 class="cs-hero-title">ReClass AI — From Raw Video to Actionable Results</h1>
+            <img src="/images/reclassbig.png" alt="ReClass AI platform" class="cs-hero-img" />
+
+            <div class="cs-layout">
+
+                <article class="cs-content">
+
+                    <div class="cs-section">
+                        <h4>Overview</h4>
+                        <p>ReClass AI was built to close the gap between content delivered in the classroom and knowledge retained by students. The platform transforms passive lecture recordings into active, structured digital knowledge assets — searchable, summarised, and interactive.</p>
+                    </div>
+
+                    <div class="cs-section">
+                        <h4>Objectives</h4>
+                        <ul>
+                            <li>Transform passive lecture recordings into active, structured digital knowledge assets — searchable, summarised, and interactive.</li>
+                            <li>Enable students to navigate directly to any concept within a lecture, eliminating time wasted scrubbing through full-length recordings.</li>
+                            <li>Provide 24/7 AI-powered academic support through a lecture-grounded AI Tutor, reducing dependency on instructor availability outside contact hours.</li>
+                            <li>Generate institutional data insights — analytics on topic coverage and engagement patterns to inform course improvement decisions.</li>
+                        </ul>
+                    </div>
+
+                    <div class="cs-section">
+                        <h4>Challenges</h4>
+                        <ul>
+                            <li>Unstructured video archives — recordings stored as flat files with no topic segmentation, chapter markers, or searchable metadata.</li>
+                            <li>Passive revision behaviour — students re-watching 60–90 minute lectures to locate a single concept, leading to inefficiency and disengagement.</li>
+                            <li>No on-demand academic support — questions arising outside office hours go unanswered until the next tutorial, creating learning gaps.</li>
+                            <li>Zero learning analytics — no visibility into which segments students engaged with, where comprehension was weak, or which topics generated the most queries.</li>
+                        </ul>
+                    </div>
+
+                    <div class="cs-section">
+                        <h4>Solutions</h4>
+                        <p>The ReClass Engine processes raw lecture recordings through a multi-stage AI pipeline, producing a structured digital knowledge asset with zero manual input from educators:</p>
+                        <div class="solution-cards">
+                            <div class="solution-card">
+                                <h5>AI Transcription</h5>
+                                <p>Automatic speech-to-text with speaker differentiation and millisecond-level timestamp alignment — no manual effort required.</p>
+                            </div>
+                            <div class="solution-card">
+                                <h5>Topic Segmentation</h5>
+                                <p>AI identifies distinct subject sections within each lecture and assigns each a precise timestamp and descriptive label automatically.</p>
+                            </div>
+                            <div class="solution-card">
+                                <h5>Semantic Search</h5>
+                                <p>Content is vectorised for concept-level retrieval — students land at the most relevant lecture moment, not just a keyword match.</p>
+                            </div>
+                            <div class="solution-card">
+                                <h5>AI-Generated Summaries</h5>
+                                <p>Structured summaries distilling key concepts and insights from each session, available immediately after class ends.</p>
+                            </div>
+                            <div class="solution-card">
+                                <h5>AI Tutor Interface</h5>
+                                <p>Conversational Q&amp;A grounded exclusively in the lecture transcript — students receive structured, source-accurate answers 24/7.</p>
+                            </div>
+                            <div class="solution-card">
+                                <h5>Data Insights Dashboard</h5>
+                                <p>Analytics on topic coverage density and engagement patterns, giving institutions actionable data for improving course delivery.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cs-section">
+                        <h4>Impact</h4>
+                        <div class="results-grid">
+                            <div class="result-card">
+                                <div class="stat">3×</div>
+                                <p>Faster Review — students locate any concept in seconds vs. scrubbing full recordings</p>
+                            </div>
+                            <div class="result-card">
+                                <div class="stat">100%</div>
+                                <p>Automation — zero manual effort from educators, fully automated end-to-end</p>
+                            </div>
+                            <div class="result-card">
+                                <div class="stat">+40%</div>
+                                <p>Retention — improved knowledge retention through structured, searchable content</p>
+                            </div>
+                        </div>
+                        <div class="impact-text">
+                            <strong>Student Impact:</strong> Students navigating a Macroeconomics lecture jump directly to the precise topic — zero re-watching required. The AI Tutor provides instant lecture-grounded summaries and answers, replacing the need to wait for office hours for basic concept clarification.
+                        </div>
+                        <div class="impact-text">
+                            <strong>Institutional Impact:</strong> Institutions gain a new data category — which topics generate the most student queries, where comprehension gaps exist, and which lecture segments drive the highest re-engagement. Educators receive actionable signals for improving course delivery with zero additional workload.
+                        </div>
+                    </div>
+
+                </article>
+
+                <aside class="cs-sidebar">
+                    <div class="meta-box">
+                        <h3>Project Details</h3>
+                        <div class="sidebar-item">
+                            <div class="label">Product</div>
+                            <div class="value">ReClass AI</div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="label">Sector</div>
+                            <div class="value">Higher Education &amp; EdTech</div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="label">Technology</div>
+                            <div class="tech-tags">
+                                <span class="tech-tag">AI Transcription</span>
+                                <span class="tech-tag">NLP</span>
+                                <span class="tech-tag">Vector Search</span>
+                                <span class="tech-tag">LLM</span>
+                                <span class="tech-tag">Analytics</span>
+                            </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="label">Tagline</div>
+                            <div class="value">From Raw Video to Actionable Results</div>
+                        </div>
+                    </div>
+                </aside>
+
+            </div>
+
+            <div style="text-align:center;margin-top:2.5rem;">
+                <div class="cs-cta-banner">
+                    <p>What business challenges are you dealing with? We can help.</p>
+                    <a href="/contact-us" class="btn btn-primary">Get in touch</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
