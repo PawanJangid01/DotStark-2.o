@@ -161,10 +161,68 @@
     @@media (min-width: 768px) { .solutions-grid { grid-template-columns: repeat(2, 1fr); } }
 
     .solution-card { padding: 2rem; transition: border-color 0.3s; }
-    .solution-card:hover { border-color: hsla(var(--primarycss), 0.3); }
+
+            .solution-card:hover {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+                box-shadow: 0 8px 30px -5px rgba(0, 0, 0, 0.08);
+            }
+
+            .solution-card:before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                padding: 1px; /* border thickness */
+                border-radius: 0.5rem;
+                --angle: 270deg;
+                background: conic-gradient( from var(--angle), transparent 0deg, transparent 300deg, var(--primary) 330deg, transparent 360deg );
+                z-index: 0;
+                opacity: 0;
+                pointer-events: none;
+                /* Keep only border */
+                -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+                -webkit-mask-composite: xor;
+                mask-composite: exclude;
+            }
+
+        @@property --angle {
+            syntax: "<angle>";
+            inherits: false;
+            initial-value: 270deg;
+        }
+
+        .solution-card::after {
+            content: "";
+            position: absolute;
+            inset: 2px;
+            /* background: #fff; */
+            border-radius: 0.5rem;
+            z-index: 0;
+        }
+
+        .solution-card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .solution-card:hover::before
+        {
+            opacity: 1;
+            animation: snake-border 3.2s linear infinite;
+        }
+
+        @@keyframes snake-border {
+            from {
+                --angle: 270deg;
+            }
+
+            to {
+                --angle: 630deg;
+            }
+        }
 
     .icon-box {
-      width: 3rem; height: 3rem; border-radius: 0.5rem;
+      width: 12rem; height: 3rem; border-radius: 0.5rem;
       background: var(--primary-bg); display: flex; align-items: center; justify-content: center;
       color: var(--primary-color); margin-bottom: 1.5rem;
     }
@@ -185,8 +243,7 @@
     .mid-cta {
       padding: 5rem 0;
       text-align: center;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      
     }
     .mid-cta h2 { font-size: clamp(1.5rem, 2.5vw, 2.25rem); font-weight: 700; color: var(--text-bright); margin-bottom: 1rem; text-wrap: balance; }
     .mid-cta p { font-size: 1.125rem; color: var(--text-dim); max-width: 40rem; margin: 0 auto 2rem; }
@@ -199,14 +256,19 @@
     .benefit-card {
       display: flex; gap: 1.25rem; padding: 1.5rem;
       border-radius: var(--radius); border: 1px solid var(--border);
-      background: rgba(250,250,250,0.5); transition: border-color 0.3s;
+            background: rgba(250,250,250,0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .benefit-card:hover { border-color: hsla(var(--primarycss), 0.2); }
+
+            .benefit-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 30px -5px rgba(0, 0, 0, 0.08);
+            }
     .benefit-card h3 { font-size: 1.125rem; font-weight: 600; color: var(--text-bright); margin-bottom: 0.5rem; }
     .benefit-card p { color: var(--text-dim); }
 
     /* ---- CASE STUDY ---- */
-    .case-study-section { border-top: 1px solid var(--border); }
+    
     .case-study { padding: 2rem; }
     @@media (min-width: 768px) { .case-study { padding: 3rem; } }
     @@media (min-width: 1024px) { .case-study { padding: 4rem; } }
@@ -224,7 +286,15 @@
     }
     @@media (min-width: 768px) { .step-card { gap: 2rem; padding: 2rem; } }
     .step-card:hover { border-color: hsla(var(--primarycss), 0.2); }
-    .step-num { font-size: clamp(1.5rem, 2vw, 2.25rem); font-weight: 900; color: hsla(var(--primarycss), 0.2); line-height: 1; flex-shrink: 0; padding-top: 0.25rem; }
+
+        .step-num {
+            font-size: clamp(1.5rem, 2vw, 2.25rem);
+            font-weight: 900;
+            color: var(--primary);
+            line-height: 1;
+            flex-shrink: 0;
+            padding-top: 0.25rem;
+        }
     .step-card h3 { font-size: 1.125rem; font-weight: 600; color: var(--text-bright); margin-bottom: 0.5rem; }
     .step-card p { color: var(--text-dim); }
 

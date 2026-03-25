@@ -123,12 +123,88 @@
     @@media (min-width: 768px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
 
     /* ---- Solution Card ---- */
-    .solution-card { padding: 2rem; }
+        .solution-card {
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            transition: border-color 0.2s;
+            cursor: pointer;
+            background-color: #ebebec59;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .solution-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 30px -5px rgba(0, 0, 0, 0.08);
+            }
+
+            .solution-card:before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                padding: 1px; /* border thickness */
+                border-radius: 0.5rem;
+                --angle: 270deg;
+                background: conic-gradient( from var(--angle), transparent 0deg, transparent 300deg, var(--primary) 330deg, transparent 360deg );
+                z-index: 0;
+                opacity: 0;
+                pointer-events: none;
+                /* Keep only border */
+                -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+                -webkit-mask-composite: xor;
+                mask-composite: exclude;
+            }
+
+        @@property --angle {
+            syntax: "<angle>";
+            inherits: false;
+            initial-value: 270deg;
+        }
+
+        .solution-card::after {
+            content: "";
+            position: absolute;
+            inset: 2px;
+            /* background: #fff; */
+            border-radius: 0.5rem;
+            z-index: 0;
+        }
+
+        .solution-card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .solution-card:hover::before
+        {
+            opacity: 1;
+            animation: snake-border 3.2s linear infinite;
+        }
+
+        @@keyframes snake-border {
+            from {
+                --angle: 270deg;
+            }
+
+            to {
+                --angle: 630deg;
+            }
+        }
     .solution-card h3 { margin: 1.25rem 0 0.75rem; font-size: 1.125rem; font-weight: 600; }
     .solution-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.7; }
 
     /* ---- Industry Card ---- */
-    .industry-card { display: flex; gap: 1rem; padding: 1.5rem; }
+        .industry-card {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .industry-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px -5px rgba(0, 0, 0, 0.08);
+        }
     .industry-card h4 { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; }
     .industry-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
 
@@ -175,7 +251,16 @@
     .rag365-features li svg { width: 20px; height: 20px; color: var(--primary); flex-shrink: 0; }
 
     /* ---- Expert Card ---- */
-    .expert-card { padding: 1.75rem; text-align: center; }
+        .expert-card {
+            padding: 1.75rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .expert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px -5px rgba(0, 0, 0, 0.08);
+        }
     .expert-card .icon-box { margin: 0 auto 1.25rem; }
     .expert-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.75rem; }
     .expert-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
@@ -216,11 +301,11 @@
     }
 
     /* ---- Animations ---- */
-    .fade-up {
+    /* .fade-up {
       opacity: 0; transform: translateY(20px);
       transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
     }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); } */
 
     /* Arrow icon inline */
     .arrow-icon { display: inline-block; width: 16px; height: 16px; }
@@ -253,42 +338,42 @@
       <p>We design and build production ready RAG systems that connect your data with AI to deliver accurate, context-aware outputs.</p>
     </div>
     <div class="grid-3">
-      <div class="card solution-card fade-up">
+      <div class="card solution-card">
         <div class="icon-box">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg>
         </div>
         <h3>Intelligent Knowledge Platforms</h3>
         <p>We build centralized knowledge systems that allow teams to access, search, and interact with enterprise data in a conversational way. These platforms improve productivity by reducing the time spent searching for information.</p>
       </div>
-      <div class="card solution-card fade-up">
+      <div class="card solution-card">
         <div class="icon-box">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
         </div>
         <h3>AI Powered Semantic Search</h3>
         <p>Enable advanced search capabilities that go beyond keywords. Our solutions understand context and intent, allowing users to find the most relevant information across documents, databases, and internal tools.</p>
       </div>
-      <div class="card solution-card fade-up">
+      <div class="card solution-card">
         <div class="icon-box">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
         </div>
         <h3>Document Intelligence Systems</h3>
         <p>We develop AI systems that can process, analyze, and retrieve insights from large volumes of structured and unstructured documents such as PDFs, reports, and contracts.</p>
       </div>
-      <div class="card solution-card fade-up">
+      <div class="card solution-card">
         <div class="icon-box">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
         </div>
         <h3>Conversational AI Assistants</h3>
         <p>Create AI assistants powered by your internal data that can answer queries, assist employees, and automate customer interactions with high accuracy.</p>
       </div>
-      <div class="card solution-card fade-up">
+      <div class="card solution-card">
         <div class="icon-box">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
         </div>
         <h3>Data Integration &amp; Pipeline Engineering</h3>
         <p>We integrate multiple data sources, clean and structure your data, and build pipelines that ensure your RAG system always works with up-to-date and relevant information.</p>
       </div>
-      <div class="card solution-card fade-up">
+      <div class="card solution-card">
         <div class="icon-box">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>
         </div>
@@ -309,37 +394,37 @@
 
     <h3 class="fade-up" style="text-align:center;font-size:1.375rem;font-weight:600;margin-bottom:2rem;">Use Cases Across Industries</h3>
     <div class="grid-3" style="margin-bottom:4rem;">
-      <div class="card industry-card fade-up">
+      <div class="card industry-card">
         <div class="icon-box icon-box-sm">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg>
         </div>
         <div><h4>Healthcare</h4><p>Access patient data, research, and medical documents securely while improving clinical decision-making</p></div>
       </div>
-      <div class="card industry-card fade-up">
+      <div class="card industry-card">
         <div class="icon-box icon-box-sm">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
         </div>
         <div><h4>Finance</h4><p>Analyze reports, policies, and sensitive financial data with accuracy and compliance</p></div>
       </div>
-      <div class="card industry-card fade-up">
+      <div class="card industry-card">
         <div class="icon-box icon-box-sm">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
         </div>
         <div><h4>Legal</h4><p>Retrieve case files, contracts, and legal knowledge instantly to improve efficiency and research speed</p></div>
       </div>
-      <div class="card industry-card fade-up">
+      <div class="card industry-card">
         <div class="icon-box icon-box-sm">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>
         </div>
         <div><h4>Enterprises</h4><p>Centralize internal knowledge and enhance employee productivity across teams and departments</p></div>
       </div>
-      <div class="card industry-card fade-up">
+      <div class="card industry-card">
         <div class="icon-box icon-box-sm">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
         </div>
         <div><h4>E-commerce &amp; Retail</h4><p>Enable intelligent product search, customer support automation, and personalized shopping experiences</p></div>
       </div>
-      <div class="card industry-card fade-up">
+      <div class="card industry-card">
         <div class="icon-box icon-box-sm">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
         </div>
@@ -426,28 +511,28 @@
       <h2>AI Experts You Can Trust</h2>
     </div>
     <div class="grid-4">
-      <div class="card expert-card fade-up">
+      <div class="card expert-card">
         <div class="icon-box">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg>
         </div>
         <h3>Deep RAG &amp; LLM Expertise</h3>
         <p>Our team specializes in building advanced RAG architectures and optimizing large language models for real-world applications.</p>
       </div>
-      <div class="card expert-card fade-up">
+      <div class="card expert-card">
         <div class="icon-box">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
         </div>
         <h3>End-to-End AI Development</h3>
         <p>From strategy and architecture to deployment and scaling, we handle the complete lifecycle of AI solutions.</p>
       </div>
-      <div class="card expert-card fade-up">
+      <div class="card expert-card">
         <div class="icon-box">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
         </div>
         <h3>Scalable &amp; Secure Systems</h3>
         <p>We design systems that are built for performance, reliability, and data security at enterprise scale.</p>
       </div>
-      <div class="card expert-card fade-up">
+      <div class="card expert-card">
         <div class="icon-box">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
         </div>
