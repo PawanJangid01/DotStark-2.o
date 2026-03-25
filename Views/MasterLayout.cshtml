@@ -118,26 +118,33 @@
     const slides = document.querySelectorAll('.testi-slide');
     let current = 0;
     let autoTimer;
-            function typeText(slide) {
+                           let typingInterval;
+
+        function typeText(slide) {
+          clearInterval(typingInterval);
+
           const blockquote = slide.querySelector("blockquote");
-          const fullText = blockquote.getAttribute("data-text") || blockquote.textContent;
+
+          let fullText = blockquote.getAttribute("data-text") || blockquote.textContent;
+
+          // remove line breaks and extra spaces
+          fullText = fullText.replace(/\s+/g, " ").trim();
 
           blockquote.setAttribute("data-text", fullText);
           blockquote.textContent = "";
 
           let index = 0;
-          const speed = 40; // typing speed
+          const speed = 55;
 
-          const typing = setInterval(() => {
+          typingInterval = setInterval(() => {
             blockquote.textContent += fullText.charAt(index);
             index++;
 
             if (index >= fullText.length) {
-              clearInterval(typing);
+              clearInterval(typingInterval);
             }
           }, speed);
         }
-
     function showSlide(n) {
       slides[current].classList.remove('active');
       current = (n + slides.length) % slides.length;
