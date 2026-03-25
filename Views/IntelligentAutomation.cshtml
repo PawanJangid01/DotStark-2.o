@@ -271,6 +271,43 @@
     .case-study h2 { font-size: clamp(1.5rem, 2.5vw, 2.25rem); font-weight: 700; color: var(--text-bright); margin-bottom: 1.5rem; text-wrap: balance; }
     .case-study p { font-size: 1.125rem; color: var(--text-dim); max-width: 48rem; margin-bottom: 1rem; }
 
+
+    /* ══════════════════════════════════════════════
+   10. CTA
+   ══════════════════════════════════════════════ */
+.cta-section {
+    background: var(--primary);
+    text-align: center;
+}
+
+    .cta-section .inner {
+        max-width: 48rem;
+        margin: 0 auto;
+    }
+
+    .cta-section h2 {
+        font-size: clamp(1.875rem, 4vw, 3rem);
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 1.5rem;
+        line-height: 1.15;
+    }
+
+    .cta-section p {
+        font-size: 1.125rem;
+        font-family: var(--font-body);
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 2.5rem;
+        line-height: 1.7;
+    }
+
+    .cta-section .btn-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+    }
+
     /* ---- DELIVERY STEPS ---- */
     .step-card {
       display: flex; gap: 1.5rem; padding: 1.5rem;
@@ -460,17 +497,20 @@
     </div>
   </section>
 
-  <!-- FINAL CTA -->
-  <section class="section-padding final-cta">
-    <div class="reveal" style="max-width:48rem;margin:0 auto">
-      <h2>Start Your Intelligent Automation Journey Today</h2>
-      <p>Partner with DotStark 2.0 to design, deploy, and scale intelligent automation solutions that streamline your operations and accelerate business growth.</p>
-      <div class="btn-group">
-        <a href="#" class="btn btn-primary">Talk to an Expert <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-        <a href="#" class="btn btn-outline">Explore Our Services</a>
-      </div>
-    </div>
-  </section>
+
+  
+ <section id="contact" class="cta-section section-padding-trust">
+   <div class="container">
+     <div class="inner">
+       <h2>Start Your Intelligent Automation Journey Today</h2>
+       <p>Partner with DotStark 2.0 to design, deploy, and scale intelligent automation solutions that streamline your operations and accelerate business growth.</p>
+       <div class="btn-group">
+         <a href="/contact-us" class="btn btn-white">Talk to an Expert</a>
+       </div>
+     </div>
+   </div>
+ </section>
+
 
   <script>
     const observer = new IntersectionObserver((entries) => {
