@@ -38,8 +38,9 @@
     .btn-primary {
       display: inline-flex; align-items: center; gap: 0.5rem;
       background: var(--primary); color: var(--primary-fg);
-      padding: 0.75rem 1.75rem; border-radius: 0.5rem;
-      font-size: 0.875rem; font-weight: 500; text-decoration: none;
+            padding: 0.6rem 1.4rem;
+            border-radius: 0.5rem;
+      font-size:14px; font-weight: 500; text-decoration: none;
       border: none; cursor: pointer; transition: filter 0.2s;
       position: relative; overflow: hidden;
     }
@@ -111,6 +112,9 @@
       font-size: clamp(2.25rem, 5.5vw, 4.25rem);
       font-weight: 600; max-width: 900px; margin: 0 auto;
       text-wrap: balance;
+    }
+    .hero h1 span{
+                    color: var(--primary);
     }
     .hero .subtitle { max-width: 640px; margin: 1.5rem auto 0; font-size: 1.125rem; color: var(--muted); }
     .hero .subtext { max-width: 640px; margin: 1rem auto 0; font-size: 1rem; color: var(--muted); }
@@ -316,13 +320,12 @@
 <section class="hero">
   <div class="container" style="position:relative">
     <div class="fade-up">
-      <h1>RAG Solutions For Intelligent Knowledge Systems</h1>
+            <h1>RAG Solutions For Intelligent <span>Knowledge Systems</span></h1>
       <p class="subtitle">Build AI systems that securely retrieve, understand, and generate insights from your business data.</p>
       <p class="subtext">Dotstark 2.0 helps enterprises design and deploy RAG based solutions that enable intelligent search, knowledge automation, and accurate decision-making at scale.</p>
       <div class="cta-wrap">
         <a href="#" class="btn-primary">
-          Discuss Your RAG Project
-          <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          Discuss Your RAG Project          
         </a>
       </div>
     </div>
@@ -472,8 +475,7 @@
         <p>Developed a scalable RAG-based knowledge system that enabled employees to search and retrieve information across internal systems in real time. The solution improved information accessibility, reduced manual effort, and enhanced decision-making across teams.</p>
         <a href="#" class="btn-link">
           Read More
-          <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
+           </a>
       </div>
     </div>
   </div>
@@ -488,7 +490,7 @@
         <p>RAG 365 is our enterprise-grade AI platform that enables organizations to quickly deploy intelligent knowledge systems without building from scratch.</p>
         <a href="#" class="btn-primary">
           Explore RAG 365
-          <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          
         </a>
       </div>
       <div class="card rag365-features">
