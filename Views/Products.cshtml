@@ -49,7 +49,7 @@ img{max-width:100%}
 .stat-sub{font-size:.75rem;color:var(--muted);margin-top:.25rem}
 
 /* Buttons */
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.875rem 2rem;border-radius:var(--radius);font-weight:600;font-size:1rem;border:none;cursor:pointer;transition:all .2s}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:0.6rem 1.4rem;border-radius:var(--radius);font-weight:600;font-size:14px;border:none;cursor:pointer;transition:all .2s}
 .btn-primary{background:hsl(var(--primarycss));color:#fff;box-shadow:0 0 24px -4px hsla(var(--primarycss),.4)}
 .btn-primary:hover{opacity: 0.9;}
 .btn-outline{background:transparent;border:1px solid hsla(var(--primarycss),.4);color:var(--fg)}
@@ -320,6 +320,22 @@ section {
                 transform: translateY(-5px);
                 box-shadow: 0 8px 30px -5px rgba(0, 0, 0, 0.08);
             }
+
+.icon-box {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.icon-box svg {
+  width: 28px;
+  height: 28px;
+  stroke: #0066ff; /* Blue color */
+}
 </style>
 }
 
@@ -329,8 +345,8 @@ section {
   <h1 class="hero-heading reveal reveal-delay-1">Intelligence That Works <span class="gradient-text">For You</span></h1>
   <p class="subtext reveal reveal-delay-2">Two category-defining AI products that turn raw organisational data - documents and lecture recordings - into structured, searchable, actionable intelligence.</p>
   <div class="btn-group reveal reveal-delay-3">
-    <a href="#rag365" class="btn btn-primary">Explore RAG365 →</a>
-    <a href="#reclass" class="btn btn-outline">Explore ReClass AI →</a>
+    <a href="#rag365" class="btn btn-primary">Explore RAG365</a>
+    <a href="#reclass" class="btn btn-outline">Explore ReClass AI</a>
   </div>
 </div>
 </section>
@@ -344,8 +360,8 @@ section {
       <p class="reveal reveal-delay-1" style="font-size:1.25rem;font-weight:600;margin-bottom:1rem">Stop Searching. Start Asking.</p>
       <p class="muted reveal reveal-delay-2" style="margin-bottom:2rem">RAG365 converts your entire internal knowledge base-contracts, memos, PDFs, policies-into a private AI assistant that answers questions in seconds, with source citations, zero hallucinations, and zero public web exposure.</p>
       <div class="btn-group reveal reveal-delay-3" style="justify-content:flex-start">
-        <a href="#cta" class="btn btn-primary">Book a Demo →</a>
-        <a href="#rag365-features" class="btn btn-outline">See Features →</a>
+        <a href="#cta" class="btn btn-primary">Book a Demo</a>
+        <a href="#rag365-features" class="btn btn-outline">See Features</a>
       </div>
     </div>
     <div class="mockup reveal reveal-delay-3">
@@ -377,16 +393,34 @@ section {
 <section id="rag365-features" class="section" style="background:var(--secondary-bg)">
 <div class="container">
   <div class="text-center reveal">
-    <h2 class="heading">Every Answer. Every Document. Instantly.</h2>
+    <h2 class="heading">The Knowledge Layer Your Team Has Been Missing</h2>
     <p class="subtext">RAG365 indexes your entire internal knowledge base and makes it conversationally queryable-in real time, with no public web, no hallucinations.</p>
   </div>
   <div class="grid-3">
-            <div class="card reveal reveal-delay-1 agent-card"><div class="icon-box">🔒</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Private Knowledge Index</h3><p class="tag" style="margin-bottom:.75rem">Zero External Exposure</p><p style="font-size:.875rem;color:var(--muted)">All your PDFs, contracts, memos and policies ingested into a secure, encrypted retrieval index. No data ever leaves your environment.</p></div>
-            <div class="card reveal reveal-delay-2 agent-card"><div class="icon-box">💬</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Natural Language Querying</h3><p class="tag" style="margin-bottom:.75rem">Semantic Understanding</p><p style="font-size:.875rem;color:var(--muted)">Ask questions the way you'd ask a colleague. RAG365 understands intent, not just keywords.</p></div>
-            <div class="card reveal reveal-delay-3 agent-card"><div class="icon-box">✓</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Source-Cited Responses</h3><p class="tag" style="margin-bottom:.75rem">Full Traceability</p><p style="font-size:.875rem;color:var(--muted)">Every answer references its exact source-document name, version, and Doc ID.</p></div>
-            <div class="card reveal reveal-delay-1 agent-card"><div class="icon-box">🧠</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Context-Aware Intelligence</h3><p class="tag" style="margin-bottom:.75rem">Industry-Tailored</p><p style="font-size:.875rem;color:var(--muted)">RAG365 is trained on your industry vocabulary, contract formats, and internal naming conventions.</p></div>
-            <div class="card reveal reveal-delay-2 agent-card"><div class="icon-box">⚡</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Real-Time Access</h3><p class="tag" style="margin-bottom:.75rem">Instant Retrieval</p><p style="font-size:.875rem;color:var(--muted)">Surface relevant intelligence mid-conversation, mid-meeting, mid-negotiation.</p></div>
-            <div class="card reveal reveal-delay-3 agent-card"><div class="icon-box">🔌</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Platform Agnostic</h3><p class="tag" style="margin-bottom:.75rem">Zero Disruption</p><p style="font-size:.875rem;color:var(--muted)">Integrates with your current document storage and toolstack-no migration required.</p></div>
+            <div class="card reveal reveal-delay-1 agent-card"><div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+  </svg></div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Private Knowledge Index</h3><p class="tag" style="margin-bottom:.75rem">Zero External Exposure</p><p style="font-size:.875rem;color:var(--muted)">All your PDFs, contracts, memos and policies ingested into a secure, encrypted retrieval index. No data ever leaves your environment.</p></div>
+            <div class="card reveal reveal-delay-2 agent-card"><div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path>
+  </svg></div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Natural Language Querying</h3><p class="tag" style="margin-bottom:.75rem">Semantic Understanding</p><p style="font-size:.875rem;color:var(--muted)">Ask questions the way you'd ask a colleague. RAG365 understands intent, not just keywords.</p></div>
+            <div class="card reveal reveal-delay-3 agent-card"><div class="icon-box"> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="20 6 9 17 4 12"></polyline>
+  </svg></div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Source-Cited Responses</h3><p class="tag" style="margin-bottom:.75rem">Full Traceability</p><p style="font-size:.875rem;color:var(--muted)">Every answer references its exact source-document name, version, and Doc ID.</p></div>
+            <div class="card reveal reveal-delay-1 agent-card"><div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="12 2 22 7 12 12 2 7 12 2"></polygon>
+    <polyline points="2 17 12 22 22 17"></polyline>
+    <polyline points="2 12 12 17 22 12"></polyline>
+  </svg></div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Context-Aware Intelligence</h3><p class="tag" style="margin-bottom:.75rem">Industry-Tailored</p><p style="font-size:.875rem;color:var(--muted)">RAG365 is trained on your industry vocabulary, contract formats, and internal naming conventions.</p></div>
+            <div class="card reveal reveal-delay-2 agent-card"><div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+  </svg></div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Real-Time Access</h3><p class="tag" style="margin-bottom:.75rem">Instant Retrieval</p><p style="font-size:.875rem;color:var(--muted)">Surface relevant intelligence mid-conversation, mid-meeting, mid-negotiation.</p></div>
+            <div class="card reveal reveal-delay-3 agent-card"><div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 3v6"></path>
+    <path d="M18 3v6"></path>
+    <path d="M4 9h16"></path>
+    <path d="M12 9v13"></path>
+  </svg></div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Platform Agnostic</h3><p class="tag" style="margin-bottom:.75rem">Zero Disruption</p><p style="font-size:.875rem;color:var(--muted)">Integrates with your current document storage and toolstack-no migration required.</p></div>
   </div>
 </div>
 </section>
@@ -396,7 +430,7 @@ section {
 <section id="process" class="process section-padding">
     <div class="container">
       <div class="process-header">
-        <h2>Ask. Retrieve. Act.</h2>
+        <h2>How RAG365 Thinks for Your Team</h2>
         <p class="process-subtext">From document upload to cited answer in seconds. RAG365's four - stage process is invisible to your team - they just ask.</p>
       </div>
       <div class="steps-grid">
@@ -497,7 +531,7 @@ section {
        <h2>Ready to Automate Your Most Critical Business Processes?</h2>
        <p>Let DotStark 2.0 identify the highest-impact automation opportunities in your organization and build a roadmap tailored to your goals.</p>
        <div class="btn-group">
-         <a href="#cta" class="btn btn-white">Let's Build Your Automation Roadmap →</a>
+         <a href="#cta" class="btn btn-white">Let's Build Your Automation Roadmap</a>
        </div>
      </div>
    </div>
@@ -513,8 +547,8 @@ section {
       <p class="reveal reveal-delay-1" style="font-size:1.25rem;font-weight:600;margin-bottom:1rem">From Raw Video to Actionable Results.</p>
       <p class="muted reveal reveal-delay-2" style="margin-bottom:2rem">ReClass AI transforms traditional lecture recordings into structured, searchable digital knowledge assets-with AI-generated summaries, semantic topic navigation, and a 24/7 AI Tutor, all grounded exclusively in your course content.</p>
       <div class="btn-group reveal reveal-delay-3" style="justify-content:flex-start">
-        <a href="#cta" class="btn btn-primary">Book a Demo →</a>
-        <a href="#reclass-features" class="btn btn-outline">See Features →</a>
+        <a href="#cta" class="btn btn-primary">Book a Demo</a>
+        <a href="#reclass-features" class="btn btn-outline">See Features</a>
       </div>
     </div>
     <div class="mockup reveal reveal-delay-3">
@@ -547,16 +581,42 @@ section {
 <section id="reclass-features" class="section" style="background:var(--secondary-bg)">
 <div class="container">
   <div class="text-center reveal">
-    <h2 class="heading">Every Lecture. Fully Ltructured. Always Searchable.</h2>
+    <h2 class="heading">The AI Layer Behind Every Class</h2>
     <p class="subtext">ReClass AI automatically transforms raw video recordings into interactive, AI-powered learning assets-with zero effort from educators.</p>
   </div>
   <div class="grid-3">
-            <div class="card reveal reveal-delay-1 agent-card"><div class="icon-box">🎙</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">AI Transcription</h3><p class="tag" style="margin-bottom:.75rem">Fully Automated</p><p style="font-size:.875rem;color:var(--muted)">Automatic speech-to-text with speaker differentiation and millisecond-accurate timestamps.</p></div>
-            <div class="card reveal reveal-delay-2 agent-card"><div class="icon-box">📑</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Topic Segmentation</h3><p class="tag" style="margin-bottom:.75rem">Zero Manual Tagging</p><p style="font-size:.875rem;color:var(--muted)">AI identifies distinct subject sections and assigns descriptive labels with precise timestamps.</p></div>
-            <div class="card reveal reveal-delay-3 agent-card"><div class="icon-box">🔍</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Semantic Topic Search</h3><p class="tag" style="margin-bottom:.75rem">Concept-Level Retrieval</p><p style="font-size:.875rem;color:var(--muted)">Students search by concept, not keyword. ReClass AI understands meaning.</p></div>
-            <div class="card reveal reveal-delay-1 agent-card"><div class="icon-box">📝</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">AI-Generated Summaries</h3><p class="tag" style="margin-bottom:.75rem">Instant Post-Lecture</p><p style="font-size:.875rem;color:var(--muted)">Structured summaries available to students immediately after the lecture ends.</p></div>
-            <div class="card reveal reveal-delay-2 agent-card"><div class="icon-box">🤖</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">AI Tutor Interface</h3><p class="tag" style="margin-bottom:.75rem">Lecture-Grounded Only</p><p style="font-size:.875rem;color:var(--muted)">A conversational AI tutor grounded exclusively in the lecture transcript.</p></div>
-            <div class="card reveal reveal-delay-3 agent-card"><div class="icon-box">📊</div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Learning Analytics</h3><p class="tag" style="margin-bottom:.75rem">Institutional Insights</p><p style="font-size:.875rem;color:var(--muted)">See which topics generate the most queries and where comprehension gaps exist.</p></div>
+            <div class="card reveal reveal-delay-1 agent-card"><div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 1v14"></path>
+    <rect x="8" y="2" width="8" height="12" rx="4"></rect>
+    <path d="M5 10a7 7 0 0 0 14 0"></path>
+    <line x1="12" y1="19" x2="12" y2="23"></line>
+    <line x1="8" y1="23" x2="16" y2="23"></line>
+  </svg></div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">AI Transcription</h3><p class="tag" style="margin-bottom:.75rem">Fully Automated</p><p style="font-size:.875rem;color:var(--muted)">Automatic speech-to-text with speaker differentiation and millisecond-accurate timestamps.</p></div>
+            <div class="card reveal reveal-delay-2 agent-card"><div class="icon-box">  <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+    <polyline points="14 2 14 8 20 8"></polyline>
+    <line x1="8" y1="13" x2="16" y2="13"></line>
+    <line x1="8" y1="17" x2="16" y2="17"></line>
+  </svg></div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Topic Segmentation</h3><p class="tag" style="margin-bottom:.75rem">Zero Manual Tagging</p><p style="font-size:.875rem;color:var(--muted)">AI identifies distinct subject sections and assigns descriptive labels with precise timestamps.</p></div>
+            <div class="card reveal reveal-delay-3 agent-card"><div class="icon-box">  <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="11" cy="11" r="8"></circle>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg></div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Semantic Topic Search</h3><p class="tag" style="margin-bottom:.75rem">Concept-Level Retrieval</p><p style="font-size:.875rem;color:var(--muted)">Students search by concept, not keyword. ReClass AI understands meaning.</p></div>
+            <div class="card reveal reveal-delay-1 agent-card"><div class="icon-box"> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 20h9"></path>
+    <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"></path>
+  </svg></div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">AI-Generated Summaries</h3><p class="tag" style="margin-bottom:.75rem">Instant Post-Lecture</p><p style="font-size:.875rem;color:var(--muted)">Structured summaries available to students immediately after the lecture ends.</p></div>
+            <div class="card reveal reveal-delay-2 agent-card"><div class="icon-box">  <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+    <circle cx="8" cy="16" r="1"></circle>
+    <circle cx="16" cy="16" r="1"></circle>
+    <path d="M12 2v4"></path>
+  </svg></div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">AI Tutor Interface</h3><p class="tag" style="margin-bottom:.75rem">Lecture-Grounded Only</p><p style="font-size:.875rem;color:var(--muted)">A conversational AI tutor grounded exclusively in the lecture transcript.</p></div>
+            <div class="card reveal reveal-delay-3 agent-card"><div class="icon-box">  <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="12" y1="20" x2="12" y2="10"></line>
+    <line x1="18" y1="20" x2="18" y2="4"></line>
+    <line x1="6" y1="20" x2="6" y2="16"></line>
+  </svg></div><h3 style="font-size:1.125rem;font-weight:600;margin-bottom:.25rem">Learning Analytics</h3><p class="tag" style="margin-bottom:.75rem">Institutional Insights</p><p style="font-size:.875rem;color:var(--muted)">See which topics generate the most queries and where comprehension gaps exist.</p></div>
   </div>
 </div>
 </section>
@@ -565,7 +625,7 @@ section {
 <section id="process" class="process section-padding">
     <div class="container">
       <div class="process-header">
-        <h2>Record. Process. Learn Smarter.</h2>
+        <h2>How ReClass AI Works</h2>
         <p class="process-subtext">ReClass AI works silently in the background - educators teach as normal, and the platform handles everything.</p>
       </div>
       <div class="steps-grid">
@@ -670,12 +730,12 @@ section {
     <div class="card reveal reveal-delay-1" style="text-align:left">
       <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:.5rem"><span class="gradient-text">RAG365</span></h3>
       <p style="font-size:.875rem;color:var(--muted);margin-bottom:1.5rem">Turn your documents into answers. See how RAG365 handles your specific document library in a live 30-minute demo. No setup required.</p>
-      <a href="/contact-us" class="btn btn-primary">RAG365 Demo →</a>
+      <a href="/contact-us" class="btn btn-primary">RAG365 Demo</a>
     </div>
     <div class="card reveal reveal-delay-2" style="text-align:left">
       <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:.5rem"><span class="gradient-text">ReClass AI</span></h3>
       <p style="font-size:.875rem;color:var(--muted);margin-bottom:1.5rem">Bring your lectures to life with AI. Upload one of your existing lecture recordings and we'll show you exactly what ReClass AI produces-live.</p>
-      <a href="/contact-us" class="btn btn-primary">ReClass Demo →</a>
+      <a href="/contact-us" class="btn btn-primary">ReClass Demo</a>
     </div>
   </div>
 </div>
