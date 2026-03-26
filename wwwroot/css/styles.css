@@ -97,8 +97,8 @@ img {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 1rem 2rem;
-    font-size: 1rem;
+    padding: 0.6rem 1.4rem;
+    font-size: 14px;
     font-weight: 500;
     font-family: var(--font-body);
     border-radius: var(--radius);

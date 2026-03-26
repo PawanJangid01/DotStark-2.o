@@ -725,10 +725,12 @@
 .testi-slider {
     flex: 1;
     position: relative;
-    min-height: 280px;
+    /* min-height: 280px; */
     overflow: hidden;
 }
-
+.testi-left svg{
+    margin-left:1rem;
+}
 /* Each slide stacked; only .active is visible */
 .testi-slide {
     position: absolute;
@@ -1363,7 +1365,7 @@
               <p>Years of Excellence</p>
             </div>
             <div class="number-card">
-              <h2 class="numbers">99.99%</h2>
+              <h2 class="numbers">97%</h2>
               <p>Client Satisfaction</p>
             </div>
           </div>
@@ -1443,16 +1445,21 @@
 
         <!-- LEFT: one quote at a time, auto-slides -->
         <div class="testi-left">
+                <svg class="testi-quote-icon" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 30V18C0 7 6 1 18 0l2 4C12 5 9 9 9 15h7v15H0zm22 0V18C22 7 28 1 40 0l2 4C34 5 31 9 31 15h7v15H22z"
+                          fill="currentColor" opacity="1" />
+                </svg>
           <div class="testi-slider-wrap">
             <button class="testi-arrow testi-prev" id="testiPrev" aria-label="Previous testimonial">&#8249;</button>
+
             <div class="testi-slider" id="testiSlider">
 
               <div class="testi-slide active">
-                <svg class="testi-quote-icon" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                @* <svg class="testi-quote-icon" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M0 30V18C0 7 6 1 18 0l2 4C12 5 9 9 9 15h7v15H0zm22 0V18C22 7 28 1 40 0l2 4C34 5 31 9 31 15h7v15H22z"
                     fill="currentColor" opacity="1" />
-                </svg>
+                </svg> *@
                 <blockquote>"DotStark's expertise in AI platforms helped us significantly enhance our online
                   capabilities and automate key workflows."</blockquote>
                 <div class="testi-author">
@@ -1465,11 +1472,11 @@
               </div>
 
               <div class="testi-slide">
-                <svg class="testi-quote-icon" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                @* <svg class="testi-quote-icon" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M0 30V18C0 7 6 1 18 0l2 4C12 5 9 9 9 15h7v15H0zm22 0V18C22 7 28 1 40 0l2 4C34 5 31 9 31 15h7v15H22z"
                     fill="currentColor" opacity="1" />
-                </svg>
+                </svg> *@
                 <blockquote>"The team delivered a production-ready RAG pipeline in record time. Exceptional technical
                   depth and communication throughout."</blockquote>
                 <div class="testi-author">
@@ -1482,11 +1489,11 @@
               </div>
 
               <div class="testi-slide">
-                <svg class="testi-quote-icon" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                @* <svg class="testi-quote-icon" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M0 30V18C0 7 6 1 18 0l2 4C12 5 9 9 9 15h7v15H0zm22 0V18C22 7 28 1 40 0l2 4C34 5 31 9 31 15h7v15H22z"
                     fill="currentColor" opacity="1" />
-                </svg>
+                </svg> *@
                 <blockquote>"From architecture to deployment, DS 2.0 handled everything seamlessly. Our AI assistant now
                   handles 60% of support queries."</blockquote>
                 <div class="testi-author">
@@ -1499,11 +1506,11 @@
               </div>
 
               <div class="testi-slide">
-                <svg class="testi-quote-icon" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                @* <svg class="testi-quote-icon" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M0 30V18C0 7 6 1 18 0l2 4C12 5 9 9 9 15h7v15H0zm22 0V18C22 7 28 1 40 0l2 4C34 5 31 9 31 15h7v15H22z"
                     fill="currentColor" opacity="1" />
-                </svg>
+                </svg> *@
                 <blockquote>"Incredible attention to detail. They built our predictive analytics dashboard on time a
                   game-changer for our ops team."</blockquote>
                 <div class="testi-author">
