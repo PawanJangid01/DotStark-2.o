@@ -1,0 +1,216 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.SeoCaseStudy>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "MasterLayout.cshtml";
+}
+
+
+@section Styles {
+<style>
+    .cs-page { padding: 0 0 6rem; background: var(--background); }
+
+    .cs-banner { position: relative; width: 100%; height: 480px; overflow: hidden; }
+    .cs-banner-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .cs-banner-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.15) 100%); }
+    .cs-banner-content { position: absolute; bottom: 2.75rem; left: 50%; transform: translateX(-50%); width: 100%; max-width: 1200px; padding: 0 2rem; }
+    .cs-tag { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; font-size: 0.72rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.875rem; backdrop-filter: blur(4px); }
+    .cs-banner-title { font-size: clamp(1.4rem, 2.5vw, 2.25rem); font-weight: 700; color: #fff; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 0.75rem; font-family: var(--font-heading); white-space: nowrap; }
+    .cs-banner-sub { font-size: 1rem; color: rgba(255,255,255,0.8); line-height: 1.65; margin: 0; max-width: 560px; }
+    @@media (max-width: 600px) { .cs-banner { height: 360px; } .cs-banner-content { bottom: 1.75rem; padding: 0 1.25rem; } .cs-banner-title { white-space: normal; } }
+
+    .cs-layout { display: grid; grid-template-columns: 1fr 300px; gap: 3rem; align-items: start; margin-top: 3rem; }
+
+    .cs-content h4 { font-size: 1.1rem; color: var(--foreground); margin: 2rem 0 0.6rem; font-family: var(--font-heading); }
+    .cs-content h4:first-child { margin-top: 0; }
+    .cs-content p { font-size: 0.9375rem; color: #444; line-height: 1.8; margin-bottom: 1rem; }
+    .cs-content ul { list-style: none; margin: 0.25rem 0 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .cs-content ul li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.9375rem; color: #444; line-height: 1.7; }
+    .cs-content ul li::before { content: ''; flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--primary); margin-top: 0.58rem; }
+    .cs-content ul li strong { color: var(--foreground); }
+
+    .cs-section { padding-top: 1.75rem; margin-top: 1.75rem; border-top: 1px solid var(--border); }
+    .cs-section:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+
+    .solution-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin: 1rem 0 1.25rem; }
+    .solution-card { background: var(--cool-grey); border: 1px solid var(--border); border-radius: 0.6rem; padding: 1.25rem; }
+    .solution-card h5 { font-size: 0.875rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; }
+    .solution-card p { font-size: 0.825rem; color: var(--muted); margin: 0; line-height: 1.6; }
+
+    .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1rem 0 1.25rem; }
+    .result-card { background: #f0f4ff; border: 1px solid rgba(27,84,255,0.12); border-radius: 0.6rem; padding: 1.1rem 1.25rem; }
+    .result-card .stat { font-size: 1.5rem; font-weight: 700; color: var(--primary); font-family: var(--font-heading); line-height: 1; margin-bottom: 0.3rem; }
+    .result-card p { font-size: 0.825rem; color: var(--muted); margin: 0; line-height: 1.4; }
+
+    .impact-text { background: #f0f4ff; border-left: 3px solid var(--primary); border-radius: 0 0.5rem 0.5rem 0; padding: 1rem 1.25rem; margin: 1rem 0; font-size: 0.9375rem; color: #444; line-height: 1.7; }
+
+    .cs-sidebar { position: sticky; top: 5rem; }
+    .meta-box { background: var(--cool-grey); border-radius: 0.75rem; padding: 1.75rem; border: 1px solid var(--border); }
+    .meta-box h3 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1.25rem; }
+    .sidebar-item { padding: 0.9rem 0; border-bottom: 1px solid var(--border); }
+    .sidebar-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .sidebar-item .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.3rem; }
+    .sidebar-item .value { font-size: 0.875rem; color: var(--foreground); font-weight: 500; line-height: 1.5; }
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
+    .tech-tag { background: var(--primary-10); color: var(--primary); font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.65rem; border-radius: 2rem; }
+
+    .cs-cta-banner { background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 100%); border: 1px solid rgba(27,84,255,0.15); border-radius: 0.75rem; padding: 1.25rem 2rem; display: inline-flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    .cs-cta-banner p { font-size: 1rem; font-weight: 600; color: var(--foreground); margin: 0; }
+
+    @@media (max-width: 960px) {
+        .cs-layout { grid-template-columns: 1fr; }
+        .cs-sidebar { position: static; }
+        .results-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @@media (max-width: 600px) {
+        .results-grid { grid-template-columns: 1fr; }
+        .cs-cta-banner { flex-direction: column; align-items: flex-start; }
+    }
+</style>
+}
+
+<!-- ═══ HERO BANNER ═══ -->
+<div class="cs-banner">
+    <img src="/images/seoagent-large.jpg" alt="SEO360 AI-Powered SEO Intelligence Platform" class="cs-banner-img" />
+    <div class="cs-banner-overlay"></div>
+    <div class="cs-banner-content">
+        <span class="cs-tag">Case Study</span>
+        <h1 class="cs-banner-title">SEO360 AI: Powered SEO Intelligence Platform</h1>
+        <p class="cs-banner-sub">How SEO360 eliminated manual audits, enabled AI-driven insights, and transformed SEO from a reactive process into a proactive intelligence-driven strategy.</p>
+    </div>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<main class="cs-page">
+    <div class="container">
+        <div class="cs-layout">
+
+            <article class="cs-content">
+
+                <div class="cs-section">
+                    <h4>Overview</h4>
+                    <p>SEO360 was developed to enable organizations and digital teams to transform how they analyze, optimize, and compete in search engine performance. The platform combines a full-stack crawler, rule-based scoring engine, AI chatbot, and competitor intelligence into a unified SEO ecosystem.</p>
+                </div>
+
+                <div class="cs-section">
+                    <h4>Objectives</h4>
+                    <ul>
+                        <li>Automate SEO auditing — eliminate manual audits by introducing a full-stack crawler and rule-based scoring engine.</li>
+                        <li>Enable AI-driven insights — allow users to interact with SEO data using natural language through an intelligent chatbot.</li>
+                        <li>Improve content strategy — generate SEO-optimized blog content aligned with trends and keyword intent.</li>
+                        <li>Enhance competitive positioning — provide real-time competitor benchmarking and actionable recommendations.</li>
+                    </ul>
+                </div>
+
+                <div class="cs-section">
+                    <h4>Challenges</h4>
+                    <ul>
+                        <li>Fragmented SEO tools — reliance on multiple disconnected platforms for crawling, analysis, content, and competitor tracking.</li>
+                        <li>Time-intensive audits — manual SEO reviews requiring hours of effort with inconsistent outputs.</li>
+                        <li>Limited actionable insights — raw data without contextual intelligence made decision-making slow and inefficient.</li>
+                        <li>No conversational interface — inability to query SEO data dynamically or extract insights in real-time.</li>
+                        <li>Weak competitor visibility — lack of structured comparison against market competitors and missed optimization opportunities.</li>
+                    </ul>
+                </div>
+
+                <div class="cs-section">
+                    <h4>Solutions</h4>
+                    <p>SEO360 introduced a unified, AI-powered SEO intelligence ecosystem combining deterministic analysis with generative AI:</p>
+                    <div class="solution-cards">
+                        <div class="solution-card">
+                            <h5>Automated Web Crawler</h5>
+                            <p>Deep website crawling engine extracts metadata, content, and links, enabling comprehensive SEO audits across pages.</p>
+                        </div>
+                        <div class="solution-card">
+                            <h5>SEO Scoring Engine</h5>
+                            <p>Evaluates websites across On-Page, Technical, Content, and Performance parameters using rule-based analysis pipelines.</p>
+                        </div>
+                        <div class="solution-card">
+                            <h5>AI-Powered SEO Chat (RAG)</h5>
+                            <p>Users interact with their website data through natural language queries, powered by hybrid retrieval (FAISS + BM25) and LLM responses.</p>
+                        </div>
+                        <div class="solution-card">
+                            <h5>AI Blog Writer</h5>
+                            <p>Generates structured, SEO-optimized blog content using templates, keywords, and trend analysis.</p>
+                        </div>
+                        <div class="solution-card">
+                            <h5>Competitor Intelligence Module</h5>
+                            <p>Identifies, compares, and benchmarks competitor websites with actionable insights for performance improvement.</p>
+                        </div>
+                        <div class="solution-card">
+                            <h5>Unified Dashboard</h5>
+                            <p>Centralized dashboard for crawl results, insights, and optimization workflows — enabling a seamless crawl → analyze → optimize journey.</p>
+                        </div>
+                        <div class="solution-card">
+                            <h5>Scalable Architecture</h5>
+                            <p>Built on FastAPI with modular service layers, SQLite persistence, and extensible APIs for future growth and feature expansion.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cs-section">
+                    <h4>Impact</h4>
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <div class="stat">80%</div>
+                            <p>Faster SEO Audits — reduction in manual audit time across websites</p>
+                        </div>
+                        <div class="result-card">
+                            <div class="stat">3×</div>
+                            <p>Faster Insights — AI-driven analysis and chatbot responses accelerate decision-making</p>
+                        </div>
+                        <div class="result-card">
+                            <div class="stat">24/7</div>
+                            <p>Intelligence Access — continuous availability of SEO insights, audits, and AI assistance</p>
+                        </div>
+                    </div>
+                    <div class="impact-text">
+                        <strong>Productivity Impact:</strong> Automation of crawling and scoring eliminated repetitive manual SEO tasks. Teams that previously spent hours auditing websites can now generate comprehensive reports in minutes. AI chatbot capabilities further reduce analysis time by enabling instant answers to complex SEO queries — removing dependency on manual data interpretation.
+                    </div>
+                    <div class="impact-text">
+                        <strong>Strategic Impact:</strong> The platform transformed SEO from a reactive process into a proactive, intelligence-driven strategy. Real-time competitor benchmarking enables teams to identify gaps and opportunities instantly. AI-generated content ensures alignment with search intent and trends, improving organic reach. The unified platform eliminates tool fragmentation, providing a single source of truth for SEO performance, insights, and actions.
+                    </div>
+                </div>
+
+            </article>
+
+            <aside class="cs-sidebar">
+                <div class="meta-box">
+                    <h3>Project Details</h3>
+                    <div class="sidebar-item">
+                        <div class="label">Product</div>
+                        <div class="value">SEO360</div>
+                    </div>
+                    <div class="sidebar-item">
+                        <div class="label">Sector</div>
+                        <div class="value">Digital Marketing &amp; Web Optimization</div>
+                    </div>
+                    <div class="sidebar-item">
+                        <div class="label">Technology</div>
+                        <div class="tech-tags">
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">RAG</span>
+                            <span class="tech-tag">FAISS</span>
+                            <span class="tech-tag">BM25</span>
+                            <span class="tech-tag">LLM</span>
+                            <span class="tech-tag">AI Crawler</span>
+                        </div>
+                    </div>
+                    <div class="sidebar-item">
+                        <div class="label">Tagline</div>
+                        <div class="value">Crawl. Analyze. Optimize.</div>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+
+        <div style="text-align:center;margin-top:2.5rem;">
+            <div class="cs-cta-banner">
+                <p>What business challenges are you dealing with? We can help.</p>
+                <a href="/contact-us" class="btn btn-primary">Talk to an Expert</a>
+            </div>
+        </div>
+
+    </div>
+</main>
