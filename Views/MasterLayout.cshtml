@@ -50,13 +50,13 @@
 
   <!-- Mobile nav drawer -->
   <nav class="mobile-nav" id="mobileNav">
-    <a href="#rag">RAG</a>
-    <a href="#ai-agents">AI Agents</a>
-    <a href="#automation">Intelligent Automation</a>
-    <a href="#solutions">Products</a>
-    <a href="#insights">Insights</a>
-    <a href="#contact">Contact Us</a>
-    <a href="#demo" class="mobile-cta">View Demo</a>
+    <a href="/rag">RAG</a>
+    <a href="/ai-agents">AI Agents</a>
+        <a href="/intelligent-automation">Intelligent Automation</a>
+    <a href="/products">Products</a>
+    <a href="/insight">Insights</a>
+    <a href="/contact-us">Contact Us</a>
+    <a href="/demo" class="mobile-cta">View Demo</a>
   </nav>
 
          <!-- ✅ MAIN CONTENT -->
@@ -114,6 +114,25 @@
   </footer>
 
     <script>
+                        const mobileToggle = document.getElementById("mobileToggle");
+        const mobileNav = document.getElementById("mobileNav");
+        const iconMenu = document.getElementById("iconMenu");
+        const iconClose = document.getElementById("iconClose");
+
+        if (mobileToggle && mobileNav) {
+          mobileToggle.addEventListener("click", () => {
+
+            mobileNav.classList.toggle("open");
+
+            const isOpen = mobileNav.classList.contains("open");
+            mobileToggle.setAttribute("aria-expanded", isOpen);
+
+            if (iconMenu && iconClose) {
+              iconMenu.style.display = isOpen ? "none" : "block";
+              iconClose.style.display = isOpen ? "block" : "none";
+            }
+          });
+        }
         // ── Testimonial slider ──
         const slides = document.querySelectorAll('.testi-slide');
         let current = 0;
