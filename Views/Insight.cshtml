@@ -45,13 +45,13 @@
     .hero-circles .c3 { inset: 96px; }
 
     @@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
-    .hero h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 20px; }
+    .hero h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 20px; }
     .hero h1 .accent { color: var(--ds-primary); }
     .hero p { font-size: 18px; color: var(--ds-muted); max-width: 640px; margin: 0 auto; }
 
     /* ── Section Commons ── */
     .section { padding: 5rem; }
-    .hero { padding: 10rem 5rem 5rem; }
+    .hero { padding: 10rem 0 5rem; }
     .section.alt { background: #ffffff; }
     .section-label {
       font-size: 12px; font-weight: 700; color: var(--ds-primary);
@@ -175,6 +175,27 @@
 .cards-grid .read-link:hover {
   transform: translateY(-3px);
 }
+
+h1 span {
+  color: var(--ds-primary);
+}
+
+.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* VERY IMPORTANT */
+.card-link .card {
+  height: 100%;
+}
+
+/* Keep your original hover */
+.card:hover {
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  border-color: rgba(0,64,255,0.3);
+}
   </style>
 }
 
@@ -182,50 +203,56 @@
   <section class="hero alt">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">Our Success Stories</h2>
+        <h1>Our Success<span> Stories</span></h1>
         <p class="section-desc">Real-world success stories showcasing how Dotstark 2.0 helps businesses implement AI solutions, automate processes, and drive measurable impact.</p>
       </div>
 
       <div class="cards-grid">
         <!-- Card 1 -->
-        <div class="card">
+        <a href="/reclass-ai" class="card-link">
+        <div class="card">          
           <div class="card-img">
-            <img src="/images/ragai.png" alt="Document Processing" />
+            <img src="/images/ragai.jpg" alt="Document Processing" />
           </div>
           <div class="card-body">
-          <span class="tag">ReClass AI</span>
+          <span class="tag">Artificial Intelligence</span>
             <h3>Smart Learning Intelligence</h3>
             <p>Converts lecture videos into structured, searchable learning with AI tutor support and significantly faster student revision.</p>
-            <a href="/reclass-ai" class="read-link">Read More </a>
+            <span class="read-link">Read More</span>
           </div>
         </div>
+        </a>
 
         <!-- Card 2 -->
+        <a href="/case-study" class="card-link">
         <div class="card">
           <div class="card-img">
-            <img src="/images/rag365.png" alt="Knowledge Base" />
-            
+            <img src="/images/rag365.png" alt="Knowledge Base" />            
           </div>
           <div class="card-body">
-          <span class="tag">RAG365</span>
+          <span class="tag">RAG</span>
             <h3>AI Knowledge Retrieval</h3>
             <p>AI-powered knowledge retrieval that delivers instant, source-cited answers from internal documents with zero hallucinations.</p>
-            <a href="/case-study" class="read-link">Read More </a>
+            <span class="read-link">Read More</span>
           </div>
         </div>
+        </a>
 
         <!-- Card 3 -->
+        <a href="#" class="card-link">
         <div class="card">
           <div class="card-img">
             <img src="/images/seo.png" alt="Customer Support" />
           </div>
           <div class="card-body">
-          <span class="tag">SEO Agent</span>
+          <span class="tag">AI Agent</span>
             <h3>AI SEO Intelligence</h3>
             <p>All-in-one AI SEO platform that automates audits, delivers real-time insights, and accelerates optimization with intelligent recommendations.</p>
-            <a href="#" class="read-link">Read More </a>
+            <span class="read-link">Read More</span>
           </div>
         </div>
+        </a>
+
       </div>
     </div>
   </section>
@@ -234,12 +261,13 @@
   <section class="section" style="background-color: #ebebec;">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">Latest Insights</h2>
+        <h2 class="section-title">Latest <span>Insights</span></h2>
         <p class="section-desc">Explore expert perspectives, trends, and best practices in artificial intelligence and modern AI-driven systems.</p>
       </div>
 
       <div class="cards-grid">
         <!-- Blog 1 -->
+        <a href="/blog-ai-agent" class="card-link">
         <div class="card">
           <div class="card-img">
             <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop" alt="RAG Future" />
@@ -259,8 +287,10 @@
             </div>
           </div>
         </div>
+        </a>
 
         <!-- Blog 2 -->
+        <a href="/blog-rag-architecture" class="card-link">
         <div class="card">
           <div class="card-img">
             <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=400&fit=crop" alt="Scalable AI" />
@@ -279,8 +309,10 @@
             </div>
           </div>
         </div>
+        </a>
 
         <!-- Blog 3 -->
+        <a href="/blog-page-index" class="card-link">
         <div class="card">
           <div class="card-img">
             <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop" alt="ML Pipelines" />
@@ -299,6 +331,8 @@
             </div>
           </div>
         </div>
+        </a>
+
       </div>
     </div>
   </section>

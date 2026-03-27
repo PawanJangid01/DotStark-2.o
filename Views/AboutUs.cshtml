@@ -7,19 +7,20 @@
     @section Styles {
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--primary:228,100%,55%;--bg:#fff;--fg:#111;--muted:#64748b;--surface:#f8fafc;--border:#e2e8f0;--card:#fafafa;--radius:0.75rem}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased}
+:root{--primaryblue:228,100%,55%;--bg:#fff;--fg:#111;--muted:#64748b;--surface:#f8fafc;--border:#e2e8f0;--card:#fafafa;--radius:0.75rem}
+body{font-family:'Inter',sans-serif;color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased}
 a{text-decoration:none;color:inherit}
 
 .section-padding{padding:5rem 1.5rem}
+.hero-padding{padding:10rem 1.5rem}
 .max-w-5xl{max-width:64rem;margin:0 auto}
 .max-w-6xl{max-width:72rem;margin:0 auto}
 .max-w-4xl{max-width:56rem;margin:0 auto}
 .text-center{text-align:center}
 
 /* Buttons */
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.875rem 2rem;border-radius:var(--radius);font-weight:600;font-size:1rem;cursor:pointer;transition:all .2s;border:none}
-.btn-primary{background:hsl(var(--primary));color:#fff}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:0.6rem 1.4rem;border-radius:var(--radius);font-weight:600;font-size:14px;cursor:pointer;transition:all .2s;border:none}
+.btn-primary{background:hsl(var(--primaryblue));color:#fff}
 .btn-primary:hover{background:hsl(228,100%,48%)}
 .btn-outline{background:transparent;border:1px solid var(--border);color:var(--fg)}
 .btn-outline:hover{background:var(--surface)}
@@ -28,15 +29,15 @@ a{text-decoration:none;color:inherit}
 .tag{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;border-radius:999px;border:1px solid var(--border);background:hsl(228,60%,96%);font-size:.875rem;color:var(--muted)}
 
 /* Section headers */
-.section-label{font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:hsl(var(--primary));margin-bottom:.75rem}
+.section-label{font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:hsl(var(--primaryblue));margin-bottom:.75rem}
 .section-title{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:800;color:var(--fg);margin-bottom:1rem;line-height:1.15}
 .section-desc{font-size:1.125rem;color:var(--muted);max-width:40rem;margin:0 auto 3rem}
 
 /* Cards */
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;transition:box-shadow .3s}
 .card:hover{box-shadow:0 10px 40px -12px rgba(0,0,0,.1)}
-.card-icon{width:3rem;height:3rem;border-radius:.75rem;background:hsl(var(--primary)/.1);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
-.card-icon svg{width:1.5rem;height:1.5rem;color:hsl(var(--primary));stroke:hsl(var(--primary));fill:none}
+.card-icon{width:3rem;height:3rem;border-radius:.75rem;background:hsl(var(--primaryblue)/.1);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
+.card-icon svg{width:1.5rem;height:1.5rem;color:hsl(var(--primaryblue));stroke:hsl(var(--primaryblue));fill:none}
 .card h3{font-size:1.25rem;font-weight:700;margin-bottom:.75rem}
 .card p{color:var(--muted);font-size:.9375rem;line-height:1.7}
 
@@ -46,26 +47,26 @@ a{text-decoration:none;color:inherit}
 
 /* Hero */
 .hero{min-height:85vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;opacity:.03;background-image:linear-gradient(hsl(var(--primary)) 1px,transparent 1px),linear-gradient(90deg,hsl(var(--primary)) 1px,transparent 1px);background-size:64px 64px}
-.hero h1{font-size:clamp(2.25rem,5vw,4rem);font-weight:800;line-height:1.05;margin-bottom:1.5rem}
-.hero h1 span{color:hsl(var(--primary))}
+.hero::before{content:'';position:absolute;inset:0;opacity:.03;}
+.hero h1{font-size:clamp(2.25rem, 5vw, 3.75rem);font-weight:700;line-height:1.05;margin-bottom:1.5rem}
+.hero h1 span{color:hsl(var(--primaryblue))}
 .hero p{font-size:1.125rem;color:var(--muted);max-width:48rem;margin:0 auto 1rem}
 .hero .btn-group{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:2.5rem}
 
 /* Alt bg */
-.bg-alt{background:hsl(228,60%,96%/.3)}
+.bg-alt{background:#ebebec}
 
 /* Values */
-.value-num{font-size:2.5rem;font-weight:900;color:hsl(var(--primary)/.12);margin-bottom:.5rem}
+.value-num{font-size:2.5rem;font-weight:900;color:hsl(var(--primaryblue)/.12);margin-bottom:.5rem}
 
 /* Leader */
-.leader-avatar{width:4rem;height:4rem;border-radius:50%;background:hsl(var(--primary)/.1);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
-.leader-avatar svg{width:2rem;height:2rem;stroke:hsl(var(--primary));fill:none}
-.leader-role{font-size:.875rem;font-weight:600;color:hsl(var(--primary));margin-bottom:.75rem}
+.leader-avatar{width:4rem;height:4rem;border-radius:50%;background:hsl(var(--primaryblue)/.1);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
+.leader-avatar svg{width:2rem;height:2rem;stroke:hsl(var(--primaryblue));fill:none}
+.leader-role{font-size:.875rem;font-weight:600;color:hsl(var(--primaryblue));margin-bottom:.75rem}
 
 /* Highlights */
 .highlight-item{display:flex;gap:.75rem;align-items:flex-start;margin-bottom:1rem}
-.highlight-check{width:1.25rem;height:1.25rem;color:hsl(var(--primary));flex-shrink:0;margin-top:.2rem}
+.highlight-check{width:1.25rem;height:1.25rem;color:hsl(var(--primaryblue));flex-shrink:0;margin-top:.2rem}
 
 /* Diff card */
 .diff-card{display:flex;gap:1.25rem;padding:1.5rem;border-radius:var(--radius);border:1px solid var(--border);background:var(--card);transition:box-shadow .3s}
@@ -74,7 +75,7 @@ a{text-decoration:none;color:inherit}
 /* CTA */
 .cta-section{text-align:center}
 .cta-section h2{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:800;margin-bottom:1rem}
-.cta-section h2 span{color:hsl(var(--primary))}
+.cta-section h2 span{color:hsl(var(--primaryblue))}
 .cta-section .highlight-text{font-size:1.125rem;font-weight:600;margin:2rem 0}
 
 /* Reveal */
@@ -88,19 +89,171 @@ a{text-decoration:none;color:inherit}
   .btn{padding:.75rem 1.5rem;font-size:.9375rem}
   .diff-card{flex-direction:column}
 }
-</style>
+
+
+    /* ══════════════════════════════════════════════
+   10. CTA
+   ══════════════════════════════════════════════ */
+.cta-section {
+    background: hsl(228, 100%, 55%);
+    text-align: center;
 }
 
+    .cta-section .inner {
+        max-width: 48rem;
+        margin: 0 auto;
+    }
+
+    .cta-section h2 {
+        font-size: clamp(1.875rem, 4vw, 3rem);
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 1.5rem;
+        line-height: 1.15;
+    }
+
+    .cta-section p {
+        font-size: 1.125rem;
+        font-family: var(--font-body);
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 2.5rem;
+        line-height: 1.7;
+    }
+
+    .cta-section .btn-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    /* Team Section */
+    /* Section */
+.team-section {
+  padding: 5rem 1.5rem;
+}
+
+/* Container */
+.container {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+/* Center Content */
+.center {
+  text-align: center;
+}
+
+.section-desc {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+/* Label */
+.label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #4f46e5;
+  margin-bottom: 0.75rem;
+}
+
+/* Title */
+.section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+/* Description */
+.section-desc {
+  font-size: 1.1rem;
+  color: #6b7280;
+}
+
+/* Grid */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+/* Card */
+.team-card {
+  background: #fafafa;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.team-card:hover {
+  border-color: rgba(79, 70, 229, 0.4);
+  transform: translateY(-5px);
+}
+
+/* Avatar */
+.avatar {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: rgba(79, 70, 229, 0.1);
+  color: #4f46e5;
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+}
+
+/* Name */
+.team-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+/* Role */
+.role {
+  font-size: 0.85rem;
+  color: #4f46e5;
+  font-weight: 600;
+  margin: 0.25rem 0 0.75rem;
+}
+
+/* Description */
+.team-card p {
+  font-size: 0.85rem;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@@media (max-width: 1024px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@@media (max-width: 768px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+</style>
+}
 <!-- HERO -->
-<section class="hero section-padding">
+<section class="hero hero-padding">
   <div class="max-w-5xl text-center" style="position:relative;z-index:1">
     <div class="reveal">
-    <h1 class="reveal">Intelligence Engineered. <span>Results Delivered.</span></h1>
-    <p class="reveal">DS2.0 is an AI-first company born from the legacy of DotStark Technologies, purpose-built to help businesses lead with artificial intelligence, automate the complex, and grow with clarity.</p>
-    <p class="reveal" style="font-size:1rem;max-width:40rem;margin:0 auto">As a sister company of DotStark Technologies, DS2.0 inherits over a decade of proven software engineering excellence and combines it with a singular, unwavering focus: <strong>Artificial Intelligence</strong>.</p>
+    <h1 class="reveal">Building the AI-Native <br><span>Future of Digital Services</span></h1>
+    <p class="reveal">We are a team of engineers, researchers, and designers reimagining how businesses operate - with artificial intelligence at the core of everything we build.</p>
     <div class="btn-group reveal">
-      <a href="#cta" class="btn btn-primary">Get in Touch →</a>
-      <a href="#services" class="btn btn-outline">Explore Our Services</a>
+      <a href="#cta" class="btn btn-primary">Talk to an Expert</a>
     </div>
   </div>
 </section>
@@ -109,24 +262,24 @@ a{text-decoration:none;color:inherit}
 <section class="section-padding bg-alt">
   <div class="max-w-5xl">
     <div class="reveal">
-      <p class="section-label">Our Story</p>
-      <h2 class="section-title">Where Experience Meets Emerging Intelligence</h2>
-      <p style="color:var(--muted);font-size:1.125rem;max-width:48rem;margin-bottom:1rem">Built on the foundation of DotStark Technologies, a trusted name in software development, DS2.0 was created with one purpose: making enterprise-grade AI accessible, practical, and transformative for every business.</p>
-      <p style="color:var(--muted);font-size:1.125rem;max-width:48rem;margin-bottom:2.5rem">We saw a world where AI was talked about but rarely deployed with precision. DS2.0 was our answer-a company that doesn't just consult, but builds, integrates, and scales AI solutions that make a measurable difference.</p>
+      <h2 class="section-title">We Don't Add AI. We Start With It.</h2>
+      <p style="color:var(--muted);font-size:1.125rem;max-width:48rem;margin-bottom:1rem">DS2.0 was founded on a single conviction: the businesses that will define the next decade aren't those that adopted AI - they're the ones that were designed around it.</p>
+      <p style="color:var(--muted);font-size:1.125rem;max-width:48rem;margin-bottom:2.5rem">We partner with enterprises and fast-growing startups to build intelligent systems, automate complex workflows, and unlock data-driven decision-making at every layer of their organization.</p>
+      <p style="color:var(--muted);font-size:1.125rem;max-width:48rem;margin-bottom:2.5rem">From custom LLM integrations to end-to-end AI pipelines, every service we offer is built with intelligence as the backbone - not an afterthought.</p>
     </div>
     <div class="reveal">
       <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:1rem">Key Highlights</h3>
       <div class="highlight-item">
         <svg class="highlight-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        <span>10+ Years of parent company expertise in software development</span>
+        <span>AI-First Architecture</span>
       </div>
       <div class="highlight-item">
         <svg class="highlight-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        <span>100% AI-focused services and solutions</span>
+        <span>Enterprise-Grade Reliability</span>
       </div>
       <div class="highlight-item">
         <svg class="highlight-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        <span>Backed by the engineering discipline and client-first culture of DotStark Technologies</span>
+        <span>Outcome-Oriented Partnership</span>
       </div>
     </div>
   </div>
@@ -135,128 +288,100 @@ a{text-decoration:none;color:inherit}
 <!-- WHAT WE DO -->
 <section id="services" class="section-padding">
   <div class="max-w-6xl">
-    <div class="text-center reveal">
-      <p class="section-label">What We Do</p>
-      <h2 class="section-title">AI Services Built for Impact</h2>
-      <p class="section-desc">From strategy to deployment, we cover the full spectrum of AI transformation with deep expertise and a builder's mindset.</p>
+    <div class="text-center reveal" style="padding: 0 0 2rem;">
+      <h2 class="section-title">Our Core Values</h2>
+      <p class="section-desc">The principles that shape every decision we make, every line of code we write, and every client relationship we build.</p>
     </div>
     <div class="grid-2">
       <div class="card reveal">
         <div class="card-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.4 2.1 6.3 5 7.4V20a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-2.6c2.9-1.1 5-4 5-7.4a8 8 0 0 0-8-8z"/><line x1="9" y1="22" x2="15" y2="22"/></svg></div>
-        <h3>AI Consulting & Strategy</h3>
-        <p>We assess your current state, identify AI opportunities, and design a roadmap that aligns with your business goals-from pilot to enterprise-scale deployment.</p>
+        <h3>Precision Over Hype</h3>
+        <p>AI is powerful — but only when applied with precision. We cut through the noise and focus on what actually moves the needle for your business.</p>
       </div>
       <div class="card reveal">
         <div class="card-icon"><svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
-        <h3>AI Product Development</h3>
-        <p>Custom AI-powered products built from the ground up-conversational AI, recommendation engines, computer vision tools, intelligent search systems, and more.</p>
+        <h3>Trust by Design</h3>
+        <p>Security, privacy, and transparency are built into every solution from the ground up. Your data stays yours, always.</p>
       </div>
       <div class="card reveal">
         <div class="card-icon"><svg viewBox="0 0 24 24" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
-        <h3>ML & Data Solutions</h3>
-        <p>We build the data infrastructure, ML pipelines, and predictive models that turn raw data into your most valuable strategic asset.</p>
+        <h3>Speed With Substance</h3>
+        <p>We move fast — but never at the cost of quality. Every deployment is tested, validated, and ready for the real world.</p>
       </div>
       <div class="card reveal">
         <div class="card-icon"><svg viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-        <h3>AI Automation & Agents</h3>
-        <p>Intelligent agents and workflow automations that eliminate manual bottlenecks, reduce operational costs, and let your team focus on what only humans can do.</p>
+        <h3>Human-Centered AI</h3>
+        <p>We believe great AI empowers people — not replaces them. Our systems are built to amplify human judgment and creativity.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <h3>Continuous Learning</h3>
+        <p>The field moves fast. We invest relentlessly in staying at the frontier so our clients always benefit from the latest breakthroughs.</p>
+      </div>
+       <div class="card reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <h3>Scalable Thinking</h3>
+        <p>We don't build for today's problem - we architect for tomorrow's scale. Every system is designed to grow with your ambitions.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- VALUES -->
-<section class="section-padding bg-alt">
-  <div class="max-w-6xl">
-    <div class="text-center reveal">
-      <p class="section-label">Our Values</p>
-      <h2 class="section-title">The Principles We Build On</h2>
-    </div>
-    <div class="grid-3">
-      <div class="card reveal"><div class="value-num">01</div><h3>Clarity Over Complexity</h3><p>AI should simplify, not confuse. We design solutions that are powerful yet intuitive-removing friction, not adding it.</p></div>
-      <div class="card reveal"><div class="value-num">02</div><h3>Outcomes, Not Outputs</h3><p>We measure success by real business impact-revenue gained, time saved, decisions improved-not just models deployed.</p></div>
-      <div class="card reveal"><div class="value-num">03</div><h3>Ethical by Design</h3><p>We build AI that is transparent, fair, and accountable. Responsible innovation is a core discipline woven into every system.</p></div>
-      <div class="card reveal"><div class="value-num">04</div><h3>Partnership Mindset</h3><p>Your goals become ours. We embed ourselves in your challenges and build lasting relationships beyond single engagements.</p></div>
-      <div class="card reveal"><div class="value-num">05</div><h3>Continuous Innovation</h3><p>The AI landscape evolves fast. We stay ahead-constantly researching, prototyping, and upgrading our methods and tools.</p></div>
-      <div class="card reveal"><div class="value-num">06</div><h3>Speed with Substance</h3><p>We move fast but never at the cost of quality. Rapid iteration and rigorous engineering standards coexist in everything we do.</p></div>
-    </div>
-  </div>
-</section>
 
-<!-- WHY DS2.0 -->
-<section class="section-padding">
-  <div class="max-w-6xl">
-    <div class="text-center reveal">
-      <p class="section-label">Why DS2.0?</p>
-      <h2 class="section-title">What Makes Us Different?</h2>
-    </div>
-    <div class="grid-2">
-      <div class="diff-card reveal">
-        <div class="card-icon" style="flex-shrink:0"><svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8"/><path d="M8 12h8"/></svg></div>
-        <div><h3 style="font-size:1.125rem;font-weight:700;margin-bottom:.5rem">AI-Only Focus</h3><p style="color:var(--muted);font-size:.9375rem;line-height:1.7">Every project, every team member, every capability is oriented around artificial intelligence and machine learning.</p></div>
+<!--Team Section-->
+<section class="team-section">
+  <div class="container center reveal">
+    <h2 class="section-title">Meet the Minds Behind DS2.0</h2>
+    <p class="section-desc">
+      A cross-functional team of AI researchers, full-stack engineers, and strategic thinkers — united by a passion for building what's next.
+    </p>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="avatar">AK</div>
+        <h3>Aisha Kapoor</h3>
+        <p class="role">CEO & Co-founder</p>
+        <p>Former ML lead at a Fortune 500. 12 years building AI systems at scale.</p>
       </div>
-      <div class="diff-card reveal">
-        <div class="card-icon" style="flex-shrink:0"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <div><h3 style="font-size:1.125rem;font-weight:700;margin-bottom:.5rem">Backed by DotStark's Engineering DNA</h3><p style="color:var(--muted);font-size:.9375rem;line-height:1.7">We inherit a decade of software development discipline, quality standards, and client-first culture.</p></div>
+
+      <div class="team-card">
+        <div class="avatar">RM</div>
+        <h3>Rohan Mehta</h3>
+        <p class="role">Chief AI Officer</p>
+        <p>PhD in NLP. Published researcher with 40+ citations in applied deep learning.</p>
       </div>
-      <div class="diff-card reveal">
-        <div class="card-icon" style="flex-shrink:0"><svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
-        <div><h3 style="font-size:1.125rem;font-weight:700;margin-bottom:.5rem">End-to-End Ownership</h3><p style="color:var(--muted);font-size:.9375rem;line-height:1.7">From strategy to deployment, monitoring, and iteration-we own the entire AI lifecycle. No handoffs, no gaps.</p></div>
+
+      <div class="team-card">
+        <div class="avatar">PN</div>
+        <h3>Priya Nair</h3>
+        <p class="role">Head of Engineering</p>
+        <p>Built distributed systems at scale for 8+ years across cloud platforms.</p>
       </div>
-      <div class="diff-card reveal">
-        <div class="card-icon" style="flex-shrink:0"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></div>
-        <div><h3 style="font-size:1.125rem;font-weight:700;margin-bottom:.5rem">Built for the Real World</h3><p style="color:var(--muted);font-size:.9375rem;line-height:1.7">We build AI systems that run in production, handle real users, and deliver real business value day after day.</p></div>
+
+      <div class="team-card">
+        <div class="avatar">DS</div>
+        <h3>Dev Sharma</h3>
+        <p class="role">Head of Product & Design</p>
+        <p>Makes complex AI workflows feel effortless. UX-first, always.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- LEADERSHIP -->
-<section class="section-padding bg-alt">
-  <div class="max-w-6xl">
-    <div class="text-center reveal">
-      <p class="section-label">Our Leadership Team</p>
-      <h2 class="section-title">Led by Experts, Driven by Purpose</h2>
-      <p class="section-desc">Our leadership brings together deep AI research, enterprise engineering, and product strategy-united by a passion for building technology that truly works.</p>
-    </div>
-    <div class="grid-2">
-      <div class="card reveal">
-        <div class="leader-avatar"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-        <h3>Sunil Sharma</h3><p class="leader-role">CEO & Founder</p>
-        <p>AI strategist with 20+ years in enterprise technology. Previously led AI initiatives at scale for Fortune 500 clients across retail, finance, and logistics.</p>
-      </div>
-      <div class="card reveal">
-        <div class="leader-avatar"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-        <h3>Yogendra Singh</h3><p class="leader-role">CTO & AI Architect</p>
-        <p>ML engineer and systems architect with a specialty in building production-grade AI pipelines and large language model applications.</p>
-      </div>
-      <div class="card reveal">
-        <div class="leader-avatar"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-        <h3>Pawan Sharma</h3><p class="leader-role">Team Lead</p>
-        <p>Expert in predictive modelling, NLP, and computer vision. PhD in Machine Learning from IIT Delhi. Leads DS2.0's research and data science practice.</p>
-      </div>
-      <div class="card reveal">
-        <div class="leader-avatar"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-        <h3>Vanshika Jangid</h3><p class="leader-role">Operation Manager</p>
-        <p>Bridges the gap between services and business outcomes. Ensures every AI solution DS2.0 delivers translates into measurable ROI for clients.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- CTA -->
-<section id="cta" class="section-padding cta-section">
-  <div class="max-w-4xl reveal">
-    <h2>Ready to Lead with <span>Intelligence?</span></h2>
-    <p style="color:var(--muted);font-size:1.125rem;max-width:40rem;margin:0 auto 1rem">DS2.0 is where AI strategy meets execution-and where ambitious businesses come to transform.</p>
-    <p style="color:var(--muted);max-width:40rem;margin:0 auto 1.5rem">Whether you're exploring AI for the first time or looking to scale an existing initiative, we bring the expertise, the technology, and the partnership mindset to make it happen.</p>
-    <p class="highlight-text">Let's build something remarkable together.</p>
-    <div class="btn-group" style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center">
-      <a href="#" class="btn btn-primary">Talk to an Expert →</a>
-      <a href="#services" class="btn btn-outline">Explore Our Services</a>
-    </div>
-  </div>
-</section>
+ <section id="contact" class="cta-section section-padding-trust">
+   <div class="container">
+     <div class="inner">
+       <h2>Build Intelligent Knowledge Systems With RAG</h2>
+       <p>Partner with Dotstark 2.0 to implement scalable RAG solutions tailored to your business needs.</p>
+       <div class="btn-group">
+         <a href="/contact-us" class="btn btn-white">Talk to an Expert</a>
+       </div>
+     </div>
+   </div>
+ </section>
+
 
 <script>
 const observer = new IntersectionObserver((entries) => {

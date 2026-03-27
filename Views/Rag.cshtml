@@ -15,7 +15,7 @@
       --primary-fg: #ffffff;
       --primary-10: hsl(228, 100%, 55%, 0.1);
       --primary-60: hsl(228, 100%, 55%, 0.6);
-      --muted: #64748b;
+      --muted: #737373;
       --border: #e2e8f0;
       --accent-bg: #f8fafc;
       --card-shadow: 0 1px 3px rgba(0,0,0,0.06);
@@ -23,7 +23,7 @@
     }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
       background: var(--bg);
       color: var(--fg);
       -webkit-font-smoothing: antialiased;
@@ -59,6 +59,19 @@
     }
     .btn-link:hover { opacity: 0.8; }
 
+
+
+    .case-body .btn-link {
+  display: inline-block;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.case-body .btn-link:hover {
+  transform: translateY(-3px);
+}
     /* ---- Grid Pattern ---- */
     .grid-pattern {
       position: absolute; inset: 0;
@@ -109,14 +122,15 @@
       padding: 10rem 0 6rem; text-align: center;
     }
     .hero h1 {
-      font-size: clamp(2.25rem, 5.5vw, 4.25rem);
-      font-weight: 600; max-width: 900px; margin: 0 auto;
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    font-weight: 700;
+      max-width: 900px; margin: 0 auto;
       text-wrap: balance;
     }
     .hero h1 span{
                     color: var(--primary);
     }
-    .hero .subtitle { max-width: 640px; margin: 1.5rem auto 0; font-size: 1.125rem; color: var(--muted); }
+    .hero .subtitle { max-width: 36rem; margin: 1.5rem auto 0; font-size: clamp(1.125rem, 2vw, 1.25rem); color: var(--muted); }
     .hero .subtext { max-width: 640px; margin: 1rem auto 0; font-size: 1rem; color: var(--muted); }
     .hero .cta-wrap { margin-top: 2.5rem; }
 
@@ -236,7 +250,7 @@
 
     /* ---- Case Study ---- */
     .case-card { overflow: hidden; max-width: 760px; margin: 0 auto; }
-    .case-bar { height: 4px; background: linear-gradient(90deg, var(--primary), var(--primary-60)); }
+    .case-bar { height: 4px; background: hsl(228.21deg 100% 55.1%); }
     .case-body { padding: 2rem 3rem; }
     .case-body h3 { font-size: 1.5rem; font-weight: 600; margin: 1rem 0; }
     .case-body p { color: var(--muted); line-height: 1.7; margin-bottom: 2rem; }
@@ -322,7 +336,6 @@
     <div class="fade-up">
             <h1>RAG Solutions For Intelligent <span>Knowledge Systems</span></h1>
       <p class="subtitle">Build AI systems that securely retrieve, understand, and generate insights from your business data.</p>
-      <p class="subtext">Dotstark 2.0 helps enterprises design and deploy RAG based solutions that enable intelligent search, knowledge automation, and accurate decision-making at scale.</p>
       <div class="cta-wrap">
         <a href="#" class="btn-primary">
           Discuss Your RAG Project          

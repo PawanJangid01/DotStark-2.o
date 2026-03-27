@@ -64,8 +64,24 @@
             @RenderBody()
         </main>
 
+ <!-- Cookie Consent -->
+<div id="cookieBanner" class="cookie-banner">
+  <div class="cookie-content">
+    <p>
+      We use cookies to enhance your experience. By continuing, you agree to our
+      <a href="/privacy-policy">Privacy Policy</a>.
+    </p>
+
+    <div class="cookie-actions">
+      <button id="cookieDecline" class="btn-outline">Decline</button>
+      <button id="cookieAccept" class="btn-primary">Allow All Cookies</button>
+    </div>
+  </div>
+</div>
+
   <!-- â•â•â• 11. FOOTER â•â•â• -->
   <footer class="footer section-padding">
+
     <div class="container">
       <div class="footer-grid">
         <div class="brand">
@@ -240,6 +256,26 @@
           });
         }
     </script>
+    <script>
+  const cookieBanner = document.getElementById("cookieBanner");
+  const acceptBtn = document.getElementById("cookieAccept");
+  const declineBtn = document.getElementById("cookieDecline");
+
+  // Check if user already accepted
+  if (!localStorage.getItem("cookieConsent")) {
+    cookieBanner.style.display = "block";
+  }
+
+  acceptBtn.addEventListener("click", () => {
+    localStorage.setItem("cookieConsent", "accepted");
+    cookieBanner.style.display = "none";
+  });
+
+  declineBtn.addEventListener("click", () => {
+    localStorage.setItem("cookieConsent", "declined");
+    cookieBanner.style.display = "none";
+  });
+</script>
 </body>
 
 </html>
