@@ -174,10 +174,29 @@ a{text-decoration:none;color:inherit}
 
 /* Grid */
 .team-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
   margin-top: 3rem;
+}
+
+/* Top row centered */
+.team-row.top {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* Bottom row 3 cards */
+.team-row.bottom {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+/* Control width for perfect centering */
+.team-row.top .team-card {
+  width: 320px;
 }
 
 /* Card */
@@ -346,37 +365,50 @@ a{text-decoration:none;color:inherit}
   <div class="container center reveal">
     <h2 class="section-title">Meet the Minds Behind DS2.0</h2>
     <p class="section-desc">
-      A cross-functional team of AI researchers, full-stack engineers, and strategic thinkers — united by a passion for building what's next.
+      A cross-functional team of AI researchers, full-stack engineers, and strategic thinkers - united by a passion for building what's next.
     </p>
-
+   
     <div class="team-grid">
+     <div class="team-row top">
       <div class="team-card">
-        <div class="avatar">AK</div>
-        <h3>Aisha Kapoor</h3>
-        <p class="role">CEO & Co-founder</p>
-        <p>Former ML lead at a Fortune 500. 12 years building AI systems at scale.</p>
+        <div class="avatar">S</div>
+        <h3>Sunil Sharma</h3>
+        <p class="role">CEO & Founder</p>
+        <p>Deep AI expertise powering cutting-edge systems. Architecting the intelligence behind every VectifyAI product.</p>
       </div>
 
       <div class="team-card">
-        <div class="avatar">RM</div>
-        <h3>Rohan Mehta</h3>
-        <p class="role">Chief AI Officer</p>
-        <p>PhD in NLP. Published researcher with 40+ citations in applied deep learning.</p>
+        <div class="avatar">Y</div>
+        <h3>Yogendra Singh</h3>
+        <p class="role">CTO & AI Head</p>
+        <p>Deep AI expertise powering cutting-edge systems. Architecting the intelligence behind every VectifyAI product.</p>
+      </div>
+
+      </div>
+
+      <div class="team-row bottom">
+      <div class="team-card">
+        <div class="avatar">P</div>
+        <h3>Pawan Sharma</h3>
+        <p class="role">Senior Technical Architect</p>
+        <p>Designs robust, scalable tech foundations that turn complex AI ideas into reliable real-world systems.</p>
       </div>
 
       <div class="team-card">
-        <div class="avatar">PN</div>
-        <h3>Priya Nair</h3>
-        <p class="role">Head of Engineering</p>
-        <p>Built distributed systems at scale for 8+ years across cloud platforms.</p>
+        <div class="avatar">N</div>
+        <h3>Nitesh Raiwar</h3>
+        <p class="role">AI Software Engineer</p>
+        <p>Builds and fine-tunes AI models that are fast, accurate, and production-ready.</p>
       </div>
 
       <div class="team-card">
-        <div class="avatar">DS</div>
-        <h3>Dev Sharma</h3>
-        <p class="role">Head of Product & Design</p>
-        <p>Makes complex AI workflows feel effortless. UX-first, always.</p>
+        <div class="avatar">V</div>
+        <h3>Vanshika Jangid</h3>
+        <p class="role">Senior Operation Manager</p>
+        <p>Keeps the engine running smoothly — bridging strategy, teams, and execution with precision.</p>
       </div>
+      </div>
+
     </div>
   </div>
 </section>

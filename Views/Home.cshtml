@@ -17,7 +17,7 @@
     align-items: center;
     background: var(--background);
     overflow: hidden;
-    padding-top: 80px;
+    padding: 80px 0 5rem 0;
 }
 
 /* VIDEO */
@@ -61,6 +61,11 @@
     font-weight: 700;
     color: var(--foreground);
     margin-bottom: 1.5rem;
+}
+@@media (min-width: 1024px) and (max-width: 1400px) {
+    .hero h1 {
+        font-size: clamp(2.25rem, 5vw, 2.75rem);
+    }
 }
 
     .hero h1 span {
