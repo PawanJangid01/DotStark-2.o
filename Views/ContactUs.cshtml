@@ -14,11 +14,11 @@
             --primary-light: rgba(0, 64, 255, 0.08);
             --primary-glow: rgba(0, 64, 255, 0.15);
             --foreground: #111111;
-            --muted: #64748b;
+            --muted1: #64748b;
             --border: #e2e8f0;
             --background: #ffffff;
             --secondary-bg: #f8fafc;
-            --radius: 12px;
+            --radius: 0.5rem;
             --font-body: 'Inter', sans-serif;
             --font-heading: 'Inter', sans-serif;
         }
@@ -35,16 +35,16 @@
         img { max-width: 100%; display: block; }
 
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 2rem;
         }
 
 
         /* ===== Hero ===== */
         .contact-hero {
             position: relative;
-            min-height: 50vh;
+            min-height: 40vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -129,14 +129,14 @@
 
         .contact-hero .subtitle {
             font-size: 1.125rem;
-            color: var(--muted);
+            color: var(--muted1);
             /* max-width: 560px; */
             margin: 0 auto;
         }
 
         /* ===== Contact Form Section ===== */
         .contact-section {
-            padding: 0 10px 40px 0;
+            padding: 0 10px 5rem 0;
         }
 
         .form-wrapper {
@@ -157,7 +157,7 @@
         }
 
         .form-header .form-intro {
-            color: var(--muted);
+            color: var(--muted1);
             font-size: 1.05rem;
         }
 
@@ -272,7 +272,7 @@
 
         /* ===== Offices Section ===== */
         .offices-section {
-            padding: 80px 0;
+            padding: 5rem 0;
             background: #ebebec;
         }
 
@@ -289,7 +289,7 @@
         }
 
         .offices-header p {
-            color: var(--muted);
+            color: var(--muted1);
             font-size: 1.05rem;
             max-width: 560px;
             margin: 0 auto;
@@ -338,7 +338,7 @@
 
         .office-card p {
             font-size: 0.875rem;
-            color: var(--muted);
+            color: var(--muted1);
             line-height: 1.6;
             margin-bottom: 8px;
         }
@@ -432,7 +432,7 @@
     }
 
     <!-- Hero Section -->
-    <section class="contact-hero">       
+    <section class="contact-hero container">       
         <div class="hero-content">
             <h1>Let's Build the <span class="text-accent">Future with AI</span></h1>
             <p class="subtitle">Connect with our experts to explore AI-driven transformation.</p>
