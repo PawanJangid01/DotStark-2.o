@@ -135,11 +135,21 @@
     .hero .cta-wrap { margin-top: 2.5rem; }
 
     /* ---- Grids ---- */
-    .grid-3 { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+        .grid-3 {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+        }
     .grid-2 { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
     .grid-4 { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
     @@media (min-width: 768px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
 
+        /* @@media (max-width: 567px) {
+            .grid-3 {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                
+            }
+        } */
     /* ---- Solution Card ---- */
         .solution-card {
             padding: 2rem;
