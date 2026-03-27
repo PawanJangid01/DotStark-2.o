@@ -1,0 +1,176 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.BlogRagArchitecture>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "MasterLayout.cshtml";
+}
+
+@section Styles {
+<style>
+    .blog-banner { background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 100%); border-bottom: 1px solid var(--border); padding: 4rem 0 0; text-align: center; }
+    .blog-banner-meta { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 1rem; }
+    .blog-banner-meta .tag { background: var(--primary-10); color: var(--primary); font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 2rem; }
+    .blog-banner h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); color: var(--foreground); max-width: 820px; margin: 0 auto 2.5rem; line-height: 1.2; }
+    .blog-banner-img { width: 100%; max-height: 420px; object-fit: cover; display: block; }
+    .blog-page { padding: 4rem 0 6rem; background: var(--background); }
+    .blog-layout { display: grid; grid-template-columns: 260px 1fr; gap: 3.5rem; align-items: start; }
+    .blog-sidebar { position: sticky; top: 5rem; }
+    .toc-box { background: var(--cool-grey); border-radius: 0.75rem; padding: 1.5rem; border: 1px solid var(--border); margin-bottom: 1.5rem; }
+    .toc-box > span { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1rem; font-weight: 600; }
+    .toc-box ul { list-style: none; display: flex; flex-direction: column; gap: 0; }
+    .toc-box ul li a { display: block; padding: 0.3rem 0.5rem 0.3rem 0.75rem; font-size: 0.8rem; color: var(--muted); border-left: 2px solid var(--border); line-height: 1.4; transition: color 0.2s, border-color 0.2s; }
+    .toc-box ul li a:hover, .toc-box ul li a.active { color: var(--primary); border-left-color: var(--primary); }
+    .blog-body { min-width: 0; }
+    .blog-body p { font-size: 0.9375rem; color: #444; line-height: 1.85; margin-bottom: 1.1rem; }
+    .blog-body h2 { font-size: 1.4rem; color: var(--foreground); margin: 2.5rem 0 0.75rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary-10); scroll-margin-top: 5rem; font-family: var(--font-heading); }
+    .blog-body h3 { font-size: 1.1rem; color: var(--foreground); margin: 1.75rem 0 0.5rem; scroll-margin-top: 5rem; font-family: var(--font-heading); }
+    .blog-body ul, .blog-body ol { list-style: none; margin: 0.5rem 0 1.25rem; display: flex; flex-direction: column; gap: 0.45rem; }
+    .blog-body ul li, .blog-body ol li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.9375rem; color: #444; line-height: 1.7; }
+    .blog-body ul li::before { content: ''; flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: #353535; margin-top: 0.58rem; }
+    .blog-body ol { counter-reset: ol-counter; }
+    .blog-body ol li::before { content: counter(ol-counter); counter-increment: ol-counter; flex-shrink: 0; width: 1.4rem; height: 1.4rem; background: var(--primary); color: #fff; border-radius: 50%; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 0.15rem; }
+    .blog-body strong { color: var(--foreground); }
+    .blog-inline-img { width: 100%; border-radius: 0.75rem; margin: 1.5rem 0; object-fit: cover; max-height: 380px; border: 1px solid var(--border); }
+    .flow-steps { display: flex; flex-direction: column; gap: 0.5rem; margin: 1rem 0 1.5rem; }
+    .flow-step { display: flex; align-items: center; gap: 1rem; background: #f0f4ff; border: 1px solid rgba(27,84,255,0.12); border-radius: 0.5rem; padding: 0.75rem 1rem; font-size: 0.9rem; color: var(--foreground); }
+    .flow-step .step-num { background: var(--primary); color: #fff; width: 1.75rem; height: 1.75rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+    @@media (max-width: 960px) { .blog-layout { grid-template-columns: 1fr; } .blog-sidebar { position: static; } }
+</style>
+}
+
+<div class="blog-banner">
+    <img src="/images/ragbig.png" alt="RAG Architecture" class="blog-banner-img" />
+</div>
+
+<main class="blog-page">
+    <div class="container">
+        <div class="blog-layout">
+            <aside class="blog-sidebar">
+                <div class="toc-box">
+                    <span>Table of Contents</span>
+                    <ul>
+                        <li><a href="#problem">The Problem with LLMs</a></li>
+                        <li><a href="#what-is-rag">What is RAG Architecture?</a></li>
+                        <li><a href="#data-ingestion">Data Ingestion</a></li>
+                        <li><a href="#chunking">Chunking</a></li>
+                        <li><a href="#embeddings">Embeddings</a></li>
+                        <li><a href="#vector-db">Vector Database</a></li>
+                        <li><a href="#query">Query Processing</a></li>
+                        <li><a href="#llm-gen">LLM Generation</a></li>
+                        <li><a href="#flow">End-to-End RAG Flow</a></li>
+                        <li><a href="#limitations">Limitations of RAG</a></li>
+                        <li><a href="#applications">Real-World Applications</a></li>
+                        <li><a href="#future">The Future of RAG</a></li>
+                    </ul>
+                </div>
+            </aside>
+            <article class="blog-body" id="content">
+                <h2 id="problem">The Problem with LLMs (And Why RAG Exists)</h2>
+                <p>Large Language Models like ChatGPT and GPT-4 are incredibly powerful- but they come with a key limitation: <strong>they don't have access to your real-time or private data.</strong></p>
+                <ul>
+                    <li><strong>Outdated Knowledge</strong>- Models are trained on past data and may not know recent updates.</li>
+                    <li><strong>No Private Context</strong>- They can't access your company documents, PDFs, or databases.</li>
+                    <li><strong>Hallucinations</strong>- Sometimes they generate confident but incorrect answers.</li>
+                </ul>
+                <p>This is where Retrieval-Augmented Generation (RAG) becomes essential. Instead of relying only on memory, RAG allows AI to look up information before answering.</p>
+
+                <h2 id="what-is-rag">What is RAG Architecture?</h2>
+                <p>RAG is an architecture that combines two systems:</p>
+                <ul>
+                    <li><strong>Retriever</strong>- Finds relevant information</li>
+                    <li><strong>Generator (LLM)</strong>- Uses that information to generate answers</li>
+                </ul>
+                <p>Think of RAG like an open-book exam: without RAG you answer from memory, with RAG you first check the book, then answer. This makes responses more accurate, grounded, and reliable.</p>
+
+                <h2 id="data-ingestion">1. Data Ingestion (Foundation of Everything)</h2>
+                <p>Before building a RAG system, you need data- PDFs, websites, databases. What actually happens here:</p>
+                <ul>
+                    <li>Text is extracted from files</li>
+                    <li>Noise is removed (headers, footers, irrelevant content)</li>
+                    <li>Data is standardized into a consistent format</li>
+                </ul>
+                <p>If this step is weak, your entire RAG system will produce poor results.</p>
+
+                <h2 id="chunking">2. Chunking (Breaking Data Intelligently)</h2>
+                <p>Since LLMs cannot process extremely long documents at once, we split them into smaller pieces called chunks. Poor chunking breaks meaning- splitting "The company's revenue increased due to strong Q4 sales" into two chunks loses the relationship between cause and effect.</p>
+                <ul>
+                    <li><strong>Small chunks</strong>- Better retrieval but less context</li>
+                    <li><strong>Large chunks</strong>- More context but less precision</li>
+                    <li><strong>Advanced techniques</strong>- Overlapping chunks, semantic chunking (based on meaning, not size)</li>
+                </ul>
+                <img src="/images/ragbig.png" alt="RAG Chunking Diagram" class="blog-inline-img" />
+
+                <h2 id="embeddings">3. Embeddings (Turning Text into Meaningful Numbers)</h2>
+                <p>Embeddings convert text into vectors (numerical representations). These vectors capture semantic meaning, not just keywords- "car" and "vehicle" will have similar vectors, while "car" and "banana" will be far apart.</p>
+                <ul>
+                    <li>Popular tools: OpenAI Embeddings, Sentence Transformers</li>
+                    <li>This enables semantic search instead of keyword search</li>
+                </ul>
+
+                <h2 id="vector-db">4. Vector Database (Where Knowledge is Stored)</h2>
+                <p>Once embeddings are created, they are stored in a vector database. It allows fast retrieval of "similar" vectors using techniques like cosine similarity and Euclidean distance.</p>
+                <ul>
+                    <li>Popular options: FAISS, Pinecone</li>
+                    <li>Think of it as a Google search engine, but for meaning instead of keywords</li>
+                </ul>
+
+                <h2 id="query">5. Query Processing (Understanding the User Question)</h2>
+                <p>When a user asks a question, the system converts the query into an embedding, searches the vector database, and retrieves the top relevant chunks. The system doesn't "understand" the query like a human- it finds similar meaning in vector space.</p>
+
+                <h2 id="llm-gen">6. LLM Generation (Final Answer Creation)</h2>
+                <p>The retrieved chunks are passed into an LLM like GPT-4. The LLM reads the retrieved context, combines it with the query, and generates a natural language response. The answer is now grounded in real data, more accurate, and less hallucinated.</p>
+
+                <h2 id="flow">End-to-End RAG Flow</h2>
+                <div class="flow-steps">
+                    <div class="flow-step"><span class="step-num">1</span> Load documents</div>
+                    <div class="flow-step"><span class="step-num">2</span> Split into chunks</div>
+                    <div class="flow-step"><span class="step-num">3</span> Convert into embeddings</div>
+                    <div class="flow-step"><span class="step-num">4</span> Store in vector DB</div>
+                    <div class="flow-step"><span class="step-num">5</span> User asks query</div>
+                    <div class="flow-step"><span class="step-num">6</span> Retrieve relevant chunks</div>
+                    <div class="flow-step"><span class="step-num">7</span> LLM generates final answer</div>
+                </div>
+                <p>Each step contributes to accuracy- skip one, and performance drops.</p>
+
+                <h2 id="limitations">Limitations of RAG</h2>
+                <ul>
+                    <li><strong>Context Loss Due to Chunking</strong>- Splitting documents can break meaning and relationships.</li>
+                    <li><strong>Similarity ≠ Correctness</strong>- Just because something is "similar" doesn't mean it's the right answer.</li>
+                    <li><strong>Embedding Dependency</strong>- If embeddings are weak, retrieval quality suffers.</li>
+                    <li><strong>Complex Infrastructure</strong>- You need pipelines, databases, and indexing strategies, increasing development and maintenance effort.</li>
+                </ul>
+
+                <h2 id="applications">Real-World Applications</h2>
+                <ul>
+                    <li><strong>Chatbots</strong>- Customer support where AI answers based on company documents instead of guessing.</li>
+                    <li><strong>Knowledge Assistants</strong>- Employees can query internal documentation instantly.</li>
+                    <li><strong>Legal Systems</strong>- Helps lawyers search large contracts without missing context.</li>
+                    <li><strong>E-commerce</strong>- Provides accurate product answers based on catalogs and specs.</li>
+                </ul>
+
+                <h2 id="future">The Future of RAG</h2>
+                <p>RAG is evolving into more advanced systems:</p>
+                <ul>
+                    <li>Hybrid search (keyword + semantic)</li>
+                    <li>Graph-based retrieval</li>
+                    <li>Multi-modal RAG (text + images)</li>
+                    <li>Reasoning-based systems like PageIndex</li>
+                </ul>
+                <p>RAG Architecture is a major step toward making AI truly useful in real-world applications- transforming AI from a guessing machine into a knowledge-grounded assistant. But as we've seen, it's still evolving.</p>
+            </article>
+        </div>
+    </div>
+</main>
+
+<script>
+    const headings = document.querySelectorAll('.blog-body h2[id], .blog-body h3[id]');
+    const tocLinks = document.querySelectorAll('.toc-box a');
+    const tocObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                tocLinks.forEach(link => { link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id); });
+            }
+        });
+    }, { rootMargin: '-15% 0px -75% 0px' });
+    headings.forEach(h => tocObserver.observe(h));
+</script>

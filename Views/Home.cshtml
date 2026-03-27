@@ -137,12 +137,38 @@
     }
 }
 
+        .testi-left svg {
+            margin-left: 2.3rem;
+        }
+
 @@media (max-width: 1023px) {
     .ai-viz-wrapper {
         display: none;
     }
 }
 
+        @@media (max-width: 992px) {
+            .testi-left svg {
+                margin-left: 2rem;
+                margin-bottom: 30px;
+            }
+        }
+
+        @@media (max-width: 567px) {
+            .hero-video {
+                display: none;
+            }
+        }
+        @@media (max-width: 498px) {
+            .testi-left svg {
+                margin-left: 3rem;
+               
+            }
+
+            .testi-slider-wrap{
+                gap: 0.3rem;
+            }
+        }
 /* ══════════════════════════════════════════════
    2. TRUST
    ══════════════════════════════════════════════ */
@@ -728,9 +754,7 @@
     /* min-height: 280px; */
     overflow: hidden;
 }
-.testi-left svg{
-    margin-left:1rem;
-}
+
 /* Each slide stacked; only .active is visible */
 .testi-slide {
     position: absolute;
@@ -1205,7 +1229,7 @@
 
         <div class="btn-group">
           <a href="/contact-us" class="btn btn-primary">Talk to an Expert</a>
-          <a href="/ai-demo" class="btn btn-outline">View Demo</a>
+          <a href="/demo" class="btn btn-outline">View Demo</a>
         </div>
       </div>
 
@@ -1297,16 +1321,16 @@
         <div>
           <h2>Real Solutions, Measurable Impact</h2>
         </div>
-        <a href="/insight" class="link icon-arrow">View Case Studies</a>
+        @* <a href="/insight" class="link icon-arrow">View Case Studies</a> *@
       </div>
       <div class="cases-grid">
           <a href="/reclass-ai" class="case-card-link">
         <div class="case-card">
           <div class="case-image">
-           <img src="/images/ragai.png" alt="AI Customer Insights Platform">
+           <img src="/images/ragai.jpg" alt="AI Customer Insights Platform">
          </div>
           <div class="card-body">
-                        <span class="tag">Artificial Intelligence</span>
+                        <span class="tag">AI</span>
             <h3>Smart Learning Intelligence</h3>
             <p>Converts lecture videos into structured, searchable learning with AI tutor support and significantly faster student revision.</p>
           </div>
@@ -1330,7 +1354,7 @@
           <img src="/images/seo.png" alt="AI Customer Insights Platform">
         </div>
           <div class="card-body">
-                        <span class="tag">SEO Agent </span>
+                        <span class="tag">AI Agent </span>
             <h3>AI SEO Intelligence</h3>
             <p>All-in-one AI SEO platform that automates audits, delivers real-time insights, and accelerates optimization with intelligent recommendations.</p>
           </div>
@@ -1638,9 +1662,10 @@
         <div>
           <h2>Thought Leadership</h2>
         </div>
-        <a href="#" class="link icon-arrow">Explore Insights</a>
+        @* <a href="#" class="link icon-arrow">Explore Insights</a> *@
       </div>
       <div class="posts-grid">
+<a href="/blog-rag-architecture" class="case-card-link">
         <article class="post-card">
              <div class="case-image">
     <img src="/images/aicode.jpg" alt="AI Customer Insights Platform">
@@ -1650,6 +1675,8 @@
             <h3>AI Agents for Enterprise Websites</h3>
           </div>
         </article>
+        </a>
+        <a href="/blog-page-index" class="case-card-link">
         <article class="post-card">
             <div class="case-image">
     <img src="/images/aira.webp" alt="Kentico AI Aira">
@@ -1659,6 +1686,8 @@
             <h3>Xperience by Kentico Migration with Aira</h3>
           </div>
         </article>
+        </a>
+        <a href="/blog-ai-agent" class="case-card-link">
         <article class="post-card">
              <div class="case-image">
     <img src="/images/data.jpg" alt="AI Customer Insights Platform">
@@ -1668,6 +1697,7 @@
             <h3>Building Data Platforms for AI</h3>
           </div>
         </article>
+        </a>
       </div>
     </div>
   </section>

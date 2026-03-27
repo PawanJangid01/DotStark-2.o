@@ -20,7 +20,7 @@
       --primary-color: hsl(228, 100%, 55%);
       --primary-light: hsl(228, 100%, 72%);
       --primary-bg: hsl(228, 100%, 96%);
-      --radius: 0.75rem;
+      --radius: 0.5rem;
     }
 
     body {
@@ -121,8 +121,8 @@
       margin-bottom: 2rem;
     }
     .hero h1 {
-      font-size: clamp(2.25rem, 5vw, 4.5rem);
-      font-weight: 800;
+      font-size: clamp(2.25rem, 5vw, 3.75rem);
+      font-weight: 700;
       line-height: 1.05;
       letter-spacing: -0.025em;
       margin-bottom: 1.5rem;
@@ -142,7 +142,7 @@
       margin-bottom: 1rem;
     }
     .section-title {
-      font-size: clamp(1.875rem, 3vw, 3rem);
+      font-size: clamp(1.5rem, 2.5vw, 2.25rem);
       font-weight: 700;
       color: var(--text-bright);
       text-wrap: balance;
@@ -237,6 +237,7 @@
     .mid-cta {
       padding: 5rem 0;
       text-align: center;
+      background-color: #ebebec;
       
     }
     .mid-cta h2 { font-size: clamp(1.5rem, 2.5vw, 2.25rem); font-weight: 700; color: var(--text-bright); margin-bottom: 1rem; text-wrap: balance; }
@@ -341,13 +342,13 @@
     
 /* ===== CASE STUDY ===== */
 .case-study{padding:5rem 0;}
-.case-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius) ;box-shadow:0 0 20px -8px var(--primary-glow)}
+.case-card{border:1px solid var(--border);border-radius:var(--radius) ;box-shadow:0 0 20px -8px var(--primary-glow)}
 .case-card .label-row{display:flex;align-items:center;gap:8px;margin-bottom:24px}
 .case-card .label-row svg{width:20px;height:20px;stroke:var(--primary);fill:none;stroke-width:2}
 .case-card h2{font-size:clamp(1.5rem,3vw,2.5rem);font-weight:800;letter-spacing:-0.01em;margin-bottom:24px}
 .case-card p{font-size:1.125rem;color:var(--text-dim);max-width:720px;margin-bottom:32px}
 .case-card { overflow: hidden; max-width: 760px; margin: 0 auto; }
-    .case-bar { height: 8px; background: linear-gradient(90deg, hsl(228, 100%, 55%), hsl(228, 100%, 55%, 0.6)); }
+    .case-bar { height: 4px; background: hsl(228.21deg 100% 55.1%); }
     .case-body { padding: 2rem 3rem; }
     .case-body h3 { font-size: 1.5rem; font-weight: 600; margin: 1rem 0; }
     .case-body p { color: var(--muted); line-height: 1.7; margin-bottom: 2rem; }
@@ -380,6 +381,18 @@
     background: var(--bg);
     transition: box-shadow 0.3s;
 }
+
+.case-body .btn-link {
+  display: inline-block;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.case-body .btn-link:hover {
+  transform: translateY(-3px);
+}
   </style>
 }
 
@@ -393,7 +406,6 @@
       </div>
       <h1 class="reveal">Automate Smarter Operate Faster <span class="gradient-text">Scale Without Limits</span></h1>
       <p class="sub reveal">Harness the power of Intelligent Automation to eliminate manual effort, streamline complex workflows, and drive consistent results across your entire organization.</p>
-      <p class="sub2 reveal">DotStark 2.0 delivers end-to-end intelligent automation solutions-combining RPA, AI, and process orchestration to transform how your business operates.</p>
       <div class="reveal">
         <a href="#" class="btn btn-primary">Schedule a Free Consultation</a>
       </div>
@@ -401,7 +413,7 @@
   </section>
 
   <!-- SOLUTIONS -->
-  <section class="section-padding" style="padding-top:5rem;padding-bottom:5rem">
+  <section class="section-padding" style="padding-top:0;padding-bottom:5rem">
     <div style="max-width:72rem;margin:0 auto">
       <div class="reveal" style="text-align:center;margin-bottom:4rem">
         <h2 class="section-title">Automation Solutions Built for Your Business</h2>
@@ -474,7 +486,7 @@
     <div class="reveal" style="max-width:48rem;margin:0 auto">
       <h2>Ready To Automate Your Most Critical Business Processes?</h2>
       <p>Let DotStark 2.0 identify the highest-impact automation opportunities in your organization and build a roadmap tailored to your goals.</p>
-      <a href="#" class="btn btn-primary">Let's Build Your Automation Roadmap </a>
+        <a href="'/contact-us" class="btn btn-primary">Let's Build Your Automation Roadmap </a>
     </div>
   </section>
 
@@ -524,8 +536,7 @@
         <p>A mid-sized financial services company was struggling with manual invoice processing, compliance reporting, and customer onboarding — all handled through siloed, labor-intensive workflows.</p>
         <p style="margin-bottom:2rem">DotStark 2.0 deployed a combined RPA and IDP solution that automated document intake, data extraction, validation, and downstream system updates. Within 90 days, the firm reduced processing time by 70%, eliminated data entry errors, and freed over 1,200 hours per month of staff capacity.</p>
         <a href="#" class="btn-link">
-          Read More
-          <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          Read More          
         </a>
       </div>
     </div>

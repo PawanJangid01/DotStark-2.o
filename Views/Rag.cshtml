@@ -15,24 +15,24 @@
       --primary-fg: #ffffff;
       --primary-10: hsl(228, 100%, 55%, 0.1);
       --primary-60: hsl(228, 100%, 55%, 0.6);
-      --muted: #64748b;
+      --muted: #737373;
       --border: #e2e8f0;
       --accent-bg: #f8fafc;
       --card-shadow: 0 1px 3px rgba(0,0,0,0.06);
-      --radius: 0.75rem;
+      --radius: 0.5rem;
     }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
       background: var(--bg);
       color: var(--fg);
       -webkit-font-smoothing: antialiased;
       line-height: 1.6;
     }
 
-    h1,h2,h3,h4,h5,h6 { letter-spacing: -0.03em; line-height: 1.15; }
+    h1,h2,h3,h4,h5,h6 { letter-spacing: -0.03em; line-height: 1.3; }
 
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
 
     /* ---- Buttons ---- */
     .btn-primary {
@@ -59,6 +59,19 @@
     }
     .btn-link:hover { opacity: 0.8; }
 
+
+
+    .case-body .btn-link {
+  display: inline-block;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.case-body .btn-link:hover {
+  transform: translateY(-3px);
+}
     /* ---- Grid Pattern ---- */
     .grid-pattern {
       position: absolute; inset: 0;
@@ -109,14 +122,15 @@
       padding: 10rem 0 6rem; text-align: center;
     }
     .hero h1 {
-      font-size: clamp(2.25rem, 5.5vw, 4.25rem);
-      font-weight: 600; max-width: 900px; margin: 0 auto;
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    font-weight: 700;
+      max-width: 900px; margin: 0 auto;
       text-wrap: balance;
     }
     .hero h1 span{
                     color: var(--primary);
     }
-    .hero .subtitle { max-width: 640px; margin: 1.5rem auto 0; font-size: 1.125rem; color: var(--muted); }
+    .hero .subtitle { max-width: 36rem; margin: 1.5rem auto 0; font-size: clamp(1.125rem, 2vw, 1.25rem); color: var(--muted); }
     .hero .subtext { max-width: 640px; margin: 1rem auto 0; font-size: 1rem; color: var(--muted); }
     .hero .cta-wrap { margin-top: 2.5rem; }
 
@@ -165,14 +179,14 @@
             initial-value: 270deg;
         }
 
-        .solution-card::after {
+        /* .solution-card::after {
             content: "";
             position: absolute;
             inset: 2px;
             /* background: #fff; */
             border-radius: 0.5rem;
             z-index: 0;
-        }
+        } */
 
         .solution-card > * {
             position: relative;
@@ -236,7 +250,7 @@
 
     /* ---- Case Study ---- */
     .case-card { overflow: hidden; max-width: 760px; margin: 0 auto; }
-    .case-bar { height: 4px; background: linear-gradient(90deg, var(--primary), var(--primary-60)); }
+    .case-bar { height: 4px; background: hsl(228.21deg 100% 55.1%); }
     .case-body { padding: 2rem 3rem; }
     .case-body h3 { font-size: 1.5rem; font-weight: 600; margin: 1rem 0; }
     .case-body p { color: var(--muted); line-height: 1.7; margin-bottom: 2rem; }
@@ -313,6 +327,11 @@
 
     /* Arrow icon inline */
     .arrow-icon { display: inline-block; width: 16px; height: 16px; }
+
+        .rag-solution-section,
+        .our-work-section {
+            padding:0 0 5rem 0;
+        }
   </style>
   }
 
@@ -322,9 +341,8 @@
     <div class="fade-up">
             <h1>RAG Solutions For Intelligent <span>Knowledge Systems</span></h1>
       <p class="subtitle">Build AI systems that securely retrieve, understand, and generate insights from your business data.</p>
-      <p class="subtext">Dotstark 2.0 helps enterprises design and deploy RAG based solutions that enable intelligent search, knowledge automation, and accurate decision-making at scale.</p>
       <div class="cta-wrap">
-        <a href="#" class="btn-primary">
+                <a href="/contact-us" class="btn-primary">
           Discuss Your RAG Project          
         </a>
       </div>
@@ -333,7 +351,7 @@
 </section>
 
 <!-- 2. RAG SOLUTIONS -->
-<section class="section">
+<section class="section rag-solution-section">
   <div class="container">
     <div class="section-header fade-up">
       <h2>Our RAG Solutions</h2>
@@ -395,7 +413,7 @@
     </div>
 
     <h3 class="fade-up" style="text-align:center;font-size:1.375rem;font-weight:600;margin-bottom:2rem;">Use Cases Across Industries</h3>
-    <div class="grid-3" style="margin-bottom:4rem;">
+    <div class="grid-3">
       <div class="card industry-card">
         <div class="icon-box icon-box-sm">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg>
@@ -461,7 +479,7 @@
 </section>
 
 <!-- 4. OUR WORK -->
-<section class="section">
+<section class="section our-work-section">
   <div class="container">
     <div class="section-header fade-up">
       <h2>Our Work</h2>
@@ -488,7 +506,7 @@
       <div>
         <h2>RAG 365 – Our AI Knowledge Platform</h2>
         <p>RAG 365 is our enterprise-grade AI platform that enables organizations to quickly deploy intelligent knowledge systems without building from scratch.</p>
-        <a href="#" class="btn-primary">
+        <a href="/products" class="btn-primary">
           Explore RAG 365
           
         </a>
