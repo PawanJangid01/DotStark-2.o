@@ -83,7 +83,7 @@ a{text-decoration:none;color:inherit}
 .reveal.visible{opacity:1;transform:translateY(0);filter:blur(0)}
 
 @@media(max-width:768px){
-  .section-padding{padding:3rem 1rem}
+  .section-padding{padding:3rem 2rem}
   .grid-2,.grid-3{grid-template-columns:1fr}
   .hero{min-height:auto;padding:6rem 1rem 4rem}
   .btn{padding:.75rem 1.5rem;font-size:.9375rem}
@@ -135,7 +135,7 @@ a{text-decoration:none;color:inherit}
 
 /* Container */
 .container {
-  max-width: 72rem;
+  max-width: 1280px;
   margin: 0 auto;
 }
 
@@ -182,24 +182,25 @@ a{text-decoration:none;color:inherit}
 }
 
 /* Top row centered */
-.team-row.top {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-}
-
+        .team-row.top {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
 /* Bottom row 3 cards */
-.team-row.bottom {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-}
+        .team-row.bottom {
+            display: grid;
+            /* Automatically switches from 1 column to 3 columns based on space */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
 
 /* Control width for perfect centering */
-.team-row.top .team-card {
-  width: 320px;
-}
-
+        .team-row.top .team-card {
+            width: 100%;
+            max-width: 320px;
+        }
 /* Card */
 .team-card {
   background: #fafafa;
@@ -214,7 +215,80 @@ a{text-decoration:none;color:inherit}
   border-color: rgba(79, 70, 229, 0.4);
   transform: translateY(-5px);
 }
+        @@media (max-width: 1024px) {
+            .team-row.bottom
 
+        {
+            /* Optional: logic to center the grid items if they wrap to a new line */
+            justify-content: center;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+        }
+
+        }
+
+        @@media (max-width: 640px) {
+            .team-grid
+
+        {
+            gap: 1.5rem;
+            padding: 0;
+        }
+
+        .team-card {
+            padding: 1.5rem;
+        }
+
+        }
+
+        /* Container */
+        .team-grid {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centers the rows if they don't fill the full width */
+            gap: 2rem;
+            margin-top: 3rem;
+            width: 100%;
+        }
+
+        /* Rows */
+        .team-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Centers cards within the row */
+            gap: 2rem;
+            width: 100%;
+        }
+
+        /* Identical Card Sizing for ALL cards */
+        .team-card {
+            /* Use flex-basis to set the ideal width and allow shrinking on mobile */
+            flex: 0 1 320px;
+            min-width: 280px; /* Prevents cards from getting too skinny */
+            background: #fafafa;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-sizing: border-box; /* Ensures padding doesn't add to the width */
+        }
+
+            /* Hover Effect */
+            .team-card:hover {
+                border-color: rgba(79, 70, 229, 0.4);
+                transform: translateY(-5px);
+            }
+
+        /* Mobile Tweak */
+        @@media (max-width: 640px) {
+            .team-card
+
+        {
+            flex: 1 1 100%; /* On very small screens, let cards take full width */
+            max-width: 400px;
+        }
+
+        }
 /* Avatar */
 .avatar {
   width: 4rem;
@@ -256,12 +330,12 @@ a{text-decoration:none;color:inherit}
   .team-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-}
+  }
 
 @@media (max-width: 768px) {
   .team-grid {
-    grid-template-columns: 1fr;
-  }
+                grid-template-columns: 1fr;
+            }
 }
 
 .avatar {

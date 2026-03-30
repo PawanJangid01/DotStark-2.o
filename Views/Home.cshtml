@@ -1075,7 +1075,8 @@
         margin-bottom: 0.5rem;
     }
 
-    .post-card:hover h3 {
+    .post-card:hover h3,
+    .case-card:hover h3{
         color: var(--primary);
 
 
@@ -1221,6 +1222,15 @@
             font-size: 14px;
             line-height: 1.6;
             color: #444;
+        }
+        @@media (max-width: 567px) {
+            .hero .btn
+
+        {
+            flex: 1;
+            white-space: nowrap;
+        }
+
         }
         </style>
     }
