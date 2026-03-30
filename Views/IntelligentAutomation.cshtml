@@ -366,7 +366,7 @@
 .case-card .label-row{display:flex;align-items:center;gap:8px;margin-bottom:24px}
 .case-card .label-row svg{width:20px;height:20px;stroke:var(--primary);fill:none;stroke-width:2}
 .case-card h2{font-size:clamp(1.5rem,3vw,2.5rem);font-weight:800;letter-spacing:-0.01em;margin-bottom:24px}
-.case-card p{font-size:1.125rem;color:var(--text-dim);max-width:720px;margin-bottom:32px}
+.case-card p{font-size:1rem;color:var(--text-dim);max-width:720px;margin-bottom:32px}
 .case-card { overflow: hidden; max-width: 760px; margin: 0 auto; }
     .case-bar { height: 4px; background: hsl(228.21deg 100% 55.1%); }
     .case-body { padding: 2rem 3rem; }
@@ -470,7 +470,32 @@
         </div>
 
         <div class="surface-card glow-border solution-card reveal">
-          <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg></div>
+          <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" 
+     width="24" height="24" 
+     viewBox="0 0 24 24" 
+     fill="none" 
+     stroke="currentColor" 
+     stroke-width="2" 
+     stroke-linecap="round" 
+     stroke-linejoin="round">
+
+  <!-- Start Node -->
+  <circle cx="4" cy="12" r="2"></circle>
+
+  <!-- Middle Node -->
+  <circle cx="12" cy="6" r="2"></circle>
+  <circle cx="12" cy="18" r="2"></circle>
+
+  <!-- End Node -->
+  <circle cx="20" cy="12" r="2"></circle>
+
+  <!-- Connections -->
+  <line x1="6" y1="12" x2="10" y2="6"></line>
+  <line x1="6" y1="12" x2="10" y2="18"></line>
+  <line x1="14" y1="6" x2="18" y2="12"></line>
+  <line x1="14" y1="18" x2="18" y2="12"></line>
+
+</svg></div>
           <h3>Business Process Orchestration</h3>
           <p class="desc">Go beyond individual task automation with end-to-end process orchestration. We coordinate people, systems, and bots for seamless workflows.</p>
           <p class="desc">From approval workflows to multi-step operational processes-every step runs on time and in sync.</p>

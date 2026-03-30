@@ -1086,3 +1086,30 @@ img {
         justify-content: flex-end;
     }
 }
+
+.privacy-box {
+    display: flex;
+    align-items: center;
+}
+
+.privacy-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+    .privacy-link svg {
+        color: #1b54ff;
+    }
+
+    .privacy-link strong {
+        color: #2563eb; /* blue highlight */
+    }
+
+    .privacy-link:hover {
+        opacity: 0.8;
+    }

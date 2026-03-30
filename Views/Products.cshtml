@@ -353,6 +353,210 @@ section {
 #cta{
     padding:0 0 5rem 0;
 }
+
+.hero-image {
+  width: 100%;
+  /* border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease; */
+}
+
+
+
+
+    /* ── Section: Impact ── */
+    .impact-section { padding: 80px 0 96px; }
+
+    .section-badge {
+      display: inline-block; padding: 6px 16px; border-radius: 9999px;
+      background: rgba(59,108,246,.1); color: var(--accent);
+      font-size: 0.8125rem; font-weight: 500; margin-bottom: 16px;
+    }
+
+    .section-header { text-align: center; margin-bottom: 64px; }
+    .section-header h1,
+    .section-header h2 { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.02em; color: #1a2240; }
+    .section-header p { color: #6b7280; max-width: 600px; margin: 16px auto 0; font-size: 1rem; }
+
+    .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+
+    .impact-card {
+      border: 1px solid #e5e7eb; border-radius: 0.75rem;
+      padding: 32px; background: #ffffff;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .impact-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(26,34,64,.1), 0 8px 10px -6px rgba(26,34,64,.08); }
+
+    .impact-icon {
+      width: 48px; height: 48px; border-radius: 10px;
+      background: rgba(59,108,246,.1); display: flex;
+      align-items: center; justify-content: center; margin-bottom: 20px;
+    }
+    .impact-icon svg { width: 24px; height: 24px; color: #3b6cf6; stroke: #3b6cf6; fill: none; }
+
+    .impact-card h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 12px; }
+    .impact-card p { font-size: 0.875rem; color: #6b7280; line-height: 1.7; }
+
+/* ── Section: Pricing ── */
+.pricing-section {
+  padding: 80px 0 96px;
+  background: #f8f9fb;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.pricing-section .plan-card {
+  position: relative;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;;
+  padding: 32px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pricing-section .plan-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(26,34,64,.1), 0 8px 10px -6px rgba(26,34,64,.08);
+}
+
+.plan-card.highlighted {
+  background: #1b54ff;
+  color: #ffffff;
+  box-shadow: 0 10px 25px -5px rgba(26,34,64,.1), 0 8px 10px -6px rgba(26,34,64,.08);
+}
+
+.pricing-section .plan-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #3b6cf6;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 16px;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+.pricing-section .plan-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.pricing-section .plan-card .plan-desc {
+  font-size: 0.875rem;
+  margin-bottom: 24px;
+  color: #6b7280;
+}
+
+.plan-card.highlighted .plan-desc {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.plan-features {
+  list-style: none;
+  flex: 1;
+  margin-bottom: 32px;
+}
+
+.plan-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.plan-card.highlighted .plan-features li {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.pricing-section .check-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.pricing-section.check-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: #3b6cf6;
+  fill: none;
+}
+
+.plan-card.highlighted .check-icon svg {
+  stroke: #ffffff;
+}
+
+.plan-price {
+  margin-bottom: 24px;
+}
+
+.plan-price .amount {
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.plan-price .label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-left: 4px;
+}
+
+.pricing-section .plan-card.highlighted .plan-price .label {
+  color: #ffff;
+}
+
+.pricing-section .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.pricing-section .btn-primary {
+  background: #1b54ff;
+  color: #ffffff;
+}
+
+.pricing-section .btn-primary:hover {
+  opacity: 0.9;
+}
+
+.pricing-section .btn-accent {
+    background: #ffffff;
+    color: #000000;
+}
+
+.pricing-section.btn-accent:hover {
+  opacity: 0.9;
+}
+
+/* Responsive */
+@@media (max-width: 768px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 </style>
 }
 
@@ -374,8 +578,8 @@ section {
   <div class="grid-2" style="align-items:start">
     <div>
       <h2 class="hero-heading reveal reveal-delay-1"><span class="gradient-text">RAG</span>365</h2>
-      <p class="reveal reveal-delay-1" style="font-size:1.25rem;font-weight:600;margin-bottom:1rem">Stop Searching. Start Asking.</p>
-      <p class="muted reveal reveal-delay-2" style="margin-bottom:2rem">RAG365 converts your entire internal knowledge base-contracts, memos, PDFs, policies-into a private AI assistant that answers questions in seconds, with source citations, zero hallucinations, and zero public web exposure.</p>
+      <p class="reveal reveal-delay-1" style="font-size:1.25rem;font-weight:600;margin-bottom:1rem">Make Your Data Instantly Accessible and Actionable </p>
+      <p class="muted reveal reveal-delay-2" style="margin-bottom:2rem">Organizations sit on vast amounts of data, documents, CMS content, and internal knowledge but accessing it is slow and inefficient. RAG 365 enables teams and customers to interact with your data using natural language, delivering accurate, contextual answers instantly.</p>
       <div class="btn-group reveal reveal-delay-3" style="justify-content:flex-start">
         <a href="/contact-us" class="btn btn-primary">RAG365 Demo</a>
       </div>
@@ -441,6 +645,42 @@ section {
 </div>
 </section>
 
+
+<!-- Real Business Impact -->
+  <section class="impact-section">
+    <div class="container">
+      <div class="section-header">
+        <h1>Real Business Impact</h1>
+      </div>
+      <div class="impact-grid">
+
+        <div class="impact-card">
+          <div class="impact-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3>Faster Decisions, Backed by Real Data</h3>
+          <p>Get accurate answers instantly instead of searching across systems. Teams can make decisions up to 3x faster, with access to real-time, context-aware insights.</p>
+        </div>
+
+        <div class="impact-card">
+          <div class="impact-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>Less Searching, More Execution</h3>
+          <p>Reduce time spent on manual knowledge lookup by up to 70%, allowing teams to focus on execution instead of navigating fragmented data.</p>
+        </div>
+
+        <div class="impact-card">
+          <div class="impact-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Consistent, High-Quality Responses Every Time</h3>
+          <p>Deliver reliable, context-aware answers with up to 80% improvement in response accuracy, ensuring consistency across teams and customer interactions.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
 <!-- RAG365 HOW IT WORKS -->
 
 <section id="process" class="process section-padding">
@@ -542,8 +782,67 @@ section {
 </div>
 </section>
 
-<!-- MID CTA -->
+<!-- Subscription Plans -->
+  <section class="pricing-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Flexible Solutions, Designed Around Your Business</h2>
+        <p>Choose the right level of engagement based on your goals, scale, and complexity. Each plan is designed to deliver real business outcomes—not just features.</p>
+      </div>
+      <div class="pricing-grid">
 
+        <!-- Starter -->
+        <div class="plan-card">
+          <h3>Starter Solution</h3>
+          <p class="plan-desc">For businesses exploring AI-powered knowledge and automation</p>
+          <ul class="plan-features">
+            <li><span style="color: rgb(0 0 0);">✓</span></span>Initial discovery and use-case definition</li>
+            <li><span style="color: rgb(0 0 0);">✓</span></span>Basic RAG implementation with limited data sources</li>
+            <li><span style="color: rgb(0 0 0);">✓</span></span>Standard integrations (website or internal tools)</li>
+            <li><span style="color: rgb(0 0 0);">✓</span></span>Foundational conversational workflows</li>
+            <li><span style="color: rgb(0 0 0);">✓</span></span>Deployment and basic support</li>
+          </ul>
+          <div class="plan-price"><span class="amount">$123</span><span class="label">/ starting from</span></div>
+          <button class="btn btn-primary">Get Started</button>
+        </div>
+
+        <!-- Growth (Highlighted) -->
+        <div class="plan-card highlighted">
+          <h3>Growth Solution</h3>
+          <p class="plan-desc">For businesses scaling AI across workflows and teams</p>
+          <ul class="plan-features">
+            <li><span style="color: rgb(255 255 255);">✓</span></span>Advanced RAG system with multiple data sources</li>
+            <li><span style="color: rgb(255 255 255);">✓</span></span>Custom conversational flows and logic</li>
+            <li><span style="color: rgb(255 255 255);">✓</span></span>Integration with CRM, APIs, and internal systems</li>
+            <li><span style="color: rgb(255 255 255);">✓</span></span>Performance optimization and monitoring</li>
+            <li><span style="color: rgb(255 255 255);">✓</span></span>Ongoing support and improvements</li>
+          </ul>
+          <div class="plan-price"><span class="amount">$123</span><span class="label">/ starting from</span></div>
+          <button class="btn btn-accent">Get Started</button>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="plan-card">
+          <h3>Enterprise Solution</h3>
+          <p class="plan-desc">For organizations building large-scale, mission-critical AI systems</p>
+          <ul class="plan-features">
+            <li><span style="color: rgb(0 0 0);">✓</span></span>Fully customized RAG architecture and deployment</li>
+            <li><span style="color: rgb(0 0 0);">✓</span></span>Integration across multiple systems and environments</li>
+            <li><span style="color: rgb(0 0 0);">✓</span></span>Advanced security, access control, and compliance setup</li>
+            <li><span style="color: rgb(0 0 0);">✓</span></span>High-scale performance and reliability optimization</li>
+            <li><span style="color: rgb(0 0 0);">✓</span></span>Dedicated team and continuous development support</li>
+          </ul>
+          <div class="plan-price"><span class="amount">$123</span><span class="label">/ starting from</span></div>
+          <button class="btn btn-primary">Get Started</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+
+<!-- MID CTA -->
 <section id="contact" class="cta-section section-padding-trust">
    <div class="container">
      <div class="inner">
@@ -569,23 +868,9 @@ section {
         <a href="/contact-us" class="btn btn-primary">ReClass Demo</a>
       </div>
     </div>
-    <div class="mockup reveal reveal-delay-3">
-      <div class="mockup-query">
-        <p class="mockup-label">Transcript Search-"Macroeconomics"</p>
-        <div class="mockup-result"><span class="ts">02:15</span>-Introduction to Macroeconomics</div>
-        <div class="mockup-result active"><span class="ts">14:30</span>-Supply and Demand Curves <span style="color:hsl(var(--primarycss));font-size:.6rem;margin-left:.25rem">ACTIVE</span></div>
-        <div class="mockup-result"><span class="ts">28:45</span>-Fiscal Policy</div>
-      </div>
-      <div class="mockup-response">
-        <p class="mockup-label">AI Tutor-Key Takeaways</p>
-        <ul class="feature-list">
-          <li>Supply, Demand and Equilibrium</li>
-          <li>Fiscal vs. Monetary Policy</li>
-          <li>GDP, Inflation, Unemployment</li>
-          <li>The Role of Central Banks</li>
-        </ul>
-      </div>
-    </div>
+<div class="reveal reveal-delay-3">
+  <img src="/images/reclass-site.png" alt="ReClass AI Preview" class="hero-image" />
+</div>
   </div>
   <div class="grid-3 sm-grid-3 reveal reveal-delay-4" style="margin-top:3rem">
     <div class="card stat-card"><p class="stat-value gradient-text">3×</p><p class="stat-label">Faster Revision</p><p class="stat-sub">Students locate any concept in seconds</p></div>
