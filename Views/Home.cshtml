@@ -17,7 +17,7 @@
     align-items: center;
     background: var(--background);
     overflow: hidden;
-    padding-top: 80px;
+    padding: 80px 0 5rem 0;
 }
 
 /* VIDEO */
@@ -61,6 +61,11 @@
     font-weight: 700;
     color: var(--foreground);
     margin-bottom: 1.5rem;
+}
+@@media (min-width: 1024px) and (max-width: 1400px) {
+    .hero h1 {
+        font-size: clamp(2.25rem, 5vw, 2.75rem);
+    }
 }
 
     .hero h1 span {
@@ -1052,7 +1057,8 @@
 
     .post-card .card-body {
         padding: 1.5rem;
-                height: -webkit-fill-available;
+        height: -webkit-fill-available;
+        background-color: #ebebec59;
     }
 
     .post-card h3 {
@@ -1681,31 +1687,31 @@
   </div>
           <div class="card-body">
             <span class="tag">RAG</span><span class="tag">Generative AI</span>
-            <h3>RAG Architecture</h3>
+            <h3>AI Actually Finds and Generates Accurate Answers</h3>
             <p>Learn how Retrieval-Augmented Generation helps AI access real-time, private data to deliver accurate and hallucination-free answers.</p>
           </div>
         </article>
         </a>
-        <a href="/blog-page-index" class="case-card-link">
+        <a href="/blog-ai-agent" class="case-card-link">
         <article class="post-card">
             <div class="case-image">
     <img src="/images/blog-ai.png" alt="Kentico AI Aira">
   </div>
           <div class="card-body">
-            <span class="tag">AI Agents</span><span class="tag">Autonomous Systems</span>
-            <h3>AI Agent Working Blog</h3>
+            <span class="tag">AI Agents</span><span class="tag">Automation Systems</span>
+            <h3>Understanding the Intelligence Behind Automation Systems </h3>
             <p>Discover how AI agents go beyond chatbots to independently reason, plan, and execute tasks, all on their own.</p>
           </div>
         </article>
         </a>
-        <a href="/blog-ai-agent" class="case-card-link">
+        <a href="/blog-page-index" class="case-card-link">
         <article class="post-card">
              <div class="case-image">
     <img src="/images/blog-seo.png" alt="AI Customer Insights Platform">
   </div>
           <div class="card-body">
             <span class="tag">Document AI</span><span class="tag">RAG</span>
-            <h3>PageIndex Blog</h3>
+            <h3>Future of Document AI Beyond Traditional RAG </h3>
             <p>Meet the vectorless, reasoning-based framework that helps AI navigate documents more accurately than traditional RAG systems.</p>
           </div>
         </article>
