@@ -18,7 +18,7 @@
   <link rel="icon" href="/images/ds_favicon.jpg" type="image/png" /> 
   <style>
     :root {
-      --ds-primary: #0040FF;
+      --ds-primary: #1b54ff;
       --ds-dark: #0f172a;
       --ds-white: #ffffff;
     }
@@ -26,22 +26,17 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--ds-dark);
       position: relative;
       overflow: hidden;
     }
 
     .bg-layer {
       position: absolute;
-      inset: 0;
-      background: 
-        radial-gradient(ellipse at 60% 50%, rgba(0, 64, 255, 0.15) 0%, transparent 60%),
-        radial-gradient(ellipse at 20% 80%, rgba(0, 64, 255, 0.08) 0%, transparent 50%);
       z-index: 0;
     }
 
@@ -98,10 +93,10 @@
 
     .thank-title {
   font-size: 3rem;
-  font-weight: 800;
+  font-weight: 700;
   text-align: center;
   white-space: nowrap; /* force single line */
-  color: var(--ds-white);
+  color: #000000;
 }
 
 .thank-title span {
@@ -110,7 +105,7 @@
 
 
     .subtitle {
-      color: rgba(255, 255, 255, 0.6);
+      color: rgb(0 0 0);
       font-size: 1.1rem;
       line-height: 1.7;
       margin-bottom: 2.5rem;
@@ -118,7 +113,7 @@
 
     /* Let's Connect */
     .connect-title {
-      color: rgba(255, 255, 255, 0.9);
+      color: rgba(0 0 0);
       font-weight: 700;
       font-size: 1.25rem;
       margin-bottom: 1.5rem;
@@ -136,11 +131,11 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      border: 1px solid #1b54ff;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(255, 255, 255, 0.6);
+      color: #1b54ff;
       font-size: 1.15rem;
       text-decoration: none;
       transition: all 0.3s ease;
@@ -182,7 +177,7 @@
 
   <div class="content-wrapper">
     <!-- Logo -->
-    <div class="logo">Dot<span>Stark</span></div>
+    <div class="logo"><img src="/images/dotstark_2.o.png" alt="DotStark Logo" style="height: 85px;" /></div>
 
     <!-- Thank You Message -->
     <h1 class="thank-title">Thank you for <span>contacting us!</span></h1>

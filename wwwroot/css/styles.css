@@ -77,7 +77,7 @@ img {
 
 @media (min-width: 768px) {
     .section-padding {
-        padding: 5rem 0;
+        padding: 3rem 0;
     }
 }
 
@@ -844,7 +844,6 @@ img {
 .footer .footer-bottom a {
     font-family: var(--font-body);
     color: rgba(255, 255, 255, 0.4);
-    font-size: 0.875rem;
 }
 
 .footer .footer-bottom a:hover {
