@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Mail;
@@ -17,8 +18,12 @@ namespace DotStarkWeb.Services
         void SaveFormData(
             string name,
             string email,
-            string company,
-            string message
+            string companyName,
+            string message,
+            string subscription,
+            string subject,
+            string companySize,
+            string productType
         );
 
         void SendBrevoTemplateEmail(
@@ -27,7 +32,7 @@ namespace DotStarkWeb.Services
         void SendBrevoTemplateEmailToAdmin(
             string name,
             string email,
-            string comapny,
+            string companyname,
             string message
         );
     }
@@ -46,7 +51,7 @@ namespace DotStarkWeb.Services
             _contentQuery = contentQuery;
         }
 
-        public void SaveFormData(string name, string email, string company, string message)
+        public void SaveFormData(string name, string email, string companyName, string companySize, string subject, string message, string subscription, string productType)
         {
             using var connection = new SqliteConnection(_connectionString);
             connection.Open();
@@ -55,16 +60,20 @@ namespace DotStarkWeb.Services
 
             command.CommandText = @"
                 INSERT INTO ContactUsForm 
-                (Name, Email, Company, Message, SubmittedAt)
+                (Name, Email, CompanyName, Message, Subject, CompanySize, SubmittedAt, Subscription, ProductType)
                 VALUES 
-                ($name, $email, $company, $message, $submittedAt)
+                ($name, $email, $companyName, $message, $subject, $companySize,  $submittedAt, $subscription, $productType)
             ";
 
             command.Parameters.AddWithValue("$name", name);
             command.Parameters.AddWithValue("$email", email);
-            command.Parameters.AddWithValue("$company", company);
+            command.Parameters.AddWithValue("$companyName", companyName);
+            command.Parameters.AddWithValue("$companySize", companySize);
+            command.Parameters.AddWithValue("$subject", subject);
             command.Parameters.AddWithValue("$message", message);
             command.Parameters.AddWithValue("$submittedAt", DateTime.UtcNow);
+            command.Parameters.AddWithValue("$subscription", subscription);
+            command.Parameters.AddWithValue("$productType", productType);
 
             command.ExecuteNonQuery();
         }

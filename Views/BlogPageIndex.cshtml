@@ -42,6 +42,26 @@
     .compare-table tbody tr:nth-child(even) { background: #f8faff; }
     .blog-inline-img { width: 100%; border-radius: 0.75rem; margin: 1.5rem 0; object-fit: cover; max-height: 380px; border: 1px solid var(--border); }
     @@media (max-width: 960px) { .blog-layout { grid-template-columns: 1fr; } .blog-sidebar { position: static; } }
+
+    /* IMAGE CTA */
+.image-cta {
+    display: block;
+    margin: 3rem 0 2rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-cta img {
+    width: 100%;
+    display: block;
+}
+
+.image-cta:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
 </style>
 }
 
@@ -120,6 +140,11 @@
                     <li><strong>High Accuracy</strong>- Achieves ~98.7% accuracy on FinanceBench (complex document QA benchmark).</li>
                     <li><strong>Transparent Reasoning</strong>- Provides traceable steps for every answer, ideal for enterprise and compliance use cases.</li>
                 </ul>
+
+                 <!-- IMAGE CTA -->
+               <a href="/contact-us" class="image-cta">
+                   <img src="/images/blog-cta.png" alt="Schedule a call" />
+               </a>
 
                 <h2 id="game-changer">Why PageIndex is a Game-Changer</h2>
                 <p>Traditional RAG systems struggle with losing context due to chunking, irrelevant results from semantic similarity, expensive vector infrastructure, and poor explainability.</p>

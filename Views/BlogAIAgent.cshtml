@@ -40,6 +40,27 @@
     .blog-body a { color: var(--primary); text-decoration: underline; }
     .blog-inline-img { width: 100%; border-radius: 0.75rem; margin: 1.5rem 0; object-fit: cover; max-height: 380px; border: 1px solid var(--border); }
     @@media (max-width: 960px) { .blog-layout { grid-template-columns: 1fr; } .blog-sidebar { position: static; } }
+
+    /* IMAGE CTA */
+.image-cta {
+    display: block;
+    margin: 3rem 0 2rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-cta img {
+    width: 100%;
+    display: block;
+}
+
+.image-cta:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
 </style>
 }
 
@@ -112,6 +133,11 @@
                 <p>AI agents are already transforming multiple industries. In business environments, they are automating repetitive workflows such as data analysis and report generation. In software development, tools like GitHub Copilot are evolving into agents that can write, debug, and optimize code.</p>
                 <p>In everyday life, agents are becoming personal assistants capable of managing schedules, booking services, and making recommendations tailored to individual preferences.</p>
 
+                <!-- IMAGE CTA -->
+               <a href="/contact-us" class="image-cta">
+                   <img src="/images/blog-cta.png" alt="Schedule a call" />
+               </a>
+               
                 <h2 id="challenges">Challenges That Still Exist</h2>
                 <ul>
                     <li>Decision-making can sometimes produce incorrect or suboptimal results when the underlying reasoning is flawed.</li>

@@ -42,12 +42,14 @@ namespace DotStarkWeb.Controllers
 
         [HttpPost]
         [IgnoreAntiforgeryToken]
-        public IActionResult SubmitForm(string name, string email, string company, string message)
+        public IActionResult SubmitForm(string name, string email, string companyName, string companySize, string subject, string message, string subscription, string productType)
         {
 
             if (string.IsNullOrWhiteSpace(name) ||
                 string.IsNullOrWhiteSpace(email) ||
-                string.IsNullOrWhiteSpace(company))
+                string.IsNullOrWhiteSpace(subject) ||
+                string.IsNullOrWhiteSpace(companySize) ||
+                string.IsNullOrWhiteSpace(companyName))
             {
                 return Json(new
                 {
@@ -78,12 +80,12 @@ namespace DotStarkWeb.Controllers
             
             
 
-            _formService.SaveFormData(name, email, company, message);
+            _formService.SaveFormData(name, email, companyName, companySize, message, subject, subscription, productType);
 
             _formService.SendBrevoTemplateEmail(name, email);
 
             // Send email
-            _formService.SendBrevoTemplateEmailToAdmin(name, email, company, message);
+            _formService.SendBrevoTemplateEmailToAdmin(name, email, companyName, message);
 
 
             return Redirect(url);
