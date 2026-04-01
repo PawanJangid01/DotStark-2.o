@@ -1,5 +1,7 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using MailKit.Security;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using MimeKit;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Mail;
@@ -38,11 +40,8 @@ namespace DotStarkWeb.Services
         void SendBrevoTemplateEmail(
            string name, string email
         );
-        void SendBrevoTemplateEmailToAdmin(
-            string name,
-            string email,
-            string companyname,
-            string message
+        void SendEmail(
+            string mailBody
         );
     }
 
@@ -79,10 +78,10 @@ namespace DotStarkWeb.Services
             command.Parameters.AddWithValue("$companyName", companyName);
             command.Parameters.AddWithValue("$companySize", companySize);
             command.Parameters.AddWithValue("$subject", subject);
-            command.Parameters.AddWithValue("$message", message);
+            command.Parameters.AddWithValue("$message", message ?? string.Empty);
             command.Parameters.AddWithValue("$submittedAt", DateTime.UtcNow);
-            command.Parameters.AddWithValue("$subscription", subscription);
-            command.Parameters.AddWithValue("$productType", productType);
+            command.Parameters.AddWithValue("$subscription", subscription ?? string.Empty);
+            command.Parameters.AddWithValue("$productType", productType ?? string.Empty);
 
             command.ExecuteNonQuery();
         }
@@ -134,7 +133,7 @@ namespace DotStarkWeb.Services
             var senderEmail = settings.Value<string>("senderEmail");
             var fromName = settings.Value<string>("fromName");
             var fullName = name;
-            var templateId = 1;
+            var templateId = 7;
 
             Dictionary<string, object> templateParams = new Dictionary<string, object>
                {
@@ -190,77 +189,57 @@ namespace DotStarkWeb.Services
         }
 
 
-        public void SendBrevoTemplateEmailToAdmin(
-                             string name,
-                            string email,
-                            string company,
-                            string message
-                                        )
+        public void SendEmail(string mailBody)
         {
             var settings = GetEmailSettings();
             if (settings == null) return;
 
-            var apiKey = settings.Value<string>("smtpAPIKey");
-            var adminEmail = settings.Value<string>("adminEmail");
+            // SMTP settings from Umbraco
+            var smtpHost = settings.Value<string>("smtpHost");      // smtpout.secureserver.net
+            var smtpPort = settings.Value<int>("smtpPort");        // 587
+            var smtpUser = settings.Value<string>("smtpUsername"); // info@datamatrixiq.com
+            var smtpkey = settings.Value<string>("smtpKey"); // EMAIL PASSWORD
+
             var senderEmail = settings.Value<string>("senderEmail");
+            var adminEmail = settings.Value<string>("adminEmail");
             var fromName = settings.Value<string>("fromName");
-            var fullName = name;
-            var templateId = 2;
-
-            Dictionary<string, object> templateParams = new Dictionary<string, object>
-               {
-                     
-                     { "name", name },
-                     { "Email", email },
-                     { "Company", company },
-                     { "Message", message }
-               };
+            var subject = settings.Value<string>("emailSubject");
 
 
-            var payload = new
+            // Build email
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress(fromName, senderEmail));
+            //message.To.Add(MailboxAddress.Parse(adminEmail)); // Admin email
+            message.Subject = subject;
+
+            // ✅ Add multiple admin emails
+            if (!string.IsNullOrWhiteSpace(adminEmail))
             {
-                to = new[]
+                var emailList = adminEmail
+                    .Split(',', StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (var email in emailList)
                 {
-            new { email = adminEmail, name = fullName }
-        },
-                sender = new
-                {
-                    email = senderEmail,
-                    name = fromName
-                },
-                templateId = templateId,
-                @params = templateParams,
-                replyTo = new
-                {
-                    email = email,
-                    name = fullName
+                    message.To.Add(MailboxAddress.Parse(email.Trim()));
                 }
+            }
+
+            message.Body = new TextPart("html")
+            {
+                Text = mailBody
             };
 
-            using var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("api-key", apiKey);
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json")
+            using var client = new MailKit.Net.Smtp.SmtpClient();
+            client.AuthenticationMechanisms.Remove("XOAUTH2");
+            client.Connect(
+                smtpHost,
+                smtpPort,
+                SecureSocketOptions.StartTls
             );
 
-            var json = JsonSerializer.Serialize(payload);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var response = client.PostAsync(
-                "https://api.brevo.com/v3/smtp/email",
-                content
-            ).Result;
-
-            if (!response.IsSuccessStatusCode)
-            {
-                var error = response.Content.ReadAsStringAsync();
-
-                // Log error (choose one)
-                Console.WriteLine("Brevo email failed: " + error);
-                // _logger.LogError("Brevo email failed: {Error}", error);
-
-                return;
-            }
+            client.Authenticate(smtpUser, smtpkey);
+            client.Send(message);
+            client.Disconnect(true);
         }
     }
 }
