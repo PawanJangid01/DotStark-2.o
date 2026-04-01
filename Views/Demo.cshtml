@@ -109,6 +109,7 @@
       align-items: center;
       gap: 0.75rem;
       font-size: 0.9375rem;
+      color: #6b7a8d;
     }
 
     .check-icon {
@@ -404,6 +405,16 @@
     @@media (min-width: 769px) and (max-width: 1024px) {
       .video-grid { grid-template-columns: repeat(2, 1fr); }
     }
+
+    .play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.3);
+  opacity: 1;
+}
   </style>
 </head>
 <body>
@@ -426,33 +437,35 @@
         <div>
           <div class="form-card">
             <h2>Watch the Demo</h2>
-            <p class="desc">Fill in your details to unlock instant access to our product demos.</p>
-            <form id="demo-form" novalidate>
+            <p class="desc">Fill in your details to unlock instant access to our product demo.</p>
+            @* <form id="demo-form" novalidate> *@
+                @using (Html.BeginUmbracoForm("DemoForm", "Form", FormMethod.Post, new { id="demo-form" }))
+             {
               <div class="form-row">
                 <div class="field">
                   @* <label for="firstName">First Name</label> *@
-                  <input id="firstName" placeholder="First Name *" required>
+                  <input id="firstName" name="firstName" placeholder="First Name *" required>
                   <div class="error" id="err-firstName"></div>
                 </div>
                 <div class="field">
                   @* <label for="lastName">Last Name</label> *@
-                  <input id="lastName" placeholder="Last Name *" required>
+                  <input id="lastName" name="lastName" placeholder="Last Name *" required>
                   <div class="error" id="err-lastName"></div>
                 </div>
               </div>
               <div class="field">
                 @* <label for="email">Email</label> *@
-                <input id="email" type="email" placeholder="Email *" required>
+                <input id="email" type="email" name="email" placeholder="Email *" required>
                 <div class="error" id="err-email"></div>
               </div>
               <div class="field">
                 @* <label for="company">Company Name</label> *@
-                <input id="company" placeholder="Company Name *" required>
+                <input id="company" name="companyName" placeholder="Company Name *" required>
                 <div class="error" id="err-company"></div>
               </div>
               <div class="field">
                 @* <label for="companySize">Company Size</label> *@
-                <select id="companySize" required>
+                <select id="companySize" name="companySize" required>
                   <option value="">Company Size *</option>
                   <option value="1-10">1–10</option>
                   <option value="11-50">11–50</option>
@@ -464,7 +477,7 @@
                 </div>
              <div class="field">
                @* <label for="jobRole">Job Role</label> *@
-               <select id="jobRole" required>
+               <select id="jobRole" name="jobRole" required>
                  <option value="">Job Role *</option>
                  <option>Engineering Manager</option>
                  <option>Software Developer / Engineer</option>
@@ -479,7 +492,7 @@
                <div class="error" id="err-jobRole"></div>
              </div>
               <button type="submit" class="btn-primary">Watch Demo</button>
-            </form>
+            }
           </div>
         </div>
       </div>
@@ -490,9 +503,18 @@
   <div id="video-section" class="video-section hidden">
     <div class="container">
       <div class="featured-player">
-        <div class="video-wrapper">
-          <iframe id="featured-iframe" src="" title="Featured Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
+       <div class="video-wrapper" id="video-container">
+         <!-- Thumbnail -->
+         <img id="video-thumbnail" src="" alt="Video Thumbnail" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;">
+         <!-- Play Button -->
+         <div id="play-button" class="play-overlay" style="opacity:1; cursor:pointer;">
+           <div class="play-btn">
+             <svg viewBox="0 0 24 24" fill="currentColor">
+               <polygon points="5 3 19 12 5 21 5 3"/>
+             </svg>
+           </div>
+         </div>
+       </div>
         <div class="info">
           <h3 id="featured-title"></h3>
           <div class="duration">
@@ -502,16 +524,16 @@
         </div>
       </div>
 
-      <div class="more-demos">
+      @* <div class="more-demos">
         <h3>More Demos</h3>
         <div class="video-grid" id="video-grid"></div>
-      </div>
+      </div> *@
     </div>
   </div>
 
   <script>
     const VIDEOS = [
-      { id: '1', title: 'AI Agent Demo', duration: '4:32', thumbnail: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=640&q=80', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
+      { id: '1', title: 'AI Agent Demo', duration: '2:59', thumbnail: '/images/Seo-Thumbnail.png', videoUrl: '/images/SEO-agent-suite.mp4' },
       { id: '2', title: 'Helpdesk Demo', duration: '6:15', thumbnail: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=640&q=80', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
       { id: '3', title: 'Inbox Demo', duration: '3:48', thumbnail: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=640&q=80', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
       { id: '4', title: 'Workflow Automation Demo', duration: '5:21', thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=640&q=80', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
@@ -519,15 +541,36 @@
 
     let featuredId = '1';
 
-    function setFeatured(id) {
-      featuredId = id;
-      const v = VIDEOS.find(x => x.id === id);
-      document.getElementById('featured-iframe').src = v.videoUrl;
-      document.getElementById('featured-title').textContent = v.title;
-      document.getElementById('featured-duration').textContent = v.duration;
-      renderGrid();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+function setFeatured(id) {
+  featuredId = id;
+  const v = VIDEOS.find(x => x.id === id);
+
+  // Set thumbnail
+  document.getElementById('video-thumbnail').src = v.thumbnail;
+
+  // Store video URL (don't load yet)
+  document.getElementById('video-container').setAttribute('data-video', v.videoUrl);
+
+  document.getElementById('featured-title').textContent = v.title;
+  document.getElementById('featured-duration').textContent = v.duration;
+
+  renderGrid();
+}
+
+document.getElementById('play-button').addEventListener('click', function () {
+  const container = document.getElementById('video-container');
+  const videoUrl = container.getAttribute('data-video');
+
+  container.innerHTML = `
+    <iframe 
+      src="${videoUrl}" 
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+      allowfullscreen
+      style="position:absolute; top:0; left:0; width:100%; height:100%;">
+    </iframe>
+  `;
+});
 
     function renderGrid() {
       const grid = document.getElementById('video-grid');
@@ -554,42 +597,59 @@
       });
     }
 
-    document.getElementById('demo-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      let valid = true;
-      const fields = [
-        { id: 'firstName', msg: 'First name is required' },
-        { id: 'lastName', msg: 'Last name is required' },
-        { id: 'email', msg: 'Work email is required' },
-        { id: 'company', msg: 'Company name is required' },
-        { id: 'companySize', msg: 'Select company size' },
-        { id: 'jobRole', msg: 'Job role is required' },
-      ];
+document.addEventListener("DOMContentLoaded", function () {
 
-      fields.forEach(f => {
-        const el = document.getElementById(f.id);
-        const err = document.getElementById('err-' + f.id);
-        if (!el.value.trim()) {
-          err.textContent = f.msg;
-          valid = false;
-        } else {
-          err.textContent = '';
-        }
-      });
+    const form = document.getElementById('demo-form');
 
-      const emailEl = document.getElementById('email');
-      const emailErr = document.getElementById('err-email');
-      if (emailEl.value.trim() && !/^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/.test(emailEl.value)) {
-        emailErr.textContent = 'Enter a valid email';
-        valid = false;
-      }
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
 
-      if (valid) {
-        document.getElementById('intro-section').classList.add('hidden');
-        document.getElementById('video-section').classList.remove('hidden');
-        setFeatured('1');
-      }
+        let valid = true;
+
+        const fields = [
+            { id: 'firstName', msg: 'First name is required' },
+            { id: 'lastName', msg: 'Last name is required' },
+            { id: 'email', msg: 'Work email is required' },
+            { id: 'company', msg: 'Company name is required' },
+            { id: 'companySize', msg: 'Select company size' },
+            { id: 'jobRole', msg: 'Job role is required' },
+        ];
+
+        fields.forEach(f => {
+            const el = document.getElementById(f.id);
+            const err = document.getElementById('err-' + f.id);
+
+            if (!el.value.trim()) {
+                err.textContent = f.msg;
+                valid = false;
+            } else {
+                err.textContent = '';
+            }
+        });
+
+        if (!valid) return;
+
+        let formData = new FormData(form);
+
+        fetch(form.action, {
+            method: "POST",
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('intro-section').classList.add('hidden');
+                document.getElementById('video-section').classList.remove('hidden');
+                setFeatured('1');
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(err => console.error(err));
     });
+
+});
+
   </script>
 </body>
 </html>

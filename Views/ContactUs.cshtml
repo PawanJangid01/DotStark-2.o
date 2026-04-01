@@ -479,15 +479,7 @@
                             </div>
                         </div>
 
-                            <div class="form-group" id="subscriptionWrapper" style="display:none;">
-                            @* <label for="subject">Subject</label> *@
-                            <select id="subscription" name="subscription" required>
-                                <option value="" disabled selected hidden>Subscription Plan</option>
-                                <option value="startersolution">Starter Solution</option>
-                                <option value="growthsolution">Growth Solution</option>
-                                <option value="enterprisesolution">Enterprise Solution</option>
-                            </select>
-                        </div>
+                         <input type="hidden" id="subscriptionHidden" name="subscription" />
 
                         <div class="form-group">
                             @* <label for="subject">Subject</label> *@
@@ -638,26 +630,26 @@
         }
     </script>
 
-          <script>
+     <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const plan = urlParams.get("plan");
-    const product = urlParams.get("product");
+    const plan = sessionStorage.getItem("selectedPlan");
+    const product = sessionStorage.getItem("selectedProduct");
 
-    const subscriptionWrapper = document.getElementById("subscriptionWrapper");
-    const subscriptionSelect = document.getElementById("subscription");
+    const subscriptionHidden = document.getElementById("subscriptionHidden");
     const productHidden = document.getElementById("productHidden");
 
-    if (product) {
+    if (plan && subscriptionHidden) {
+        subscriptionHidden.value = plan;
+    }
+
+    if (product && productHidden) {
         productHidden.value = product;
     }
 
-    if (plan) {
-        subscriptionWrapper.style.display = "block";
-        subscriptionSelect.value = plan;
-    } else {
-        subscriptionWrapper.style.display = "none";
-    }
+    // Optional: clear after use
+    sessionStorage.removeItem("selectedPlan");
+    sessionStorage.removeItem("selectedProduct");
+
 });
 </script>

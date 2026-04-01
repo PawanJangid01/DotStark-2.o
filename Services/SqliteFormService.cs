@@ -26,6 +26,15 @@ namespace DotStarkWeb.Services
             string productType
         );
 
+        void SaveDemoFormData(
+            string firstName,
+            string lastName,
+            string email,
+            string companyName,
+            string companySize,
+            string jobRole
+        );
+
         void SendBrevoTemplateEmail(
            string name, string email
         );
@@ -77,6 +86,32 @@ namespace DotStarkWeb.Services
 
             command.ExecuteNonQuery();
         }
+
+
+        public void SaveDemoFormData(string firstName, string lastName, string email, string companyName, string companySize, string jobRole)
+        {
+            using var connection = new SqliteConnection(_connectionString);
+            connection.Open();
+
+            using var command = connection.CreateCommand();
+
+            command.CommandText = @"
+                INSERT INTO DemoForm 
+                (FirstName, LastName, Email, CompanyName, CompanySize, JobRole)
+                VALUES 
+                ($firstName, $lastName, $email, $companyName, $companySize,  $jobRole)
+            ";
+
+            command.Parameters.AddWithValue("$firstName", firstName);
+            command.Parameters.AddWithValue("$lastName", lastName);
+            command.Parameters.AddWithValue("$email", email);
+            command.Parameters.AddWithValue("$companyName", companyName);
+            command.Parameters.AddWithValue("$companySize", companySize);
+            command.Parameters.AddWithValue("$jobRole", jobRole);
+
+            command.ExecuteNonQuery();
+        }
+
 
         private IPublishedContent? GetEmailSettings()
         {

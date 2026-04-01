@@ -351,7 +351,25 @@ a{text-decoration:none;color:inherit}
   height: 100%;
   object-fit: cover;
 }
+.service-logos {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 0.75rem;
+}
 
+.service-logos img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  /* filter: grayscale(100%); */
+  transition: 0.3s ease;
+}
+
+.service-logos img:hover {
+  filter: grayscale(0%);
+  transform: scale(1.1);
+}
 </style>
 }
 <!-- HERO -->
@@ -470,7 +488,7 @@ a{text-decoration:none;color:inherit}
         <div class="avatar"><img src="/images/Yogendra_Singh_team.png" alt="Yogendra Singh"></div>
         <h3>Yogendra Singh</h3>
         <p class="role">CTO & AI Head</p>
-        <p>Deep AI expertise powering cutting-edge systems. Architecting the intelligence behind every VectifyAI product.</p>
+        <p>Deep AI expertise powering cutting-edge systems. Architecting the intelligence behind every AI powered products.</p>
       </div>
 
       </div>
@@ -494,7 +512,7 @@ a{text-decoration:none;color:inherit}
         <div class="avatar"><img src="/images/Manoj_team.jpg" alt="Manoj Kumar"></div>
         <h3>Manoj Kumar</h3>
         <p class="role">Senior Technical Architect</p>
-        <p>Keeps the engine running smoothly — bridging strategy, teams, and execution with precision.</p>
+        <p>Designs scalable systems and ensures seamless execution by aligning architecture, teams, and business goals.</p>
       </div>
       </div>
 
@@ -508,7 +526,7 @@ a{text-decoration:none;color:inherit}
    <div class="container">
      <div class="inner">
        <h2>Build Intelligent Knowledge Systems With RAG</h2>
-       <p>Partner with Dotstark 2.0 to implement scalable RAG solutions tailored to your business needs.</p>
+       <p>Partner with Dotstark 2.0 to implement scalable RAG solutions tailored to your business needs</p>
        <div class="btn-group">
          <a href="/contact-us" class="btn btn-white">Talk to an Expert</a>
        </div>

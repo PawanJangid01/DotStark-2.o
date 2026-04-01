@@ -38,7 +38,7 @@
     .blog-body ol li::before { content: counter(ol-counter); counter-increment: ol-counter; flex-shrink: 0; width: 1.4rem; height: 1.4rem; background: var(--primary); color: #fff; border-radius: 50%; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 0.15rem; }
     .blog-body strong { color: var(--foreground); }
     .blog-body a { color: var(--primary); text-decoration: underline; }
-    .blog-inline-img { width: 100%; border-radius: 0.75rem; margin: 1.5rem 0; object-fit: cover; max-height: 380px; border: 1px solid var(--border); }
+    .blog-inline-img { width: auto; height: 100%; border-radius: 0.75rem; margin: 1.5rem 0; object-fit: cover; max-height: 380px; border: 1px solid var(--border); }
     @@media (max-width: 960px) { .blog-layout { grid-template-columns: 1fr; } .blog-sidebar { position: static; } }
 
     /* IMAGE CTA */
@@ -61,12 +61,32 @@
     box-shadow: 0 20px 40px rgba(0,0,0,0.08);
 }
 
+.cs-banner { position: relative; width: 100%; height: 480px; overflow: hidden; }
+
+    @@media (max-width: 1400px) {
+            .cs-banner{ height:380px;}
+    }
+        .cs-banner-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .cs-banner-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.15) 100%); }
+        .cs-banner-content { position: absolute; bottom: 2.75rem; left: 50%; transform: translateX(-50%); width: 100%; max-width: 1200px;}
+        .cs-tag { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; font-size: 0.72rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.875rem; backdrop-filter: blur(4px); }
+        .cs-banner-title { font-size: clamp(1.4rem, 2.5vw, 2.25rem); font-weight: 700; color: #fff; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 0.75rem; font-family: var(--font-heading); }
+        .cs-banner-sub { font-size: 1rem; color: rgba(255,255,255,0.8); line-height: 1.65; margin: 0; max-width: 560px; }
+        @@media (max-width: 600px) { .cs-banner { height: 360px; } .cs-banner-content { bottom: 1.75rem; padding: 0 1.25rem; } }
+
 </style>
 }
 
-<div class="blog-banner">
-    <img src="/images/blog-ai-large.png" alt="How AI Agents Work" class="blog-banner-img" />
-</div>
+    <!-- ═══ HERO BANNER ═══ -->
+    <div class="cs-banner">
+       <img src="/images/blog-ai-large.png" alt="How AI Agents Work" class="blog-banner-img" />
+        <div class="cs-banner-overlay"></div>
+        <div class="cs-banner-content container">
+            <span class="cs-tag">Blog</span>
+            <h1 class="cs-banner-title">Understanding the Intelligence Behind Automation Systems</h1>
+        
+        </div>
+    </div>
 
 <main class="blog-page">
     <div class="container">
@@ -112,7 +132,7 @@
                 <h2 id="tools">How Agents Use Tools to Interact with the Real World</h2>
                 <p>One of the biggest limitations of standalone language models is that they cannot access real-time data or perform external actions. AI agents overcome this by integrating tools- web search engines, APIs, databases, or code execution environments.</p>
                 <p>For example, if an agent is asked to analyze stock trends, it might fetch live market data through an API, process it, and then generate insights. This ability to combine reasoning with action is what makes agents practical for real-world applications.</p>
-                <img src="/images/blog-ai-large.png" alt="AI Agent Tools Diagram" class="blog-inline-img" />
+                <img src="/images/blog-ai-agent.jpg" alt="AI Agent Tools Diagram" class="blog-inline-img" />
 
                 <h2 id="planning">Planning: How Agents Break Down Complex Problems</h2>
                 <p>Planning is where an agent truly starts to resemble human thinking. Instead of solving a problem in one step, it creates a roadmap. Consider a task like "analyze competitor websites." An agent would first gather a list of competitors, then visit each site, extract relevant information, and finally compare the findings.</p>

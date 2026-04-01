@@ -450,6 +450,7 @@ section {
   font-size: 1.25rem;
   font-weight: 700;
   margin-bottom: 8px;
+  text-align: center;
 }
 
 .pricing-section .plan-card .plan-desc {
@@ -501,6 +502,7 @@ section {
 
 .plan-price {
   margin-bottom: 24px;
+  text-align: center;
 }
 
 .plan-price .amount {
@@ -513,7 +515,9 @@ section {
   color: #6b7280;
   margin-left: 4px;
 }
-
+.pricing-section .plan-card .plan-desc {
+  text-align: center;
+}
 .pricing-section .plan-card.highlighted .plan-price .label {
   color: #ffff;
 }
@@ -782,6 +786,17 @@ section {
 </div>
 </section>
 
+<!-- RAG365 Integration Image -->
+<section class="image-section" style="background-color: #ebebec;">
+  <div class="container text-center">
+    
+    <img src="/images/RAG365-view.png" 
+         alt="RAG365 Integrations Diagram" 
+         style="max-width: 900px; width: 100%; height: auto; margin: 0 auto; display: block;" />
+
+  </div>
+</section>
+
 <!-- Subscription Plans -->
   <section class="pricing-section">
     <div class="container">
@@ -803,7 +818,8 @@ section {
             <li><span style="color: rgb(0 0 0);">✓</span></span>Deployment and basic support</li>
           </ul>
           <div class="plan-price"><span class="amount">$123</span><span class="label">/ starting from</span></div>
-          <a href="/contact-us?plan=startersolution&product=rag365" class="btn btn-primary">Get Started</a>
+          <a href="/contact-us" class="btn btn-primary" 
+   onclick="setPlan('startersolution','rag365')">Get Started</a>
         </div>
 
         <!-- Growth (Highlighted) -->
@@ -818,7 +834,8 @@ section {
             <li><span style="color: rgb(255 255 255);">✓</span></span>Ongoing support and improvements</li>
           </ul>
           <div class="plan-price"><span class="amount">$123</span><span class="label">/ starting from</span></div>
-          <a href="/contact-us?plan=growthsolution&product=rag365" class="btn btn-accent">Get Started</a>
+          <a href="/contact-us" class="btn btn-accent" 
+   onclick="setPlan('growthsolution','rag365')">Get Started</a>
         </div>
 
         <!-- Enterprise -->
@@ -833,7 +850,8 @@ section {
             <li><span style="color: rgb(0 0 0);">✓</span></span>Dedicated team and continuous development support</li>
           </ul>
           <div class="plan-price"><span class="amount">$123</span><span class="label">/ starting from</span></div>
-          <a href="/contact-us?plan=enterprisesolution&product=rag365" class="btn btn-primary">Get Started</a>
+         <a href="/contact-us" class="btn btn-primary" 
+   onclick="setPlan('enterprisesolution','rag365')">Get Started</a>
         </div>
 
       </div>
@@ -849,7 +867,7 @@ section {
        <h2>Ready to Automate Your Most Critical Business Processes?</h2>
        <p>Let DotStark 2.0 identify the highest-impact automation opportunities in your organization and build a roadmap tailored to your goals.</p>
        <div class="btn-group">
-         <a href="#cta" class="btn btn-white">Let's Build Your Automation Roadmap</a>
+         <a href="/contact-us" class="btn btn-white">Let's Build Your Automation Roadmap</a>
        </div>
      </div>
    </div>
@@ -1067,4 +1085,10 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (target) target.scrollIntoView({ behavior: 'smooth' });
   });
 });
+</script>
+<script>
+function setPlan(plan, product) {
+    sessionStorage.setItem("selectedPlan", plan);
+    sessionStorage.setItem("selectedProduct", product);
+}
 </script>

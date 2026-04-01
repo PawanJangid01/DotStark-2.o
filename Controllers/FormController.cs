@@ -93,6 +93,35 @@ namespace DotStarkWeb.Controllers
         }
 
 
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public IActionResult DemoForm(string firstName, string lastName, string email, string companyName, string companySize, string jobRole)
+        {
+
+            if (string.IsNullOrWhiteSpace(firstName) ||
+                string.IsNullOrWhiteSpace(lastName) ||
+                string.IsNullOrWhiteSpace(email) ||
+                string.IsNullOrWhiteSpace(companyName) ||
+                string.IsNullOrWhiteSpace(companySize) ||
+                string.IsNullOrWhiteSpace(jobRole))
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = "Fill out all required fields."
+                });
+            }
+
+            _formService.SaveDemoFormData(firstName, lastName,  email, companyName, companySize, jobRole);
+
+            return Json(new
+            {
+                success = true
+            });
+
+
+        }
+
         private IPublishedContent? GetEmailSettings()
         {
             if (!UmbracoContextAccessor.TryGetUmbracoContext(out var context))
