@@ -28,11 +28,11 @@
     .toc-box ul li a { display: block; padding: 0.3rem 0.5rem 0.3rem 0.75rem; font-size: 0.8rem; color: var(--muted); border-left: 2px solid var(--border); line-height: 1.4; transition: color 0.2s, border-color 0.2s; }
     .toc-box ul li a:hover, .toc-box ul li a.active { color: var(--primary); border-left-color: var(--primary); }
     .blog-body { min-width: 0; }
-    .blog-body p { font-size: 0.9375rem; color: #444; line-height: 1.85; margin-bottom: 1.1rem; }
+    .blog-body p { font-size: 0.9375rem; color: #737373; line-height: 1.85; margin-bottom: 1.1rem; }
     .blog-body h2 { font-size: 1.4rem; color: var(--foreground); margin: 2.5rem 0 0.75rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary-10); scroll-margin-top: 5rem; font-family: var(--font-heading); }
     .blog-body h3 { font-size: 1.1rem; color: var(--foreground); margin: 1.75rem 0 0.5rem; scroll-margin-top: 5rem; font-family: var(--font-heading); }
     .blog-body ul, .blog-body ol { list-style: none; margin: 0.5rem 0 1.25rem; display: flex; flex-direction: column; gap: 0.45rem; }
-    .blog-body ul li, .blog-body ol li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.9375rem; color: #444; line-height: 1.7; }
+    .blog-body ul li, .blog-body ol li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.9375rem; color: #737373; line-height: 1.7; }
     .blog-body ul li::before { content: ''; flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: #353535; margin-top: 0.58rem; }
     .blog-body ol { counter-reset: ol-counter; }
     .blog-body ol li::before { content: counter(ol-counter); counter-increment: ol-counter; flex-shrink: 0; width: 1.4rem; height: 1.4rem; background: var(--primary); color: #fff; border-radius: 50%; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 0.15rem; }
@@ -118,7 +118,7 @@
 
                 <h2 id="what-makes-different">What Makes an AI Agent Different?</h2>
                 <p>At a fundamental level, an AI agent operates in a continuous cycle. It observes its environment, interprets what it sees, decides what to do next, and then takes action. After acting, it evaluates the outcome and adjusts its approach if needed.</p>
-                <p>This loop- often described as <strong>perceive → reason → act → observe</strong>- is what gives agents their autonomy. Unlike traditional systems that follow fixed instructions, agents dynamically decide their next step based on context.</p>
+                <p>This loop- often described as <strong>perceive, reason, act, observe</strong> - is what gives agents their autonomy. Unlike traditional systems that follow fixed instructions, agents dynamically decide their next step based on context.</p>
 
                 <h2 id="goal">How an Agent Understands and Defines a Goal</h2>
                 <p>Everything begins with a goal, but in an AI agent, a goal is more than just an instruction- it's a guiding objective that shapes all decisions.</p>
@@ -132,7 +132,7 @@
                 <h2 id="tools">How Agents Use Tools to Interact with the Real World</h2>
                 <p>One of the biggest limitations of standalone language models is that they cannot access real-time data or perform external actions. AI agents overcome this by integrating tools- web search engines, APIs, databases, or code execution environments.</p>
                 <p>For example, if an agent is asked to analyze stock trends, it might fetch live market data through an API, process it, and then generate insights. This ability to combine reasoning with action is what makes agents practical for real-world applications.</p>
-                <img src="/images/blog-ai-agent.jpg" alt="AI Agent Tools Diagram" class="blog-inline-img" />
+                <img src="/images/blog-ai-agent.png" alt="AI Agent Tools Diagram" class="blog-inline-img" />
 
                 <h2 id="planning">Planning: How Agents Break Down Complex Problems</h2>
                 <p>Planning is where an agent truly starts to resemble human thinking. Instead of solving a problem in one step, it creates a roadmap. Consider a task like "analyze competitor websites." An agent would first gather a list of competitors, then visit each site, extract relevant information, and finally compare the findings.</p>

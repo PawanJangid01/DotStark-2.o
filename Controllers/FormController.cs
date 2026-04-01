@@ -13,6 +13,7 @@ using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Infrastructure.Persistence;
 using Umbraco.Cms.Web.Website.Controllers;
 using Umbraco.Extensions;
+using static Lucene.Net.Util.OfflineSorter;
 namespace DotStarkWeb.Controllers
 {
     public class FormController : SurfaceController
@@ -79,13 +80,23 @@ namespace DotStarkWeb.Controllers
                 url = thankYouLink?.FirstOrDefault()?.Url;
             
             
-
-            _formService.SaveFormData(name, email, companyName, companySize, message, subject, subscription, productType);
+            _formService.SaveFormData(name, email, companyName, companySize, subject, message, subscription, productType);
 
             _formService.SendBrevoTemplateEmail(name, email);
 
+            var template = _configuration["Umbraco:CMS:EmailTemplates:ContactInquiry"];
+
+            template = ReplaceOrRemove(template, "FullName", "Full Name", name);
+            template = ReplaceOrRemove(template, "Email", "Email", email);
+            template = ReplaceOrRemove(template, "CompanyName", "Company Name", companyName);
+            template = ReplaceOrRemove(template, "CompanySize", "Company Size", companySize);
+            template = ReplaceOrRemove(template, "Subject", "Subject", subject);
+            template = ReplaceOrRemove(template, "Subscription", "Subscription", subscription);
+            template = ReplaceOrRemove(template, "Product Type", "ProductType", productType);
+            template = ReplaceOrRemove(template, "Message", "Message", message);
+       
             // Send email
-            _formService.SendBrevoTemplateEmailToAdmin(name, email, companyName, message);
+            _formService.SendEmail(template);
 
 
             return Redirect(url);
