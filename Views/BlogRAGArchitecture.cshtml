@@ -30,7 +30,7 @@
     .blog-body ol { counter-reset: ol-counter; }
     .blog-body ol li::before { content: counter(ol-counter); counter-increment: ol-counter; flex-shrink: 0; width: 1.4rem; height: 1.4rem; background: var(--primary); color: #fff; border-radius: 50%; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 0.15rem; }
     .blog-body strong { color: var(--foreground); }
-    .blog-inline-img { width: 100%; border-radius: 0.75rem; margin: 1.5rem 0; object-fit: cover; max-height: 380px; border: 1px solid var(--border); }
+    .blog-inline-img { width: auto; height: 100%; border-radius: 0.75rem; margin: 1.5rem 0; object-fit: cover; max-height: 380px; border: 1px solid var(--border); }
     .flow-steps { display: flex; flex-direction: column; gap: 0.5rem; margin: 1rem 0 1.5rem; }
     .flow-step { display: flex; align-items: center; gap: 1rem; background: #f0f4ff; border: 1px solid rgba(27,84,255,0.12); border-radius: 0.5rem; padding: 0.75rem 1rem; font-size: 0.9rem; color: var(--foreground); }
     .flow-step .step-num { background: var(--primary); color: #fff; width: 1.75rem; height: 1.75rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
@@ -55,12 +55,33 @@
     transform: translateY(-4px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.08);
 }
+
+.cs-banner { position: relative; width: 100%; height: 480px; overflow: hidden; }
+
+    @@media (max-width: 1400px) {
+            .cs-banner{ height:380px;}
+    }
+        .cs-banner-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .cs-banner-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.15) 100%); }
+        .cs-banner-content { position: absolute; bottom: 2.75rem; left: 50%; transform: translateX(-50%); width: 100%; max-width: 1200px;}
+        .cs-tag { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; font-size: 0.72rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.875rem; backdrop-filter: blur(4px); }
+        .cs-banner-title { font-size: clamp(1.4rem, 2.5vw, 2.25rem); font-weight: 700; color: #fff; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 0.75rem; font-family: var(--font-heading); }
+        .cs-banner-sub { font-size: 1rem; color: rgba(255,255,255,0.8); line-height: 1.65; margin: 0; max-width: 560px; }
+        @@media (max-width: 600px) { .cs-banner { height: 360px; } .cs-banner-content { bottom: 1.75rem; padding: 0 1.25rem; } }
+
 </style>
 }
 
-<div class="blog-banner">
-    <img src="/images/blog-rag-large.png" alt="RAG Architecture" class="blog-banner-img" />
-</div>
+    <!-- ═══ HERO BANNER ═══ -->
+    <div class="cs-banner">
+        <img src="/images/blog-rag-large.png" alt="RAG Architecture" class="blog-banner-img" />
+        <div class="cs-banner-overlay"></div>
+        <div class="cs-banner-content container">
+            <span class="cs-tag">Blog</span>
+            <h1 class="cs-banner-title">AI Actually Finds and Generates Accurate Answers</h1>
+        
+        </div>
+    </div>
 
 <main class="blog-page">
     <div class="container">
@@ -118,7 +139,7 @@
                     <li><strong>Large chunks</strong>- More context but less precision</li>
                     <li><strong>Advanced techniques</strong>- Overlapping chunks, semantic chunking (based on meaning, not size)</li>
                 </ul>
-                <img src="/images/blog-rag-large.png" alt="RAG Chunking Diagram" class="blog-inline-img" />
+               
 
                 <h2 id="embeddings">3. Embeddings (Turning Text into Meaningful Numbers)</h2>
                 <p>Embeddings convert text into vectors (numerical representations). These vectors capture semantic meaning, not just keywords- "car" and "vehicle" will have similar vectors, while "car" and "banana" will be far apart.</p>
@@ -141,6 +162,7 @@
                 <p>The retrieved chunks are passed into an LLM like GPT-4. The LLM reads the retrieved context, combines it with the query, and generates a natural language response. The answer is now grounded in real data, more accurate, and less hallucinated.</p>
 
                 <h2 id="flow">End-to-End RAG Flow</h2>
+                 <img src="/images/blog-rag-architecture.jpg" alt="RAG Chunking Diagram" class="blog-inline-img" />
                 <div class="flow-steps">
                     <div class="flow-step"><span class="step-num">1</span> Load documents</div>
                     <div class="flow-step"><span class="step-num">2</span> Split into chunks</div>

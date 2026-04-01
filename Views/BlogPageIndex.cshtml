@@ -40,7 +40,7 @@
     .compare-table th { padding: 0.75rem 1rem; text-align: left; font-weight: 600; }
     .compare-table td { padding: 0.65rem 1rem; color: #444; border-bottom: 1px solid var(--border); }
     .compare-table tbody tr:nth-child(even) { background: #f8faff; }
-    .blog-inline-img { width: 100%; border-radius: 0.75rem; margin: 1.5rem 0; object-fit: cover; max-height: 380px; border: 1px solid var(--border); }
+    .blog-inline-img { width: auto; height: 100%; border-radius: 0.75rem; margin: 1.5rem 0; object-fit: cover; max-height: 380px; border: 1px solid var(--border); }
     @@media (max-width: 960px) { .blog-layout { grid-template-columns: 1fr; } .blog-sidebar { position: static; } }
 
     /* IMAGE CTA */
@@ -62,12 +62,33 @@
     transform: translateY(-4px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.08);
 }
+
+.cs-banner { position: relative; width: 100%; height: 480px; overflow: hidden; }
+
+    @@media (max-width: 1400px) {
+            .cs-banner{ height:380px;}
+    }
+        .cs-banner-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .cs-banner-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.15) 100%); }
+        .cs-banner-content { position: absolute; bottom: 2.75rem; left: 50%; transform: translateX(-50%); width: 100%; max-width: 1200px;}
+        .cs-tag { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; font-size: 0.72rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.875rem; backdrop-filter: blur(4px); }
+        .cs-banner-title { font-size: clamp(1.4rem, 2.5vw, 2.25rem); font-weight: 700; color: #fff; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 0.75rem; font-family: var(--font-heading); }
+        .cs-banner-sub { font-size: 1rem; color: rgba(255,255,255,0.8); line-height: 1.65; margin: 0; max-width: 560px; }
+        @@media (max-width: 600px) { .cs-banner { height: 360px; } .cs-banner-content { bottom: 1.75rem; padding: 0 1.25rem; } }
+
 </style>
 }
 
-<div class="blog-banner">
-    <img src="/images/blog-seo-large.png" alt="PageIndex Document AI" class="blog-banner-img" />
-</div>
+  <!-- ═══ HERO BANNER ═══ -->
+    <div class="cs-banner">
+       <img src="/images/blog-seo-large.png" alt="PageIndex Document AI" class="blog-banner-img" />
+        <div class="cs-banner-overlay"></div>
+        <div class="cs-banner-content container">
+            <span class="cs-tag">Blog</span>
+            <h1 class="cs-banner-title">Future of Document AI Beyond Traditional RAG</h1>
+        
+        </div>
+    </div>
 
 <main class="blog-page">
     <div class="container">
@@ -101,7 +122,7 @@
                     <li>Output → Highly relevant, context-aware answers</li>
                 </ul>
                 <p>This mimics how humans navigate documents- by scanning headings, sections, and references.</p>
-
+                 <img src="/images/blog-page-index.jpg" alt="PageIndex Pipeline Diagram" class="blog-inline-img" />
                 <h2 id="how-works">How PageIndex Works</h2>
                 <p>PageIndex follows a two-step intelligent pipeline:</p>
                 <h3>1. Semantic Tree Indexing</h3>
@@ -116,7 +137,7 @@
                     <li>Finds logically relevant sections, not just similar text</li>
                     <li>Produces traceable reasoning paths</li>
                 </ul>
-                <img src="/images/blog-seo-large.png" alt="PageIndex Pipeline Diagram" class="blog-inline-img" />
+                <img src="/images/blog-page-index2.jpg" alt="PageIndex Pipeline Diagram" class="blog-inline-img" />
 
                 <h2 id="vs-rag">PageIndex vs Traditional RAG</h2>
                 <table class="compare-table">
