@@ -13,11 +13,11 @@
     .cs-banner { position: relative; width: 100%; height: 480px; overflow: hidden; }
     .cs-banner-img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .cs-banner-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.15) 100%); }
-    .cs-banner-content { position: absolute; bottom: 2.75rem; left: 50%; transform: translateX(-50%); width: 100%; max-width: 1200px;  }
+    .cs-banner-content { position: absolute; bottom: 2.75rem; left: 50%; transform: translateX(-50%); width: 100%; }
     .cs-tag { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; font-size: 0.72rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.875rem; backdrop-filter: blur(4px); }
     .cs-banner-title { font-size: clamp(1.4rem, 2.5vw, 2.25rem); font-weight: 700; color: #fff; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 0.75rem; font-family: var(--font-heading); white-space: nowrap; }
     .cs-banner-sub { font-size: 1rem; color: rgba(255,255,255,0.8); line-height: 1.65; margin: 0; max-width: 560px; }
-    @@media (max-width: 600px) { .cs-banner { height: 360px; } .cs-banner-content { bottom: 1.75rem; padding: 0 1.25rem; } .cs-banner-title { white-space: normal; } }
+    @@media (max-width: 600px) { .cs-banner { height: 360px; } .cs-banner-content { bottom: 1.75rem; padding: 0 32px; } .cs-banner-title { white-space: normal; } }
 
     .cs-layout { display: grid; grid-template-columns: 1fr 300px; gap: 3rem; align-items: start; margin-top: 3rem; }
 
@@ -64,7 +64,7 @@
     }
     @@media (max-width: 600px) {
         .results-grid { grid-template-columns: 1fr; }
-        .cs-cta-banner { flex-direction: column; align-items: flex-start; }
+        .cs-cta-banner { flex-direction: column; }
     }
         @@media (max-width: 1400px) {
         .cs-banner

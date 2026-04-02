@@ -12,12 +12,12 @@
    ══════════════════════════════════════════════ */
 .hero {
     position: relative;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     display: flex;
     align-items: center;
     background: var(--background);
     overflow: hidden;
-    padding: 80px 0 5rem 0;
+    padding: 8rem 0 5rem 0;
 }
 
 /* VIDEO */
@@ -54,8 +54,11 @@
     .hero .hero-grid {
         grid-template-columns: 1fr 1fr;
     }
+    .hero{
+        min-height:100vh;
+                padding: 80px 0 5rem 0;
+    }
 }
-
 .hero h1 {
     font-size: clamp(2.25rem, 5vw, 3.75rem);
     font-weight: 700;
@@ -510,11 +513,17 @@
     gap: 1.5rem;
 }
 
-@@media (min-width: 768px) {
+@@media (min-width: 567px) {
     .process .steps-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 }
+
+        @@media (min-width: 992px) {
+            .process .steps-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
 
 /* Step card */
 .step-card {
@@ -1037,7 +1046,7 @@
     overflow: hidden;
     transition: border-color 0.2s;
     cursor: pointer;
-            height: -webkit-fill-available;
+            /* height: -webkit-fill-available; */
 }
 
 .post-card p {
@@ -1063,7 +1072,7 @@
 
     .post-card .card-body {
         padding: 1.5rem;
-        height: -webkit-fill-available;
+        /* height: -webkit-fill-available; */
         background-color: #ebebec59;
     }
 
@@ -1090,9 +1099,23 @@
   max-width: 860px;
   margin: 0 auto 1.5rem;
 }
+
+    @@media (min-width: 768px) {
+        .insights .posts-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .post-card {
+            height: -webkit-fill-available;
+        }
+
+        .post-card .card-body{
+                height: -webkit-fill-available;
+        }
+    }
     }
 
-/* ══════════════════════════════════════════════
+    /* ══════════════════════════════════════════════
    10. CTA
    ══════════════════════════════════════════════ */
 .cta-section {
@@ -1134,23 +1157,7 @@
         grid-template-columns: repeat(4, 1fr);
         gap: 30px;
     }
-        @@media (max-width: 900px) {
-            .offices-grid
-
-        {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        }
-
-        @@media (max-width: 480px) {
-            .offices-grid
-
-        {
-            grid-template-columns: 1fr;
-        }
-
-        }
+        
 
     /* CARD */
     .office-card {
@@ -1231,6 +1238,26 @@
             white-space: nowrap;
         }
 
+        }
+
+        @@media (max-width: 992px) {
+            .offices-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .office-card-front img {
+                height: 300px;
+            }
+
+            .office-card-inner{
+                height:420px;
+            }
+        }
+
+        @@media (max-width: 600px) {
+            .offices-grid {
+                grid-template-columns: 1fr;
+            }
         }
         </style>
     }
@@ -1597,7 +1624,7 @@
                 </svg>
               </button>
             </div>
-                    <video id="testiVideo" style="width: 100%; display: inline-block;height:-webkit-fill-available;" controls preload="none" poster="./global-skyline.png"
+                    <video id="testiVideo" style="width: 100%; display: inline-block;height:-webkit-fill-available;" controls preload="none" 
               style="display:none; width:100%; border-radius:12px;">
                         <source src="/media/Testimonial_Video.webm" type="video/webm" />
             </video>

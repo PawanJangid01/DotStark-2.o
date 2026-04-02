@@ -487,10 +487,7 @@ img {
         text-align: left;
     }
 
-    .aboutus-stats-wrapper .numbers-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1rem;
-    }
+    
 
     .aboutus-stats-wrapper .number-card {
         margin: 0;
@@ -498,12 +495,18 @@ img {
 }
 
 @media (max-width: 767px) {
-    .aboutus-stats-wrapper .numbers-grid {
-        grid-template-columns: 1fr;
-    }
 
     .aboutus-stats-wrapper .content-section h2 {
         text-align: center;
+    }
+    .aboutus-stats-wrapper .numbers-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+    }
+}
+@media (max-width: 567px) {
+    .aboutus-stats-wrapper .numbers-grid {
+        grid-template-columns: 1fr;
     }
 }
 
