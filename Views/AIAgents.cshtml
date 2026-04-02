@@ -61,22 +61,36 @@ img{max-width:100%;display:block}
 .section-label{font-size:0.8rem;font-weight:600;color:var(--primary);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:16px}
 
 /* ===== HERO ===== */
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 24px 60px}
+        .hero {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10rem 32px 6rem;
+        }
 .hero-grid{position:absolute;inset:0;opacity:0.03;background-image:linear-gradient(var(--primary) 1px,transparent 1px),linear-gradient(90deg,var(--primary) 1px,transparent 1px);background-size:64px 64px;pointer-events:none}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;border:1px solid var(--border);background:var(--surface);font-size:0.875rem;color:var(--text-dim);margin-bottom:32px}
 .hero-badge svg{width:16px;height:16px;color:var(--primary);stroke:var(--primary);fill:none;stroke-width:2}
-.hero h1{font-size:clamp(2.25rem, 5vw, 3.75rem);font-weight:700;line-height:1.05;letter-spacing:-0.02em;margin-bottom:24px}
+.hero h1{font-size:clamp(2.25rem, 5vw, 3.75rem);font-weight:700;line-height:1.3;letter-spacing:-0.02em;margin-bottom:24px}
 .hero h1 span{background:hsl(228, 100%, 55%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero .lead{font-size:clamp(1.125rem, 2vw, 1.25rem);color:var(--text-dim);max-width:800px;margin:0 auto 16px}
 .hero .sublead{font-size:1rem;color:var(--text-muted);max-width:800px;margin:0 auto 40px}
 
+        @@media (min-width: 1024px) {
+            .hero {
+                min-height: 100vh;
+                /* padding: 80px 0 5rem 0; */
+                
+            }
+        }
 /* ===== AGENTS ===== */
 .agents{padding:0 0 5rem 0;}
 .agents-header{text-align:center;margin-bottom:64px}
 .agents-header h2{font-size:clamp(1.75rem, 3.5vw, 2.5rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:24px}
 .agents-header p{font-size:1.125rem;color:var(--text-dim);max-width:640px;margin:0 auto}
 .agents-grid{display:grid;gap:24px}
-@@media(min-width:768px){.agents-grid{grid-template-columns:repeat(3,1fr);align-items:stretch}}
+@@media(min-width:992px){.agents-grid{grid-template-columns:repeat(3,1fr);align-items:stretch}}
 
         .agent-card {
             background: var(--surface);
