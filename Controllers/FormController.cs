@@ -92,7 +92,7 @@ namespace DotStarkWeb.Controllers
             template = ReplaceOrRemove(template, "CompanySize", "Company Size", companySize);
             template = ReplaceOrRemove(template, "Subject", "Subject", subject);
             template = ReplaceOrRemove(template, "Subscription", "Subscription", subscription);
-            template = ReplaceOrRemove(template, "Product Type", "ProductType", productType);
+            template = ReplaceOrRemove(template, "ProductType", "Product Type", productType);
             template = ReplaceOrRemove(template, "Message", "Message", message);
        
             // Send email
