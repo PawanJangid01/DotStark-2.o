@@ -444,28 +444,28 @@
               <div class="form-row">
                 <div class="field">
                   @* <label for="firstName">First Name</label> *@
-                  <input id="firstName" name="firstName" placeholder="First Name *" required>
+                  <input id="firstName" name="firstName" placeholder="First Name *">
                   <div class="error" id="err-firstName"></div>
                 </div>
                 <div class="field">
                   @* <label for="lastName">Last Name</label> *@
-                  <input id="lastName" name="lastName" placeholder="Last Name *" required>
+                  <input id="lastName" name="lastName" placeholder="Last Name *">
                   <div class="error" id="err-lastName"></div>
                 </div>
               </div>
               <div class="field">
                 @* <label for="email">Email</label> *@
-                <input id="email" type="email" name="email" placeholder="Email *" required>
+                <input id="email" type="text" name="email" placeholder="Email *">
                 <div class="error" id="err-email"></div>
               </div>
               <div class="field">
                 @* <label for="company">Company Name</label> *@
-                <input id="company" name="companyName" placeholder="Company Name *" required>
+                <input id="company" name="companyName" placeholder="Company Name *">
                 <div class="error" id="err-company"></div>
               </div>
               <div class="field">
                 @* <label for="companySize">Company Size</label> *@
-                <select id="companySize" name="companySize" required>
+                <select id="companySize" name="companySize">
                   <option value="">Company Size *</option>
                   <option value="1-10">1–10</option>
                   <option value="11-50">11–50</option>
@@ -477,7 +477,7 @@
                 </div>
              <div class="field">
                @* <label for="jobRole">Job Role</label> *@
-               <select id="jobRole" name="jobRole" required>
+               <select id="jobRole" name="jobRole">
                  <option value="">Job Role *</option>
                  <option>Engineering Manager</option>
                  <option>Software Developer / Engineer</option>
@@ -601,6 +601,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const form = document.getElementById('demo-form');
 
+            function validateEmail(email) {
+            const pattern = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+            return pattern.test(email);
+        }
+
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
@@ -609,7 +614,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const fields = [
             { id: 'firstName', msg: 'First name is required' },
             { id: 'lastName', msg: 'Last name is required' },
-            { id: 'email', msg: 'Work email is required' },
+            { id: 'email', msg: 'Email is required' },
             { id: 'company', msg: 'Company name is required' },
             { id: 'companySize', msg: 'Select company size' },
             { id: 'jobRole', msg: 'Job role is required' },
@@ -626,7 +631,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 err.textContent = '';
             }
         });
+                const emailInput = document.getElementById("email");
+                const emailError = document.getElementById("err-email");
 
+                if (emailInput.value && !validateEmail(emailInput.value)) {
+                    emailError.textContent = "Please enter a valid email address";
+                    valid = false;
+                }
         if (!valid) return;
 
         let formData = new FormData(form);
@@ -640,6 +651,12 @@ document.addEventListener("DOMContentLoaded", function () {
             if (data.success) {
                 document.getElementById('intro-section').classList.add('hidden');
                 document.getElementById('video-section').classList.remove('hidden');
+                        setTimeout(() => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            }, 100);
                 setFeatured('1');
             } else {
                 alert(data.message);
