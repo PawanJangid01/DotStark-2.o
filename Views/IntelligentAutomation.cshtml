@@ -99,13 +99,21 @@
 
     /* ---- HERO ---- */
     .hero {
-      min-height: 100vh;
+     
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
       overflow: hidden;
+            padding: 10rem 32px 6rem;
     }
+
+        @@media (min-width: 1024px) {
+            .hero {
+                min-height: 100vh;
+
+            }
+        }
     
     .hero-content { position: relative; max-width: 56rem; margin: 0 auto; text-align: center; width: 100%; }
     .hero-badge {
@@ -123,7 +131,7 @@
     .hero h1 {
       font-size: clamp(2.25rem, 5vw, 3.75rem);
       font-weight: 700;
-      line-height: 1.05;
+      line-height: 1.3;
       letter-spacing: -0.025em;
       margin-bottom: 1.5rem;
       color: var(--text-bright);
@@ -235,7 +243,7 @@
 
     /* ---- MID CTA ---- */
     .mid-cta {
-      padding: 5rem 0;
+      padding: 5rem 32px;
       text-align: center;
       background-color: #ebebec;
       
@@ -386,7 +394,7 @@
     }
 
     .case-section{
-        padding: 5rem 0;
+        padding: 0;
     }
 
       .case-section .btn-link {
@@ -421,9 +429,7 @@
   <section class="hero section-padding">
     <div class="hero-grid"></div>
     <div class="hero-content">
-      <div class="reveal">
-   <br>
-      </div>
+      
       <h1 class="reveal">Automate Smarter. Operate Faster. <span class="gradient-text">Scale Without Limits.</span></h1>
       <p class="sub reveal">Harness the power of Intelligent Automation to eliminate manual effort, streamline complex workflows, and drive consistent results across your entire organization</p>
       <div class="reveal">

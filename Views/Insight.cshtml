@@ -115,6 +115,12 @@
     /* ── Stats ── */
     .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
     @@media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        @@media (max-width: 460px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     .stat-card {
       background: var(--ds-card); border: 1px solid var(--ds-border); border-radius: 12px;
       padding: 32px; text-align: center; transition: all 0.3s;

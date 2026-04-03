@@ -1,0 +1,628 @@
+﻿@{
+	Layout = "MasterLayout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book an Appointment — DotStark</title>
+  <meta name="description" content="Book an appointment with DotStark AI assistant. Step-by-step guided booking with validation and OTP verification." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@@latest/dist/umd/lucide.js"></script>
+  <style>
+    /* ── CSS Variables (DotStark theme) ── */
+    :root {
+      --background: #ffffff;
+      --foreground: hsl(222, 47%, 11%);
+      --primary: hsl(228, 100%, 55%);
+      --primary-fg: #ffffff;
+      --secondary: hsl(220, 14%, 96%);
+      --muted1: hsl(220, 14%, 96%);
+      --muted1-fg: hsl(220, 9%, 46%);
+      --border: hsl(220, 13%, 91%);
+      --destructive: hsl(0, 84%, 60%);
+      --radius: 0.75rem;
+      --font: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      background: var(--background);
+      color: var(--foreground);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4, h5, h6 { letter-spacing: -0.03em; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; font-family: inherit; }
+    input, select { font-family: inherit; }
+
+    /* ── Utilities ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ── Header ── */
+    
+
+    
+    /* ── Hero ── */
+    .hero {
+      position: relative; overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      background: hsl(220,14%,96%,0.3);
+      padding-top: 64px;
+    }
+    .hero-inner { position: relative; text-align: center; padding: 4rem 1.5rem; }
+    .hero h1 { font-size: 2rem; font-weight: 700; animation: fadeUp 0.5s ease both; }
+    .hero p { margin-top: 1rem; max-width: 36rem; margin-left: auto; margin-right: auto; color: var(--muted1-fg); animation: fadeUp 0.5s 0.1s ease both; }
+
+    @@keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @@keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @@media (min-width: 640px) { .hero h1 { font-size: 2.5rem; } }
+
+    /* ── Card Rim ── */
+    .card-rim { border: 1px solid var(--border); }
+
+    /* ── Chat Container ── */
+    .chat-wrapper { max-width: 42rem; margin: 0 auto; padding: 3rem 1rem; }
+    .chat-header { border-radius: var(--radius) var(--radius) 0 0; background: var(--background); padding: 1rem; }
+    .chat-header-row { display: flex; align-items: center; justify-content: space-between; }
+    .chat-header-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted1-fg); }
+    .chat-header-title { font-size: 1.125rem; font-weight: 700; color: var(--foreground); }
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 0.375rem;
+      background: #dcfce7; color: #15803d;
+      padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 500;
+    }
+    .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; }
+
+    /* ── Required Fields Badges ── */
+    .fields-bar { margin-top: 1rem; }
+    .fields-bar-title { font-size: 0.75rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .badges { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.25rem;
+      border: 1px solid var(--border); background: var(--secondary);
+      color: var(--muted1-fg); padding: 0.25rem 0.75rem;
+      border-radius: 9999px; font-size: 0.75rem; font-weight: 500;
+      transition: all 0.3s;
+    }
+    .badge.filled { border-color: #bbf7d0; background: #f0fdf4; color: #15803d; }
+    .badge .check-icon { width: 12px; height: 12px; }
+
+    /* ── Chat Messages ── */
+    .chat-messages {
+      border-top: none; background: hsl(220,14%,96%,0.2);
+      padding: 1rem; min-height: 320px; max-height: 480px;
+      overflow-y: auto;
+    }
+    .msg-row { display: flex; gap: 0.75rem; margin-bottom: 1rem; animation: fadeIn 0.3s ease both; }
+    .msg-row.user { justify-content: flex-end; }
+    .msg-row.bot { justify-content: flex-start; }
+    .avatar {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .avatar.bot-avatar { background: var(--primary); color: var(--primary-fg); }
+    .avatar.user-avatar { background: var(--muted1); color: var(--muted1-fg); }
+    .avatar.success-avatar { background: #22c55e; color: #fff; }
+    .avatar i { width: 16px; height: 16px; }
+    .bubble {
+      max-width: 80%; border-radius: var(--radius); padding: 0.75rem 1rem;
+      font-size: 0.875rem; line-height: 1.6;
+    }
+    .bubble.bot-bubble { border: 1px solid var(--border); background: var(--background); color: var(--foreground); box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+    .bubble.user-bubble { background: var(--primary); color: var(--primary-fg); }
+
+    /* ── Summary Card ── */
+    .summary-card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--background); padding: 1rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04); max-width: 85%; }
+    .summary-row { display: flex; justify-content: space-between; font-size: 0.875rem; padding: 0.25rem 0; }
+    .summary-label { color: var(--muted1-fg); }
+    .summary-value { font-weight: 500; color: var(--foreground); }
+    .summary-actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
+
+    /* ── Edit Choice Card ── */
+    .edit-card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--background); padding: 1rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04); max-width: 85%; }
+    .edit-card p { font-size: 0.875rem; margin-bottom: 0.75rem; }
+    .edit-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    /* ── OTP Card ── */
+    .otp-card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--background); padding: 1rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04); max-width: 85%; }
+    .otp-hint { font-size: 0.75rem; color: var(--muted1-fg); margin-bottom: 0.5rem; }
+    .otp-hint strong { font-family: monospace; font-weight: 700; color: var(--foreground); }
+    .otp-inputs { display: flex; gap: 0.5rem; }
+    .otp-input {
+      width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 0.375rem;
+      background: var(--background); text-align: center; font-size: 1.125rem; font-weight: 600;
+      color: var(--foreground); outline: none; transition: box-shadow 0.2s;
+    }
+    .otp-input:focus { box-shadow: 0 0 0 2px var(--primary); }
+    .otp-error { display: flex; align-items: center; gap: 0.25rem; font-size: 0.75rem; color: var(--destructive); margin-top: 0.5rem; }
+    .otp-error i { width: 12px; height: 12px; }
+
+    /* ── Success Card ── */
+    .success-card { border: 1px solid #bbf7d0; border-radius: var(--radius); background: #f0fdf4; padding: 1rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04); max-width: 85%; }
+    .success-card .title { font-size: 0.875rem; font-weight: 500; color: #166534; }
+    .success-card .subtitle { font-size: 0.75rem; color: #16a34a; margin-top: 0.25rem; }
+
+    /* ── Directive Bar ── */
+    .directive-bar { border-top: none; background: hsl(220,14%,96%,0.4); padding: 0.75rem 1rem; }
+    .directive-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+    .directive-info { font-size: 0.75rem; color: var(--muted1-fg); margin-top: 0.25rem; }
+
+    /* ── Input Area ── */
+    .input-area { border-top: none; border-radius: 0 0 var(--radius) var(--radius); background: var(--background); padding: 1rem; }
+    .input-row { display: flex; gap: 0.5rem; }
+    .text-input {
+      flex: 1; height: 40px; border: 1px solid var(--border); border-radius: 0.375rem;
+      background: var(--background); padding: 0 0.75rem; font-size: 0.875rem;
+      color: var(--foreground); outline: none; transition: box-shadow 0.2s;
+    }
+    .text-input::placeholder { color: var(--muted1-fg); }
+    .text-input:focus { box-shadow: 0 0 0 2px var(--primary); }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.375rem;
+      font-size: 0.875rem; font-weight: 500; border: none;
+      border-radius: 0.375rem; padding: 0.5rem 1rem;
+      transition: all 0.2s; white-space: nowrap;
+    }
+    .btn i { width: 14px; height: 14px; }
+    .btn-primary { background: var(--primary); color: var(--primary-fg); }
+    .btn-primary:hover { filter: brightness(1.1); }
+    .btn-outline { background: transparent; color: var(--foreground); border: 1px solid var(--border); }
+    .btn-outline:hover { background: var(--secondary); }
+    .btn-sm { font-size: 0.75rem; padding: 0.375rem 0.75rem; }
+
+    /* ── Date Picker ── */
+    .date-trigger {
+      display: flex; align-items: center; gap: 0.5rem; width: 100%;
+      height: 40px; border: 1px solid var(--border); border-radius: 0.375rem;
+      background: var(--background); padding: 0 0.75rem; font-size: 0.875rem;
+      color: var(--muted1-fg); cursor: pointer; transition: box-shadow 0.2s;
+    }
+    .date-trigger:hover { box-shadow: 0 0 0 2px var(--primary); }
+    .date-trigger i { width: 16px; height: 16px; color: var(--primary); }
+
+    .calendar-popup {
+      position: absolute; z-index: 100; background: var(--background);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1); padding: 0.75rem;
+      display: none;
+    }
+    .calendar-popup.open { display: block; }
+    .cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+    .cal-header span { font-size: 0.875rem; font-weight: 500; }
+    .cal-nav { background: none; border: 1px solid var(--border); border-radius: 0.375rem; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .cal-nav:hover { background: var(--secondary); }
+    .cal-nav i { width: 14px; height: 14px; }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; text-align: center; }
+    .cal-day-label { font-size: 0.7rem; font-weight: 500; color: var(--muted1-fg); padding: 0.25rem; }
+    .cal-day {
+      font-size: 0.8rem; padding: 0.375rem; border-radius: 0.375rem; border: none;
+      background: transparent; cursor: pointer; color: var(--foreground); transition: all 0.15s;
+    }
+    .cal-day:hover:not(.disabled):not(.empty) { background: var(--primary); color: var(--primary-fg); }
+    .cal-day.today { background: var(--secondary); font-weight: 600; }
+    .cal-day.disabled { color: var(--muted1-fg); opacity: 0.4; cursor: not-allowed; }
+    .cal-day.empty { cursor: default; }
+
+    /* ── Time Select ── */
+    .time-select {
+      width: 100%; height: 40px; border: 1px solid var(--border); border-radius: 0.375rem;
+      background: var(--background); padding: 0 0.75rem; font-size: 0.875rem;
+      color: var(--foreground); outline: none; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 0.75rem center;
+      cursor: pointer; transition: box-shadow 0.2s;
+    }
+    .time-select:focus { box-shadow: 0 0 0 2px var(--primary); }
+
+    
+  </style>
+</head>
+<body>
+
+
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="grid-pattern"></div>
+  <div class="hero-inner container">
+    <h1>Book an Appointment</h1>
+    <p>Our AI assistant will guide you through the booking process step by step.</p>
+  </div>
+</section>
+
+<!-- ═══ CHAT SECTION ═══ -->
+<section class="container">
+  <div class="chat-wrapper">
+
+    <!-- Chat Header -->
+    <div class="card-rim chat-header">
+      <div class="chat-header-row">
+        <div>
+          <p class="chat-header-label">Booking Assistant</p>
+          <h2 class="chat-header-title">Dotstark AI</h2>
+        </div>
+        <span class="status-badge"><span class="status-dot"></span> Connected</span>
+      </div>
+      @* <div class="fields-bar">
+        <p class="fields-bar-title">Required Booking Fields</p>
+        <div class="badges" id="badgesContainer"></div>
+      </div> *@
+    </div>
+
+    <!-- Chat Messages -->
+    <div class="card-rim chat-messages" id="chatMessages" style="border-top:none"></div>
+
+    <!-- Directive Bar -->
+    @* <div class="card-rim directive-bar" id="directiveBar" style="border-top:none">
+      <p class="directive-title" id="directiveTitle">Current Directive: TEXT_INPUT</p>
+      <p class="directive-info" id="directiveInfo">Directive: TEXT_INPUT | Active field: Full Name</p>
+    </div> *@
+
+    <!-- Input Area -->
+    <div class="card-rim input-area" id="inputArea" style="border-top:none; position: relative;"></div>
+  </div>
+</section>
+
+
+
+<script>
+// ── Initialize Lucide Icons ──
+lucide.createIcons();
+
+// ── State ──
+const FIELDS = ['fullName', 'email', 'phone', 'date', 'time'];
+const FIELD_LABELS = { fullName: 'Full Name', email: 'Email Address', phone: 'Phone Number', date: 'Preferred Date', time: 'Preferred Time' };
+const TIME_SLOTS = ['09:00 AM','09:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','01:00 PM','01:30 PM','02:00 PM','02:30 PM','03:00 PM','03:30 PM','04:00 PM','04:30 PM','05:00 PM'];
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+let stage = 'greeting';
+let editingField = null;
+let bookingData = { fullName: '', email: '', phone: '', date: null, time: '' };
+let generatedOtp = '';
+let calMonth, calYear;
+
+const $msgs = document.getElementById('chatMessages');
+const $input = document.getElementById('inputArea');
+// const $directive = document.getElementById('directiveBar');
+// const $directiveTitle = document.getElementById('directiveTitle');
+// const $directiveInfo = document.getElementById('directiveInfo');
+
+// ── Helpers ──
+function scrollChat() { setTimeout(() => $msgs.scrollTop = $msgs.scrollHeight, 80); }
+
+function formatDate(d) {
+  return MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+}
+
+function validate(field, value) {
+  switch (field) {
+    case 'fullName':
+      if (!value.trim()) return 'Full name is required.';
+      if (value.trim().length < 2) return 'Name must be at least 2 characters.';
+      if (/\d/.test(value)) return 'Name should not contain numbers.';
+      if (value.trim().length > 100) return 'Name must be under 100 characters.';
+      return null;
+    case 'email':
+      if (!value.trim()) return 'Email address is required.';
+      if (!/^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/.test(value.trim())) return 'Please enter a valid email address.';
+      return null;
+    case 'phone':
+      if (!value.trim()) return 'Phone number is required.';
+      if (!/^\+?[\d\s\-()]{7,15}$/.test(value.trim())) return 'Please enter a valid phone number (7–15 digits).';
+      return null;
+    case 'date':
+      if (!value) return 'Please select a date.';
+      return null;
+    case 'time':
+      if (!value) return 'Please select a time slot.';
+      return null;
+  }
+}
+
+// ── Render Badges ──
+// function renderBadges() {
+//   const c = document.getElementById('badgesContainer');
+//   c.innerHTML = FIELDS.map(f => {
+//     const filled = f === 'date' ? !!bookingData.date : !!bookingData[f];
+//     return `<span class="badge${filled ? ' filled' : ''}">${filled ? '<i data-lucide="check-circle-2" class="check-icon"></i> ' : ''}${FIELD_LABELS[f]}${filled ? '' : ' (required)'}</span>`;
+//   }).join('');
+//   lucide.createIcons();
+// }
+
+// ── Add Messages ──
+function addMsg(role, content) {
+  const row = document.createElement('div');
+  row.className = 'msg-row ' + role;
+  if (role === 'bot') {
+    row.innerHTML = `<div class="avatar bot-avatar"><i data-lucide="bot"></i></div><div class="bubble bot-bubble">${content}</div>`;
+  } else {
+    row.innerHTML = `<div class="bubble user-bubble">${content}</div><div class="avatar user-avatar"><i data-lucide="user"></i></div>`;
+  }
+  $msgs.appendChild(row);
+  lucide.createIcons();
+  scrollChat();
+}
+
+// ── Render Input Area ──
+function renderInput() {
+  const active = editingField || stage;
+  const placeholders = { fullName: 'Your full name', email: 'you@@company.com', phone: '+1 234 567 8900' };
+
+  // Directive
+  if (stage === 'success') {
+    // $directive.style.display = 'none';
+    $input.style.display = 'none';
+    return;
+  }
+  // $directive.style.display = '';
+  $input.style.display = '';
+
+  let dType = 'TEXT_INPUT';
+  let dInfo = '';
+  // if (['fullName','email','phone'].includes(active)) {
+  //   dInfo = 'Directive: TEXT_INPUT | Active field: ' + FIELD_LABELS[active];
+  // } else if (active === 'date') { dType = 'DATE_PICKER'; dInfo = 'Directive: DATE_PICKER — Select a date'; }
+  // else if (active === 'time') { dType = 'TIME_PICKER'; dInfo = 'Directive: TIME_PICKER — Select a time slot'; }
+  // else if (active === 'summary' || stage === 'summary') { dType = 'REVIEW'; dInfo = 'Directive: REVIEW — Confirm or edit your details'; }
+  // else if (stage === 'edit-choice') { dType = 'SELECT_FIELD'; dInfo = 'Directive: SELECT_FIELD — Choose a field to edit'; }
+  // else if (stage === 'otp') { dType = 'OTP_VERIFICATION'; dInfo = 'Directive: OTP_VERIFICATION — Enter the 6-digit code'; }
+  // $directiveTitle.textContent = 'Current Directive: ' + dType;
+  // $directiveInfo.textContent = dInfo;
+
+  // Input
+  if (['fullName','email','phone'].includes(active)) {
+    $input.innerHTML = `<form class="input-row" id="textForm"><input class="text-input" id="textField" placeholder="${placeholders[active] || 'Type your response...'}" autocomplete="off" /><button type="submit" class="btn btn-primary">Send <i data-lucide="send"></i></button></form>`;
+    lucide.createIcons();
+    const form = document.getElementById('textForm');
+    const field = document.getElementById('textField');
+    if (editingField && ['fullName','email','phone'].includes(editingField)) {
+      field.value = bookingData[editingField] || '';
+    }
+    field.focus();
+    form.onsubmit = e => { e.preventDefault(); handleTextSubmit(field.value); };
+  } else if (active === 'date') {
+    const today = new Date();
+    calMonth = today.getMonth();
+    calYear = today.getFullYear();
+    $input.innerHTML = `<button class="date-trigger" id="dateTrigger"><i data-lucide="calendar"></i> Pick a date</button><div class="calendar-popup" id="calPopup"></div>`;
+    lucide.createIcons();
+    document.getElementById('dateTrigger').onclick = () => {
+      const popup = document.getElementById('calPopup');
+      popup.classList.toggle('open');
+      renderCalendar();
+    };
+  } else if (active === 'time') {
+    $input.innerHTML = `<select class="time-select" id="timeSelect"><option value="" disabled selected>Select a time slot</option>${TIME_SLOTS.map(t => `<option value="${t}">${t}</option>`).join('')}</select>`;
+    document.getElementById('timeSelect').onchange = e => handleTimeSelect(e.target.value);
+  } else {
+    $input.innerHTML = '';
+  }
+}
+
+// ── Calendar ──
+function renderCalendar() {
+  const popup = document.getElementById('calPopup');
+  const today = new Date(); today.setHours(0,0,0,0);
+  const first = new Date(calYear, calMonth, 1);
+  const startDay = first.getDay();
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+  let html = `<div class="cal-header"><button class="cal-nav" id="calPrev"><i data-lucide="chevron-left"></i></button><span>${MONTHS[calMonth]} ${calYear}</span><button class="cal-nav" id="calNext"><i data-lucide="chevron-right"></i></button></div>`;
+  html += '<div class="cal-grid">';
+  ['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(d => html += `<span class="cal-day-label">${d}</span>`);
+  for (let i = 0; i < startDay; i++) html += '<button class="cal-day empty"></button>';
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dt = new Date(calYear, calMonth, d);
+    const isPast = dt < today;
+    const isToday = dt.getTime() === today.getTime();
+    html += `<button class="cal-day${isPast ? ' disabled' : ''}${isToday ? ' today' : ''}" data-day="${d}"${isPast ? ' disabled' : ''}>${d}</button>`;
+  }
+  html += '</div>';
+  popup.innerHTML = html;
+  lucide.createIcons();
+
+  document.getElementById('calPrev').onclick = () => { calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCalendar(); };
+  document.getElementById('calNext').onclick = () => { calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCalendar(); };
+
+  popup.querySelectorAll('.cal-day:not(.disabled):not(.empty)').forEach(btn => {
+    btn.onclick = () => {
+      const selected = new Date(calYear, calMonth, parseInt(btn.dataset.day));
+      handleDateSelect(selected);
+      popup.classList.remove('open');
+    };
+  });
+}
+
+// ── Proceed to Next ──
+function proceedToNext(currentField) {
+  // renderBadges();
+  if (editingField) {
+    editingField = null;
+    addMsg('bot', "Got it! Here's your updated booking summary:");
+    stage = 'summary';
+    showSummary();
+    renderInput();
+    return;
+  }
+  const idx = FIELDS.indexOf(currentField);
+  const next = FIELDS[idx + 1];
+  if (!next) {
+    addMsg('bot', "Here's a summary of your booking details:");
+    stage = 'summary';
+    showSummary();
+    renderInput();
+    return;
+  }
+  const prompts = { fullName: 'What is your full name?', email: 'What is your email address?', phone: 'What is your phone number?', date: 'Please select your preferred date:', time: 'Please select your preferred time slot:' };
+  setTimeout(() => { addMsg('bot', prompts[next]); stage = next; renderInput(); }, 500);
+}
+
+// ── Handlers ──
+function handleTextSubmit(value) {
+  const field = editingField || stage;
+  const error = validate(field, value);
+  if (error) { addMsg('bot', '⚠️ ' + error); return; }
+  addMsg('user', value);
+  bookingData[field] = value.trim();
+  proceedToNext(field);
+}
+
+function handleDateSelect(date) {
+  addMsg('user', formatDate(date));
+  bookingData.date = date;
+  proceedToNext('date');
+}
+
+function handleTimeSelect(time) {
+  addMsg('user', time);
+  bookingData.time = time;
+  proceedToNext('time');
+}
+
+// ── Summary ──
+function showSummary() {
+  const row = document.createElement('div');
+  row.className = 'msg-row bot';
+  row.style.animation = 'fadeIn 0.3s ease both';
+  row.innerHTML = `
+    <div class="avatar bot-avatar"><i data-lucide="bot"></i></div>
+    <div class="summary-card">
+      <div class="summary-row"><span class="summary-label">Name</span><span class="summary-value">${bookingData.fullName}</span></div>
+      <div class="summary-row"><span class="summary-label">Email</span><span class="summary-value">${bookingData.email}</span></div>
+      <div class="summary-row"><span class="summary-label">Phone</span><span class="summary-value">${bookingData.phone}</span></div>
+      <div class="summary-row"><span class="summary-label">Date</span><span class="summary-value">${bookingData.date ? formatDate(bookingData.date) : '—'}</span></div>
+      <div class="summary-row"><span class="summary-label">Time</span><span class="summary-value">${bookingData.time}</span></div>
+      <div class="summary-actions">
+        <button class="btn btn-outline btn-sm" id="btnEdit"><i data-lucide="pencil"></i> Edit Details</button>
+        <button class="btn btn-primary btn-sm" id="btnConfirm"><i data-lucide="check-circle-2"></i> Confirm Booking</button>
+      </div>
+    </div>`;
+  $msgs.appendChild(row);
+  lucide.createIcons();
+  scrollChat();
+  document.getElementById('btnEdit').onclick = handleEdit;
+  document.getElementById('btnConfirm').onclick = handleConfirm;
+}
+
+function handleEdit() {
+  addMsg('user', 'Edit Details');
+  setTimeout(() => {
+    addMsg('bot', 'Which detail would you like to edit?');
+    const row = document.createElement('div');
+    row.className = 'msg-row bot';
+    row.style.animation = 'fadeIn 0.3s ease both';
+    row.innerHTML = `<div class="avatar bot-avatar"><i data-lucide="bot"></i></div><div class="edit-card"><p>Select the field you'd like to update:</p><div class="edit-buttons">${FIELDS.map(f => `<button class="btn btn-outline btn-sm" data-field="${f}">${FIELD_LABELS[f]}</button>`).join('')}</div></div>`;
+    $msgs.appendChild(row);
+    lucide.createIcons();
+    scrollChat();
+    stage = 'edit-choice';
+    renderInput();
+    row.querySelectorAll('[data-field]').forEach(btn => {
+      btn.onclick = () => {
+        const field = btn.dataset.field;
+        addMsg('user', 'Edit ' + FIELD_LABELS[field]);
+        editingField = field;
+        const prompts = { fullName: 'Please enter your updated full name:', email: 'Please enter your updated email address:', phone: 'Please enter your updated phone number:', date: 'Please select a new preferred date:', time: 'Please select a new preferred time slot:' };
+        setTimeout(() => { addMsg('bot', prompts[field]); stage = field; renderInput(); }, 400);
+      };
+    });
+  }, 400);
+}
+
+function handleConfirm() {
+  addMsg('user', 'Confirm Booking');
+  generatedOtp = String(Math.floor(100000 + Math.random() * 900000));
+  setTimeout(() => {
+    addMsg('bot', 'We\'ve sent a 6-digit OTP to ' + bookingData.email + '. Please enter it below to verify your booking.');
+    // OTP card
+    const row = document.createElement('div');
+    row.className = 'msg-row bot';
+    row.style.animation = 'fadeIn 0.3s ease both';
+    row.innerHTML = `
+      <div class="avatar bot-avatar"><i data-lucide="shield"></i></div>
+      <div class="otp-card">
+        <p class="otp-hint">(Demo OTP: <strong>${generatedOtp}</strong>)</p>
+        <div class="otp-inputs">${Array.from({length:6}).map((_,i) => `<input class="otp-input" maxlength="1" inputmode="numeric" data-idx="${i}" />`).join('')}</div>
+        <div class="otp-error" id="otpError" style="display:none"><i data-lucide="alert-circle"></i> <span></span></div>
+        <button class="btn btn-primary btn-sm" style="margin-top:0.75rem" id="btnOtp">Verify OTP <i data-lucide="arrow-right"></i></button>
+      </div>`;
+    $msgs.appendChild(row);
+    lucide.createIcons();
+    scrollChat();
+    stage = 'otp';
+    renderInput();
+
+    // OTP input behavior
+    const inputs = row.querySelectorAll('.otp-input');
+    inputs.forEach((inp, i) => {
+      inp.addEventListener('input', () => {
+        if (!/^\d?$/.test(inp.value)) { inp.value = ''; return; }
+        if (inp.value && i < 5) inputs[i+1].focus();
+      });
+      inp.addEventListener('keydown', e => {
+        if (e.key === 'Backspace' && !inp.value && i > 0) inputs[i-1].focus();
+      });
+    });
+    inputs[0].focus();
+
+    document.getElementById('btnOtp').onclick = () => {
+      const otp = Array.from(inputs).map(i => i.value).join('');
+      const errEl = document.getElementById('otpError');
+      if (otp.length < 6) {
+        errEl.style.display = 'flex'; errEl.querySelector('span').textContent = 'Please enter all 6 digits.'; return;
+      }
+      if (otp !== generatedOtp) {
+        errEl.style.display = 'flex'; errEl.querySelector('span').textContent = 'Invalid OTP. Please try again.'; return;
+      }
+      errEl.style.display = 'none';
+      addMsg('user', 'OTP Verified ✓');
+      setTimeout(() => {
+        // Success
+        const sRow = document.createElement('div');
+        sRow.className = 'msg-row bot';
+        sRow.style.animation = 'fadeIn 0.3s ease both';
+        sRow.innerHTML = `
+          <div class="avatar success-avatar"><i data-lucide="check-circle-2"></i></div>
+          <div class="success-card">
+            <p class="title">Your booking has been successfully confirmed!</p>
+            <p class="subtitle">We've sent a confirmation to ${bookingData.email}. We look forward to seeing you on ${bookingData.date ? formatDate(bookingData.date) : ''} at ${bookingData.time}.</p>
+          </div>`;
+        $msgs.appendChild(sRow);
+        lucide.createIcons();
+        scrollChat();
+        stage = 'success';
+        renderInput();
+      }, 500);
+    };
+  }, 500);
+}
+
+// ── Init ──
+// renderBadges();
+setTimeout(() => {
+  addMsg('bot', "Hi there! I'm here to help you book an appointment. How can I assist you today?");
+  setTimeout(() => {
+    addMsg('bot', "Let's get started! What is your full name?");
+    stage = 'fullName';
+    renderInput();
+  }, 800);
+}, 500);
+</script>
+
+</body>
+</html>
