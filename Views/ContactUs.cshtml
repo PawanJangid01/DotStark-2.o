@@ -428,6 +428,14 @@
 .btn-primary:hover {
     opacity: 0.9;
 }
+
+        .error-message {
+            font-size: 0.75rem;
+            color: #e53e3e;
+            margin-top: 0.25rem;
+        }
+
+ 
     </style>
     }
 
@@ -448,27 +456,30 @@
                         ✅ Thank you for reaching out! We'll be in touch soon.
                     </div>
 
-                        @using (Html.BeginUmbracoForm("SubmitForm", "Form", FormMethod.Post, new { id = "contactForm",  @class = "contact-form" }))
+                @using (Html.BeginUmbracoForm("SubmitForm", "Form", FormMethod.Post, new { id = "contactForm", @class = "contact-form", onsubmit = "return handleSubmit(event)" }))
                         {
                         <div class="form-row">
                             <div class="form-group">
                                 @* <label for="name">Name</label> *@
-                                <input type="text" id="name" name="name" placeholder="Full Name *" required>
+                                <input type="text" id="name" name="name" placeholder="Full Name *">
+                            <span class="error-message"></span>
                             </div>
                             <div class="form-group">
                                 @* <label for="email">Email</label> *@
-                                <input type="email" id="email" name="email" placeholder="Email *" required>
+                                <input type="text" id="email" name="email" placeholder="Email *">
+                            <span class="error-message"></span>
                             </div>
                         </div>
 
                        <div class="form-row">
                             <div class="form-group">
                                 @* <label for="name">Company Name</label> *@
-                                <input type="text" id="company" name="companyname" placeholder="Company Name *" required>
+                                <input type="text" id="company" name="companyname" placeholder="Company Name *">
+                            <span class="error-message"></span>
                             </div>
                             <div class="form-group">
                              @* <label for="companySize"></label> *@
-                              <select id="companySize" name="companySize" required>
+                              <select id="companySize" name="companySize">
                                 <option value="" disabled selected hidden>Company Size *</option>
                                 <option value="1-10">1–10</option>
                                 <option value="11-50">11–50</option>
@@ -476,6 +487,7 @@
                                 <option value="201-1000">201–1,000</option>
                                 <option value="1000+">1,000+</option>
                               </select>
+                            <span class="error-message"></span>
                             </div>
                         </div>
 
@@ -483,7 +495,7 @@
 
                         <div class="form-group">
                             @* <label for="subject">Subject</label> *@
-                            <select id="subject" name="subject" required>
+                            <select id="subject" name="subject">
                                 <option value="" disabled selected hidden>Subject *</option>
                                 <option value="Request a Free AI Consultation">Request a Free AI Consultation</option>
                                 <option value="AI Product Development">AI Product Development</option>
@@ -494,6 +506,7 @@
                                 <option value="Request a Demo">Request a Demo</option>
                                 <option value="Other / General Inquiry">Other / General Inquiry</option>
                             </select>
+                        <span class="error-message"></span>
                         </div>
 
                         <div class="form-group">
@@ -620,17 +633,7 @@
     </section>
 
     <script>
-        function handleSubmit(e) {
-            e.preventDefault();
-            document.getElementById('successMsg').classList.add('show');
-            document.getElementById('contactForm').reset();
-            setTimeout(() => {
-                document.getElementById('successMsg').classList.remove('show');
-            }, 5000);
-        }
-    </script>
 
-     <script>
 document.addEventListener("DOMContentLoaded", function () {
 
     const plan = sessionStorage.getItem("selectedPlan");
@@ -647,9 +650,63 @@ document.addEventListener("DOMContentLoaded", function () {
         productHidden.value = product;
     }
 
-    // Optional: clear after use
     sessionStorage.removeItem("selectedPlan");
     sessionStorage.removeItem("selectedProduct");
 
 });
+
+
+    function handleSubmit(e) {
+    e.preventDefault();
+
+    let isValid = true;
+
+    const fields = [
+            { name:"name", message:"Full Name is required"},
+            { name:"email", message:"Email is required"},
+            { name:"companyname", message:"Company name is required"},
+            { name:"companySize", message:"Select company size"},
+            { name:"subject", message:"Job role is required"},
+    ];
+
+    // Clear previous errors
+    document.querySelectorAll(".error-message").forEach(el => el.remove());
+
+    fields.forEach(field => {
+        const input = document.querySelector(`[name="${field.name}"]`);
+
+        if (!input || input.value.trim() === "") {
+            showError(input, field.message);
+            isValid = false;
+        }
+
+        // Email format validation
+        if (field.name === "email" && input.value.trim() !== "") {
+            const emailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+
+            if (!emailRegex.test(input.value.trim())) {
+                showError(input, "Please enter a valid email address");
+                isValid = false;
+            }
+        }
+    });
+
+    if (isValid) {
+        document.getElementById('successMsg').classList.add('show');
+        document.getElementById('contactForm').reset();
+
+        setTimeout(() => {
+            document.getElementById('successMsg').classList.remove('show');
+        }, 5000);
+    }
+}
+
+function showError(input, message) {
+    const error = document.createElement("div");
+    error.className = "error-message";   
+    error.style.marginTop = "4px";
+    error.innerText = message;
+
+    input.parentNode.appendChild(error);
+}
 </script>

@@ -1056,6 +1056,7 @@ img {
         border-radius: 8px;
         cursor: pointer;
         transition: 0.3s;
+        white-space:nowrap;
     }
 
         .cookie-actions .btn-primary:hover {

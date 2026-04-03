@@ -20,7 +20,14 @@
             min-height: 100%;
         }
     .blog-page { padding: 2rem 0 6rem; background: var(--background); }
-    .blog-layout { display: grid; grid-template-columns: 260px 1fr; gap: 3.5rem; align-items: start; }
+
+        .blog-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 3.5rem;
+            align-items: start;
+            padding-bottom: 5rem;
+        }
     .blog-sidebar { position: sticky; top: 5rem; }
     .toc-box { background: var(--cool-grey); border-radius: 0.75rem; padding: 1.5rem; border: 1px solid var(--border); margin-bottom: 1.5rem; }
     .toc-box > span { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1rem; font-weight: 600; }
@@ -76,6 +83,175 @@
         .cs-banner-sub { font-size: 1rem; color: rgba(255,255,255,0.8); line-height: 1.65; margin: 0; max-width: 560px; }
         @@media (max-width: 600px) { .cs-banner { height: 360px; } .cs-banner-content { bottom: 1.75rem; padding: 0 32px; } }
 
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 380px));
+            justify-content: center;
+            gap: 32px;
+        }
+
+        @@media (max-width: 900px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            transition: box-shadow 0.3s, border-color 0.3s;
+        }
+
+            .card:hover {
+                box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+                border-color: rgba(0,64,255,0.3);
+            }
+
+        .card-img {
+            position: relative;
+            height: 210px;
+            overflow: hidden;
+        }
+
+            .card-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.5s;
+            }
+
+        .card:hover .card-img img {
+            transform: scale(1.05);
+        }
+
+        .card-tag {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: #0040FF;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 50px;
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+            .card-body h3 {
+                font-size: 18px;
+                font-weight: 700;
+                margin-bottom: 10px;
+                line-height: 1.4;
+                transition: color 0.2s;
+            }
+
+        .card:hover .card-body h3 {
+            color: #0040FF;
+        }
+
+        .card-body p {
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+
+            .card-meta svg {
+                width: 12px;
+                height: 12px;
+            }
+
+        .card-author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-top: 8px;
+        }
+
+            .card-author .avatar {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                background: rgba(0,64,255,0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #78748b;
+                font-weight: bold;
+            }
+
+                .card-author .avatar svg {
+                    width: 14px;
+                    height: 14px;
+                    color: #0040FF;
+                }
+
+            .card-author span {
+                font-size: 12px;
+                font-weight: 500;
+                color: #64748b;
+            }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .hero {
+            padding: 10rem 0 5rem;
+        }
+
+        .section.alt {
+            background: #ffffff;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(2.25rem, 5vw, 3.75rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .section-desc {
+            font-size: 16px;
+            color: #64748b;
+            max-width: 640px;
+            margin: 0 auto 56px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        @@media (min-width: 768px) {
+            .card,
+            .card .card-body {
+                height: -webkit-fill-available;
+            }
+        }
 </style>
 }
 
@@ -215,6 +391,65 @@
         </div>
     </div>
 
+    <section class="section" style="background-color: #ebebec;">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">Latest <span>Insights</span></h1>
+                <p class="section-desc">Explore expert perspectives, trends, and best practices in artificial intelligence and modern AI-driven systems.</p>
+            </div>
+
+            <div class="cards-grid">
+                
+                <!-- Blog 2 -->
+                <a href="/blog-ai-agent" class="card-link">
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="/images/blog-ai.png" alt="Scalable AI">
+                        </div>
+                        <div class="card-body">
+                            <span class="tag">AI Agents</span><span class="tag">Automation Systems</span>
+                            <div class="card-meta">
+                                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg> Jan 20, 2026</span>
+                                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg> 7 min read</span>
+                            </div>
+                            <h3>Understanding the Intelligence Behind Automation Systems</h3>
+                            <p>Discover how AI agents go beyond chatbots to independently reason, plan, and execute tasks, all on their own.</p>
+                            <div class="card-author">
+                                <div class="avatar">N</div>
+                                <span>Nitesh Raiwar</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Blog 3 -->
+                <a href="/blog-page-index" class="card-link">
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="/images/blog-seo.png" alt="ML Pipelines">
+                        </div>
+                        <div class="card-body">
+                            <span class="tag">Document AI</span><span class="tag">RAG</span>
+                            <div class="card-meta">
+                                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg> Mar 18, 2026</span>
+                                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg> 6 min read</span>
+                            </div>
+                            <h3>Future of Document AI Beyond Traditional RAG </h3>
+                            <p>
+                                Meet the vectorless, reasoning-based framework that helps AI navigate documents more accurately than traditional RAG systems.
+
+                            </p>
+                            <div class="card-author">
+                                <div class="avatar">S</div>
+                                <span>Shivansh Sharma</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
 </main>
 
 <script>

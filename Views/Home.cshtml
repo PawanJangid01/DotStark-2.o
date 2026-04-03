@@ -168,7 +168,7 @@
             }
 
             .testi-slide blockquote {             
-                min-height: 160px !;
+                min-height: 160px ;
             }
         }
         @@media (max-width: 498px) {
@@ -642,11 +642,7 @@
     gap: 1.5rem;
 }
 
-@@media (min-width: 768px) {
-    .case-studies .cases-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
+
 
 .case-card {
     border: 1px solid var(--border);
@@ -654,7 +650,7 @@
     overflow: hidden;
     transition: border-color 0.2s;
     cursor: pointer;
-            height: -webkit-fill-available;
+            /* height: -webkit-fill-available; */
 }
 
     .case-card:hover {
@@ -690,7 +686,7 @@
     .case-card .card-body {
         padding: 1.5rem;
             background-color: #ebebec59;
-            height: -webkit-fill-available;
+            /* height: -webkit-fill-available; */
     }
 
     .case-card h3 {
@@ -706,6 +702,16 @@
         font-size: 0.875rem;
     }
 
+        @@media (min-width: 768px) {
+            .case-studies .cases-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .case-card,
+            .case-card .card-body {
+                height: -webkit-fill-available;
+            }
+        }
 /* ══════════════════════════════════════════════
    8. TESTIMONIALS
    ══════════════════════════════════════════════ */
@@ -1087,7 +1093,7 @@
     .post-card:hover h3,
     .case-card:hover h3{
         color: var(--primary);
-
+    }
 
             .global-presence h2 {
   font-size: clamp(1.75rem, 4vw, 2.75rem);
@@ -1095,7 +1101,7 @@
 }
 
 .global-presence p {
-  color: #d0e2ff;
+  /* color: #d0e2ff; */
   max-width: 860px;
   margin: 0 auto 1.5rem;
 }
@@ -1109,11 +1115,11 @@
             height: -webkit-fill-available;
         }
 
-        .post-card .card-body{
+                .post-card .card-body {
                 height: -webkit-fill-available;
         }
     }
-    }
+
 
     /* ══════════════════════════════════════════════
    10. CTA
@@ -1624,10 +1630,12 @@
                 </svg>
               </button>
             </div>
-                    <video id="testiVideo" style="width: 100%; display: inline-block;height:-webkit-fill-available;" controls preload="none"
-              style="display:none; width:100%; border-radius:12px;">
-                        <source src="/media/Testimonial_Video.webm" type="video/webm" />
-            </video>
+                    <video id="testiVideo"
+                           controls
+                           preload="metadata"
+                           style="width:100%; border-radius:12px;height:-webkit-fill-available;">
+                        <source src="/media/Testimonial_Video.webm" type="video/webm">
+                    </video>
           </div>
         </div>
 
