@@ -133,7 +133,7 @@ namespace DotStarkWeb.Services
             var senderEmail = settings.Value<string>("senderEmail");
             var fromName = settings.Value<string>("fromName");
             var fullName = name;
-            var templateId = 7;
+            var templateId = 1;
 
             Dictionary<string, object> templateParams = new Dictionary<string, object>
                {
