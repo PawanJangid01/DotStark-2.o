@@ -45,7 +45,7 @@ img{max-width:100%}
 /* Typography */
 .gradient-text{background:hsl(var(--primarycss));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .label{font-size:.75rem;font-weight:600;color:hsl(var(--primarycss));text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem}
-.heading{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;line-height:1.15;margin-bottom:3rem}
+.heading{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;line-height:1.3;margin-bottom:3rem}
 .hero-heading{font-size:clamp(2.25rem, 5vw, 3.75rem);font-weight:700;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.25rem}
 .subtext{font-size:1.125rem;color:var(--muted);max-width:48rem;margin:0 auto 2rem}
 .muted{color:var(--muted)}
@@ -411,7 +411,12 @@ section {
 
     .section-header { text-align: center; margin-bottom: 64px; }
     .section-header h1,
-    .section-header h2 { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.02em; color: #1a2240; }
+            .section-header h2 {
+                font-size: clamp(1.75rem, 4vw, 2.5rem);
+                font-weight: 700;
+                letter-spacing: -0.02em;
+                color: #1a2240;
+            }
     .section-header p { color: #6b7280; max-width: 600px; margin: 16px auto 0; font-size: 1rem; }
 
     .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
@@ -705,7 +710,7 @@ section {
   <section class="impact-section">
     <div class="container">
       <div class="section-header">
-        <h1>Real Business Impact</h1>
+        <h2>Real Business Impact</h2>
       </div>
       <div class="impact-grid">
 
