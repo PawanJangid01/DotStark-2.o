@@ -21,7 +21,22 @@
 </head>
 
 <body>
+    @{
+    var consent = Context.Request.Cookies["cookieConsent"];
+}
 
+@if (consent == "accepted")
+{
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HB5S7MMQ5Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+ 
+  gtag('config', 'G-HB5S7MMQ5Q');
+</script>
+}
   <!-- â•â•â• HEADER â•â•â• -->
   <header class="header">
     <div class="container">
@@ -287,24 +302,37 @@
         }
     </script>
     <script>
-  const cookieBanner = document.getElementById("cookieBanner");
-  const acceptBtn = document.getElementById("cookieAccept");
-  const declineBtn = document.getElementById("cookieDecline");
+const cookieBanner = document.getElementById("cookieBanner");
+const acceptBtn = document.getElementById("cookieAccept");
+const declineBtn = document.getElementById("cookieDecline");
 
-  // Check if user already accepted
-  if (!localStorage.getItem("cookieConsent")) {
-    cookieBanner.style.display = "block";
-  }
+// Helper to get cookie
+function getCookie(name) {
+  return document.cookie.split('; ')
+    .find(row => row.startsWith(name + '='))?.split('=')[1];
+}
 
-  acceptBtn.addEventListener("click", () => {
-    localStorage.setItem("cookieConsent", "accepted");
-    cookieBanner.style.display = "none";
-  });
+// On page load
+const consent = getCookie("cookieConsent");
 
-  declineBtn.addEventListener("click", () => {
-    localStorage.setItem("cookieConsent", "declined");
-    cookieBanner.style.display = "none";
-  });
+// Show banner only if no consent
+if (!consent) {
+  cookieBanner.style.display = "block";
+} else {
+  cookieBanner.style.display = "none";
+}
+
+// Accept cookies
+acceptBtn.addEventListener("click", () => {
+  document.cookie = "cookieConsent=accepted; path=/; max-age=31536000";
+  location.reload(); // reload to trigger Razor GA script
+});
+
+// Decline cookies
+declineBtn.addEventListener("click", () => {
+  document.cookie = "cookieConsent=declined; path=/; max-age=31536000";
+  cookieBanner.style.display = "none";
+});
 </script>
 </body>
 
