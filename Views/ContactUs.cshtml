@@ -443,7 +443,7 @@
     <section class="contact-hero container">       
         <div class="hero-content">
             <h1>Let's Build the <span class="text-accent">Future with AI</span></h1>
-            <p class="subtitle">Connect with our experts to explore AI-driven transformation.</p>
+            <p class="subtitle">Connect with our experts to explore AI-driven transformation</p>
             <p class="subtitle">Fill in the form below and our team will get back to you within 24 hours.</p>
         </div>
     </section>
@@ -497,14 +497,14 @@
                             @* <label for="subject">Subject</label> *@
                             <select id="subject" name="subject">
                                 <option value="" disabled selected hidden>Subject *</option>
-                                <option value="consultation">Request a Free AI Consultation</option>
-                                <option value="product-dev">AI Product Development</option>
-                                <option value="ml-data">ML &amp; Data Solutions</option>
-                                <option value="automation">AI Automation &amp; Agent Development</option>
-                                <option value="partnership">Partnership / Collaboration Opportunity</option>
-                                <option value="pricing">Pricing &amp; Packages Inquiry</option>
-                                <option value="demo">Request a Demo</option>
-                                <option value="other">Other / General Inquiry</option>
+                                <option value="Request a Free AI Consultation">Request a Free AI Consultation</option>
+                                <option value="AI Product Development">AI Product Development</option>
+                                <option value="ML Data Solutions">ML Data Solutions</option>
+                                <option value="AI Automation Agent Development">AI Automation Agent Development</option>
+                                <option value="Partnership / Collaboration Opportunity">Partnership / Collaboration Opportunity</option>
+                                <option value="Pricing Packages Inquiry">Pricing Packages Inquiry</option>
+                                <option value="Request a Demo">Request a Demo</option>
+                                <option value="Other / General Inquiry">Other / General Inquiry</option>
                             </select>
                         <span class="error-message"></span>
                         </div>
@@ -531,7 +531,7 @@
         <div class="container">
             <div class="offices-header">
                 <h2>Global <span class="text-accent">Presence</span></h2>
-                <p>We operate across multiple regions, delivering AI and digital solutions worldwide.</p>
+                <p>We Operate Across Multiple Regions, Delivering AI And Digital Solutions Worldwide</p>
             </div>
 
             <div class="office-grid">
@@ -656,21 +656,19 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-    function handleSubmit(e) {
-    e.preventDefault();
-
+   function handleSubmit(e) {
     let isValid = true;
 
     const fields = [
-            { name:"name", message:"Full Name is required"},
-            { name:"email", message:"Email is required"},
-            { name:"companyname", message:"Company name is required"},
-            { name:"companySize", message:"Select company size"},
-            { name:"subject", message:"Job role is required"},
+        { name:"name", message:"Full Name is required"},
+        { name:"email", message:"Email is required"},
+        { name:"companyname", message:"Company name is required"},
+        { name:"companySize", message:"Select company size"},
+        { name:"subject", message:"Subject is required"},
     ];
 
-    // Clear previous errors
-    document.querySelectorAll(".error-message").forEach(el => el.remove());
+    // Clear previous errors (DO NOT REMOVE ELEMENTS)
+    document.querySelectorAll(".error-message").forEach(el => el.innerText = "");
 
     fields.forEach(field => {
         const input = document.querySelector(`[name="${field.name}"]`);
@@ -680,9 +678,8 @@ document.addEventListener("DOMContentLoaded", function () {
             isValid = false;
         }
 
-        // Email format validation
         if (field.name === "email" && input.value.trim() !== "") {
-            const emailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+            const emailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/; // ✅ fixed
 
             if (!emailRegex.test(input.value.trim())) {
                 showError(input, "Please enter a valid email address");
@@ -691,14 +688,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    if (isValid) {
-        document.getElementById('successMsg').classList.add('show');
-        document.getElementById('contactForm').reset();
-
-        setTimeout(() => {
-            document.getElementById('successMsg').classList.remove('show');
-        }, 5000);
+    // ❌ STOP ONLY IF INVALID
+    if (!isValid) {
+        e.preventDefault();
+        return false;
     }
+
+    // ✅ ALLOW FORM SUBMIT → Controller will be called
+    return true;
 }
 
 function showError(input, message) {
