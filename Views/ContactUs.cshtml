@@ -656,21 +656,19 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-    function handleSubmit(e) {
-    e.preventDefault();
-
+   function handleSubmit(e) {
     let isValid = true;
 
     const fields = [
-            { name:"name", message:"Full Name is required"},
-            { name:"email", message:"Email is required"},
-            { name:"companyname", message:"Company name is required"},
-            { name:"companySize", message:"Select company size"},
-            { name:"subject", message:"Job role is required"},
+        { name:"name", message:"Full Name is required"},
+        { name:"email", message:"Email is required"},
+        { name:"companyname", message:"Company name is required"},
+        { name:"companySize", message:"Select company size"},
+        { name:"subject", message:"Subject is required"},
     ];
 
-    // Clear previous errors
-    document.querySelectorAll(".error-message").forEach(el => el.remove());
+    // Clear previous errors (DO NOT REMOVE ELEMENTS)
+    document.querySelectorAll(".error-message").forEach(el => el.innerText = "");
 
     fields.forEach(field => {
         const input = document.querySelector(`[name="${field.name}"]`);
@@ -680,9 +678,8 @@ document.addEventListener("DOMContentLoaded", function () {
             isValid = false;
         }
 
-        // Email format validation
         if (field.name === "email" && input.value.trim() !== "") {
-            const emailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+            const emailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/; // ✅ fixed
 
             if (!emailRegex.test(input.value.trim())) {
                 showError(input, "Please enter a valid email address");
@@ -691,14 +688,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    if (isValid) {
-        document.getElementById('successMsg').classList.add('show');
-        document.getElementById('contactForm').reset();
-
-        setTimeout(() => {
-            document.getElementById('successMsg').classList.remove('show');
-        }, 5000);
+    // ❌ STOP ONLY IF INVALID
+    if (!isValid) {
+        e.preventDefault();
+        return false;
     }
+
+    // ✅ ALLOW FORM SUBMIT → Controller will be called
+    return true;
 }
 
 function showError(input, message) {
