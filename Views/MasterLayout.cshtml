@@ -1,8 +1,43 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models.Blocks
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 @{
 		Layout = null;
+
+        var layout = Umbraco.ContentAtRoot()
+        .FirstOrDefault(x => x.ContentType.Alias == "masterLayout");
+
+
+    if (layout == null)
+    {
+        <text>Master Layout node not found</text>;
+    }
+
+     // Page-level SEO
+var seoBlock = Model.Value<BlockListModel>("seoSetting")?
+                    .FirstOrDefault()?.Content;
+var pageMetaTitle = seoBlock?.Value<string>("metaTitle");
+var pageMetaDescription = seoBlock?.Value<string>("metaDescription");
+// var pageMetaKeywords = seoBlock?.Value<string>("metaKeywords");
+// var noIndex = seoBlock?.Value<bool>("noIndexNoFollow") ?? false;
+
+      // Final SEO values (Page → Fallback → Hard default)
+    var metaTitle =
+        !string.IsNullOrWhiteSpace(pageMetaTitle)
+        ? pageMetaTitle
+        : layout?.Value<string>("defaultMetaTitle") ?? "DotStrk 2.o";
+
+    var metaDescription =
+        !string.IsNullOrWhiteSpace(pageMetaDescription)
+        ? pageMetaDescription
+        : layout?.Value<string>("defaultMetaDescription");
+
+    // var metaKeywords =
+    //     !string.IsNullOrWhiteSpace(pageMetaKeywords)
+    //     ? pageMetaKeywords
+    //     : layout?.Value<string>("defaultMetaKeywords");
+
 }
 
 
@@ -11,11 +46,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DotStark AI</title>
+  <title>@metaTitle</title>
   <meta name="description"
-    content="We help enterprises unlock business value through AI-driven platforms and Kentico-powered digital experiences." />
+    content="@metaDescription" />
  <link rel="stylesheet" href="/css/styles.css" />
- <link rel="icon" href="/images/ds_favicon.jpg" type="image/png" /> 
+ <link rel="icon" href="/images/ds_favicon.jpg" type="image/jpg" /> 
 
   @RenderSection("Styles", required: false)
 </head>
