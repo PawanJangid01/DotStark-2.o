@@ -392,10 +392,9 @@
             color: #64748b;
 }
 
-/* When user selects a value → black text */
-/* .form-group select:valid {
-  color: #111111; 
-} */
+.form-group select.has-value {
+    color: #111111;
+}
 
 /* Dropdown options (inside list) */
 .form-group select option {
@@ -708,4 +707,21 @@ function showError(input, message) {
 
     input.parentNode.appendChild(error);
 }
+
+document.querySelectorAll("select").forEach(select => {
+
+    // Initial check (page load)
+    if (select.value !== "") {
+        select.classList.add("has-value");
+    }
+
+    // On change
+    select.addEventListener("change", function () {
+        if (this.value !== "") {
+            this.classList.add("has-value");
+        } else {
+            this.classList.remove("has-value");
+        }
+    });
+});
 </script>
