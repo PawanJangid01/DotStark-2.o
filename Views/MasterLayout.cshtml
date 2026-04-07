@@ -8,12 +8,6 @@
         var layout = Umbraco.ContentAtRoot()
         .FirstOrDefault(x => x.ContentType.Alias == "masterLayout");
 
-
-    if (layout == null)
-    {
-        <text>Master Layout node not found</text>;
-    }
-
      // Page-level SEO
 var seoBlock = Model.Value<BlockListModel>("seoSetting")?
                     .FirstOrDefault()?.Content;
@@ -49,8 +43,11 @@ var pageMetaDescription = seoBlock?.Value<string>("metaDescription");
   <title>@metaTitle</title>
   <meta name="description"
     content="@metaDescription" />
+       <meta property="og:title" content="@metaTitle" />
+    <meta property="og:description" content="@metaDescription" />
+<meta property="og:image" content="/images/meta-image.png" />
  <link rel="stylesheet" href="/css/styles.css" />
- <link rel="icon" href="/images/ds_favicon.jpg" type="image/jpg" /> 
+ <link rel="icon" href="/images/Chief sense_ Favicon_(blue bg).png" type="image/jpg" /> 
 
   @RenderSection("Styles", required: false)
 </head>
@@ -75,7 +72,7 @@ var pageMetaDescription = seoBlock?.Value<string>("metaDescription");
   <!-- â•â•â• HEADER â•â•â• -->
   <header class="header">
     <div class="container">
-      <a href="/" class="logo"><img src="/images/dotstark_2.o.png" alt="DotStark Logo" style="height: 50px;" /></a>
+      <a href="/" class="logo"><img src="/images/Chief sense_ logo with name_(blue).png" alt="DotStark Logo" style="height: 60px;" /></a>
       <nav>
         <a href="/rag">RAG</a>
         <a href="/ai-agents">AI Agents</a>
@@ -135,7 +132,7 @@ var pageMetaDescription = seoBlock?.Value<string>("metaDescription");
     <div class="container">
       <div class="footer-grid">
         <div class="brand">
-          <img src="/images/dotstark_2.o_footer.png" alt="DotStark Logo" style="height: 24px;" />
+          <img src="/images/Chief_sense__logo_with_name__white_-removebg-preview.png" alt="DotStark Logo" style="height: 60px;" />
                     <p>AI Solutions for Revenue, Automation and Decision Intelligence</p>
         </div>
         @* <div class="footer-col">
