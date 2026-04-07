@@ -177,24 +177,24 @@
   opacity: 1;
 }
 
-/* Default (placeholder look) */
+/* Default = placeholder look (grey) */
 .field select {
   color: #6b7a8d;
 }
 
-/* When user selects value */
-.field select:valid {
-  color: var(--fg);
+/* When value selected → black */
+.field select.has-value {
+  color: #141a26; /* same as your --fg */
 }
 
 /* Dropdown options */
 .field select option {
-  color: var(--fg);
+  color: #141a26;
 }
 
 /* Placeholder option */
 .field select option[value=""] {
-  color: var(--muted1);
+  color: #6b7a8d;
 }
     .field input:focus,
     .field select:focus {
@@ -670,6 +670,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+// Handle select placeholder color
+document.querySelectorAll(".field select").forEach(select => {
+
+    // On page load
+    if (select.value !== "") {
+        select.classList.add("has-value");
+    }
+
+    // On change
+    select.addEventListener("change", function () {
+        if (this.value !== "") {
+            this.classList.add("has-value");
+        } else {
+            this.classList.remove("has-value");
+        }
+    });
+});
   </script>
 </body>
 </html>
