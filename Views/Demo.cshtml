@@ -415,6 +415,27 @@
   background: rgba(0,0,0,0.3);
   opacity: 1;
 }
+
+        .desktop-video {
+            display: block;
+        }
+
+        .mobile-video {
+            display: none;
+        }
+
+        @@media (max-width: 768px) {
+            .desktop-video
+
+        {
+            display: none;
+        }
+
+        .mobile-video {
+            display: block;
+        }
+
+        }
   </style>
 </head>
 <body>
@@ -508,7 +529,7 @@ Get a quick walkthrough of how it simplifies SEO tasks, uncovers opportunities, 
       <div class="featured-player">
        <div class="video-wrapper" id="video-container">
          <!-- Thumbnail -->
-         <img id="video-thumbnail" src="" alt="Video Thumbnail" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;">
+                    <img id="video-thumbnail" src="" alt="Video Thumbnail" loading="lazy"  asp-append-version="true" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;">
          <!-- Play Button -->
          <div id="play-button" class="play-overlay" style="opacity:1; cursor:pointer;">
            <div class="play-btn">
@@ -536,7 +557,7 @@ Get a quick walkthrough of how it simplifies SEO tasks, uncovers opportunities, 
 
   <script>
     const VIDEOS = [
-      { id: '1', title: 'AI Agent Demo', duration: '2:59', thumbnail: '/images/Seo-Thumbnail.png', videoUrl: '/images/SEO-agent-suite.mp4' },
+              { id: '1', title: 'AI Agent Demo', duration: '2:59', thumbnail: '/images/Seo-Thumbnail.png', videoUrl: '/images/SEO-agent-suite.mp4', mobileVideoUrl: '/images/SEO-agent-suite-mobile.mp4'},
       { id: '2', title: 'Helpdesk Demo', duration: '6:15', thumbnail: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=640&q=80', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
       { id: '3', title: 'Inbox Demo', duration: '3:48', thumbnail: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=640&q=80', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
       { id: '4', title: 'Workflow Automation Demo', duration: '5:21', thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=640&q=80', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
@@ -544,22 +565,23 @@ Get a quick walkthrough of how it simplifies SEO tasks, uncovers opportunities, 
 
     let featuredId = '1';
 
-function setFeatured(id) {
-  featuredId = id;
-  const v = VIDEOS.find(x => x.id === id);
+        function setFeatured(id) {
+          featuredId = id;
+          const v = VIDEOS.find(x => x.id === id);
 
-  // Set thumbnail
-  document.getElementById('video-thumbnail').src = v.thumbnail;
+          const isMobile = window.innerWidth <= 768;
 
-  // Store video URL (don't load yet)
-  document.getElementById('video-container').setAttribute('data-video', v.videoUrl);
+          const videoUrl = isMobile ? v.mobileVideoUrl : v.videoUrl;
 
-  document.getElementById('featured-title').textContent = v.title;
-  document.getElementById('featured-duration').textContent = v.duration;
+          document.getElementById('video-thumbnail').src = v.thumbnail;
 
-  renderGrid();
-}
+          document.getElementById('video-container').setAttribute('data-video', videoUrl);
 
+          document.getElementById('featured-title').textContent = v.title;
+          document.getElementById('featured-duration').textContent = v.duration;
+
+          renderGrid();
+        }
 document.getElementById('play-button').addEventListener('click', function () {
   const container = document.getElementById('video-container');
   const videoUrl = container.getAttribute('data-video');
@@ -584,7 +606,7 @@ document.getElementById('play-button').addEventListener('click', function () {
         card.onclick = () => setFeatured(v.id);
         card.innerHTML = `
           <div class="thumb">
-            <img src="${v.thumbnail}" alt="${v.title}">
+                    <img src="${v.thumbnail}" alt="${v.title}" loading="lazy"  asp-append-version="true">
             <div class="play-overlay">
               <div class="play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
             </div>

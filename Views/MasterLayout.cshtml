@@ -20,7 +20,7 @@ var pageMetaDescription = seoBlock?.Value<string>("metaDescription");
     var metaTitle =
         !string.IsNullOrWhiteSpace(pageMetaTitle)
         ? pageMetaTitle
-        : layout?.Value<string>("defaultMetaTitle") ?? "DotStrk 2.o";
+        : layout?.Value<string>("defaultMetaTitle") ?? "ChiefSense";
 
     var metaDescription =
         !string.IsNullOrWhiteSpace(pageMetaDescription)
@@ -71,7 +71,7 @@ var pageMetaDescription = seoBlock?.Value<string>("metaDescription");
 
 
 <meta property="og:image" content="/images/meta-image.png" />
- <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/styles.css" defer asp-append-version="true" />
  <link rel="icon" href="/images/ChiefSense-favicon.png" type="image/jpg" /> 
 
   @RenderSection("Styles", required: false)
@@ -94,18 +94,21 @@ var pageMetaDescription = seoBlock?.Value<string>("metaDescription");
   gtag('config', 'G-HB5S7MMQ5Q');
 </script>
 }
+    @{
+        var currentUrl = Context.Request.Path.Value?.ToLower();
+    }
   <!-- â•â•â• HEADER â•â•â• -->
   <header class="header">
     <div class="container">
-      <a href="/" class="logo"><img src="/images/Chief_sense__header_logo.png" alt="ChiefSense Logo" style="height: 60px;" /></a>
-      <nav>
-        <a href="/rag">RAG</a>
-        <a href="/ai-agents">AI Agents</a>
-        <a href="/intelligent-automation">Intelligent Automation</a>
-        <a href="/products">Products</a>    
-        <a href="/insight">Insights</a>
-        <a href="/contact-us">Contact Us</a>
-      </nav>
+            <a href="/" class="logo"><img src="/images/Chief_sense__header_logo.png" alt="ChiefSense Logo" asp-append-version="true" style="height: 60px;" /></a>
+            <nav>
+                <a href="/rag" class="@(currentUrl.Contains("/rag") ? "active" : "")">RAG</a>
+                <a href="/ai-agents" class="@(currentUrl.Contains("/ai-agents") ? "active" : "")">AI Agents</a>
+                <a href="/intelligent-automation" class="@(currentUrl.Contains("/intelligent-automation") ? "active" : "")">Intelligent Automation</a>
+                <a href="/products" class="@(currentUrl.Contains("/products") ? "active" : "")">Products</a>
+                <a href="/insight" class="@(currentUrl.Contains("/insight") ? "active" : "")">Insights</a>
+                <a href="/contact-us" class="@(currentUrl.Contains("/contact-us") ? "active" : "")">Contact Us</a>
+            </nav>
       <a href="/demo" class="header-cta">View Demo</a>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu" aria-expanded="false">
         <svg id="iconMenu" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -121,16 +124,15 @@ var pageMetaDescription = seoBlock?.Value<string>("metaDescription");
   </header>
 
   <!-- Mobile nav drawer -->
-  <nav class="mobile-nav" id="mobileNav">
-    <a href="/rag">RAG</a>
-    <a href="/ai-agents">AI Agents</a>
-        <a href="/intelligent-automation">Intelligent Automation</a>
-    <a href="/products">Products</a>
-    <a href="/insight">Insights</a>
-    <a href="/contact-us">Contact Us</a>
-    <a href="/demo" class="mobile-cta">View Demo</a>
-  </nav>
-
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="/rag" class="@(currentUrl.Contains("/rag") ? "active" : "")">RAG</a>
+        <a href="/ai-agents" class="@(currentUrl.Contains("/ai-agents") ? "active" : "")">AI Agents</a>
+        <a href="/intelligent-automation" class="@(currentUrl.Contains("/intelligent-automation") ? "active" : "")">Intelligent Automation</a>
+        <a href="/products" class="@(currentUrl.Contains("/products") ? "active" : "")">Products</a>
+        <a href="/insight" class="@(currentUrl.Contains("/insight") ? "active" : "")">Insights</a>
+        <a href="/contact-us" class="@(currentUrl.Contains("/contact-us") ? "active" : "")">Contact Us</a>
+        <a href="/demo" class="mobile-cta">View Demo</a>
+    </nav>
          <!-- ✅ MAIN CONTENT -->
         <main class="main">
             @RenderBody()
@@ -157,7 +159,7 @@ var pageMetaDescription = seoBlock?.Value<string>("metaDescription");
     <div class="container">
       <div class="footer-grid">
         <div class="brand">
-          <img src="/images/Chief_sense_footer_logo.png" alt="DotStark Logo" style="height: 60px;" />
+                    <img src="/images/Chief_sense_footer_logo.png" alt="ChiefSense Logo" asp-append-version="true" style="height: 60px;" loading="lazy" />
                     <p>AI Solutions for Revenue, Automation and Decision Intelligence</p>
         </div>
         @* <div class="footer-col">
