@@ -672,7 +672,11 @@ img {
 .header-cta:hover {
     opacity: 0.88;
 }
-
+.header nav a.active,
+.mobile-nav a.active {
+    color: var(--primary); /* blue */
+    font-weight: 600;
+}
 /* Hamburger */
 .mobile-toggle {
     display: none;
