@@ -25,7 +25,7 @@ var pageMetaDescription = seoBlock?.Value<string>("metaDescription");
     var metaDescription =
         !string.IsNullOrWhiteSpace(pageMetaDescription)
         ? pageMetaDescription
-        : layout?.Value<string>("defaultMetaDescription");
+        : layout?.Value<string>("defaultMetaDescription") ?? "ChiefSense builds AI solutions including RAG systems, AI agents, and intelligent automation to help businesses scale, automate workflows, and unlock data-driven insights.";
 
     // var metaKeywords =
     //     !string.IsNullOrWhiteSpace(pageMetaKeywords)
@@ -56,7 +56,7 @@ var pageMetaDescription = seoBlock?.Value<string>("metaDescription");
     <meta property="og:description" content="@metaDescription" />
     <meta property="og:url" content="@Context.Request.Scheme://@Context.Request.Host@Context.Request.Path" />
     <meta property="og:site_name" content="ChiefSense.ai" />
-    <meta property="og:image" content="/images/meta-image.png" />
+    <meta property="og:image" content="/images/meta-image.webp" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
@@ -66,13 +66,13 @@ var pageMetaDescription = seoBlock?.Value<string>("metaDescription");
     <meta property="twitter:description" content="@metaDescription" />
     <meta name="twitter:site" content="@metaTitle" />
     <meta name="twitter:creator" content="@metaDescription">
-    <meta name="twitter:image" content="/images/meta-image.png" />
+    <meta name="twitter:image" content="/images/meta-image.webp" />
     <meta property="twitter:url" content="@Context.Request.Scheme://@Context.Request.Host@Context.Request.Path" />
 
 
-<meta property="og:image" content="/images/meta-image.png" />
+<meta property="og:image" content="/images/meta-image.webp" />
     <link rel="stylesheet" href="/css/styles.css" defer asp-append-version="true" />
- <link rel="icon" href="/images/ChiefSense-favicon.png" type="image/jpg" /> 
+ <link rel="icon" href="/images/ChiefSense-favicon.webp" type="image/webp" /> 
 
   @RenderSection("Styles", required: false)
 </head>
@@ -194,8 +194,7 @@ var pageMetaDescription = seoBlock?.Value<string>("metaDescription");
         </div>
       </div>
       <div class="footer-bottom">
-                <p style="font-size: 14px;">&copy; 2026 ChiefSense. All Rights Reserved. <span class="powered-by">
-         | Powered by <a href="https://dotstark.com" target="_blank">DotStark</a>
+                <p style="font-size: 14px;">&copy; 2026 ChiefSense<span class="powered-by"> | Powered by <a href="https://dotstark.com" target="_blank">DotStark</a>
 </span></p>
 <div class="footer-links privacy-box">
   <a href="/privacy-policy" class="privacy-link">
