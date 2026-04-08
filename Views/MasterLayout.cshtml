@@ -46,7 +46,7 @@ var pageMetaDescription = seoBlock?.Value<string>("metaDescription");
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="content-language" content="en-us">
     <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
-    <link rel="canonical" href="https://chiefsense.ai/" />
+ <link rel="canonical" href="@Context.Request.Scheme://@Context.Request.Host@Context.Request.Path" />
 
 
      <!-- Open Graph Meta Tags -->
@@ -54,7 +54,7 @@ var pageMetaDescription = seoBlock?.Value<string>("metaDescription");
     <meta property="og:type" content="website" />
     <meta property="og:title" content="@metaTitle" />
     <meta property="og:description" content="@metaDescription" />
-    <meta property="og:url" content="https://chiefsense.ai/" />
+    <meta property="og:url" content="@Context.Request.Scheme://@Context.Request.Host@Context.Request.Path" />
     <meta property="og:site_name" content="Chi Technologies" />
     <meta property="og:image" content="/images/meta-image.png" />
     <meta property="og:image:width" content="1200" />
@@ -67,7 +67,7 @@ var pageMetaDescription = seoBlock?.Value<string>("metaDescription");
     <meta name="twitter:site" content="@metaTitle" />
     <meta name="twitter:creator" content="@metaDescription">
     <meta name="twitter:image" content="/images/meta-image.png" />
-    <meta property="twitter:url" content="https://chiefsense.ai/" />
+    <meta property="twitter:url" content="@Context.Request.Scheme://@Context.Request.Host@Context.Request.Path" />
 
 
 <meta property="og:image" content="/images/meta-image.png" />
