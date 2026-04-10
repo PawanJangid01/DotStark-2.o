@@ -357,7 +357,7 @@ var pageMetaDescription = seoBlock?.Value<string>("metaDescription");
         }
 
         // Technology Stack tab switching
-        const techTabs = document.querySelectorAll('.tech-tab');
+                 const techTabs = document.querySelectorAll('.tech-tab');
         const techPanels = document.querySelectorAll('.tech-icons-panel');
 
         const tabMap = {
@@ -369,26 +369,43 @@ var pageMetaDescription = seoBlock?.Value<string>("metaDescription");
         };
 
         if (techTabs && techTabs.length > 0) {
-          techTabs.forEach(btn => {
+
+          let currentIndex = 0;
+
+          function activateTab(btn) {
+            techTabs.forEach(t => {
+              t.classList.remove('active');
+              t.setAttribute('aria-selected', 'false');
+            });
+
+            techPanels.forEach(p => p.classList.remove('active'));
+
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+
+            const panelId = tabMap[btn.dataset.tab];
+            const panel = document.getElementById(panelId);
+
+            if (panel) {
+              panel.classList.add('active');
+            }
+          }
+
+          techTabs.forEach((btn, index) => {
             btn.addEventListener('click', () => {
-              techTabs.forEach(t => {
-                t.classList.remove('active');
-                t.setAttribute('aria-selected', 'false');
-              });
-
-              techPanels.forEach(p => p.classList.remove('active'));
-
-              btn.classList.add('active');
-              btn.setAttribute('aria-selected', 'true');
-
-              const panelId = tabMap[btn.dataset.tab];
-              const panel = document.getElementById(panelId);
-
-              if (panel) {
-                panel.classList.add('active');
-              }
+              currentIndex = index; // ⭐ update index when user clicks
+              activateTab(btn);
             });
           });
+
+          // Auto change tabs for mobile
+          setInterval(() => {
+            if (window.innerWidth <= 768) {
+              currentIndex = (currentIndex + 1) % techTabs.length;
+              activateTab(techTabs[currentIndex]);
+            }
+          }, 7000);
+
         }
     </script>
     <script>

@@ -462,7 +462,14 @@
         }
 
         }
-
+        /* Mobile view - show animation on first card by default */
+        @@media (max-width: 768px) {
+            .solution-card:first-child::before
+        {
+            opacity: 1;
+            animation: snake-border 3.2s linear infinite;
+        }
+        }
 
     .solution-card .card-top {
         margin-bottom: 1rem;
@@ -576,9 +583,13 @@
 
 .step-icon {
     color: var(--primary);
-    margin-bottom: 1rem;
+     margin-bottom: 0;
 }
 
+
+            .step-icon svg {
+                margin-bottom: 1rem;
+            }
 .step-card h3 {
     font-size: 1.2rem;
     font-weight: 700;
@@ -592,6 +603,23 @@
     line-height: 1.7;
     font-size: 0.95rem;
 }
+
+        @@media (max-width: 768px) {
+            .step-icon svg {
+                margin-right: 10px;
+                margin-bottom: 0;
+            }
+
+            .step-icon {
+                display: flex;
+                /* align-items:center; */
+                margin-bottom: 1rem;
+            }
+
+            .step-card h3{
+                margin-bottom:0;
+            }
+        }
 
 /* ══════════════════════════════════════════════
    7. CASE STUDIES
@@ -1480,8 +1508,9 @@
   <circle cx="12" cy="12" r="10"/>
   <polygon points="16 8 14 14 8 16 10 10 16 8"/>
 </svg>
+                    <h3><span>1.</span> Discover</h3>
           </div>
-          <h3><span>1.</span> Discover</h3>
+          
           <p>Understand business challenges, map data flows and define measurable AI goals.</p>
         </div>
         <div class="step-card">
@@ -1493,8 +1522,9 @@
   <polyline points="2 17 12 22 22 17"/>
   <polyline points="2 12 12 17 22 12"/>
 </svg>
+                    <h3><span>2.</span> Architect</h3>
           </div>
-          <h3><span>2.</span> Architect</h3>
+          
           <p>Design scalable AI infrastructure, data pipelines and integration blueprints.</p>
         </div>
         <div class="step-card">
@@ -1504,8 +1534,9 @@
               <polyline points="16 18 22 12 16 6" />
               <polyline points="8 6 2 12 8 18" />
             </svg>
+                    <h3><span>3.</span> Build</h3>
           </div>
-          <h3><span>3.</span> Build</h3>
+          
           <p>Develop and deploy production-ready AI models, agents and digital platforms.</p>
         </div>
         <div class="step-card">
@@ -1516,8 +1547,9 @@
   <polyline points="3 17 9 11 13 15 21 7"/>
   <polyline points="14 7 21 7 21 14"/>
 </svg>
+                    <h3><span>4.</span> Optimize</h3>
           </div>
-          <h3><span>4.</span> Optimize</h3>
+          
           <p>Monitor performance, retrain models and continuously improve outcomes.</p>
         </div>
       </div>
