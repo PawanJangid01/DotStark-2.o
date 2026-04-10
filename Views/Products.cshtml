@@ -18,7 +18,7 @@
   --secondary-bg:#ebebec;
   --radius:0.5rem;
 }
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased;line-height:1.6}
+body{background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased;line-height:1.6}
 a{color:inherit;text-decoration:none}
 img{max-width:100%}
 
@@ -286,24 +286,46 @@ ul.feature-list li{margin-bottom:.25rem}
     margin-bottom: 1.25rem;
 }
 
-.step-icon {
-    color: var(--primary);
-    margin-bottom: 1rem;
-}
+        .step-icon {
+            color: var(--primary);
+            margin-bottom: 0;
+        }
 
-.step-card h3 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--foreground);
-    margin-bottom: 0.5rem;
-}
 
-.step-card p {
-    font-family: var(--font-body);
-    color: var(--muted);
-    line-height: 1.7;
-    font-size: 0.95rem;
-}
+            .step-icon svg {
+                margin-bottom: 1rem;
+            }
+
+        .step-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--foreground);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-card p {
+            font-family: var(--font-body);
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        @@media (max-width: 768px) {
+            .step-icon svg {
+                margin-right: 10px;
+                margin-bottom: 0;
+            }
+
+            .step-icon {
+                display: flex;
+                /* align-items: center; */
+                margin-bottom: 1rem;
+            }
+
+            .step-card h3 {
+                margin-bottom: 0;
+            }
+        }
 
 section {
   scroll-margin-top: 80px; /* Example value */
@@ -746,8 +768,9 @@ section {
   <path d="M3 5v6c0 1.7 4 3 9 3s9-1.3 9-3V5"/>
   <path d="M3 11v6c0 1.7 4 3 9 3s9-1.3 9-3v-6"/>
 </svg>
+                    <h3><span>1.</span> Ingest Your Knowledge Base</h3>
           </div>
-          <h3><span>1.</span> Ingest Your Knowledge Base</h3>
+          
           <p>Connect your document repositories - SharePoint, Google Drive, local drives. RAG365 ingests all files into its private secure index.</p>
         </div>
         <div class="step-card">
@@ -759,8 +782,9 @@ section {
   <polyline points="2 12 12 17 22 12"/>
   <polyline points="2 17 12 22 22 17"/>
 </svg>
+                    <h3><span>2.</span> AI Semantic Processing</h3>
           </div>
-          <h3><span>2.</span> AI Semantic Processing</h3>
+          
           <p>The RAG engine vectorize every document - converting content into a semantic knowledge graph.</p>
         </div>
         <div class="step-card">
@@ -772,8 +796,9 @@ section {
   <polyline points="8 10 10 12 8 14"/>
   <line x1="13" y1="14" x2="16" y2="10"/>
 </svg>
+                    <h3><span>3.</span> Ask in Natural Language</h3>
           </div>
-          <h3><span>3.</span> Ask in Natural Language</h3>
+          
           <p>Your team asks questions and RAG365 retrieves the most relevant content and cites the source-in under two seconds.</p>
         </div>
         <div class="step-card">
@@ -783,9 +808,10 @@ section {
  stroke-linecap="round" stroke-linejoin="round">
   <polyline points="20 6 9 17 4 12"/>
   <path d="M12 2a10 10 0 1 0 10 10"/>
-</svg> 
+</svg>
+                    <h3><span>4.</span> Verify, Act & Iterate</h3>
           </div>
-          <h3><span>4.</span> Verify, Act & Iterate</h3>
+          
           <p>Every answer includes a clickable source reference. Teams verify and continue querying in a natural thread.</p>
         </div>
       </div>
@@ -1003,8 +1029,9 @@ section {
   <circle cx="19" cy="12" r="3"/>
   <circle cx="9" cy="12" r="2"/>
 </svg>
+                    <h3><span>1.</span> Classroom Recording</h3>
           </div>
-          <h3><span>1.</span> Classroom Recording</h3>
+          
           <p>ReClass AI securely records and stores the live classroom session with zero change to how educators teach.</p>
         </div>
         <div class="step-card">
@@ -1014,8 +1041,9 @@ section {
  stroke-linecap="round" stroke-linejoin="round">
   <path d="M12 2a4 4 0 0 0-4 4v2H6a2 2 0 0 0-2 2v2h2v2H4v2a2 2 0 0 0 2 2h2v2a4 4 0 0 0 8 0v-2h2a2 2 0 0 0 2-2v-2h-2v-2h2v-2a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4z"/>
 </svg>
+                    <h3><span>2.</span> AI Engine Processing</h3>
           </div>
-          <h3><span>2.</span> AI Engine Processing</h3>
+          
           <p>Transcribing speech, identifying topic segments, generating summaries and creating a semantic search index.</p>
         </div>
         <div class="step-card">
@@ -1028,8 +1056,9 @@ section {
   <line x1="7" y1="12" x2="17" y2="12"/>
   <line x1="7" y1="16" x2="13" y2="16"/>
 </svg>
+                    <h3><span>3.</span> Structured Asset Published</h3>
           </div>
-          <h3><span>3.</span> Structured Asset Published</h3>
+          
           <p>Students receive a navigable video player with timestamped topic index, transcript, summary and AI Tutor.</p>
         </div>
         <div class="step-card">
@@ -1042,8 +1071,9 @@ section {
   <path d="M11 8v6"/>
   <path d="M8 11h6"/>
 </svg>
+                    <h3><span>4.</span> Navigate, Ask & Retain</h3>
           </div>
-          <h3><span>4.</span> Navigate, Ask & Retain</h3>
+          
           <p>Students search by concept, jump to precise moments and ask the AI Tutor structured questions.</p>
         </div>
       </div>
