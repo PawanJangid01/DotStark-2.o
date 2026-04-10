@@ -38,7 +38,7 @@
     .blog-body ol li::before { content: counter(ol-counter); counter-increment: ol-counter; flex-shrink: 0; width: 1.4rem; height: 1.4rem; background: var(--primary); color: #fff; border-radius: 50%; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 0.15rem; }
     .blog-body strong { color: var(--foreground); }
     .blog-body a { color: var(--primary); text-decoration: underline; }
-    .blog-inline-img { width: auto; height: 100%; border-radius: 0.75rem; margin: 1.5rem 0; object-fit: cover; max-height: 380px; border: 1px solid var(--border); }
+    .blog-inline-img { width: auto; border-radius: 0.75rem; margin: 1.5rem 0; object-fit: cover; max-height: 380px; border: 1px solid var(--border); }
     @@media (max-width: 960px) { .blog-layout { grid-template-columns: 1fr; } .blog-sidebar { display:none; } }
 
     /* IMAGE CTA */
@@ -249,7 +249,7 @@
 
     <!-- ═══ HERO BANNER ═══ -->
     <div class="cs-banner">
-       <img src="/images/blog-ai-large.png" alt="How AI Agents Work" class="blog-banner-img" />
+    <img src="/images/blog-ai-large.webp" alt="How AI Agents Work" class="blog-banner-img" loading="lazy"  asp-append-version="true" />
         <div class="cs-banner-overlay"></div>
         <div class="cs-banner-content container">
             <span class="cs-tag">Blog</span>
@@ -302,7 +302,7 @@
                 <h2 id="tools">How Agents Use Tools to Interact with the Real World</h2>
                 <p>One of the biggest limitations of standalone language models is that they cannot access real-time data or perform external actions. AI agents overcome this by integrating tools- web search engines, APIs, databases, or code execution environments.</p>
                 <p>For example, if an agent is asked to analyze stock trends, it might fetch live market data through an API, process it, and then generate insights. This ability to combine reasoning with action is what makes agents practical for real-world applications.</p>
-                <img src="/images/blog-ai-agent.png" alt="AI Agent Tools Diagram" class="blog-inline-img" />
+                <img src="/images/blog-ai-agent.webp" alt="AI Agent Tools Diagram" class="blog-inline-img" loading="lazy"  asp-append-version="true" />
 
                 <h2 id="planning">Planning: How Agents Break Down Complex Problems</h2>
                 <p>Planning is where an agent truly starts to resemble human thinking. Instead of solving a problem in one step, it creates a roadmap. Consider a task like "analyze competitor websites." An agent would first gather a list of competitors, then visit each site, extract relevant information, and finally compare the findings.</p>
@@ -324,8 +324,8 @@
                 <p>In everyday life, agents are becoming personal assistants capable of managing schedules, booking services, and making recommendations tailored to individual preferences.</p>
 
                 <!-- IMAGE CTA -->
-               <a href="https://calendly.com/yogendra-dotstark/30min" target="_blank" class="image-cta">
-                   <img src="/images/blog-cta.png" alt="Schedule a call" />
+               <a href="https://calendly.com/chiefsense-ai/30min" target="_blank" class="image-cta">
+                    <img src="/images/blog-cta.webp" alt="Schedule a call" loading="lazy"  asp-append-version="true" />
                </a>
                
                 <h2 id="challenges">Challenges That Still Exist</h2>
@@ -346,7 +346,7 @@
     <section class="section" style="background-color: #ebebec;">
         <div class="container">
             <div class="section-header">
-                <h1 class="section-title">Related <span>Insights</span></h1>
+                <h2 class="section-title">Related <span>Insights</span></h2>
                 <p class="section-desc">Explore expert perspectives, trends, and best practices in artificial intelligence and modern AI-driven systems.</p>
             </div>
 
@@ -355,7 +355,7 @@
                 <a href="/blog-rag-architecture" class="card-link">
                     <div class="card">
                         <div class="card-img">
-                            <img src="/images/blog-rag.png" alt="RAG Future">
+                            <img src="/images/blog-rag.webp" alt="RAG Future" loading="lazy"  asp-append-version="true">
 
                         </div>
                         <div class="card-body">
@@ -378,7 +378,7 @@
                 <a href="/blog-page-index" class="card-link">
                     <div class="card">
                         <div class="card-img">
-                            <img src="/images/blog-seo.png" alt="ML Pipelines">
+                            <img src="/images/blog-seo.webp" alt="ML Pipelines" loading="lazy"  asp-append-version="true">
                         </div>
                         <div class="card-body">
                             <span class="tag">Document AI</span><span class="tag">RAG</span>
@@ -404,7 +404,7 @@
     </section>
 </main>
 
-<script>
+<script defer>
     const headings = document.querySelectorAll('.blog-body h2[id], .blog-body h3[id]');
     const tocLinks = document.querySelectorAll('.toc-box a');
     const tocObserver = new IntersectionObserver((entries) => {

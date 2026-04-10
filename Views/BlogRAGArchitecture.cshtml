@@ -19,7 +19,7 @@
             display: block;
             min-height: 100%;
         }
-    .blog-page { padding: 2rem 0 6rem; background: var(--background); }
+    .blog-page { padding: 2rem 0 0; background: var(--background); }
 
         .blog-layout {
             display: grid;
@@ -44,7 +44,7 @@
     .blog-body ol { counter-reset: ol-counter; }
     .blog-body ol li::before { content: counter(ol-counter); counter-increment: ol-counter; flex-shrink: 0; width: 1.4rem; height: 1.4rem; background: var(--primary); color: #fff; border-radius: 50%; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 0.15rem; }
     .blog-body strong { color: var(--foreground); }
-    .blog-inline-img { width: auto; height: 100%; border-radius: 0.75rem; margin: 1.5rem 0; object-fit: cover; max-height: 380px; border: 1px solid var(--border); }
+    .blog-inline-img { width: auto;  border-radius: 0.75rem; margin: 1.5rem 0; object-fit: cover; max-height: 380px; border: 1px solid var(--border); }
     .flow-steps { display: flex; flex-direction: column; gap: 0.5rem; margin: 1rem 0 1.5rem; }
     .flow-step { display: flex; align-items: center; gap: 1rem; background: #f0f4ff; border: 1px solid rgba(27,84,255,0.12); border-radius: 0.5rem; padding: 0.75rem 1rem; font-size: 0.9rem; color: var(--foreground); }
     .flow-step .step-num { background: var(--primary); color: #fff; width: 1.75rem; height: 1.75rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
@@ -257,7 +257,7 @@
 
     <!-- ═══ HERO BANNER ═══ -->
     <div class="cs-banner">
-        <img src="/images/blog-rag-large.png" alt="RAG Architecture" class="blog-banner-img" />
+    <img src="/images/blog-rag-large.webp" alt="RAG Architecture" class="blog-banner-img" loading="lazy"  asp-append-version="true" />
         <div class="cs-banner-overlay"></div>
         <div class="cs-banner-content container">
             <span class="cs-tag">Blog</span>
@@ -345,7 +345,7 @@
                 <p>The retrieved chunks are passed into an LLM like GPT-4. The LLM reads the retrieved context, combines it with the query, and generates a natural language response. The answer is now grounded in real data, more accurate, and less hallucinated.</p>
 
                 <h2 id="flow">End-to-End RAG Flow</h2>
-                 <img src="/images/blog-rag-architecture.jpg" alt="RAG Chunking Diagram" class="blog-inline-img" />
+                <img src="/images/blog-rag-architecture.webp" alt="RAG Chunking Diagram" class="blog-inline-img" loading="lazy"  asp-append-version="true" />
                 <div class="flow-steps">
                     <div class="flow-step"><span class="step-num">1</span> Load documents</div>
                     <div class="flow-step"><span class="step-num">2</span> Split into chunks</div>
@@ -358,8 +358,8 @@
                 <p>Each step contributes to accuracy- skip one, and performance drops.</p>
 
                                <!-- IMAGE CTA -->
-               <a href="https://calendly.com/yogendra-dotstark/30min"  target="_blank" class="image-cta">
-                   <img src="/images/blog-cta.png" alt="Schedule a call" />
+               <a href="https://calendly.com/chiefsense-ai/30min"  target="_blank" class="image-cta">
+                    <img src="/images/blog-cta.webp" alt="Schedule a call" loading="lazy"  asp-append-version="true" />
                </a>
                
                 <h2 id="limitations">Limitations of RAG</h2>
@@ -394,7 +394,7 @@
     <section class="section" style="background-color: #ebebec;">
         <div class="container">
             <div class="section-header">
-                <h1 class="section-title">Latest <span>Insights</span></h1>
+                <h2 class="section-title">Latest <span>Insights</span></h2>
                 <p class="section-desc">Explore expert perspectives, trends, and best practices in artificial intelligence and modern AI-driven systems.</p>
             </div>
 
@@ -404,7 +404,7 @@
                 <a href="/blog-ai-agent" class="card-link">
                     <div class="card">
                         <div class="card-img">
-                            <img src="/images/blog-ai.png" alt="Scalable AI">
+                            <img src="/images/blog-ai.webp" alt="Scalable AI" loading="lazy"  asp-append-version="true">
                         </div>
                         <div class="card-body">
                             <span class="tag">AI Agents</span><span class="tag">Automation Systems</span>
@@ -426,7 +426,7 @@
                 <a href="/blog-page-index" class="card-link">
                     <div class="card">
                         <div class="card-img">
-                            <img src="/images/blog-seo.png" alt="ML Pipelines">
+                            <img src="/images/blog-seo.webp" alt="ML Pipelines" loading="lazy"  asp-append-version="true">
                         </div>
                         <div class="card-body">
                             <span class="tag">Document AI</span><span class="tag">RAG</span>

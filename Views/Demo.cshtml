@@ -93,7 +93,7 @@
       font-size: 1.125rem;
       color: var(--muted1);
       max-width: 28rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       line-height: 1.7;
     }
 
@@ -177,24 +177,24 @@
   opacity: 1;
 }
 
-/* Default (placeholder look) */
+/* Default = placeholder look (grey) */
 .field select {
   color: #6b7a8d;
 }
 
-/* When user selects value */
-.field select:valid {
-  color: var(--fg);
+/* When value selected → black */
+.field select.has-value {
+  color: #141a26; /* same as your --fg */
 }
 
 /* Dropdown options */
 .field select option {
-  color: var(--fg);
+  color: #141a26;
 }
 
 /* Placeholder option */
 .field select option[value=""] {
-  color: var(--muted1);
+  color: #6b7a8d;
 }
     .field input:focus,
     .field select:focus {
@@ -221,7 +221,7 @@
       border: none;
       border-radius: calc(var(--radius) - 2px);
       font-size: 0.9375rem;
-      font-weight: 500;
+      font-weight: 600;
       font-family: var(--font);
       cursor: pointer;
       transition: opacity 0.15s;
@@ -415,6 +415,27 @@
   background: rgba(0,0,0,0.3);
   opacity: 1;
 }
+
+        .desktop-video {
+            display: block;
+        }
+
+        .mobile-video {
+            display: none;
+        }
+
+        @@media (max-width: 768px) {
+            .desktop-video
+
+        {
+            display: none;
+        }
+
+        .mobile-video {
+            display: block;
+        }
+
+        }
   </style>
 </head>
 <body>
@@ -428,8 +449,9 @@
           <h1>See Our Product <span>In Action</span></h1>
           <p>Watch how our AI-powered SEO Agent helps you boost rankings, automate optimization, and drive organic growth, faster than ever before.
 Get a quick walkthrough of how it simplifies SEO tasks, uncovers opportunities, and delivers measurable results without manual effort.</p>
+                    <p><strong>What You’ll Experience:</strong></p>
           <ul class="benefits">
-              <p><strong>What You’ll Experience:</strong></p>
+             
             <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Automate keyword research & content optimization</li>
             <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Track rankings and performance in real-time</li>
             <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Identify SEO gaps and opportunities instantly</li>
@@ -507,7 +529,7 @@ Get a quick walkthrough of how it simplifies SEO tasks, uncovers opportunities, 
       <div class="featured-player">
        <div class="video-wrapper" id="video-container">
          <!-- Thumbnail -->
-         <img id="video-thumbnail" src="" alt="Video Thumbnail" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;">
+                    <img id="video-thumbnail" src="" alt="Video Thumbnail" loading="lazy"  asp-append-version="true" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;">
          <!-- Play Button -->
          <div id="play-button" class="play-overlay" style="opacity:1; cursor:pointer;">
            <div class="play-btn">
@@ -535,7 +557,7 @@ Get a quick walkthrough of how it simplifies SEO tasks, uncovers opportunities, 
 
   <script>
     const VIDEOS = [
-      { id: '1', title: 'AI Agent Demo', duration: '2:59', thumbnail: '/images/Seo-Thumbnail.png', videoUrl: '/images/SEO-agent-suite.mp4' },
+              { id: '1', title: 'AI Agent Demo', duration: '2:59', thumbnail: '/images/Seo-Thumbnail.webp', videoUrl: '/images/SEO-agent-suite.mp4', mobileVideoUrl: '/images/SEO-agent-suite-mobile.mp4'},
       { id: '2', title: 'Helpdesk Demo', duration: '6:15', thumbnail: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=640&q=80', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
       { id: '3', title: 'Inbox Demo', duration: '3:48', thumbnail: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=640&q=80', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
       { id: '4', title: 'Workflow Automation Demo', duration: '5:21', thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=640&q=80', videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
@@ -543,22 +565,23 @@ Get a quick walkthrough of how it simplifies SEO tasks, uncovers opportunities, 
 
     let featuredId = '1';
 
-function setFeatured(id) {
-  featuredId = id;
-  const v = VIDEOS.find(x => x.id === id);
+        function setFeatured(id) {
+          featuredId = id;
+          const v = VIDEOS.find(x => x.id === id);
 
-  // Set thumbnail
-  document.getElementById('video-thumbnail').src = v.thumbnail;
+          const isMobile = window.innerWidth <= 768;
 
-  // Store video URL (don't load yet)
-  document.getElementById('video-container').setAttribute('data-video', v.videoUrl);
+          const videoUrl = isMobile ? v.mobileVideoUrl : v.videoUrl;
 
-  document.getElementById('featured-title').textContent = v.title;
-  document.getElementById('featured-duration').textContent = v.duration;
+          document.getElementById('video-thumbnail').src = v.thumbnail;
 
-  renderGrid();
-}
+          document.getElementById('video-container').setAttribute('data-video', videoUrl);
 
+          document.getElementById('featured-title').textContent = v.title;
+          document.getElementById('featured-duration').textContent = v.duration;
+
+          renderGrid();
+        }
 document.getElementById('play-button').addEventListener('click', function () {
   const container = document.getElementById('video-container');
   const videoUrl = container.getAttribute('data-video');
@@ -583,7 +606,7 @@ document.getElementById('play-button').addEventListener('click', function () {
         card.onclick = () => setFeatured(v.id);
         card.innerHTML = `
           <div class="thumb">
-            <img src="${v.thumbnail}" alt="${v.title}">
+                    <img src="${v.thumbnail}" alt="${v.title}" loading="lazy"  asp-append-version="true">
             <div class="play-overlay">
               <div class="play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
             </div>
@@ -669,6 +692,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+// Handle select placeholder color
+document.querySelectorAll(".field select").forEach(select => {
+
+    // On page load
+    if (select.value !== "") {
+        select.classList.add("has-value");
+    }
+
+    // On change
+    select.addEventListener("change", function () {
+        if (this.value !== "") {
+            this.classList.add("has-value");
+        } else {
+            this.classList.remove("has-value");
+        }
+    });
+});
   </script>
 </body>
 </html>

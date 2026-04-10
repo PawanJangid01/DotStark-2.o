@@ -389,12 +389,11 @@
 
         /* Default (placeholder look) */
 .form-group select {
-  color: #64748b;
+            color: #64748b;
 }
 
-/* When user selects a value → black text */
-.form-group select:valid {
-  color: #111111; /* or var(--foreground) */
+.form-group select.has-value {
+    color: #111111;
 }
 
 /* Dropdown options (inside list) */
@@ -406,6 +405,8 @@
 .form-group select option[value=""] {
   color: #94a3b8;
 }
+
+        
  .btn-primary {
     display: inline-flex;
     align-items: center;
@@ -419,7 +420,7 @@
     border: none;
     border-radius: calc(var(--radius) - 2px);
     font-size: 0.9375rem;
-    font-weight: 500;
+    font-weight: 600;
     font-family: var(--font);
     cursor: pointer;
     transition: opacity 0.15s;
@@ -537,7 +538,7 @@
             <div class="office-grid">
                 <!-- India -->
                 <div class="office-card">
-                   <img src="/images/india.png" class="flag-badge" />
+                <img src="/images/india.webp" class="flag-badge" loading="lazy"  asp-append-version="true" alt="Indian Flag" />
                     <h4>India</h4>
                     <p>1st Floor, Opp. Metro Pillar No. 97, New Sanganer Road, Jaipur - 302019 Rajasthan, India.</p>
                     <p class="contact-info">    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -561,12 +562,12 @@
          style="vertical-align: middle; margin-right: 6px; color: #0040ff;">
       <rect x="3" y="5" width="18" height="14" rx="2"></rect>
       <polyline points="3 7 12 13 21 7"></polyline>
-    </svg> support@dotstark.com</p>
+    </svg> connect@chiefsense.ai</p>
                 </div>
 
                 <!-- USA -->
                 <div class="office-card">
-                     <img src="/images/usaflag.webp" class="flag-badge" />
+                <img src="/images/usaflag.webp" class="flag-badge" alt="USA Flag" loading="lazy"  asp-append-version="true" />
                     <h4>USA</h4>
                     <p>3101 N. Central Ave, STE 183#3541, Phoenix, Arizona</p>
                     <p class="contact-info">    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -590,12 +591,12 @@
          style="vertical-align: middle; margin-right: 6px; color: #0040ff;">
       <rect x="3" y="5" width="18" height="14" rx="2"></rect>
       <polyline points="3 7 12 13 21 7"></polyline>
-    </svg> support@dotstark.com</p>
+    </svg> connect@chiefsense.ai</p>
                 </div>
 
                 <!-- Canada -->
                 <div class="office-card">
-                    <img src="/images/Canada.jpg" class="flag-badge" />
+                <img src="/images/Canada.webp" class="flag-badge" alt="Canada Flag" loading="lazy"  asp-append-version="true" />
                     <h4>Canada</h4>
                     <p>26 Finch Crescent, London ON N6E 2E5, Canada</p>
                     <p class="contact-info">    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -619,12 +620,12 @@
          style="vertical-align: middle; margin-right: 6px; color: #0040ff;">
       <rect x="3" y="5" width="18" height="14" rx="2"></rect>
       <polyline points="3 7 12 13 21 7"></polyline>
-    </svg> support@dotstark.com</p>
+    </svg> connect@chiefsense.ai</p>
                 </div>
 
                 <!-- Europe -->
                 <div class="office-card">
-                    <img src="/images/europe.png" class="flag-badge" />
+                <img src="/images/europe.webp" class="flag-badge" alt="Europe Flag" loading="lazy"  asp-append-version="true" />
                     <h4>Europe</h4>
                     <p>Coming Soon!</p>
                 </div>
@@ -706,4 +707,21 @@ function showError(input, message) {
 
     input.parentNode.appendChild(error);
 }
+
+document.querySelectorAll("select").forEach(select => {
+
+    // Initial check (page load)
+    if (select.value !== "") {
+        select.classList.add("has-value");
+    }
+
+    // On change
+    select.addEventListener("change", function () {
+        if (this.value !== "") {
+            this.classList.add("has-value");
+        } else {
+            this.classList.remove("has-value");
+        }
+    });
+});
 </script>
