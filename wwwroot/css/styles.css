@@ -253,15 +253,11 @@ img {
     max-height: 55px;
     width: auto;
     object-fit: contain;
-    opacity: 0.75;
     transition: opacity 0.2s, transform 0.2s;
-    filter: grayscale(30%);
 }
 
 .trust .logos img:hover {
-    opacity: 1;
     transform: translateY(-2px);
-    filter: grayscale(0%);
 }
 
 /* --- Number section styling --- */
@@ -1077,6 +1073,7 @@ img {
         padding: 8px 16px;
         border-radius: 8px;
         cursor: pointer;
+        white-space: nowrap;
     }
 
         .cookie-actions .btn-outline:hover {
