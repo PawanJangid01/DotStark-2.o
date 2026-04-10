@@ -43,7 +43,7 @@ namespace DotStarkWeb.Controllers
 
         [HttpPost]
         [IgnoreAntiforgeryToken]
-        public IActionResult SubmitForm(string name, string email, string companyName, string companySize, string subject, string message, string subscription, string productType)
+        public IActionResult SubmitForm(string name, string email, string companyName, string companySize, string subject, string subscription, string productType)
         {
 
             if (string.IsNullOrWhiteSpace(name) ||
@@ -80,7 +80,7 @@ namespace DotStarkWeb.Controllers
                 url = thankYouLink?.FirstOrDefault()?.Url;
             
             
-            _formService.SaveFormData(name, email, companyName, companySize, subject, message, subscription, productType);
+            _formService.SaveFormData(name, email, companyName, companySize, subject, subscription, productType);
 
             _formService.SendBrevoTemplateEmail(name, email);
 
@@ -93,7 +93,6 @@ namespace DotStarkWeb.Controllers
             template = ReplaceOrRemove(template, "Subject", "Subject", subject);
             template = ReplaceOrRemove(template, "Subscription", "Subscription", subscription);
             template = ReplaceOrRemove(template, "ProductType", "Product Type", productType);
-            template = ReplaceOrRemove(template, "Message", "Message", message);
        
             // Send email
             _formService.SendEmail(template);

@@ -21,7 +21,6 @@ namespace DotStarkWeb.Services
             string name,
             string email,
             string companyName,
-            string message,
             string subscription,
             string subject,
             string companySize,
@@ -59,7 +58,7 @@ namespace DotStarkWeb.Services
             _contentQuery = contentQuery;
         }
 
-        public void SaveFormData(string name, string email, string companyName, string companySize, string subject, string message, string subscription, string productType)
+        public void SaveFormData(string name, string email, string companyName, string companySize, string subject, string subscription, string productType)
         {
             using var connection = new SqliteConnection(_connectionString);
             connection.Open();
@@ -68,9 +67,9 @@ namespace DotStarkWeb.Services
 
             command.CommandText = @"
                 INSERT INTO ContactUsForm 
-                (Name, Email, CompanyName, Message, Subject, CompanySize, SubmittedAt, Subscription, ProductType)
+                (Name, Email, CompanyName, Subject, CompanySize, SubmittedAt, Subscription, ProductType)
                 VALUES 
-                ($name, $email, $companyName, $message, $subject, $companySize,  $submittedAt, $subscription, $productType)
+                ($name, $email, $companyName, $subject, $companySize,  $submittedAt, $subscription, $productType)
             ";
 
             command.Parameters.AddWithValue("$name", name);
@@ -78,7 +77,6 @@ namespace DotStarkWeb.Services
             command.Parameters.AddWithValue("$companyName", companyName);
             command.Parameters.AddWithValue("$companySize", companySize);
             command.Parameters.AddWithValue("$subject", subject);
-            command.Parameters.AddWithValue("$message", message ?? string.Empty);
             command.Parameters.AddWithValue("$submittedAt", DateTime.UtcNow);
             command.Parameters.AddWithValue("$subscription", subscription ?? string.Empty);
             command.Parameters.AddWithValue("$productType", productType ?? string.Empty);
