@@ -203,6 +203,123 @@ h1 span {
   box-shadow: 0 20px 40px rgba(0,0,0,0.08);
   border-color: rgba(0,64,255,0.3);
 }
+
+
+        .resources {
+            padding: 80px 20px;
+            background: white;
+            color: black;
+        }
+
+        
+
+            .resources .tag {
+                color: var(--primary);
+                background: var(--primary-10);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+            .resources .title {
+            font-family: var(--font-heading);
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+            .resources .subtitle {
+            color: black;
+            margin-bottom: 40px;
+        }
+
+            .resources .resource-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+            .resources .resource-item {
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            padding: 20px;
+                background: var(--primary-10);
+        }
+
+            .resources .resource-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+            .resources .resource-left {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+            .resources .icon {
+            width: 45px;
+            height: 45px;
+                background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 20px;
+        }
+
+            .resources .resource-left h4 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+            .resources .resource-left p {
+            margin: 4px 0 0;
+            font-size: 14px;
+            color: black;
+        }
+
+            .resources .download-btn {
+            background: none;
+            border: none;
+                color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+            .resources .download-form {
+            display: none;
+            margin-top: 15px;
+            gap: 10px;
+        }
+
+                .resources .download-form input {
+                padding: 10px;
+                border-radius: var(--radius);
+                border: 1px solid var(--border);
+                width: 250px;
+            }
+
+                .resources .download-form button {
+                padding: 10px 18px;
+                border: none;
+                border-radius: var(--radius);
+                background: var(--primary);
+                color: white;
+                cursor: pointer;
+            }
+
+        .error-msg {
+            color: #ff6b6b;
+            font-size: 13px;
+        }
+
+        .success-msg {
+            color: #2affb2;
+            font-size: 14px;
+        }
+
+
+
   </style>
 }
 
@@ -375,6 +492,137 @@ h1 span {
     </div>
   </section>
 
+<section class="resources">
+    <div class="container">
+
+        <p class="tag">— FREE RESOURCES</p>
+
+        <h2 class="title">
+            Practical AI Guides — No Fluff, Just Frameworks
+        </h2>
+
+        <p class="subtitle">
+            Downloads used by 2,800+ CTOs and engineering leaders. Pick what’s relevant to your stage.
+        </p>
+
+        <div class="resource-list">
+
+            <!-- RESOURCE 1 -->
+            <div class="resource-item">
+
+                <div class="resource-top">
+
+                    <div class="resource-left">
+                        <div class="icon">📄</div>
+
+                        <div>
+                            <h4>AI Readiness Scorecard</h4>
+                            <p>47-point self-assessment for CTOs · 5-min read</p>
+                        </div>
+                    </div>
+
+                    <button class="download-btn">Free ↓</button>
+
+                </div>
+
+                <form class="download-form">
+
+                    <input type="hidden" name="resourceId" value="scorecard">
+
+                    <input type="email"
+                           name="email"
+                           class="email-input"
+                           placeholder="Enter your work email">
+
+                    <p class="error-msg"></p>
+
+                    <button type="submit">Get Download</button>
+
+                    <p class="success-msg"></p>
+
+                </form>
+
+            </div>
+
+
+            <!-- RESOURCE 2 -->
+            <div class="resource-item">
+
+                <div class="resource-top">
+
+                    <div class="resource-left">
+                        <div class="icon">📘</div>
+
+                        <div>
+                            <h4>RAG Implementation Playbook 2025</h4>
+                            <p>32-page guide for enterprise RAG deployment</p>
+                        </div>
+                    </div>
+
+                    <button class="download-btn">Free ↓</button>
+
+                </div>
+
+                <form class="download-form">
+
+                    <input type="hidden" name="resourceId" value="rag">
+
+                    <input type="email"
+                           name="email"
+                           class="email-input"
+                           placeholder="Enter your work email">
+
+                    <p class="error-msg"></p>
+
+                    <button type="submit">Get Download</button>
+
+                    <p class="success-msg"></p>
+
+                </form>
+
+            </div>
+
+
+            <!-- RESOURCE 3 -->
+            <div class="resource-item">
+
+                <div class="resource-top">
+
+                    <div class="resource-left">
+                        <div class="icon">📊</div>
+
+                        <div>
+                            <h4>AI ROI Calculator (Excel)</h4>
+                            <p>Model your automation savings before you invest</p>
+                        </div>
+                    </div>
+
+                    <button class="download-btn">Free ↓</button>
+
+                </div>
+
+                <form class="download-form">
+
+                    <input type="hidden" name="resourceId" value="roi">
+
+                    <input type="email"
+                           name="email"
+                           class="email-input"
+                           placeholder="Enter your work email">
+
+                    <p class="error-msg"></p>
+
+                    <button type="submit">Get Download</button>
+
+                    <p class="success-msg"></p>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</section>
   <!-- CTA -->
   
  <section id="contact" class="cta-section section-padding-trust">
@@ -389,3 +637,89 @@ h1 span {
       </div>
     </div>
   </section>
+
+ <script>
+ const buttons = document.querySelectorAll(".download-btn");
+const forms = document.querySelectorAll(".download-form");
+
+buttons.forEach(button => {
+
+button.addEventListener("click", () => {
+
+forms.forEach(f => f.style.display="none");
+
+const form = button.closest(".resource-item").querySelector(".download-form");
+
+form.style.display="flex";
+
+});
+
+});
+
+
+document.querySelectorAll(".download-form").forEach(form => {
+
+form.addEventListener("submit", function(e){
+
+e.preventDefault();
+
+const emailInput = this.querySelector(".email-input");
+const errorMsg = this.querySelector(".error-msg");
+const successMsg = this.querySelector(".success-msg");
+const resourceId = this.querySelector("input[name='resourceId']").value;
+
+const email = emailInput.value.trim();
+
+errorMsg.textContent="";
+successMsg.textContent="";
+
+const personalDomains=[
+"gmail.com",
+"yahoo.com",
+"hotmail.com",
+"outlook.com"
+];
+
+if(email===""){
+errorMsg.textContent="Work email is required";
+return;
+}
+
+const emailPattern=/^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+
+if(!emailPattern.test(email)){
+errorMsg.textContent="Enter a valid email";
+return;
+}
+
+const domain=email.split("@@")[1];
+
+if(personalDomains.includes(domain)){
+errorMsg.textContent="Please use your work email";
+return;
+}
+
+successMsg.textContent="Success! Download link sent to your email";
+
+emailInput.value="";
+
+
+/* Example API call
+
+fetch("/api/download-resource",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+email:email,
+resourceId:resourceId
+})
+})
+
+*/
+
+});
+
+});
+ </script>
