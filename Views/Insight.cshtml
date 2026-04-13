@@ -203,6 +203,128 @@ h1 span {
   box-shadow: 0 20px 40px rgba(0,0,0,0.08);
   border-color: rgba(0,64,255,0.3);
 }
+
+/* ===== RESPONSIVE NEW ADDITIONS ===== */
+
+/* Stats */
+.case-stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap; /* important */
+}
+
+.case-stats div {
+    display: flex;
+    flex-direction: column;
+    min-width: 70px;
+}
+
+.case-stats strong {
+    color: var(--primary);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.case-stats span {
+    font-size: 0.7rem;
+    color: var(--muted);
+}
+
+/* Footer */
+.case-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 10px;
+    flex-wrap: wrap; /* important */
+}
+
+/* Client */
+.case-client {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    flex-wrap: wrap;
+}
+
+.client-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--primary-20);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+/* CTA */
+.read-link {
+    font-size: 0.8rem;
+    color: var(--primary);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* ===== MOBILE OPTIMIZATION ===== */
+@@media (max-width: 768px) {
+
+    .case-stats {
+        justify-content: space-between;
+    }
+
+    .case-stats div {
+        flex: 1 1 30%; /* 3 items per row */
+        min-width: 60px;
+    }
+
+    .case-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .read-link {
+        margin-top: 5px;
+    }
+}
+
+/* ===== EXTRA SMALL DEVICES ===== */
+@@media (max-width: 480px) {
+
+    .case-stats {
+        gap: 8px;
+    }
+
+    .case-stats div {
+        flex: 1 1 45%; /* 2 per row */
+    }
+
+    .case-stats strong {
+        font-size: 0.9rem;
+    }
+
+    .case-stats span {
+        font-size: 0.65rem;
+    }
+
+    .case-client {
+        font-size: 0.75rem;
+    }
+
+    .read-link {
+        font-size: 0.75rem;
+    }
+}
+
   </style>
 }
 
@@ -225,7 +347,21 @@ h1 span {
           <span class="tag">AI</span>
             <h3>Smart Learning Intelligence</h3>
             <p>Converts lecture videos into structured, searchable learning with AI tutor support and significantly faster student revision.</p>
-            <span class="read-link">Read More</span>
+            <!-- NEW: Stats -->
+             <div class="case-stats">
+                 <div><strong>75% less</strong><span>Faster retrieval</span></div>
+                 <div><strong>91%</strong><span>User satisfaction</span></div>
+                 <div><strong>8K+</strong><span>Active users</span></div>
+             </div>
+             
+             <!-- NEW: Footer -->
+             <div class="case-footer">
+                 <div class="case-client">
+                     <span class="client-icon">RG</span>
+                     <span>RAG365 · AI Knowledge</span>
+                 </div>
+                 <span class="read-link">Read case study</span>
+             </div>
           </div>
         </div>
         </a>
@@ -240,7 +376,21 @@ h1 span {
           <span class="tag">RAG</span>
             <h3>AI Knowledge Retrieval</h3>
             <p>AI-powered knowledge retrieval that delivers instant, source-cited answers from internal documents with zero hallucinations.</p>
-            <span class="read-link">Read More</span>
+                   <!-- NEW: Stats -->
+            <div class="case-stats">
+                <div><strong>75% less</strong><span>Faster retrieval</span></div>
+                <div><strong>91%</strong><span>User satisfaction</span></div>
+                <div><strong>8K+</strong><span>Active users</span></div>
+            </div>
+            
+            <!-- NEW: Footer -->
+            <div class="case-footer">
+                <div class="case-client">
+                    <span class="client-icon">RG</span>
+                    <span>RAG365 · AI Knowledge</span>
+                </div>
+                <span class="read-link">Read case study</span>
+            </div>
           </div>
         </div>
         </a>
@@ -255,7 +405,21 @@ h1 span {
           <span class="tag">AI Agent</span>
             <h3>AI SEO Intelligence</h3>
             <p>All-in-one AI SEO platform that automates audits, delivers real-time insights, and accelerates optimization with intelligent recommendations.</p>
-            <span class="read-link">Read More</span>
+                 <!-- NEW: Stats -->
+              <div class="case-stats">
+                  <div><strong>60% faster</strong><span>Faster audits</span></div>
+                  <div><strong>88%</strong><span>User satisfaction</span></div>
+                  <div><strong>15K+</strong><span>Active users</span></div>
+              </div>
+              
+              <!-- NEW: Footer -->
+              <div class="case-footer">
+                  <div class="case-client">
+                      <span class="client-icon">AI</span>
+                      <span>AI SEO Intelligence</span>
+                  </div>
+                  <span class="read-link">Read case study</span>
+              </div>
           </div>
         </div>
         </a>
