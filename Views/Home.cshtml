@@ -1414,6 +1414,59 @@
         font-size: 0.75rem;
     }
 }
+
+.tech-group {
+    margin-bottom: 30px;
+display: flex;
+    flex-direction: column;
+    align-items: center;   /* ✅ center horizontally */
+    text-align: center;    /* ✅ center text */
+}
+
+.tech-group h4 {
+    color: #000000;
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+/* ROW */
+.tech-tags-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* TAG */
+.tech-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 5px 10px;
+    border-radius: 999px;
+
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+
+    font-size: 1.25rem;
+    color: var(--foreground);
+
+    transition: all 0.2s ease;
+}
+
+/* ICON */
+.tech-tag img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+/* HOVER */
+.tech-tag:hover {
+    border-color: var(--primary);
+    background: rgba(27, 84, 255, 0.08);
+}
         </style>
     }
 
@@ -1846,84 +1899,180 @@
   </section>
 
   <!-- â•â•â• 8. TECHNOLOGY STACK â•â•â• -->
-  <section class="tech-stack-section section-padding">
-    <div class="container">
-      <div class="tech-stack-heading">
-        <h2>Deep Expertise Across the Full AI Stack</h2>
-      </div>
+ <section class="tech-stack-section section-padding">
+  <div class="container">
 
-      <!-- Tab Buttons -->
-      <div class="tech-tabs" role="tablist">
-        <button class="tech-tab active" data-tab="ai-models" role="tab" aria-selected="true">AI Models</button>
-        <button class="tech-tab" data-tab="frameworks" role="tab" aria-selected="false">Frameworks</button>
-        <button class="tech-tab" data-tab="vectordb" role="tab" aria-selected="false">Data &amp; Vector DB</button>
-        <button class="tech-tab" data-tab="cloud" role="tab" aria-selected="false">Cloud &amp; Infra</button>
-        <button class="tech-tab" data-tab="mlops" role="tab" aria-selected="false">MLOps &amp; Tools</button>
-      </div>
-
-
-      <!-- Tab Panels -->
-      <div class="tech-icons-panel active" id="tab-ai-models">
-        <div class="tech-icons-row">
-                <div class="tech-icon-item"><img src="/images/openai.webp" alt="OpenAI" loading="lazy"  asp-append-version="true" /><span>OpenAI</span></div>
-                <div class="tech-icon-item"><img src="/images/Claude-ai-logo1.webp" alt="Claude" loading="lazy"  asp-append-version="true" /><span>Claude</span></div>
-                <div class="tech-icon-item"><img src="/images/gemini-color.webp" alt="Gemini" loading="lazy"  asp-append-version="true" /><span>Gemini</span></div>
-                <div class="tech-icon-item"><img src="/images/Mistral.webp" alt="Mistral" loading="lazy"  asp-append-version="true" /><span>Mistral</span></div>
-                <div class="tech-icon-item"><img src="/images/meta-ai.webp" alt="Meta AI" loading="lazy"  asp-append-version="true" /><span>Meta AI</span></div>
-        </div>
-      </div>
-
-      <div class="tech-icons-panel" id="tab-frameworks">
-        <div class="tech-icons-row">
-                <div class="tech-icon-item"><img src="/images/langchain.webp" alt="LangChain" loading="lazy"  asp-append-version="true" /><span>LangChain</span></div>
-                <div class="tech-icon-item">
-                    <img src="/images/LlamaIndex.webp" alt="LlamaIndex" loading="lazy"  asp-append-version="true" /><span>LlamaIndex</span>
-          </div>
-                <div class="tech-icon-item">
-                    <img src="/images/scikit-learn.webp" alt="Scikit learn" loading="lazy"  asp-append-version="true" /><span>Scikit Learn</span>
-          </div>
-                <div class="tech-icon-item"><img src="/images/tensorflow.webp" alt="Tensorflow" loading="lazy"  asp-append-version="true" /><span>TensorFlow</span></div>
-                <div class="tech-icon-item"><img src="/images/fast-ai.webp" alt="FastAI" loading="lazy"  asp-append-version="true" /><span>FastAI </span></div>
-        </div>
-      </div>
-
-      <div class="tech-icons-panel" id="tab-vectordb">
-        <div class="tech-icons-row">
-                <div class="tech-icon-item"><img src="/images/Pinecone.io.webp" alt="Pinecone" loading="lazy"  asp-append-version="true" /><span>Pinecone</span></div>
-                <div class="tech-icon-item"><img src="/images/weaviate.webp" alt="Weaviate" loading="lazy"  asp-append-version="true" /><span>Weaviate</span></div>
-                <div class="tech-icon-item"><img src="/images/faiss.webp" alt="FAISS" loading="lazy"  asp-append-version="true" /><span>FAISS</span></div>
-                <div class="tech-icon-item"><img src="/images/Chroma.webp" alt="Chroma" loading="lazy"  asp-append-version="true" /><span>Chroma</span></div>
-                <div class="tech-icon-item"><img src="/images/milvus.webp" alt="Milvus" loading="lazy"  asp-append-version="true" /><span>Milvus</span></div>
-        </div>
-      </div>
-
-      <div class="tech-icons-panel" id="tab-cloud">
-        <div class="tech-icons-row">
-                <div class="tech-icon-item"><img src="/images/Amazon_Web_Services.webp" alt="AWS" loading="lazy"  asp-append-version="true" /><span>AWS</span></div>
-                <div class="tech-icon-item"><img src="/images/azure.webp" alt="Azure" loading="lazy"  asp-append-version="true" /><span>Azure</span></div>
-                <div class="tech-icon-item"><img src="/images/gcp.webp" alt="GCP" loading="lazy"  asp-append-version="true" /><span>GCP</span></div>
-                <div class="tech-icon-item"><img src="/images/docker.webp" alt="Docker" loading="lazy"  asp-append-version="true" /><span>Docker</span></div>
-                <div class="tech-icon-item"><img src="/images/terraform.webp" alt="Terraform" loading="lazy"  asp-append-version="true" /><span>Terraform</span></div>
-        </div>
-      </div>
-
-      <div class="tech-icons-panel" id="tab-mlops">
-        <div class="tech-icons-row">
-                <div class="tech-icon-item"><img src="/images/mlflow.webp" alt="MLflow" loading="lazy"  asp-append-version="true" /><span>MLflow</span></div>
-                <div class="tech-icon-item">
-                    <img src="/images/wandb.webp" alt="Weights & Biases" loading="lazy"  asp-append-version="true" /><span>
-                        Weights &amp;
-              Biases</span></div>
-                <div class="tech-icon-item">
-                    <img src="/images/Kubernetes.webp" alt="Kubernetes" loading="lazy"  asp-append-version="true" /><span>Kubernetes</span>
-          </div>
-                <div class="tech-icon-item"><img src="/images/cometml.webp" alt="CometMl" loading="lazy"  asp-append-version="true" /><span>CometML</span></div>
-                <div class="tech-icon-item"><img src="/images/kubeflow.webp" alt="CometMl" loading="lazy"  asp-append-version="true" /><span>KubeFlow</span></div>
-        </div>
-      </div>
-
+    <div class="tech-stack-heading">
+      <h2>Deep Expertise Across the Full AI Stack</h2>
     </div>
-  </section>
+
+    <!-- AI MODELS -->
+    <div class="tech-group">
+      <h4>AI Models</h4>
+      <div class="tech-tags-row">
+
+        <div class="tech-tag">
+          <img src="/images/openai.webp" alt="OpenAI">
+          <span>OpenAI</span>
+        </div>
+
+        <div class="tech-tag">
+          <img src="/images/Claude-ai-logo1.webp" alt="Claude">
+          <span>Claude</span>
+        </div>
+
+        <div class="tech-tag">
+          <img src="/images/gemini-color.webp" alt="Gemini">
+          <span>Gemini</span>
+        </div>
+
+        <div class="tech-tag">
+          <img src="/images/Mistral.webp" alt="Mistral">
+          <span>Mistral</span>
+        </div>
+
+        <div class="tech-tag">
+          <img src="/images/meta-ai.webp" alt="Meta AI">
+          <span>Meta AI</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Frameworks -->
+    <div class="tech-group">
+      <h4>Frameworks</h4>
+      <div class="tech-tags-row">
+
+        <div class="tech-tag">
+          <img src="/images/langchain.webp" alt="LangChain">
+          <span>LangChain</span>
+        </div>
+
+        <div class="tech-tag">
+          <img src="/images/LlamaIndex.webp" alt="LlamaIndex">
+          <span>LlamaIndex</span>
+        </div>
+
+        <div class="tech-tag">
+          <img src="/images/scikit-learn.webp" alt="Scikit Learn">
+          <span>Scikit Learn</span>
+        </div>
+
+        <div class="tech-tag">
+          <img src="/images/tensorflow.webp" alt="TensorFlow">
+          <span>TensorFlow</span>
+        </div>
+
+        <div class="tech-tag">
+          <img src="/images/fast-ai.webp" alt="FastAI">
+          <span>FastAI</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Data & Vector DB -->
+    <div class="tech-group">
+      <h4>Data & Vector DB</h4>
+      <div class="tech-tags-row">
+
+        <div class="tech-tag">
+          <img src="/images/Pinecone.io.webp" alt="Pinecone">
+          <span>Pinecone</span>
+        </div>
+
+        <div class="tech-tag">
+          <img src="/images/weaviate.webp" alt="Weaviate">
+          <span>Weaviate</span>
+        </div>
+
+        <div class="tech-tag">
+          <img src="/images/faiss.webp" alt="FAISS">
+          <span>FAISS</span>
+        </div>
+
+        <div class="tech-tag">
+          <img src="/images/Chroma.webp" alt="Chroma">
+          <span>Chroma</span>
+        </div>
+
+        <div class="tech-tag">
+          <img src="/images/milvus.webp" alt="Milvus">
+          <span>Milvus</span>
+        </div>
+
+      </div>
+    </div>
+
+     <!-- Cloud & Infra -->
+    <div class="tech-group">
+      <h4>Cloud & Infra</h4>
+      <div class="tech-tags-row">
+
+        <div class="tech-tag">
+          <img src="/images/Amazon_Web_Services.webp" alt="AWS">
+          <span>AWS</span>
+        </div>
+
+        <div class="tech-tag">
+          <img src="/images/azure.webp" alt="Azure">
+          <span>Azure</span>
+        </div>
+
+        <div class="tech-tag">
+          <img src="/images/gcp.webp" alt="GCP">
+          <span>GCP</span>
+        </div>
+
+        <div class="tech-tag">
+          <img src="/images/docker.webp" alt="Docker">
+          <span>Docker</span>
+        </div>
+
+        <div class="tech-tag">
+          <img src="/images/terraform.webp" alt="Terraform">
+          <span>Terraform</span>
+        </div>
+
+      </div>
+    </div>
+
+     <!-- MLOps & Tools -->
+ <div class="tech-group">
+   <h4>MLOps & Tools</h4>
+   <div class="tech-tags-row">
+
+     <div class="tech-tag">
+       <img src="/images/mlflow.webp" alt="MLflow">
+       <span>MLflow</span>
+     </div>
+
+     <div class="tech-tag">
+       <img src="/images/wandb.webp" alt="Weights & Biases">
+       <span>Weights & Biases</span>
+     </div>
+
+     <div class="tech-tag">
+       <img src="/images/Kubernetes.webp" alt="Kubernetes">
+       <span>Kubernetes</span>
+     </div>
+
+     <div class="tech-tag">
+       <img src="/images/cometml.webp" alt="CometML">
+       <span>CometML</span>
+     </div>
+
+     <div class="tech-tag">
+       <img src="/images/kubeflow.webp" alt="KubeFlow">
+       <span>KubeFlow</span>
+     </div>
+
+   </div>
+ </div>
+
+  </div>
+</section>
  
 
   <!-- â•â•â• 9. INSIGHTS â•â•â• -->
