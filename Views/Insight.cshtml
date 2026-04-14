@@ -205,119 +205,169 @@ h1 span {
 }
 
 
-        .resources {
-            padding: 80px 20px;
-            background: white;
-            color: black;
+        .resources-section{
+            padding-bottom:5rem;
+        }
+       
+
+        .Resource-header {
+            text-align: center;
+            margin-bottom: 3rem;
         }
 
-        
+            .Resource-header h2 {
+                font-family: var(--font-heading);
+                font-size: 2.5rem;
+                font-weight: 700;
+                margin-bottom: 1rem;
+            }
 
-            .resources .tag {
-                color: var(--primary);
-                background: var(--primary-10);
-            font-size: 14px;
-            margin-bottom: 10px;
+            .Resource-header p {
+                color: var(--muted);
+                font-size: 1.1rem;
+            }
+
+        /* Grid Layout */
+        .resources-section .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
         }
 
-            .resources .title {
-            font-family: var(--font-heading);
-            font-size: 42px;
-            margin-bottom: 15px;
-        }
-
-            .resources .subtitle {
-            color: black;
-            margin-bottom: 40px;
-        }
-
-            .resources .resource-list {
+        /* Resource Card */
+        .resources-section .resource-card {
+            background: rgba(27, 84, 255, 0.1);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            transition: var(--transition);
             display: flex;
             flex-direction: column;
-            gap: 20px;
         }
 
-            .resources .resource-item {
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 14px;
-            padding: 20px;
-                background: var(--primary-10);
-        }
+            .resources-section .resource-card:hover {
+                border-color: var(--primary);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            }
 
-            .resources .resource-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-            .resources .resource-left {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-            .resources .icon {
-            width: 45px;
-            height: 45px;
-                background: var(--primary);
+        .resources-section .icon {
+            width: 48px;
+            height: 48px;
+            background: #1b54ff;
+            border-radius: calc(var(--radius) - 2px);
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 10px;
-            font-size: 20px;
+            margin-bottom: 1.25rem;
+            font-size: 1.5rem;
         }
 
-            .resources .resource-left h4 {
-            margin: 0;
-            font-size: 18px;
+        .resources-section .resource-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
         }
 
-            .resources .resource-left p {
-            margin: 4px 0 0;
-            font-size: 14px;
-            color: black;
+        .resources-section .resource-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
         }
 
-            .resources .download-btn {
-            background: none;
+        .resources-section .btn-download {
+            background: #1b54ff;
+            color: white;
             border: none;
-                color: var(--primary);
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+        }
+
+            .resources-section .btn-download:hover {
+                background: var(--primary);
+            }
+
+        /* Form Styling */
+        .resources-section .form-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+            opacity: 0;
+        }
+
+            .resources-section .form-container.active {
+                max-height: 200px;
+                opacity: 1;
+                margin-top: 1.5rem;
+                padding-top: 1.5rem;
+                border-top: 1px solid var(--border);
+            }
+
+        .resources-section .email-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .resources-section .input-group {
+            position: relative;
+        }
+
+        .resources-section input[type="email"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-family: var(--font-body);
+            outline: none;
+            transition: var(--transition);
+        }
+
+            .resources-section input[type="email"]:focus {
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px rgba(27, 84, 255, 0.1);
+            }
+
+        .resources-section .btn-submit {
+            background: black;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: var(--radius);
             font-weight: 600;
             cursor: pointer;
         }
 
-            .resources .download-form {
+        /* Messages */
+        .resources-section .message {
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
             display: none;
-            margin-top: 15px;
-            gap: 10px;
         }
 
-                .resources .download-form input {
-                padding: 10px;
-                border-radius: var(--radius);
-                border: 1px solid var(--border);
-                width: 250px;
-            }
-
-                .resources .download-form button {
-                padding: 10px 18px;
-                border: none;
-                border-radius: var(--radius);
-                background: var(--primary);
-                color: white;
-                cursor: pointer;
-            }
-
-        .error-msg {
-            color: #ff6b6b;
-            font-size: 13px;
+        .resources-section .error-message {
+            color: #dc2626;
         }
 
-        .success-msg {
-            color: #2affb2;
-            font-size: 14px;
+        .resources-section .success-message {
+            color: #059669;
+            font-weight: 500;
         }
 
+        @@media (max-width: 640px) {
+            .resources-section .resource-grid {
+            grid-template-columns: 1fr;
+        }
+
+        }
 
 
   </style>
@@ -492,137 +542,70 @@ h1 span {
     </div>
   </section>
 
-<section class="resources">
-    <div class="container">
+<div class="container resources-section">
+    <header class="Resource-header">
+        <h2>Free Resources</h2>
+        <p>Expert guides and templates to help you scale your business.</p>
+    </header>
 
-        <p class="tag">— FREE RESOURCES</p>
+    <div class="resource-grid">
+        <article class="resource-card" data-resource-id="guide_scaling_2024">
+            <div class="icon">📘</div>
+            <h3>SaaS Scaling Guide</h3>
+            <p>Learn the 5 core frameworks used by unicorn startups to scale from $1M to $10M ARR.</p>
+            <button class="btn-download">Free ↓</button>
 
-        <h2 class="title">
-            Practical AI Guides — No Fluff, Just Frameworks
-        </h2>
-
-        <p class="subtitle">
-            Downloads used by 2,800+ CTOs and engineering leaders. Pick what’s relevant to your stage.
-        </p>
-
-        <div class="resource-list">
-
-            <!-- RESOURCE 1 -->
-            <div class="resource-item">
-
-                <div class="resource-top">
-
-                    <div class="resource-left">
-                        <div class="icon">📄</div>
-
-                        <div>
-                            <h4>AI Readiness Scorecard</h4>
-                            <p>47-point self-assessment for CTOs · 5-min read</p>
-                        </div>
+            <div class="form-container">
+                <form class="email-form">
+                    <div class="input-group">
+                        <input type="email" placeholder="Enter your work email">
+                        <div class="message error-message">Please use a valid work email address.</div>
                     </div>
-
-                    <button class="download-btn">Free ↓</button>
-
-                </div>
-
-                <form class="download-form">
-
-                    <input type="hidden" name="resourceId" value="scorecard">
-
-                    <input type="email"
-                           name="email"
-                           class="email-input"
-                           placeholder="Enter your work email">
-
-                    <p class="error-msg"></p>
-
-                    <button type="submit">Get Download</button>
-
-                    <p class="success-msg"></p>
-
+                    <button type="submit" class="btn-submit">Get Access</button>
+                    <div class="message success-message">Download link sent to your email.</div>
                 </form>
-
             </div>
+        </article>
 
+        <article class="resource-card" data-resource-id="template_hiring_plan">
+            <div class="icon">📝</div>
+            <h3>Hiring Plan Template</h3>
+            <p>A comprehensive spreadsheet to track headcount, budget, and recruitment pipelines.</p>
+            <button class="btn-download">Free ↓</button>
 
-            <!-- RESOURCE 2 -->
-            <div class="resource-item">
-
-                <div class="resource-top">
-
-                    <div class="resource-left">
-                        <div class="icon">📘</div>
-
-                        <div>
-                            <h4>RAG Implementation Playbook 2025</h4>
-                            <p>32-page guide for enterprise RAG deployment</p>
-                        </div>
+            <div class="form-container">
+                <form class="email-form">
+                    <div class="input-group">
+                        <input type="email" placeholder="Enter your work email">
+                        <div class="message error-message">Please use a valid work email address.</div>
                     </div>
-
-                    <button class="download-btn">Free ↓</button>
-
-                </div>
-
-                <form class="download-form">
-
-                    <input type="hidden" name="resourceId" value="rag">
-
-                    <input type="email"
-                           name="email"
-                           class="email-input"
-                           placeholder="Enter your work email">
-
-                    <p class="error-msg"></p>
-
-                    <button type="submit">Get Download</button>
-
-                    <p class="success-msg"></p>
-
+                    <button type="submit" class="btn-submit">Get Access</button>
+                    <div class="message success-message">Download link sent to your email.</div>
                 </form>
-
             </div>
+        </article>
 
+        <article class="resource-card" data-resource-id="ebook_product_market_fit">
+            <div class="icon">🚀</div>
+            <h3>Finding PMF eBook</h3>
+            <p>Identify signals of product-market fit and avoid common pitfalls during early growth.</p>
+            <button class="btn-download">Free ↓</button>
 
-            <!-- RESOURCE 3 -->
-            <div class="resource-item">
-
-                <div class="resource-top">
-
-                    <div class="resource-left">
-                        <div class="icon">📊</div>
-
-                        <div>
-                            <h4>AI ROI Calculator (Excel)</h4>
-                            <p>Model your automation savings before you invest</p>
-                        </div>
+            <div class="form-container">
+                <form class="email-form">
+                    <div class="input-group">
+                        <input type="email" placeholder="Enter your work email">
+                        <div class="message error-message">Please use a valid work email address.</div>
                     </div>
-
-                    <button class="download-btn">Free ↓</button>
-
-                </div>
-
-                <form class="download-form">
-
-                    <input type="hidden" name="resourceId" value="roi">
-
-                    <input type="email"
-                           name="email"
-                           class="email-input"
-                           placeholder="Enter your work email">
-
-                    <p class="error-msg"></p>
-
-                    <button type="submit">Get Download</button>
-
-                    <p class="success-msg"></p>
-
+                    <button type="submit" class="btn-submit">Get Access</button>
+                    <div class="message success-message">Download link sent to your email.</div>
                 </form>
-
             </div>
-
-        </div>
+        </article>
     </div>
-</section>
+</div>
+
+
   <!-- CTA -->
   
  <section id="contact" class="cta-section section-padding-trust">
@@ -639,87 +622,98 @@ h1 span {
   </section>
 
  <script>
- const buttons = document.querySelectorAll(".download-btn");
-const forms = document.querySelectorAll(".download-form");
+    document.addEventListener('DOMContentLoaded', () => {
+        const cards = document.querySelectorAll('.resource-card');
+        
+        // List of blocked personal domains
+        const blockedDomains = [
+            'gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 
+            'icloud.com', 'aol.com', 'protonmail.com', 'mail.com'
+        ];
 
-buttons.forEach(button => {
+        cards.forEach(card => {
+            const downloadBtn = card.querySelector('.btn-download');
+            const formContainer = card.querySelector('.form-container');
+            const form = card.querySelector('.email-form');
+            const emailInput = card.querySelector('input[type="email"]');
+            const errorMsg = card.querySelector('.error-message');
+            const successMsg = card.querySelector('.success-message');
+            const resourceId = card.getAttribute('data-resource-id');
 
-button.addEventListener("click", () => {
+            // 1. Handle Toggle logic
+            downloadBtn.addEventListener('click', (e) => {
+                const isActive = formContainer.classList.contains('active');
+                
+                // Close all other open forms first
+                document.querySelectorAll('.form-container').forEach(container => {
+                    container.classList.remove('active');
+                });
 
-forms.forEach(f => f.style.display="none");
+                // Toggle this one
+                if (!isActive) {
+                    formContainer.classList.add('active');
+                    emailInput.focus();
+                }
+            });
 
-const form = button.closest(".resource-item").querySelector(".download-form");
+            // 2. Form Submission & Validation
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const emailValue = emailInput.value.trim().toLowerCase();
+                const domain = emailValue.split('@@')[1];
 
-form.style.display="flex";
+                // Reset states
+                errorMsg.style.display = 'none';
+                successMsg.style.display = 'none';
 
-});
+                // Basic format check + Work email check
+                if (!emailValue.includes('@@') || blockedDomains.includes(domain)) {
+                    errorMsg.textContent = blockedDomains.includes(domain) 
+                        ? "Please use a business email. Personal domains are not allowed." 
+                        : "Please enter a valid email address.";
+                    errorMsg.style.display = 'block';
+                    return;
+                }
 
-});
+                // Prepare Data
+                const payload = {
+                    email: emailValue,
+                    resourceId: resourceId
+                };
 
+                // Simulate API Call
+                console.log("Sending data to API:", payload);
+                
+                // Show Loading state
+                const submitBtn = form.querySelector('.btn-submit');
+                const originalBtnText = submitBtn.textContent;
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Sending...";
 
-document.querySelectorAll(".download-form").forEach(form => {
+                try {
+                    // Replace with your actual endpoint: 
+                    // const response = await fetch('https://api.yoursite.com/download', { ... })
+                    
+                    await new Promise(resolve => setTimeout(resolve, 1000)); // Fake delay
+                    
+                    successMsg.style.display = 'block';
+                    form.reset();
+                    
+                    // Optional: Close form after success after 3 seconds
+                    setTimeout(() => {
+                        formContainer.classList.remove('active');
+                        successMsg.style.display = 'none';
+                    }, 4000);
 
-form.addEventListener("submit", function(e){
-
-e.preventDefault();
-
-const emailInput = this.querySelector(".email-input");
-const errorMsg = this.querySelector(".error-msg");
-const successMsg = this.querySelector(".success-msg");
-const resourceId = this.querySelector("input[name='resourceId']").value;
-
-const email = emailInput.value.trim();
-
-errorMsg.textContent="";
-successMsg.textContent="";
-
-const personalDomains=[
-"gmail.com",
-"yahoo.com",
-"hotmail.com",
-"outlook.com"
-];
-
-if(email===""){
-errorMsg.textContent="Work email is required";
-return;
-}
-
-const emailPattern=/^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
-
-if(!emailPattern.test(email)){
-errorMsg.textContent="Enter a valid email";
-return;
-}
-
-const domain=email.split("@@")[1];
-
-if(personalDomains.includes(domain)){
-errorMsg.textContent="Please use your work email";
-return;
-}
-
-successMsg.textContent="Success! Download link sent to your email";
-
-emailInput.value="";
-
-
-/* Example API call
-
-fetch("/api/download-resource",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-email:email,
-resourceId:resourceId
-})
-})
-
-*/
-
-});
-
-});
- </script>
+                } catch (error) {
+                    errorMsg.textContent = "Something went wrong. Please try again.";
+                    errorMsg.style.display = 'block';
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalBtnText;
+                }
+            });
+        });
+    });
+</script>
