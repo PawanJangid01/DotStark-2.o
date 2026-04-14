@@ -36,6 +36,8 @@ namespace DotStarkWeb.Services
             string jobRole
         );
 
+        Task SendResourcePdfToEmail(string email, string resourceId);
+
         void SendBrevoTemplateEmail(
            string name, string email
         );
@@ -238,6 +240,63 @@ namespace DotStarkWeb.Services
             client.Authenticate(smtpUser, smtpkey);
             client.Send(message);
             client.Disconnect(true);
+        }
+
+        public async Task SendResourcePdfToEmail(string email, string resourceId)
+        {
+            var settings = GetEmailSettings();
+            if (settings == null) return;
+
+            // 🔥 Map ResourceId → File Name
+            var fileName = resourceId switch
+            {
+                "guide_scaling_2024" => "scaling-guide.pdf",
+                "template_hiring_plan" => "hiring-template.pdf",
+                "ebook_product_market_fit" => "pmf-ebook.pdf",
+                _ => null
+            };
+
+            if (fileName == null)
+                throw new Exception("Invalid resource");
+
+            // 🔥 Get file path
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "pdf", fileName);
+
+            if (!File.Exists(filePath))
+                throw new Exception("File not found");
+
+            // SMTP settings
+            var smtpHost = settings.Value<string>("smtpHost");
+            var smtpPort = settings.Value<int>("smtpPort");
+            var smtpUser = settings.Value<string>("smtpUsername");
+            var smtpKey = settings.Value<string>("smtpKey");
+
+            var senderEmail = settings.Value<string>("senderEmail");
+            var fromName = settings.Value<string>("fromName");
+
+            // 🔥 Create email
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress(fromName, senderEmail));
+            message.To.Add(MailboxAddress.Parse(email));
+            message.Subject = "Your Requested Resource";
+
+            var builder = new BodyBuilder
+            {
+                HtmlBody = "<p>Hi,<br/><br/>Please find your requested resource attached.<br/><br/>Thanks!</p>"
+            };
+
+            // 🔥 Attach PDF
+            builder.Attachments.Add(filePath);
+
+            message.Body = builder.ToMessageBody();
+
+            using var client = new MailKit.Net.Smtp.SmtpClient();
+            client.AuthenticationMechanisms.Remove("XOAUTH2");
+
+            await client.ConnectAsync(smtpHost, smtpPort, SecureSocketOptions.StartTls);
+            await client.AuthenticateAsync(smtpUser, smtpKey);
+            await client.SendAsync(message);
+            await client.DisconnectAsync(true);
         }
     }
 }

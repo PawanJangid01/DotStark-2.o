@@ -77,9 +77,9 @@ namespace DotStarkWeb.Controllers
             string url = string.Empty;
 
             var thankYouLink = settings.Value<IEnumerable<Link>>("thankYouPageUrl");
-                url = thankYouLink?.FirstOrDefault()?.Url;
-            
-            
+            url = thankYouLink?.FirstOrDefault()?.Url;
+
+
             _formService.SaveFormData(name, email, companyName, companySize, subject, subscription, productType);
 
             _formService.SendBrevoTemplateEmail(name, email);
@@ -93,7 +93,7 @@ namespace DotStarkWeb.Controllers
             template = ReplaceOrRemove(template, "Subject", "Subject", subject);
             template = ReplaceOrRemove(template, "Subscription", "Subscription", subscription);
             template = ReplaceOrRemove(template, "ProductType", "Product Type", productType);
-       
+
             // Send email
             _formService.SendEmail(template);
 
@@ -122,7 +122,7 @@ namespace DotStarkWeb.Controllers
                 });
             }
 
-            _formService.SaveDemoFormData(firstName, lastName,  email, companyName, companySize, jobRole);
+            _formService.SaveDemoFormData(firstName, lastName, email, companyName, companySize, jobRole);
 
             return Json(new
             {
@@ -158,5 +158,36 @@ namespace DotStarkWeb.Controllers
             return template.Replace($"{{{{{placeholder}}}}}", value);
         }
 
+
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public async Task<IActionResult> SendResourcePdf(string email, string resourceId)
+        {
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(resourceId))
+            {
+                return Json(new { success = false, message = "Invalid request" });
+            }
+
+            try
+            {
+                await _formService.SendResourcePdfToEmail(email, resourceId);
+
+                return Json(new
+                {
+                    success = true,
+                    message = "PDF sent successfully"
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error sending resource PDF");
+
+                return Json(new
+                {
+                    success = false,
+                    message = "Something went wrong"
+                });
+            }
+        }
     }
 }

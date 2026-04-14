@@ -556,14 +556,16 @@ h1 span {
             <button class="btn-download">Free ↓</button>
 
             <div class="form-container">
-                <form class="email-form">
+               @using (Html.BeginUmbracoForm("SendResourcePdf", "Form", FormMethod.Post, 
+            new { @class = "email-form" }))
+              {
                     <div class="input-group">
                         <input type="email" placeholder="Enter your work email">
                         <div class="message error-message">Please use a valid work email address.</div>
                     </div>
                     <button type="submit" class="btn-submit">Get Access</button>
                     <div class="message success-message">Download link sent to your email.</div>
-                </form>
+              }
             </div>
         </article>
 
@@ -574,14 +576,16 @@ h1 span {
             <button class="btn-download">Free ↓</button>
 
             <div class="form-container">
-                <form class="email-form">
+                @using (Html.BeginUmbracoForm("SendResourcePdf", "Form", FormMethod.Post, 
+               new { @class = "email-form" }))
+             {
                     <div class="input-group">
                         <input type="email" placeholder="Enter your work email">
                         <div class="message error-message">Please use a valid work email address.</div>
                     </div>
                     <button type="submit" class="btn-submit">Get Access</button>
                     <div class="message success-message">Download link sent to your email.</div>
-                </form>
+                }
             </div>
         </article>
 
@@ -592,14 +596,16 @@ h1 span {
             <button class="btn-download">Free ↓</button>
 
             <div class="form-container">
-                <form class="email-form">
-                    <div class="input-group">
-                        <input type="email" placeholder="Enter your work email">
-                        <div class="message error-message">Please use a valid work email address.</div>
-                    </div>
-                    <button type="submit" class="btn-submit">Get Access</button>
-                    <div class="message success-message">Download link sent to your email.</div>
-                </form>
+                @using (Html.BeginUmbracoForm("SendResourcePdf", "Form", FormMethod.Post, 
+                   new { @class = "email-form" }))
+               {
+                  <div class="input-group">
+                      <input type="email" placeholder="Enter your work email">
+                      <div class="message error-message">Please use a valid work email address.</div>
+                  </div>
+                  <button type="submit" class="btn-submit">Get Access</button>
+                  <div class="message success-message">Download link sent to your email.</div>
+               }
             </div>
         </article>
     </div>
@@ -620,100 +626,100 @@ h1 span {
       </div>
     </div>
   </section>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.resource-card');
 
- <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const cards = document.querySelectorAll('.resource-card');
-        
-        // List of blocked personal domains
-        const blockedDomains = [
-            'gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 
-            'icloud.com', 'aol.com', 'protonmail.com', 'mail.com'
-        ];
+    // Block personal email domains
+    const blockedDomains = [
+        'gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 
+        'icloud.com', 'aol.com', 'protonmail.com', 'mail.com'
+    ];
 
-        cards.forEach(card => {
-            const downloadBtn = card.querySelector('.btn-download');
-            const formContainer = card.querySelector('.form-container');
-            const form = card.querySelector('.email-form');
-            const emailInput = card.querySelector('input[type="email"]');
-            const errorMsg = card.querySelector('.error-message');
-            const successMsg = card.querySelector('.success-message');
-            const resourceId = card.getAttribute('data-resource-id');
+    cards.forEach(card => {
+        const downloadBtn = card.querySelector('.btn-download');
+        const formContainer = card.querySelector('.form-container');
+        const form = card.querySelector('.email-form');
+        const emailInput = card.querySelector('input[type="email"]');
+        const errorMsg = card.querySelector('.error-message');
+        const successMsg = card.querySelector('.success-message');
+        const resourceId = card.getAttribute('data-resource-id');
 
-            // 1. Handle Toggle logic
-            downloadBtn.addEventListener('click', (e) => {
-                const isActive = formContainer.classList.contains('active');
-                
-                // Close all other open forms first
-                document.querySelectorAll('.form-container').forEach(container => {
-                    container.classList.remove('active');
-                });
+        // ✅ Toggle form
+        downloadBtn.addEventListener('click', () => {
+            const isActive = formContainer.classList.contains('active');
 
-                // Toggle this one
-                if (!isActive) {
-                    formContainer.classList.add('active');
-                    emailInput.focus();
-                }
+            document.querySelectorAll('.form-container').forEach(container => {
+                container.classList.remove('active');
             });
 
-            // 2. Form Submission & Validation
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                
-                const emailValue = emailInput.value.trim().toLowerCase();
-                const domain = emailValue.split('@@')[1];
+            if (!isActive) {
+                formContainer.classList.add('active');
+                emailInput.focus();
+            }
+        });
 
-                // Reset states
-                errorMsg.style.display = 'none';
-                successMsg.style.display = 'none';
+        // ✅ Form submit
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-                // Basic format check + Work email check
-                if (!emailValue.includes('@@') || blockedDomains.includes(domain)) {
-                    errorMsg.textContent = blockedDomains.includes(domain) 
-                        ? "Please use a business email. Personal domains are not allowed." 
-                        : "Please enter a valid email address.";
-                    errorMsg.style.display = 'block';
-                    return;
-                }
+            const emailValue = emailInput.value.trim().toLowerCase();
 
-                // Prepare Data
-                const payload = {
-                    email: emailValue,
-                    resourceId: resourceId
-                };
+            // 🔥 FIXED (was @@ ❌)
+            const domain = emailValue.split('@@')[1];
 
-                // Simulate API Call
-                console.log("Sending data to API:", payload);
-                
-                // Show Loading state
-                const submitBtn = form.querySelector('.btn-submit');
-                const originalBtnText = submitBtn.textContent;
-                submitBtn.disabled = true;
-                submitBtn.textContent = "Sending...";
+            // Reset messages
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'none';
 
-                try {
-                    // Replace with your actual endpoint: 
-                    // const response = await fetch('https://api.yoursite.com/download', { ... })
-                    
-                    await new Promise(resolve => setTimeout(resolve, 1000)); // Fake delay
-                    
+            // ✅ Validation
+            if (!emailValue.includes('@@') || !domain || blockedDomains.includes(domain)) {
+                errorMsg.textContent = blockedDomains.includes(domain)
+                    ? "Please use a business email. Personal domains are not allowed."
+                    : "Please enter a valid email address.";
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            // ✅ Prepare FormData (for SurfaceController)
+            const formData = new FormData();
+            formData.append("email", emailValue);
+            formData.append("resourceId", resourceId);
+
+            // Loading state
+            const submitBtn = form.querySelector('.btn-submit');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Sending...";
+
+            try {
+                const response = await fetch('/umbraco/surface/form/SendResourcePdf', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
                     successMsg.style.display = 'block';
                     form.reset();
-                    
-                    // Optional: Close form after success after 3 seconds
+
                     setTimeout(() => {
                         formContainer.classList.remove('active');
                         successMsg.style.display = 'none';
                     }, 4000);
-
-                } catch (error) {
-                    errorMsg.textContent = "Something went wrong. Please try again.";
-                    errorMsg.style.display = 'block';
-                } finally {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = originalBtnText;
+                } else {
+                    throw new Error("Failed");
                 }
-            });
+
+            } catch (error) {
+                errorMsg.textContent = "Something went wrong. Please try again.";
+                errorMsg.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
         });
     });
+});
 </script>
