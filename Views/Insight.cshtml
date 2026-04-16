@@ -206,7 +206,7 @@ h1 span {
 
 
         .resources-section{
-            padding-bottom:5rem;
+            padding-top:5rem;
         }
        
 
@@ -230,8 +230,9 @@ h1 span {
         /* Grid Layout */
         .resources-section .resource-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(480px, 480px));
             gap: 1.5rem;
+            justify-content: center;
         }
 
         /* Resource Card */
@@ -513,35 +514,7 @@ h1 span {
     </div>
   </section>
 
-  <!-- Why ChiefSense 2.0 -->
-  <section class="section alt">
-    <div class="container">
-      <div class="section-header">
-            <h2 class="section-title">Why ChiefSense</h2>
-        <p class="section-desc">We build intelligent AI solutions that are scalable, reliable, and designed to deliver real business impact</p>
-      </div>
-
-      <div class="stats-grid">
-        <div class="stat-card">
-          <p class="value">500+</p>
-          <p class="label">Projects Delivered</p>
-        </div>
-        <div class="stat-card">
-          <p class="value">400+</p>
-          <p class="label">Clients Served</p>
-        </div>
-        <div class="stat-card">
-          <p class="value">6+</p>
-          <p class="label">Years of Excellence</p>
-        </div>
-        <div class="stat-card">
-          <p class="value">97%</p>
-          <p class="label">Client Satisfaction</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  
 <div class="container resources-section">
     <header class="Resource-header">
         <h2>Free Resources</h2>
@@ -569,7 +542,7 @@ h1 span {
             </div>
         </article>
 
-        <article class="resource-card" data-resource-id="template_hiring_plan">
+        @* <article class="resource-card" data-resource-id="template_hiring_plan">
             <div class="icon">📝</div>
             <h3>Hiring Plan Template</h3>
             <p>A comprehensive spreadsheet to track headcount, budget, and recruitment pipelines.</p>
@@ -607,10 +580,38 @@ h1 span {
                   <div class="message success-message">Download link sent to your email.</div>
                }
             </div>
-        </article>
+        </article> *@
     </div>
 </div>
 
+<!-- Why ChiefSense 2.0 -->
+<section class="section alt">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Why ChiefSense</h2>
+            <p class="section-desc">We build intelligent AI solutions that are scalable, reliable, and designed to deliver real business impact</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <p class="value">500+</p>
+                <p class="label">Projects Delivered</p>
+            </div>
+            <div class="stat-card">
+                <p class="value">400+</p>
+                <p class="label">Clients Served</p>
+            </div>
+            <div class="stat-card">
+                <p class="value">6+</p>
+                <p class="label">Years of Excellence</p>
+            </div>
+            <div class="stat-card">
+                <p class="value">97%</p>
+                <p class="label">Client Satisfaction</p>
+            </div>
+        </div>
+    </div>
+</section>
 
   <!-- CTA -->
   
