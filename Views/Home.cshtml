@@ -1025,7 +1025,7 @@
    ══════════════════════════════════════════════ */
 .insights {
     background: var(--background);
-    padding:0  0;
+    padding:0  0 5rem;
 }
 
     .insights .section-top {
@@ -1153,7 +1153,7 @@
    10. CTA
    ══════════════════════════════════════════════ */
 .cta-section {
-    background: var(--primary);
+            background: var(--cool-grey);
     text-align: center;
 }
 
@@ -1165,7 +1165,7 @@
     .cta-section h2 {
         font-size: clamp(1.875rem, 4vw, 3rem);
         font-weight: 700;
-        color: #fff;
+        color: black;
         margin-bottom: 1.5rem;
         line-height: 1.15;
     }
@@ -1173,7 +1173,7 @@
     .cta-section p {
         font-size: 1.125rem;
         font-family: var(--font-body);
-        color: rgba(255, 255, 255, 0.8);
+        color: black;
         margin-bottom: 2.5rem;
         line-height: 1.7;
     }
@@ -1469,6 +1469,91 @@ display: flex;
     border-color: var(--primary);
     background: rgba(27, 84, 255, 0.08);
 }
+        /* ===== FAQ Section ===== */
+        
+        :root {
+            --bg-blue: #f0f7ff;
+            --text-dark: #2d314d;
+            --accent-blue: #007bff;
+            --transition-speed: 0.4s;
+            --ease: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto 5rem;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .faq-title {
+            text-align: center;
+            color: black;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .faq-item {
+            background-color: #ebebec59;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 22px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            text-align: left;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            gap:10px;
+        }
+
+            .faq-question:hover {
+                background-color: #e6f0ff;
+            }
+
+        .icon {
+            font-size: 1.6rem;
+            color: var(--primary);
+            transition: transform var(--transition-speed) var(--ease);
+            line-height: 1;
+            display: inline-block;
+        }
+
+        /* The hidden answer wrapper */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-speed) var(--ease);
+        }
+
+        /* Inner content for smooth padding transition */
+        .faq-answer-content {
+            padding: 22px 28px 22px 28px;
+            color: #4a4a4a;
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        .faq-item.active .faq-question{
+            background-color: #ebebec59;
+        }
+        /* Active State */
+        .faq-item.active .icon {
+            transform: rotate(45deg);
+        }
         </style>
     }
 
@@ -2127,7 +2212,85 @@ display: flex;
     </div>
   </section>
 
+<div class="faq-container container">
+    <h2 class="faq-title">Frequently Asked, Clearly Answered</h2>
 
+    <div class="faq-item">
+        <button class="faq-question">
+            What AI solutions does ChiefSense provide?
+            <span class="icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-content">
+                ChiefSense provides AI solutions including RAG 365 knowledge systems, AI agents, and intelligent automation to help businesses automate workflows, improve decision-making, and unlock value from their data.
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">
+            What is RAG 365 and how does it benefit businesses?
+            <span class="icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-content">
+                RAG 365 is an AI-powered knowledge system that retrieves and generates accurate answers from your business data. It helps organizations access information instantly, improve decision-making, and build intelligent search and conversational experiences.
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">
+            How can AI agents help my business?
+            <span class="icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-content">
+                AI agents automate tasks such as customer interactions, workflow management, and data processing. They help reduce manual effort, improve efficiency, and allow teams to focus on high-value work.
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">
+            How much does intelligent automation cost?
+            <span class="icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-content">
+                The cost of intelligent automation depends on your business requirements, workflows, and scale. ChiefSense offers flexible solutions starting from foundational automation setups to fully customized enterprise systems.
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">
+            Can ChiefSense build custom AI solutions for my business?
+            <span class="icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <div class="faq-answer-content">
+                Yes, ChiefSense designs and develops custom AI solutions tailored to your business needs, including RAG 365 systems, AI agents, and automation platforms that integrate seamlessly with your existing tools.
+            </div>
+        </div>
+    </div>
+</div>
+<section id="contact" class="cta-section section-padding-trust">
+    <div class="container">
+        <div class="inner">
+            <h2>
+                Ready to Build AI That Actually Works?
+            </h2>
+            <p>Discover how AI can transform your business. Connect with our experts to explore tailored solutions or view a demo to see our AI-powered products in action.</p>
+            <div class="btn-group">
+                <div class="btn-group">
+                    <a href="https://calendly.com/chiefsense-ai/30min" target="_blank" class="btn btn-primary">Talk to an Expert</a>
+                    <a href="/demo" class="btn btn-outline">View Demo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <!-- ═══ 10.5 GLOBAL PRESENCE ═══ -->
 <!-- â•â•â• 10.5 GLOBAL PRESENCE â•â•â• -->
   <section class="global-presence section-padding">
@@ -2238,3 +2401,31 @@ display: flex;
         </div>
     </div>
   </section>
+
+    <script>
+            document.querySelectorAll('.faq-question').forEach(button => {
+        button.addEventListener('click', () => {
+            const faqItem = button.parentElement;
+            const answer = faqItem.querySelector('.faq-answer');
+
+            
+            const isOpen = faqItem.classList.contains('active');
+
+            
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+                item.querySelector('.faq-answer').style.maxHeight = null;
+            });
+
+            
+            if (!isOpen) {
+                faqItem.classList.add('active');
+                // Set max-height to the actual scroll height of the content
+                answer.style.maxHeight = answer.scrollHeight + "px";
+            } else {
+                faqItem.classList.remove('active');
+                answer.style.maxHeight = null;
+            }
+        });
+    });
+    </script>
