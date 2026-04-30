@@ -49,8 +49,8 @@ img{max-width:100%;display:block}
 .btn:active{transform:scale(0.97)}
 .btn-primary{background:var(--primary);color:#fff;box-shadow:0 0 24px -4px var(--primary-glow)}
 .btn-primary:hover{background:var(--primary-light);box-shadow:0 0 32px -4px rgba(27,84,255,0.5)}
-.btn-outline{background:transparent;color:var(--text);border:1.5px solid rgba(27,84,255,0.4)}
-.btn-outline:hover{background:rgba(27,84,255,0.06);border-color:var(--primary)}
+.btn-outline{background:transparent;color:var(--text);border:1.5px solid rgb(0 0 0)}
+.btn-outline:hover{background:rgb(0 0 0);border-color:#000000}
 .btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
 /* Scroll reveal */
@@ -285,6 +285,428 @@ img{max-width:100%;display:block}
 .case-body .btn-link:hover {
   transform: translateY(-3px);
 }
+
+/* ===============================
+   SECTION BASE (REQUIRED)
+================================= */
+.section {
+  padding: 80px 0;
+}
+
+@@media (max-width: 768px) {
+  .section {
+    padding: 60px 0;
+  }
+}
+
+/* ===============================
+   SECTION HEADER
+================================= */
+.section-header {
+  max-width: 720px;
+  margin: 0 auto 64px;
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 12px;
+}
+
+.section-header h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* ===============================
+   OVERALL IMPACT SECTION
+================================= */
+.section-dark {
+  background: #ebebec;
+  color: #111;
+}
+
+/* Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* Responsive */
+@@media (max-width: 1023px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@@media (max-width: 479px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card */
+.stat-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 32px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  background: rgb(255 255 255);
+}
+
+/* Hover */
+.stat-card:hover {
+  border-color: rgba(27, 84, 255, 0.5);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+/* Icon */
+.stat-card svg {
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+/* Number */
+.stat-num {
+  font-size: clamp(1.8rem, 3vw, 2.2rem);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+/* Label */
+.stat-label {
+  color: #737373;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ===============================
+   HOW WE BUILD SECTION
+================================= */
+.section-alt {
+  background: #f5f5f5;
+}
+
+/* Grid */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 32px;
+}
+
+/* Responsive */
+@@media (max-width: 1023px) {
+  .steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@@media (max-width: 479px) {
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Step */
+.step {
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+/* Hover */
+.step:hover {
+  transform: translateY(-4px);
+}
+
+/* Step Number */
+.step-num {
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: rgba(27, 84, 255, 0.15);
+  display: block;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+/* Title */
+.step h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* Description */
+.step p {
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+
+
+/* ══════════════════════════════════════════════
+   6. PROCESS
+   ══════════════════════════════════════════════ */
+.process {
+    background: #f8faff;
+}
+
+    .process .process-header {
+        max-width: 48rem;
+        margin-bottom: 4rem;
+    }
+
+        .process .process-header h2 {
+            font-size: clamp(1.875rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--foreground);
+            margin-bottom: 0.75rem;
+        }
+
+.process-subtext {
+    font-family: var(--font-body);
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.process .steps-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+        @@media (min-width: 567px) {
+            .process .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @@media (min-width: 992px) {
+            .process .steps-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        
+/* Step card */
+.step-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 1.2rem 1.5rem;
+    position: relative;
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+    overflow: hidden;
+}
+
+    /* .step-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--primary);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    } */
+
+    .step-card:hover {
+        border-color: var(--primary-30);
+        box-shadow: 0 8px 28px rgba(27, 84, 255, 0.1);
+        transform: translateY(-4px);
+    }
+
+        .step-card:hover::before {
+            transform: scaleX(1);
+        }
+
+.step-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    margin-bottom: 1.25rem;
+}
+
+        .step-icon {
+            color: var(--primary);
+            margin-bottom: 0;
+        }
+
+
+            .step-icon svg {
+                margin-bottom: 1rem;
+            }
+
+        .step-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--foreground);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-card p {
+            font-family: var(--font-body);
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        @@media (max-width: 768px) {
+            .step-icon svg {
+                margin-right: 10px;
+                margin-bottom: 0;
+            }
+
+            .step-icon {
+                display: flex;
+                /* align-items: center; */
+                margin-bottom: 1rem;
+            }
+
+            .step-card h3 {
+                margin-bottom: 0;
+            }
+        }
+
+section {
+  scroll-margin-top: 80px; /* Example value */
+}
+
+
+
+/* ===== AGENT SHOWCASE ===== */
+.agent-showcase {
+  padding: 80px 0;
+}
+
+.agent-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+/* Reverse layout */
+.agent-row.reverse {
+  direction: rtl;
+}
+.agent-row.reverse .agent-info {
+  direction: ltr;
+}
+
+/* IMAGE */
+.agent-media {
+  position: relative;
+}
+
+.agent-media img {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+}
+
+.built-by {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: #fff;
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+/* CONTENT */
+.agent-info h2 {
+  font-size: 1.6rem;
+  margin: 8px 0 16px;
+}
+
+.agent-tag {
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+/* USE CASE */
+.block {
+  margin-bottom: 16px;
+}
+.block-title {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+/* IMPACT */
+.impact-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.impact-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f1f5ff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.impact-card svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--primary);
+  fill: none;
+  stroke-width: 2;
+}
+
+/* CONCLUSION */
+.conclusion-box {
+  background: #f7f7f9;
+  border-left: 3px solid var(--primary);
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+/* RESPONSIVE */
+@@media (max-width: 768px) {
+  .agent-row {
+    grid-template-columns: 1fr;
+  }
+
+  .agent-row.reverse {
+    direction: ltr;
+  }
+}
 </style>
 }
 
@@ -298,73 +720,254 @@ img{max-width:100%;display:block}
   
     <div class="reveal" data-delay="400">
             <a href="https://bookings.cloud.microsoft/book/PriorityTalkwithChiefSense@dotstark.com/?ismsaljsauthenabled" target="_blank" class="btn btn-primary">Talk to an Expert </a>
+           <!-- <a href="" class="btn btn-outline">Explore AI Agents</a> -->
     </div>
   </div>
 </section>
 
 <!-- AGENTS -->
-<section class="agents">
+
+<section class="agent-showcase section">
   <div class="container">
-    <div class="agents-header reveal">
-      <h2 class="text-balance">AI Agents for Every Business Function</h2>
-      <p class="text-pretty">Our AI agents work alongside your business to automate tasks, interact with systems, and streamline workflows. Built for seamless integration with your existing tools and processes</p>
+      <div class="agents-header reveal">
+      <h2 class="text-balance">AI Agents Built from Real Work Challenges</h2>
+      <p class="text-pretty">Our team doesn't just use AI - we build it to solve our daily work problems. Explore AI agents created by our team members to automate repetitive tasks, boost productivity, and deliver smarter outcomes.</p>
     </div>
-    <div class="agents-grid">
 
-      <!-- SEO Agent -->
-      <div class="agent-card reveal" data-delay="0">
-        <div class="agent-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-        <h3>SEO Agent</h3>
-        <div class="agent-body">
-          <p class="desc text-pretty">Our SEO Agent automates end-to-end search optimization processes, helping businesses improve visibility and drive organic growth. It performs keyword research, performance tracking in a continuous and data-driven manner.</p>
-          <p class="desc text-pretty">The agent integrates seamlessly with your CMS, analytics tools, and content workflows to ensure real-time optimization and actionable insights.</p>
-        </div>
-        <p class="cap-label">Key Capabilities</p>
-        <ul class="cap-list">
-          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Automated keyword research and clustering</li>
-          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Content optimization recommendations</li>
-          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Technical SEO audits and fixes</li>
-
-        </ul>
+     <!-- ITEM 1 -->
+    <div class="agent-row">
+      <div class="agent-media">
+        <img src="/images/SearchSense.png" alt="JD Agent">
       </div>
 
-      <!-- Appointment Agent -->
-      <div class="agent-card reveal" data-delay="100">
-        <div class="agent-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-        <h3>Appointment Agent</h3>
-        <div class="agent-body">
-          <p class="desc text-pretty">The Appointment Agent handles scheduling, bookings, reminders, and customer interactions without manual intervention. It ensures a smooth and efficient experience for both businesses and customers.</p>
-          <p class="desc text-pretty">It integrates with calendars, CRMs, and communication tools to manage appointments intelligently and reduce scheduling conflicts or missed opportunities.</p>
-        </div>
-        <p class="cap-label">Key Capabilities</p>
-        <ul class="cap-list">
-          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Automated scheduling and rescheduling</li>
-          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Calendar and CRM integration</li>
-          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Smart reminders and notifications</li>
-          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Conversational booking experience</li>
-        </ul>
-      </div>
+      <div class="agent-info">
+        <h2>SearchSense AI  </h2>
 
-      <!-- Operations Agent -->
-      <div class="agent-card reveal" data-delay="200">
-        <div class="agent-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
-        <h3>Operations Agent</h3>
-        <div class="agent-body">
-          <p class="desc text-pretty">The Operations Agent streamlines internal workflows by automating repetitive tasks and coordinating business processes across systems. It helps teams focus on high-value work while improving operational efficiency.</p>
-          <p class="desc text-pretty">The agent integrates with internal tools, databases, and APIs to execute tasks, monitor workflows, and ensure smooth operations across departments.</p>
+        <div class="block">
+          <p class="block-title">— USE CASE</p>
+          <p>Automates end-to-end SEO processes - helping businesses improve search visibility, optimize content, and drive consistent organic growth without manual effort.</p>
         </div>
-        <p class="cap-label">Key Capabilities</p>
-        <ul class="cap-list">
-          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Workflow automation and task execution</li>
-          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>System and API integrations</li>
-          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Process monitoring and optimization</li>
-          <li><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Data-driven operational insights</li>
-        </ul>
-      </div>
+        
+         <p class="block-title">— IMPACT</p>
+        <div class="impact-row">
+          <div class="impact-card">
+            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Saves 8–10 hrs
+          </div>
+          <div class="impact-card">
+            <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+            70% faster
+          </div>
+          <div class="impact-card">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+            continuous optimization
+          </div>
+        </div>
 
+        <div class="conclusion-box">
+         <p class="block-title">— CONCLUSION</p> 
+        <p>By shifting manually, fragmented SEO efforts to an automated, data-driven approach, the SEO AI Agent transforms optimization into a continuous and intelligent process. It eliminates time-intensive tasks, provides real-time insights, and enables faster, more accurate decision making ultimately driving consistent improvements in search visibility and overall digital performance.</p>
+        </div>  
+      </div>
     </div>
+
+    <!-- ITEM 2 (REVERSE) -->
+    <div class="agent-row reverse">
+      <div class="agent-media">
+        <img src="/images/AppointEase.png" alt="Booking Agent">
+      </div>
+
+      <div class="agent-info">
+        <h2>AppointEase AI </h2>
+
+        <div class="block">
+          <p class="block-title">— USE CASE</p>
+          <p>Automates appointment scheduling, rescheduling, and customer interactions eliminating manual coordination and ensuring a seamless booking experience.  </p>
+        </div>
+
+         <p class="block-title">— IMPACT</p>
+        <div class="impact-row">
+          <div class="impact-card">
+            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Saves 5–7  hrs
+          </div>
+          <div class="impact-card">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+            90% fewer emails
+          </div>
+          <div class="impact-card">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            customer experience
+          </div>
+        </div>
+
+        <div class="conclusion-box">
+          <p class="block-title">— CONCLUSION</p> 
+         <p>The Appointment Booking AI Agent transforms a traditional manual and time-consuming process into a fully automated, intelligent workflow. By eliminating scheduling friction, reducing missed opportunities, and integrating seamlessly with existing tools, it enables teams to focus on meaningful interactions while delivering a faster, more reliable booking experience.</p>
+        </div>
+      </div>
+    </div>
+
+
+     <!-- ITEM 3 (REVERSE) -->
+    <div class="agent-row ">
+      <div class="agent-media">
+        <img src="/images/PostPilot.png" alt="Booking Agent">
+      </div>
+
+      <div class="agent-info">
+        <h2>PostPilot AI </h2>
+
+        <div class="block">
+          <p class="block-title">— USE CASE</p>
+          <p>Streamlines end-to-end content management across LinkedIn posts, newsletters, and blogs for multiple contributors, eliminating manual coordination and tracking gaps.  </p>
+        </div>
+
+         <p class="block-title">— IMPACT</p>
+        <div class="impact-row">
+          <div class="impact-card">
+            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Saves 10–11  hrs
+          </div>
+          <div class="impact-card">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+            70% fewer emails
+          </div>
+          <div class="impact-card">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Zero conflicts
+          </div>
+        </div>
+
+        <div class="conclusion-box">
+          <p class="block-title">— CONCLUSION</p> 
+         <p>A once manual, follow-up-heavy process with limited visibility is now transformed into a fully automated, transparent workflow enabling real-time insights, streamlined approvals, and effortless coordination with minimal dependency.</p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ITEM 4 -->
+    <div class="agent-row reverse">
+      <div class="agent-media">
+        <img src="/images/WPLaunch.png" alt="JD Agent">
+      </div>
+
+      <div class="agent-info">
+        <h2>WPLaunch AI </h2>
+
+        <div class="block">
+          <p class="block-title">— USE CASE</p>
+          <p>Enables instant deployment of HTML/CSS pages to WordPress without manual setup, eliminating repetitive publishing steps, theme conflicts, and dependency on developers.</p>
+        </div>
+        
+         <p class="block-title">— IMPACT</p>
+        <div class="impact-row">
+          <div class="impact-card">
+            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Saves 25–30 hrs
+          </div>
+          <div class="impact-card">
+            <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+            90% faster
+          </div>
+          <div class="impact-card">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+            Consistent tone
+          </div>
+        </div>
+
+        <div class="conclusion-box">
+         <p class="block-title">— CONCLUSION</p> 
+        <p>What once required manual effort, technical expertise, and error-prone workflows is now streamlined into a simple, automated process enabling fast, accurate, and independent publishing for anyone.</p>
+        </div>
+      </div>
+    </div>
+
+   
+
+
+     <!-- ITEM 5 -->
+    <div class="agent-row">
+      <div class="agent-media">
+        <img src="/images/HireCraft.png" alt="JD Agent">
+      </div>
+
+      <div class="agent-info">
+        <h2>HireCraft AI</h2>
+
+        <div class="block">
+          <p class="block-title">— USE CASE</p>
+          <p>Automates the creation of professional and creative job descriptions, eliminating repetitive manual drafting and ensuring consistent, high-quality hiring content. </p>
+        </div>
+        
+         <p class="block-title">— IMPACT</p>
+        <div class="impact-row">
+          <div class="impact-card">
+            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Saves 8–12 hrs
+          </div>
+          <div class="impact-card">
+            <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+            100% faster
+          </div>
+          <div class="impact-card">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+            Consistent tone
+          </div>
+        </div>
+
+        <div class="conclusion-box">
+          <p class="block-title">— CONCLUSION</p> 
+         <p>What once required repetitive manual drafting, formatting, and revisions is now an instant, streamlined process delivering consistent, high-quality job descriptions and content with minimal effort and maximum efficiency.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM 6 (REVERSE) -->
+    <div class="agent-row reverse">
+      <div class="agent-media">
+        <img src="/images/CodePilot.png" alt="Booking Agent">
+      </div>
+
+      <div class="agent-info">
+        <h2>CodePilot AI  </h2>
+
+        <div class="block">
+          <p class="block-title">— USE CASE</p>
+          <p> Eliminates repetitive development tasks like CRUD coding, debugging, unit testing, and security checks, allowing .NET developers to focus on core business logic instead of manual effort.</p>
+        </div>
+
+         <p class="block-title">— IMPACT</p>
+        <div class="impact-row">
+          <div class="impact-card">
+            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Saves 15–20  hrs
+          </div>
+          <div class="impact-card">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+            40–50% fewer emails
+          </div>
+          <div class="impact-card">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Zero conflicts
+          </div>
+        </div>
+
+        <div class="conclusion-box">
+           <p class="block-title">— CONCLUSION</p> 
+         <p>A once fragmented, manual development process is now transformed into a seamless, integrated workflow enabling faster coding, instant debugging, automated testing, and uninterrupted productivity within a single environment.</p>
+        </div>
+      </div>
+    </div>
+
+
   </div>
 </section>
+
+
+
+
 
 <!-- CTA 1 -->
 <section class="cta-sections">
@@ -403,7 +1006,7 @@ img{max-width:100%;display:block}
 </section>
 
 
-<!-- 4. OUR WORK -->
+<!-- 4. OUR WORK 
 <section class="section case-section">
   <div class="container">
     <div class="case-header fade-up">
@@ -422,14 +1025,127 @@ img{max-width:100%;display:block}
       </div>
     </div>
   </div>
-</section>
+</section>-->
+
+<!-- Overall Impact -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="section-header fade-up">
+        <h2>Real Productivity Gains Across Our Team</h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card fade-up">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <div class="stat-num">30+</div>
+          <div class="stat-label">hours saved per week across teams</div>
+        </div>
+        <div class="stat-card fade-up">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <div class="stat-num">70%</div>
+          <div class="stat-label">reduction in manual work</div>
+        </div>
+        <div class="stat-card fade-up">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          <div class="stat-num">Faster</div>
+          <div class="stat-label">delivery with consistent quality</div>
+        </div>
+        <div class="stat-card fade-up">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          <div class="stat-num">More</div>
+          <div class="stat-label">time on strategic, less on repetitive</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+<section id="process" class="process section-padding">
+    <div class="container">
+      <div class="process-header">
+        <h2>How We Build AI Agents</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+ stroke="currentColor" stroke-width="1.8"
+ stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="11" cy="11" r="7"/>
+  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+</svg>
+                    <h3><span>1.</span> Identify</h3>
+          </div>
+          
+          <p>Real workflow challenges across teams.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+ stroke="currentColor" stroke-width="2"
+ stroke-linecap="round" stroke-linejoin="round">
+  <polyline points="12 6 4 10 12 14 20 10 12 6"/>
+  <polyline points="4 14 12 18 20 14"/>
+  <polyline points="4 18 12 22 20 18"/>
+</svg>
+                    <h3><span>2.</span> Define</h3>
+          </div>
+          
+          <p>Automation opportunities with clear outcomes.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+ stroke="currentColor" stroke-width="1.8"
+ stroke-linecap="round" stroke-linejoin="round">
+  <polyline points="16 18 22 12 16 6"/>
+  <polyline points="8 6 2 12 8 18"/>
+</svg>
+                    <h3><span>3.</span> Build</h3>
+          </div>
+          
+          <p>AI logic using modern frameworks.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">
+         <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+ stroke="currentColor" stroke-width="1.8"
+ stroke-linecap="round" stroke-linejoin="round">
+  <polyline points="20 6 9 17 4 12"/>
+</svg>
+                    <h3><span>4.</span> Test</h3>
+          </div>
+          
+          <p>Within real team environments.</p>
+        </div>
+
+         <div class="step-card">
+          <div class="step-icon">
+       <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+ stroke="currentColor" stroke-width="1.8"
+ stroke-linecap="round" stroke-linejoin="round">
+  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+  <polyline points="17 6 23 6 23 12"/>
+</svg>
+                    <h3><span>5.</span> Optimize</h3>
+          </div>
+          
+          <p>Continuously based on actual usage.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+
+
 
 <!-- CTA 2 -->
  <section id="contact" class="cta-section section-padding-trust">
    <div class="container">
      <div class="inner">
-       <h2>Build &amp; Deploy AI Agents for Your Business</h2>
-            <p>Partner with ChiefSense to design and deploy intelligent AI agents that automate operations and drive growth</p>
+       <h2>Want an AI Agent for Your Business?</h2>
+            <p>We can build custom AI agents tailored to your workflows, challenges, and goals - just like we did for our own team.</p>
        <div class="btn-group">
          <a href="https://bookings.cloud.microsoft/book/PriorityTalkwithChiefSense@dotstark.com/?ismsaljsauthenabled" target="_blank"  class="btn btn-white">Talk to an Expert</a>
        </div>
