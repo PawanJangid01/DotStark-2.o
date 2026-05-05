@@ -24,7 +24,8 @@ namespace DotStarkWeb.Services
             string subscription,
             string subject,
             string companySize,
-            string productType
+            string productType,
+            string ipAddress
         );
 
         void SaveDemoFormData(
@@ -58,7 +59,7 @@ namespace DotStarkWeb.Services
             _contentQuery = contentQuery;
         }
 
-        public void SaveFormData(string name, string email, string companyName, string companySize, string subject, string subscription, string productType)
+        public void SaveFormData(string name, string email, string companyName, string companySize, string subject, string subscription, string productType, string ipAddress)
         {
             using var connection = new SqliteConnection(_connectionString);
             connection.Open();
@@ -67,9 +68,9 @@ namespace DotStarkWeb.Services
 
             command.CommandText = @"
                 INSERT INTO ContactUsForm 
-                (Name, Email, CompanyName, Subject, CompanySize, SubmittedAt, Subscription, ProductType)
+                (Name, Email, CompanyName, Subject, CompanySize, SubmittedAt, Subscription, ProductType, IPAddress)
                 VALUES 
-                ($name, $email, $companyName, $subject, $companySize,  $submittedAt, $subscription, $productType)
+                ($name, $email, $companyName, $subject, $companySize,  $submittedAt, $subscription, $productType, $ipAddress)
             ";
 
             command.Parameters.AddWithValue("$name", name);
@@ -80,6 +81,7 @@ namespace DotStarkWeb.Services
             command.Parameters.AddWithValue("$submittedAt", DateTime.UtcNow);
             command.Parameters.AddWithValue("$subscription", subscription ?? string.Empty);
             command.Parameters.AddWithValue("$productType", productType ?? string.Empty);
+            command.Parameters.AddWithValue("$ipAddress", ipAddress ?? string.Empty);
 
             command.ExecuteNonQuery();
         }
