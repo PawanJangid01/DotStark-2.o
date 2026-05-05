@@ -203,6 +203,174 @@ h1 span {
   box-shadow: 0 20px 40px rgba(0,0,0,0.08);
   border-color: rgba(0,64,255,0.3);
 }
+
+
+        .resources-section{
+            padding-top:5rem;
+        }
+       
+
+        .Resource-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+            .Resource-header h2 {
+                font-family: var(--font-heading);
+                font-size: 2.5rem;
+                font-weight: 700;
+                margin-bottom: 1rem;
+            }
+
+            .Resource-header p {
+                color: var(--muted);
+                font-size: 1.1rem;
+            }
+
+        /* Grid Layout */
+        .resources-section .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 480px));
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        /* Resource Card */
+        .resources-section .resource-card {
+            background: rgba(27, 84, 255, 0.1);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+            .resources-section .resource-card:hover {
+                border-color: var(--primary);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            }
+
+        .resources-section .icon {
+            width: 48px;
+            height: 48px;
+            background: #1b54ff;
+            border-radius: calc(var(--radius) - 2px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            font-size: 1.5rem;
+        }
+
+        .resources-section .resource-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .resources-section .resource-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .resources-section .btn-download {
+            background: #1b54ff;
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+        }
+
+            .resources-section .btn-download:hover {
+                background: var(--primary);
+            }
+
+        /* Form Styling */
+        .resources-section .form-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+            opacity: 0;
+        }
+
+            .resources-section .form-container.active {
+                max-height: 200px;
+                opacity: 1;
+                margin-top: 1.5rem;
+                padding-top: 1.5rem;
+                border-top: 1px solid var(--border);
+            }
+
+        .resources-section .email-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .resources-section .input-group {
+            position: relative;
+        }
+
+        .resources-section input[type="email"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-family: var(--font-body);
+            outline: none;
+            transition: var(--transition);
+        }
+
+            .resources-section input[type="email"]:focus {
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px rgba(27, 84, 255, 0.1);
+            }
+
+        .resources-section .btn-submit {
+            background: black;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Messages */
+        .resources-section .message {
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .resources-section .error-message {
+            color: #dc2626;
+        }
+
+        .resources-section .success-message {
+            color: #059669;
+            font-weight: 500;
+        }
+
+        @@media (max-width: 640px) {
+            .resources-section .resource-grid {
+            grid-template-columns: 1fr;
+        }
+
+        }
+
+
   </style>
 }
 
@@ -346,34 +514,104 @@ h1 span {
     </div>
   </section>
 
-  <!-- Why ChiefSense 2.0 -->
-  <section class="section alt">
-    <div class="container">
-      <div class="section-header">
-            <h2 class="section-title">Why ChiefSense</h2>
-        <p class="section-desc">We build intelligent AI solutions that are scalable, reliable, and designed to deliver real business impact</p>
-      </div>
+  
+<div class="container resources-section">
+    <header class="Resource-header">
+        <h2>Free Resources</h2>
+        <p>Expert guides and templates to help you scale your business.</p>
+    </header>
 
-      <div class="stats-grid">
-        <div class="stat-card">
-          <p class="value">500+</p>
-          <p class="label">Projects Delivered</p>
-        </div>
-        <div class="stat-card">
-          <p class="value">400+</p>
-          <p class="label">Clients Served</p>
-        </div>
-        <div class="stat-card">
-          <p class="value">6+</p>
-          <p class="label">Years of Excellence</p>
-        </div>
-        <div class="stat-card">
-          <p class="value">97%</p>
-          <p class="label">Client Satisfaction</p>
-        </div>
-      </div>
+    <div class="resource-grid">
+        <article class="resource-card" data-resource-id="AI_Agent_Architecture_Guide">
+            <div class="icon">📘</div>
+            <h3>AI Agent Architecture Guide</h3>
+            <p>A practical guide to building effective AI solutions</p>
+            <button class="btn-download">Free ↓</button>
+
+            <div class="form-container">
+               @using (Html.BeginUmbracoForm("SendResourcePdf", "Form", FormMethod.Post, 
+            new { @class = "email-form" }))
+              {
+                    <div class="input-group">
+                        <input type="email" placeholder="Enter your work email">
+                        <div class="message error-message">Please use a valid work email address.</div>
+                    </div>
+                    <button type="submit" class="btn-submit">Get Access</button>
+                    <div class="message success-message">Download link sent to your email.</div>
+              }
+            </div>
+        </article>
+
+        @* <article class="resource-card" data-resource-id="template_hiring_plan">
+            <div class="icon">📝</div>
+            <h3>Hiring Plan Template</h3>
+            <p>A comprehensive spreadsheet to track headcount, budget, and recruitment pipelines.</p>
+            <button class="btn-download">Free ↓</button>
+
+            <div class="form-container">
+                @using (Html.BeginUmbracoForm("SendResourcePdf", "Form", FormMethod.Post, 
+               new { @class = "email-form" }))
+             {
+                    <div class="input-group">
+                        <input type="email" placeholder="Enter your work email">
+                        <div class="message error-message">Please use a valid work email address.</div>
+                    </div>
+                    <button type="submit" class="btn-submit">Get Access</button>
+                    <div class="message success-message">Download link sent to your email.</div>
+                }
+            </div>
+        </article>
+
+        <article class="resource-card" data-resource-id="ebook_product_market_fit">
+            <div class="icon">🚀</div>
+            <h3>Finding PMF eBook</h3>
+            <p>Identify signals of product-market fit and avoid common pitfalls during early growth.</p>
+            <button class="btn-download">Free ↓</button>
+
+            <div class="form-container">
+                @using (Html.BeginUmbracoForm("SendResourcePdf", "Form", FormMethod.Post, 
+                   new { @class = "email-form" }))
+               {
+                  <div class="input-group">
+                      <input type="email" placeholder="Enter your work email">
+                      <div class="message error-message">Please use a valid work email address.</div>
+                  </div>
+                  <button type="submit" class="btn-submit">Get Access</button>
+                  <div class="message success-message">Download link sent to your email.</div>
+               }
+            </div>
+        </article> *@
     </div>
-  </section>
+</div>
+
+<!-- Why ChiefSense 2.0 -->
+<section class="section alt">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Why ChiefSense</h2>
+            <p class="section-desc">We build intelligent AI solutions that are scalable, reliable, and designed to deliver real business impact</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <p class="value">500+</p>
+                <p class="label">Projects Delivered</p>
+            </div>
+            <div class="stat-card">
+                <p class="value">400+</p>
+                <p class="label">Clients Served</p>
+            </div>
+            <div class="stat-card">
+                <p class="value">6+</p>
+                <p class="label">Years of Excellence</p>
+            </div>
+            <div class="stat-card">
+                <p class="value">97%</p>
+                <p class="label">Client Satisfaction</p>
+            </div>
+        </div>
+    </div>
+</section>
 
   <!-- CTA -->
   
@@ -389,3 +627,100 @@ h1 span {
       </div>
     </div>
   </section>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.resource-card');
+
+    // Block personal email domains
+    const blockedDomains = [
+        'gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 
+        'icloud.com', 'aol.com', 'protonmail.com', 'mail.com'
+    ];
+
+    cards.forEach(card => {
+        const downloadBtn = card.querySelector('.btn-download');
+        const formContainer = card.querySelector('.form-container');
+        const form = card.querySelector('.email-form');
+        const emailInput = card.querySelector('input[type="email"]');
+        const errorMsg = card.querySelector('.error-message');
+        const successMsg = card.querySelector('.success-message');
+        const resourceId = card.getAttribute('data-resource-id');
+
+        // ✅ Toggle form
+        downloadBtn.addEventListener('click', () => {
+            const isActive = formContainer.classList.contains('active');
+
+            document.querySelectorAll('.form-container').forEach(container => {
+                container.classList.remove('active');
+            });
+
+            if (!isActive) {
+                formContainer.classList.add('active');
+                emailInput.focus();
+            }
+        });
+
+        // ✅ Form submit
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const emailValue = emailInput.value.trim().toLowerCase();
+
+            // 🔥 FIXED (was @@ ❌)
+            const domain = emailValue.split('@@')[1];
+
+            // Reset messages
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'none';
+
+            // ✅ Validation
+            if (!emailValue.includes('@@') || !domain || blockedDomains.includes(domain)) {
+                errorMsg.textContent = blockedDomains.includes(domain)
+                    ? "Please use a business email. Personal domains are not allowed."
+                    : "Please enter a valid email address.";
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            // ✅ Prepare FormData (for SurfaceController)
+            const formData = new FormData();
+            formData.append("email", emailValue);
+            formData.append("resourceId", resourceId);
+
+            // Loading state
+            const submitBtn = form.querySelector('.btn-submit');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Sending...";
+
+            try {
+                const response = await fetch('/umbraco/surface/form/SendResourcePdf', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    successMsg.style.display = 'block';
+                    form.reset();
+
+                    setTimeout(() => {
+                        formContainer.classList.remove('active');
+                        successMsg.style.display = 'none';
+                    }, 4000);
+                } else {
+                    throw new Error("Failed");
+                }
+
+            } catch (error) {
+                errorMsg.textContent = "Something went wrong. Please try again.";
+                errorMsg.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        });
+    });
+});
+</script>

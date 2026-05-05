@@ -299,5 +299,36 @@ namespace DotStarkWeb.Controllers
             // ✅ 3. Fallback (Local / Direct connection)
             return context.Connection.RemoteIpAddress?.ToString();
         }
+
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public async Task<IActionResult> SendResourcePdf(string email, string resourceId)
+        {
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(resourceId))
+            {
+                return Json(new { success = false, message = "Invalid request" });
+            }
+
+            try
+            {
+                await _formService.SendResourcePdfToEmail(email, resourceId);
+
+                return Json(new
+                {
+                    success = true,
+                    message = "PDF sent successfully"
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error sending resource PDF");
+
+                return Json(new
+                {
+                    success = false,
+                    message = "Something went wrong"
+                });
+            }
+        }
     }
 }
