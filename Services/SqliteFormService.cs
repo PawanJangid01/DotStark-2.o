@@ -252,9 +252,7 @@ namespace DotStarkWeb.Services
             // 🔥 Map ResourceId → File Name
             var fileName = resourceId switch
             {
-                "guide_scaling_2024" => "scaling-guide.pdf",
-                "template_hiring_plan" => "hiring-template.pdf",
-                "ebook_product_market_fit" => "pmf-ebook.pdf",
+                "AI_Agent_Architecture_Guide" => "AI_Agent_Architecture_Guide.pdf",
                 _ => null
             };
 
