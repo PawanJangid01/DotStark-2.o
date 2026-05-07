@@ -1,10 +1,11 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Insight>
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.BlogLandingPage>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 @{
 	Layout = "MasterLayout.cshtml";
 }
-  @section Styles {
+
+@section Styles {
   <style>
     :root {
       --ds-primary: #0040FF;
@@ -49,7 +50,7 @@
     .hero p { font-size: 18px; color: var(--ds-muted); max-width: 640px; margin: 0 auto; }
 
     /* ── Section Commons ── */
-    .section { padding: 5rem 0; }
+    .section { padding: 10rem 0 5rem; }
     .hero { padding: 10rem 0 5rem; }
     .section.alt { background: #ffffff; }
     .section-label {
@@ -371,98 +372,19 @@ h1 span {
         }
 
 
-       .view-all-wrap {
-    text-align: center;
-    margin-top: 3rem;
-}
-
-.view-all-wrap .link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.6rem 1.4rem;
-    border-radius: 0.5rem;
-    background: #1b54ff;
-    color: #fff;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.view-all-wrap .link:hover {
-    background: #002ecc;
-    transform: translateY(-2px);
-}
-
   </style>
 }
 
-  <!-- Case Studies -->
-  <section class="hero alt">
-    <div class="container">
-      <div class="section-header">
-        <h1>Our Success<span> Stories</span></h1>
-            <p class="section-desc">Real-world success stories showcasing how ChiefSense helps businesses implement AI solutions, automate processes, and drive measurable impact</p>
-      </div>
 
-      <div class="cards-grid">
-        <!-- Card 1 -->
-        <a href="/reclass-ai" class="card-link">
-        <div class="card">          
-          <div class="card-img">
-                        <img src="/images/ragai.webp" alt="Document Processing" loading="lazy"  asp-append-version="true" />
-          </div>
-          <div class="card-body">
-          <span class="tag">AI</span>
-            <h3>Smart Learning Intelligence</h3>
-            <p>Converts lecture videos into structured, searchable learning with AI tutor support and significantly faster student revision.</p>
-            <span class="read-link">Read More</span>
-          </div>
-        </div>
-        </a>
-
-        <!-- Card 2 -->
-        <a href="/case-study" class="card-link">
-        <div class="card">
-          <div class="card-img">
-                        <img src="/images/rag365.webp" alt="Knowledge Base" loading="lazy"  asp-append-version="true"  />
-                    </div>
-          <div class="card-body">
-          <span class="tag">RAG</span>
-            <h3>AI Knowledge Retrieval</h3>
-            <p>AI-powered knowledge retrieval that delivers instant, source-cited answers from internal documents with zero hallucinations.</p>
-            <span class="read-link">Read More</span>
-          </div>
-        </div>
-        </a>
-
-        <!-- Card 3 -->
-        <a href="/seo-case-study" class="card-link">
-        <div class="card">
-          <div class="card-img">
-                        <img src="/images/seoagent.png" alt="Customer Support" loading="lazy"  asp-append-version="true" />
-          </div>
-          <div class="card-body">
-          <span class="tag">AI Agent</span>
-            <h3>AI SEO Intelligence</h3>
-            <p>All-in-one AI SEO platform that automates audits, delivers real-time insights, and accelerates optimization with intelligent recommendations.</p>
-            <span class="read-link">Read More</span>
-          </div>
-        </div>
-        </a>
-
-      </div>
-    </div>
-  </section>
 
   <!-- Blogs -->
-  <section class="section" style="background-color: #ebebec;">
+  <section class="section" >
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">Latest <span>Insights</span></h2>
+        <h2 class="section-title">Knowledge <span style="color: #1b54ff;">Hub</span></h2>
         <p class="section-desc">Explore expert perspectives, trends, and best practices in artificial intelligence and modern AI-driven systems</p>
       </div>
-    
+
       <div class="cards-grid">
         <!-- Blog 1 -->
         <a href="/blog-rag-architecture" class="card-link">
@@ -524,7 +446,7 @@ h1 span {
             <h3>Future of Document AI Beyond Traditional RAG </h3>
             <p>Meet the vectorless, reasoning-based framework that helps AI navigate documents more accurately than traditional RAG systems.
 
-</p>
+             </p>
             <div class="card-author">
               <div class="avatar">S</div>
               <span>Shivansh Sharma</span>
@@ -533,223 +455,30 @@ h1 span {
         </div>
         </a>
 
-         
-      </div>
-
-      <div class="view-all-wrap">
-    <a href="/blog-landing-page/" class="link">View All</a>
-</div>
-
-    </div>
-  </section>
-
-  
-<div class="container resources-section">
-    <header class="Resource-header">
-        <h2>Free Resources</h2>
-        <p>Expert guides and templates to help you scale your business.</p>
-    </header>
-
-    <div class="resource-grid">
-        <article class="resource-card" data-resource-id="AI_Agent_Architecture_Guide">
-            <div class="icon">📘</div>
-            <h3>AI Agent Architecture Guide</h3>
-            <p>A practical guide to building effective AI solutions</p>
-            <button class="btn-download">Free ↓</button>
-
-            <div class="form-container">
-               @using (Html.BeginUmbracoForm("SendResourcePdf", "Form", FormMethod.Post, 
-            new { @class = "email-form" }))
-              {
-                    <div class="input-group">
-                        <input type="email" placeholder="Enter your work email">
-                        <div class="message error-message">Please use a valid work email address.</div>
-                    </div>
-                    <button type="submit" class="btn-submit">Get Access</button>
-                    <div class="message success-message">Download link sent to your email.</div>
-              }
+        <!-- Blog 4-->
+                <a href="/implement-ai-blog-details" class="card-link">
+        <div class="card">
+          <div class="card-img">
+                        <img src="/images/Implement_AI.png" alt="ML Pipelines" loading="lazy"  asp-append-version="true" />
+          </div>
+          <div class="card-body">
+           <span class="tag">AI Agent</span><span class="tag">AI Automation</span>
+            <div class="card-meta">
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> April 19, 2026</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 8 min read</span>
             </div>
-        </article>
-
-        @* <article class="resource-card" data-resource-id="template_hiring_plan">
-            <div class="icon">📝</div>
-            <h3>Hiring Plan Template</h3>
-            <p>A comprehensive spreadsheet to track headcount, budget, and recruitment pipelines.</p>
-            <button class="btn-download">Free ↓</button>
-
-            <div class="form-container">
-                @using (Html.BeginUmbracoForm("SendResourcePdf", "Form", FormMethod.Post, 
-               new { @class = "email-form" }))
-             {
-                    <div class="input-group">
-                        <input type="email" placeholder="Enter your work email">
-                        <div class="message error-message">Please use a valid work email address.</div>
-                    </div>
-                    <button type="submit" class="btn-submit">Get Access</button>
-                    <div class="message success-message">Download link sent to your email.</div>
-                }
+            <h3>How to Implement AI in Your Business </h3>
+            <p>
+            AI helps businesses automate tasks, improve efficiency, and deliver smarter customer experiences using tools like chatbots, automation, and AI analytics.    
+            </p>
+            <div class="card-author">
+              <div class="avatar">N</div>
+              <span>Nitesh Raiwar</span>
             </div>
-        </article>
-
-        <article class="resource-card" data-resource-id="ebook_product_market_fit">
-            <div class="icon">🚀</div>
-            <h3>Finding PMF eBook</h3>
-            <p>Identify signals of product-market fit and avoid common pitfalls during early growth.</p>
-            <button class="btn-download">Free ↓</button>
-
-            <div class="form-container">
-                @using (Html.BeginUmbracoForm("SendResourcePdf", "Form", FormMethod.Post, 
-                   new { @class = "email-form" }))
-               {
-                  <div class="input-group">
-                      <input type="email" placeholder="Enter your work email">
-                      <div class="message error-message">Please use a valid work email address.</div>
-                  </div>
-                  <button type="submit" class="btn-submit">Get Access</button>
-                  <div class="message success-message">Download link sent to your email.</div>
-               }
-            </div>
-        </article> *@
-    </div>
-</div>
-
-<!-- Why ChiefSense 2.0 -->
-<section class="section alt">
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title">Why ChiefSense</h2>
-            <p class="section-desc">We build intelligent AI solutions that are scalable, reliable, and designed to deliver real business impact</p>
+          </div>
         </div>
+        </a>
 
-        <div class="stats-grid">
-            <div class="stat-card">
-                <p class="value">500+</p>
-                <p class="label">Projects Delivered</p>
-            </div>
-            <div class="stat-card">
-                <p class="value">400+</p>
-                <p class="label">Clients Served</p>
-            </div>
-            <div class="stat-card">
-                <p class="value">6+</p>
-                <p class="label">Years of Excellence</p>
-            </div>
-            <div class="stat-card">
-                <p class="value">97%</p>
-                <p class="label">Client Satisfaction</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-  <!-- CTA -->
-  
- <section id="contact" class="cta-section section-padding-trust">
-    <div class="container">
-      <div class="inner">
-        <h2>Start Your AI Transformation</h2>
-        <p>Partner with ChiefSense to design and build scalable AI solutions that automate processes, unlock insights, and
-          drive business growth</p>
-        <div class="btn-group">
-          <a href="https://bookings.cloud.microsoft/book/PriorityTalkwithChiefSense@dotstark.com/?ismsaljsauthenabled" target="_blank" class="btn btn-white">Talk to an Expert</a>
-        </div>
       </div>
     </div>
   </section>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const cards = document.querySelectorAll('.resource-card');
-
-    // Block personal email domains
-    const blockedDomains = [
-        'gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 
-        'icloud.com', 'aol.com', 'protonmail.com', 'mail.com'
-    ];
-
-    cards.forEach(card => {
-        const downloadBtn = card.querySelector('.btn-download');
-        const formContainer = card.querySelector('.form-container');
-        const form = card.querySelector('.email-form');
-        const emailInput = card.querySelector('input[type="email"]');
-        const errorMsg = card.querySelector('.error-message');
-        const successMsg = card.querySelector('.success-message');
-        const resourceId = card.getAttribute('data-resource-id');
-
-        // ✅ Toggle form
-        downloadBtn.addEventListener('click', () => {
-            const isActive = formContainer.classList.contains('active');
-
-            document.querySelectorAll('.form-container').forEach(container => {
-                container.classList.remove('active');
-            });
-
-            if (!isActive) {
-                formContainer.classList.add('active');
-                emailInput.focus();
-            }
-        });
-
-        // ✅ Form submit
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const emailValue = emailInput.value.trim().toLowerCase();
-
-            // 🔥 FIXED (was @@ ❌)
-            const domain = emailValue.split('@@')[1];
-
-            // Reset messages
-            errorMsg.style.display = 'none';
-            successMsg.style.display = 'none';
-
-            // ✅ Validation
-            if (!emailValue.includes('@@') || !domain || blockedDomains.includes(domain)) {
-                errorMsg.textContent = blockedDomains.includes(domain)
-                    ? "Please use a business email. Personal domains are not allowed."
-                    : "Please enter a valid email address.";
-                errorMsg.style.display = 'block';
-                return;
-            }
-
-            // ✅ Prepare FormData (for SurfaceController)
-            const formData = new FormData();
-            formData.append("email", emailValue);
-            formData.append("resourceId", resourceId);
-
-            // Loading state
-            const submitBtn = form.querySelector('.btn-submit');
-            const originalText = submitBtn.textContent;
-            submitBtn.disabled = true;
-            submitBtn.textContent = "Sending...";
-
-            try {
-                const response = await fetch('/umbraco/surface/form/SendResourcePdf', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const result = await response.json();
-
-                if (result.success) {
-                    successMsg.style.display = 'block';
-                    form.reset();
-
-                    setTimeout(() => {
-                        formContainer.classList.remove('active');
-                        successMsg.style.display = 'none';
-                    }, 4000);
-                } else {
-                    throw new Error("Failed");
-                }
-
-            } catch (error) {
-                errorMsg.textContent = "Something went wrong. Please try again.";
-                errorMsg.style.display = 'block';
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
-            }
-        });
-    });
-});
-</script>

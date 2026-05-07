@@ -1,0 +1,594 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ImplementAiBlogDetails>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "MasterLayout.cshtml";
+}
+
+
+@section Styles {
+<style>
+    .blog-banner { background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 100%); border-bottom: 1px solid var(--border); padding: 4rem 0 0; text-align: center; }
+    .blog-banner-meta { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 1rem; }
+    .blog-banner-meta .tag { background: var(--primary-10); color: var(--primary); font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 2rem; }
+    .blog-banner h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); color: var(--foreground); max-width: 820px; margin: 0 auto 2.5rem; line-height: 1.2; }
+
+        .blog-banner-img {
+            width: 100%;
+            max-height: 420px;
+            object-fit: cover;
+            display: block;
+            min-height: 100%;
+        }
+    .blog-page { padding: 2rem 0 0; background: var(--background); }
+
+        .blog-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 3.5rem;
+            align-items: start;
+            padding-bottom: 5rem;
+        }
+    .blog-sidebar { position: sticky; top: 5rem; }
+    .toc-box { background: var(--cool-grey); border-radius: 0.75rem; padding: 1.5rem; border: 1px solid var(--border); margin-bottom: 1.5rem; }
+    .toc-box > span { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1rem; font-weight: 600; }
+    .toc-box ul { list-style: none; display: flex; flex-direction: column; gap: 0; }
+    .toc-box ul li a { display: block; padding: 0.3rem 0.5rem 0.3rem 0.75rem; font-size: 0.8rem; color: var(--muted); border-left: 2px solid var(--border); line-height: 1.4; transition: color 0.2s, border-color 0.2s; }
+    .toc-box ul li a:hover, .toc-box ul li a.active { color: var(--primary); border-left-color: var(--primary); }
+    .blog-body { min-width: 0; }
+    .blog-body p { font-size: 0.9375rem; color: #737373; line-height: 1.85; margin-bottom: 1.1rem; }
+    .blog-body h2 { font-size: 1.4rem; color: var(--foreground); margin: 2.5rem 0 0.75rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary-10); scroll-margin-top: 5rem; font-family: var(--font-heading); }
+    .blog-body h3 { font-size: 1.1rem; color: var(--foreground); margin: 1.75rem 0 0.5rem; scroll-margin-top: 5rem; font-family: var(--font-heading); }
+    .blog-body ul, .blog-body ol { list-style: none; margin: 0.5rem 0 1.25rem; display: flex; flex-direction: column; gap: 0.45rem; }
+    .blog-body ul li, .blog-body ol li {  align-items: flex-start; gap: 0.6rem; font-size: 0.9375rem; color: #737373; line-height: 1.7; }
+    .blog-body ul li::before { content: ''; flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: #353535; margin-top: 0.58rem; }
+    .blog-body ol { counter-reset: ol-counter; }
+    .blog-body ol li::before { content: counter(ol-counter); counter-increment: ol-counter; flex-shrink: 0; width: 1.4rem; height: 1.4rem; background: var(--primary); color: #fff; border-radius: 50%; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 0.15rem; }
+    .blog-body strong { color: var(--foreground); }
+    .blog-inline-img { width: auto;  border-radius: 0.75rem; margin: 1.5rem 0; object-fit: cover; max-height: 380px; border: 1px solid var(--border); }
+    .flow-steps { display: flex; flex-direction: column; gap: 0.5rem; margin: 1rem 0 1.5rem; }
+    .flow-step { display: flex; align-items: center; gap: 1rem; background: #f0f4ff; border: 1px solid rgba(27,84,255,0.12); border-radius: 0.5rem; padding: 0.75rem 1rem; font-size: 0.9rem; color: var(--foreground); }
+    .flow-step .step-num { background: var(--primary); color: #fff; width: 1.75rem; height: 1.75rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+    @@media (max-width: 960px) { .blog-layout { grid-template-columns: 1fr; } .blog-sidebar {display:none; } }
+
+    /* IMAGE CTA */
+.image-cta {
+    display: block;
+    margin: 1.5rem 0;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-cta img {
+    width: 100%;
+    display: block;
+}
+
+.image-cta:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.cs-banner { position: relative; width: 100%; height: 480px; overflow: hidden; }
+
+    @@media (max-width: 1400px) {
+            .cs-banner{ height:380px;}
+    }
+        .cs-banner-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .cs-banner-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.15) 100%); }
+        .cs-banner-content { position: absolute; bottom: 2.75rem; left: 50%; transform: translateX(-50%); width: 100%; }
+        .cs-tag { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; font-size: 0.72rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.875rem; backdrop-filter: blur(4px); }
+        .cs-banner-title { font-size: clamp(1.4rem, 2.5vw, 2.25rem); font-weight: 700; color: #fff; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 0.75rem; font-family: var(--font-heading); }
+        .cs-banner-sub { font-size: 1rem; color: rgba(255,255,255,0.8); line-height: 1.65; margin: 0; max-width: 560px; }
+        @@media (max-width: 600px) { .cs-banner { height: 360px; } .cs-banner-content { bottom: 1.75rem; padding: 0 32px; } }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 380px));
+            justify-content: center;
+            gap: 32px;
+        }
+
+        @@media (max-width: 900px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            transition: box-shadow 0.3s, border-color 0.3s;
+        }
+
+            .card:hover {
+                box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+                border-color: rgba(0,64,255,0.3);
+            }
+
+        .card-img {
+            position: relative;
+            height: 210px;
+            overflow: hidden;
+        }
+
+            .card-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.5s;
+            }
+
+        .card:hover .card-img img {
+            transform: scale(1.05);
+        }
+
+        .card-tag {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: #0040FF;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 50px;
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+            .card-body h3 {
+                font-size: 18px;
+                font-weight: 700;
+                margin-bottom: 10px;
+                line-height: 1.4;
+                transition: color 0.2s;
+            }
+
+        .card:hover .card-body h3 {
+            color: #0040FF;
+        }
+
+        .card-body p {
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+
+            .card-meta svg {
+                width: 12px;
+                height: 12px;
+            }
+
+        .card-author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-top: 8px;
+        }
+
+            .card-author .avatar {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                background: rgba(0,64,255,0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #78748b;
+                font-weight: bold;
+            }
+
+                .card-author .avatar svg {
+                    width: 14px;
+                    height: 14px;
+                    color: #0040FF;
+                }
+
+            .card-author span {
+                font-size: 12px;
+                font-weight: 500;
+                color: #64748b;
+            }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .hero {
+            padding: 10rem 0 5rem;
+        }
+
+        .section.alt {
+            background: #ffffff;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(2.25rem, 5vw, 3.75rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .section-desc {
+            font-size: 16px;
+            color: #64748b;
+            max-width: 640px;
+            margin: 0 auto 56px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        @@media (min-width: 768px) {
+            .card,
+            .card .card-body {
+                height: -webkit-fill-available;
+            }
+        }
+</style>
+}
+
+```html
+<!-- ═══ HERO BANNER ═══ -->
+<div class="cs-banner">
+    <img src="/images/Implement_AI_large.png" alt="Implement AI in Business" class="blog-banner-img" loading="lazy" asp-append-version="true" />
+    <div class="cs-banner-overlay"></div>
+    <div class="cs-banner-content container">
+        <span class="cs-tag">Blog</span>
+        <h1 class="cs-banner-title">How to Implement AI in Your Business</h1>     
+    </div>
+</div>
+
+<main class="blog-page">
+    <div class="container">
+        <div class="blog-layout">
+
+            <aside class="blog-sidebar">
+                <div class="toc-box">
+                    <span>Table of Contents</span>
+                    <ul>
+                        <li><a href="#understanding-ai">How to Implement AI in Your Business</a></li>
+                        <li><a href="#understanding-ais">Understanding AI in Business</a></li>
+                        <li><a href="#business-problem">Start with a Business Problem</a></li>
+                        <li><a href="#use-case">Define the Right Use Case</a></li>
+                        <li><a href="#tools-platforms">Choose the Right Tools</a></li>
+                        <li><a href="#mvp">Start Small with MVP</a></li>
+                        <li><a href="#data">Leverage Data Effectively</a></li>
+                        <li><a href="#implementation">Implement or Train AI</a></li>
+                        <li><a href="#testing">Test, Measure & Improve</a></li>
+                        <li><a href="#scale">Scale AI Across Business</a></li>
+                        <li><a href="#applications">Real-World Applications</a></li>
+                        <li><a href="#challenges">Challenges to Consider</a></li>
+                        <li><a href="#future">Future of AI</a></li>
+                        <li><a href="#conclusion">Conclusion</a></li>
+                        <li><a href="#faq">Frequently Asked Questions</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <article class="blog-body" id="content">
+
+                <h2 id="understanding-ai">How to Implement AI in Your Business  </h2>
+
+                <p>
+                    Artificial Intelligence is no longer a buzzword reserved for tech giants. It has become one of the most powerful tools for modern businesses. From startups to established enterprises, companies are using AI to streamline operations, improve customer experiences, and unlock new growth opportunities. Yet, despite its growing importance, many business owners find themselves asking a simple question: where do I start with AI? 
+                </p>
+
+                <p>
+                    The confusion is understandable. With countless tools, platforms, and technical jargon, AI can feel overwhelming. However, implementing AI in your business does not have to be complicated. You do not need a team of data scientists or a massive budget. What you need is a clear strategy and a structured approach.
+                </p>
+
+                <p>
+                    This below diagram explains how to implement AI in your business in a practical and scalable way. 
+                </p>
+
+                <p>
+                    AI helps machines perform tasks that normally require human intelligence such as understanding language, analyzing data, recognizing patterns, making decisions, and automating repetitive work.
+                </p>
+
+                <img src="/images/ai-implementation-roadmap.png" alt="AI Implementation Roadmap" class="blog-inline-img" loading="lazy">
+
+                <h2 id="understanding-ais">Understanding AI in a Business Context</h2>
+
+                <p>
+                    Before diving into implementation, it is important to understand what AI means in a business environment. AI is not just about complicated coding, advanced mathematics, or futuristic robots shown in movies. In reality, AI is simply a technology that helps machines perform tasks that normally require human intelligence, such as understanding language, analyzing data, recognizing patterns, making decisions, and automating repetitive work. In simple terms, AI helps businesses automate repetitive tasks, analyze data more effectively, and deliver personalized experiences to customers. 
+                </p>
+                <p>
+                    Examples include chatbots responding to customer queries, tools generating marketing content, and systems recommending products based on user behaviour. The goal is not to use AI for the sake of it, but to solve real business problems and improve efficiency. 
+                </p>
+
+                <h2 id="business-problem">Step 1: Start with a Clear Business Problem</h2>
+
+                <p>
+                    The most common mistake businesses make is starting with tools instead of problems. They adopt AI without a clear purpose, which often leads to wasted time and resources. 
+                </p>
+
+                <p>
+                   Instead, evaluate your business and identify areas where you face challenges. You may be dealing with too many customer queries, low marketing output, inefficient sales processes, or time-consuming manual tasks. AI should always be introduced as a solution to a specific issue. If it is not solving something meaningful, it is not worth implementing.
+                </p>
+
+                <h2 id="use-case">Step 2: Define the Right Use Case</h2>
+
+                <p>
+                    Once you identify the problem, the next step is to define a relevant AI use case. This means mapping your business challenge to a practical AI application. 
+                </p>
+
+                <p>
+                    <strong>For example</strong>, if customer support is slow, implementing a chatbot can improve response time. If marketing productivity is low, AI tools can help generate content. In sales, AI can assist with lead scoring and customer insights. In operations, it can automate workflows and reduce manual effort. 
+                </p>
+
+                <p>
+                   Focus on use cases that provide high impact while remaining simple to implement.
+                </p>
+
+                <h2 id="tools-platforms">Step 3: Choose the Right Tools and Platforms</h2>
+
+                <p>
+                    You do not need to build AI systems from scratch. Today, there are many AI tools available that make implementation easier, faster, and more affordable—even for beginners and small businesses. 
+                </p>
+
+                <p> Tools like ChatGPT can be used for content creation, customer support, and chatbot functionality. Zapier helps automate workflows by connecting different applications without coding. HubSpot provides AI-powered marketing and sales capabilities, while Google Cloud AI offers advanced AI solutions for businesses that require large-scale or custom implementations.  </p>
+                
+                <p>
+                    For businesses looking for free or budget-friendly alternatives, there are several excellent options available. n8n is one of the most powerful open-source automation platforms available today. While the official n8n cloud version offers only a limited free trial, the self-hosted version of n8n is completely free and allows users to create unlimited workflows and AI agents without monthly costs. This makes it an excellent choice for startups, developers, and businesses looking to build advanced automations on a budget. 
+                </p>
+
+                <p>
+                    Another popular option is Make, which provides an easy-to-use visual automation builder along with a free tier for beginners. Pipedream is another strong alternative that is especially useful for developers working with APIs and serverless workflows. Free AI platforms such as Google Gemini and OpenRouter also allow businesses to experiment with AI models and automation without significant upfront investment. 
+                    </p>
+                <p> 
+
+                    <p> 
+                        For hosting self-hosted automation tools like n8n, businesses can use affordable or free cloud platforms such as Railway, Render, and Oracle Cloud. These platforms make it possible to run automation systems and AI workflows at minimal or no cost during the early stages of development. 
+                        </p>
+
+                        <p>
+                            Beginners can start with free no-code tools to quickly test ideas and automate simple tasks. Developers, on the other hand, can integrate APIs or build custom AI systems for more advanced use cases. The key is to choose tools that align with your business goals, technical expertise, scalability requirements, and budget. 
+                            </p>
+        
+
+                <h2 id="mvp">Step 4: Start Small and Build an MVP</h2>
+
+                <p>
+                    Trying to implement AI across your entire business at once can lead to failure. Instead, start with a Minimum Viable Product. 
+                </p>
+
+                <p>
+                    This could be as simple as adding a chatbot to your website, automating email responses, or using AI for content generation. Starting small reduces risk and allows you to test your approach before scaling. 
+                </p>
+                <p>
+                    If you are building a startup or platform, focus on one AI-powered feature first. Once it proves successful, expand gradually. 
+                </p>
+                <img src="/images/ai-mvp.png" alt="AI Mvp" class="blog-inline-img" loading="lazy">
+      
+
+                <h2 id="data">Step 5: Leverage Data Effectively</h2>
+
+                <p>
+                   AI depends on data. Without data, it cannot function effectively. This makes data collection and organization a critical step. 
+                </p>
+
+                <p>
+                    Data can come from website interactions, customer behaviour, CRM systems, and user inputs. It may be structured, such as databases, or unstructured, such as text and emails. 
+                </p>
+
+                <p>
+                    Ensuring that your data is clean, organized, and accessible will significantly improve the performance of your AI systems. 
+                </p>
+
+                <h2 id="implementation">Step 6: Implement, Configure, or Train AI</h2>
+
+                <p>
+                    At this stage, you move from planning to execution. Depending on your approach, this may involve configuring a tool, integrating an API, or training a custom model. 
+                </p>
+
+                <p>
+                    Most businesses can achieve their goals using no-code tools or API-based solutions. Advanced implementations may require custom models, but they are not necessary in most cases. 
+                </p>
+
+                <p>
+                    Focus on achieving results rather than building complex systems. 
+                </p>
+
+                <h2 id="testing">Step 7: Test, Measure, and Improve</h2>
+
+                <p>
+                    AI implementation is not a one-time process. It requires continuous monitoring and improvement. 
+                </p>
+                <p>
+                    Track metrics such as accuracy, user satisfaction, and business impact. If something is not working, refine it. For example, improve chatbot responses or adjust automation workflows. 
+                </p>
+
+                <img src="/images/ai-cycle.png" alt="ai cycle" class="blog-inline-img" loading="lazy">
+
+                <p>Continuous improvement ensures that your AI system becomes more effective over time.  </p>
+                <div class="flow-steps">
+                    <div class="flow-step"><span class="step-num">1</span> Capture data</div>
+                    <div class="flow-step"><span class="step-num">2</span> Analyze patterns</div>
+                    <div class="flow-step"><span class="step-num">3</span> Learn from user behaviour</div>
+                    <div class="flow-step"><span class="step-num">4</span> Generate predictions and insights</div>
+                    <div class="flow-step"><span class="step-num">5</span> Automate actions and responses</div>
+                    <div class="flow-step"><span class="step-num">6</span> Improve continuously using new data</div>
+                </div>
+
+                <p>
+                    Unlike traditional software, AI systems continuously evolve and improve through learning and feedback loops.
+                </p>
+
+                <!-- IMAGE CTA -->
+                <a href="https://bookings.cloud.microsoft/book/PriorityTalkwithChiefSense@dotstark.com/?ismsaljsauthenabled" target="_blank" class="image-cta">
+                    <img src="/images/Implement_AI_CTA.png" alt="Schedule a call" loading="lazy" asp-append-version="true" />
+                </a>
+
+                <h2 id="scale">Step 8: Scale AI Across Your Business</h2>
+
+                <p>
+                    Once the initial AI implementation proves successful, businesses can gradually scale AI into other departments.
+                </p>
+
+                <ul>
+                    <li>Customer support automation</li>
+                    <li>Marketing personalization</li>
+                    <li>Sales intelligence</li>
+                    <li>Workflow optimization</li>
+                    <li>Operational analytics</li>
+                </ul>
+
+                <p>
+                    AI should grow alongside your business and support long-term scalability.
+                </p>
+
+                <h2 id="applications">Real-World Applications of AI</h2>
+
+                <ul>
+                    <li><strong>E-commerce</strong> – Product recommendations and personalized shopping</li>
+                    <li><strong>Education</strong> – Personalized learning experiences</li>
+                    <li><strong>Healthcare</strong> – Data analysis and workflow automation</li>
+                    <li><strong>Startups</strong> – Customer support automation and lead generation</li>
+                    <li><strong>Business Platforms</strong> – AI-driven workflow systems and analytics</li>
+                </ul>
+
+                <p>
+                    AI is transforming industries by helping businesses automate processes and improve user experiences.
+                </p>
+
+                <h2 id="challenges">Challenges to Consider</h2>
+
+                <p>
+                    Despite its advantages, AI implementation comes with several challenges businesses must carefully manage.
+                </p>
+
+                <ul>
+                    <li><strong>Data Privacy</strong> – Handling customer information securely</li>
+                    <li><strong>Poor Data Quality</strong> – Incorrect or biased AI outputs</li>
+                    <li><strong>Wrong Tool Selection</strong> – Choosing AI without strategy</li>
+                    <li><strong>Integration Complexity</strong> – Connecting AI with existing systems</li>
+                    <li><strong>Employee Resistance</strong> – Fear of automation replacing jobs</li>
+                    <li><strong>Scalability Challenges</strong> – Managing larger workloads and data volumes</li>
+                </ul>
+
+                <p>
+                    Businesses should maintain a balanced approach that combines automation with proper human oversight.
+                </p>
+
+                <h2 id="future">The Future of AI in Business</h2>
+
+                <p>
+                    Artificial Intelligence is evolving rapidly and becoming a core part of modern business operations.
+                </p>
+
+                <p>
+                    Companies are moving toward automation-driven systems that reduce operational costs, improve productivity, and deliver highly personalized customer experiences.
+                </p>
+
+                <ul>
+                    <li>AI-powered workflow automation</li>
+                    <li>Advanced AI agents</li>
+                    <li>Smarter customer support systems</li>
+                    <li>AI-assisted decision making</li>
+                    <li>Real-time predictive analytics</li>
+                </ul>
+
+                <p>
+                    Businesses that adopt AI early will gain significant competitive advantages in the future digital economy.
+                </p>
+
+                <h2 id="conclusion">Conclusion</h2>
+
+                <p>
+                    Implementing AI in your business does not have to be complicated.
+                </p>
+
+                <p>
+                    The key is to start with a clear problem, select the right use case, choose practical tools, and scale gradually over time.
+                </p>
+
+                <p>
+                    Businesses do not need advanced AI systems to benefit from this technology. 
+                    What matters most is how effectively AI is used to solve real business problems and create measurable value.
+                </p>
+
+                <p>
+                    In today’s competitive environment, AI is no longer optional. 
+                    It is becoming essential for innovation, automation, and long-term growth.
+                </p>
+
+                <h2 id="faq">Frequently Asked Questions</h2>
+
+                <h3>1. What is AI in business?</h3>
+                <p>
+                    AI in business refers to the use of intelligent technologies to automate tasks, analyze data, improve decision-making, and enhance customer experiences.
+                </p>
+
+                <h3>2. Do I need coding knowledge to use AI?</h3>
+                <p>
+                    No. Many AI tools and automation platforms are beginner-friendly and require little or no coding knowledge.
+                </p>
+
+                <h3>3. Which free AI tools can businesses use?</h3>
+                <p>
+                    Businesses can start with tools like n8n, Google Gemini, OpenRouter, Make, and Pipedream for AI automation and workflows.
+                </p>
+
+                <h3>4. What are the biggest benefits of AI?</h3>
+                <p>
+                    AI helps automate repetitive work, improve productivity, reduce operational costs, personalize customer experiences, and support faster business decisions.
+                </p>
+
+                <h3>5. What challenges should businesses consider?</h3>
+                <p>
+                    Common challenges include data privacy, poor data quality, scalability issues, integration complexity, and maintaining a balance between automation and human interaction.
+                </p>
+
+                <h3>6. What is the future of AI in business?</h3>
+                <p>
+                    AI is becoming a core part of modern business operations and will continue transforming industries through automation, intelligent workflows, and personalized experiences.
+                </p>
+
+            </article>
+        </div>
+    </div>
+</main>
+```
+
+
+<script>
+    const headings = document.querySelectorAll('.blog-body h2[id], .blog-body h3[id]');
+    const tocLinks = document.querySelectorAll('.toc-box a');
+    const tocObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                tocLinks.forEach(link => { link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id); });
+            }
+        });
+    }, { rootMargin: '-15% 0px -75% 0px' });
+    headings.forEach(h => tocObserver.observe(h));
+</script>

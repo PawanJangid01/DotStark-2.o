@@ -435,9 +435,9 @@
             color: #e53e3e;
             margin-top: 0.25rem;
         }
-.grecaptcha-badge {
+/* .grecaptcha-badge {
     visibility: hidden;
-}
+} */
  
     </style>
     }
@@ -648,8 +648,7 @@
         </div>
     </section>
 
-    <script>
-
+  <script>
 document.addEventListener("DOMContentLoaded", function () {
 
     const plan = sessionStorage.getItem("selectedPlan");
@@ -658,32 +657,40 @@ document.addEventListener("DOMContentLoaded", function () {
     const subscriptionHidden = document.getElementById("subscriptionHidden");
     const productHidden = document.getElementById("productHidden");
 
-    if (plan && subscriptionHidden) {
-        subscriptionHidden.value = plan;
-    }
-
-    if (product && productHidden) {
-        productHidden.value = product;
-    }
+    if (plan && subscriptionHidden) subscriptionHidden.value = plan;
+    if (product && productHidden) productHidden.value = product;
 
     sessionStorage.removeItem("selectedPlan");
     sessionStorage.removeItem("selectedProduct");
 
+    // ✅ Attach submit handler here instead of inline onsubmit
+    document.getElementById("contactForm")
+        .addEventListener("submit", handleSubmit);
+
+    // Select color state on load
+    document.querySelectorAll("select").forEach(select => {
+        if (select.value !== "") select.classList.add("has-value");
+
+        select.addEventListener("change", function () {
+            this.classList.toggle("has-value", this.value !== "");
+        });
+    });
 });
 
+async function handleSubmit(e) {
+    e.preventDefault();
 
-   function handleSubmit(e) {
     let isValid = true;
 
     const fields = [
-        { name:"name", message:"Full Name is required"},
-        { name:"email", message:"Email is required"},
-        { name:"companyname", message:"Company name is required"},
-        { name:"companySize", message:"Select company size"},
-        { name:"subject", message:"Subject is required"},
+        { name: "name",        message: "Full Name is required" },
+        { name: "email",       message: "Email is required" },
+        { name: "companyname", message: "Company name is required" },
+        { name: "companySize", message: "Select company size" },
+        { name: "subject",     message: "Subject is required" },
     ];
 
-    // Clear previous errors (DO NOT REMOVE ELEMENTS)
+    // Clear previous errors
     document.querySelectorAll(".error-message").forEach(el => el.innerText = "");
 
     fields.forEach(field => {
@@ -692,11 +699,11 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!input || input.value.trim() === "") {
             showError(input, field.message);
             isValid = false;
+            return;
         }
 
         if (field.name === "email" && input.value.trim() !== "") {
-            const emailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/; // ✅ fixed
-
+            const emailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
             if (!emailRegex.test(input.value.trim())) {
                 showError(input, "Please enter a valid email address");
                 isValid = false;
@@ -704,50 +711,32 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // ❌ STOP ONLY IF INVALID
-    if (!isValid) {
-        e.preventDefault();
-        return false;
+    if (!isValid) return;
+
+    // ✅ Get reCAPTCHA token then submit
+    try {
+        const token = await grecaptcha.execute(
+            '6Lesa4sqAAAAAOfloea1nMt438Rk08VLa_U4tl-Q',
+            { action: 'submit' }
+        );
+        document.getElementById("recaptchaToken").value = token;
+    } catch (err) {
+        console.error("reCAPTCHA error:", err);
+        alert("reCAPTCHA failed. Please refresh and try again.");
+        return;
     }
 
-    // ✅ ALLOW FORM SUBMIT → Controller will be called
-    return true;
+    // ✅ Submit form after token is set
+    document.getElementById("contactForm").submit();
 }
 
 function showError(input, message) {
+    if (!input) return;
     const error = document.createElement("div");
-    error.className = "error-message";   
+    error.className = "error-message";
     error.style.marginTop = "4px";
     error.innerText = message;
-
     input.parentNode.appendChild(error);
 }
-
-document.querySelectorAll("select").forEach(select => {
-
-    // Initial check (page load)
-    if (select.value !== "") {
-        select.classList.add("has-value");
-    }
-
-    // On change
-    select.addEventListener("change", function () {
-        if (this.value !== "") {
-            this.classList.add("has-value");
-        } else {
-            this.classList.remove("has-value");
-        }
-    });
-});
 </script>
-<script>
-function executeRecaptcha() {
-    grecaptcha.ready(function () {
-        grecaptcha.execute('6LdkgNgsAAAAAGA06Sdnu4URCjltSUvc4WH5Q1Oz', { action: 'submit' })
-            .then(function (token) {
-                document.getElementById("recaptchaToken").value = token;
-            });
-    });
-}
-</script>
-<script src="https://www.google.com/recaptcha/api.js?render=6LdkgNgsAAAAAGA06Sdnu4URCjltSUvc4WH5Q1Oz"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6Lesa4sqAAAAAOfloea1nMt438Rk08VLa_U4tl-Q"></script>

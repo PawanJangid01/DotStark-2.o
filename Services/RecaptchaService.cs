@@ -1,50 +1,52 @@
-﻿using DotStarkWeb.Services;
-using System.Text.Json;
+﻿using System.Text.Json;
 
-public class RecaptchaService : IRecaptchaService
+namespace DotStarkWeb.Services
 {
-    private readonly IConfiguration _config;
-    private readonly HttpClient _httpClient;
-
-    public RecaptchaService(IConfiguration config, HttpClient httpClient)
+    public class RecaptchaService : IRecaptchaService
     {
-        _config = config;
-        _httpClient = httpClient;
+        private readonly HttpClient _httpClient;
+        private readonly string _recaptchaApiUrl;
+        private readonly string _secretKey;
+
+        public RecaptchaService(HttpClient httpClient, IConfiguration configuration)
+        {
+            _httpClient = httpClient;
+            _secretKey = configuration["Recaptcha:SecretKey"];
+
+            // ✅ Fallback so URL is never null
+            _recaptchaApiUrl = configuration["Recaptcha:RecaptchaApiUrl"]
+                               ?? "https://www.google.com/recaptcha/api/siteverify";
+
+            if (string.IsNullOrWhiteSpace(_secretKey))
+                throw new InvalidOperationException("Recaptcha:SecretKey is missing in appsettings.json");
+        }
+
+        public async Task<bool> ValidateTokenAsync(string token)
+        {
+            if (string.IsNullOrWhiteSpace(token))
+                return false;
+
+            var url = $"{_recaptchaApiUrl}?secret={_secretKey}&response={token}";
+
+            var response = await _httpClient.PostAsync(url, null);
+
+            if (!response.IsSuccessStatusCode)
+                return false;
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            var result = JsonSerializer.Deserialize<RecaptchaResponse>(json);
+
+            return result != null && result.success && result.score >= 0.5;
+        }
     }
 
-    public async Task<bool> ValidateTokenAsync(string token, string ipAddress)
+    public class RecaptchaResponse
     {
-        var secret = _config["GoogleReCaptcha:SecretKey"];
-
-        var response = await _httpClient.PostAsync(
-            "https://www.google.com/recaptcha/api/siteverify",
-            new FormUrlEncodedContent(new[]
-            {
-                new KeyValuePair<string,string>("secret", secret),
-                new KeyValuePair<string,string>("response", token),
-                new KeyValuePair<string,string>("remoteip", ipAddress)
-            })
-        );
-
-        var json = await response.Content.ReadAsStringAsync();
-
-        var result = JsonSerializer.Deserialize<RecaptchaResponse>(json,
-            new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
-
-        return result != null &&
-               result.Success &&
-               result.Score >= 0.5; // adjust if needed
+        public bool success { get; set; }
+        public string challenge_Ts { get; set; }
+        public string hostname { get; set; }
+        public float score { get; set; }
+        public string action { get; set; }
     }
-}
-
-public class RecaptchaResponse
-{
-    public bool Success { get; set; }
-    public double Score { get; set; }
-    public string Action { get; set; }
-    public DateTime Challenge_ts { get; set; }
-    public string Hostname { get; set; }
 }
