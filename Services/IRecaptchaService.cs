@@ -2,6 +2,6 @@
 {
     public interface IRecaptchaService
     {
-        Task<bool> ValidateTokenAsync(string token, string ipAddress);
+        Task<bool> ValidateTokenAsync(string token);
     }
 }

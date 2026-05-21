@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Http;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<ISqliteFormService, SqliteFormService>();
-builder.Services.AddHttpClient<IRecaptchaService, RecaptchaService>();
+builder.Services.AddHttpClient<IRecaptchaService, RecaptchaService>(client =>
+{
+    client.Timeout = TimeSpan.FromSeconds(10);
+});
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {

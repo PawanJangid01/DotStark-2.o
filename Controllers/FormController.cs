@@ -126,11 +126,11 @@ namespace DotStarkWeb.Controllers
             //    return CurrentUmbracoPage();
             //}
 
-            //var isValidCaptcha = await _recaptchaService.ValidateTokenAsync(recaptchaToken, ipAddress);
+            //var isValidCaptcha = await _recaptchaService.ValidateTokenAsync(recaptchaToken);
 
             //if (!isValidCaptcha)
             //{
-            //    _logger.LogWarning($"reCAPTCHA failed for IP: {userIpAddress}");
+            //    _logger.LogWarning($"reCAPTCHA failed for IP: {ipAddress}");
             //    TempData["FormError"] = "reCAPTCHA validation failed.";
             //    return CurrentUmbracoPage();
             //}
