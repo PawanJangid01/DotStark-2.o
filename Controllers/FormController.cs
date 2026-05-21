@@ -120,20 +120,20 @@ namespace DotStarkWeb.Controllers
             // =========================
             // reCAPTCHA VALIDATION (FIXED)
             // =========================
-            if (string.IsNullOrWhiteSpace(recaptchaToken))
-            {
-                TempData["FormError"] = "Invalid reCAPTCHA token.";
-                return CurrentUmbracoPage();
-            }
+            //if (string.IsNullOrWhiteSpace(recaptchaToken))
+            //{
+            //    TempData["FormError"] = "Invalid reCAPTCHA token.";
+            //    return CurrentUmbracoPage();
+            //}
 
-            var isValidCaptcha = await _recaptchaService.ValidateTokenAsync(recaptchaToken);
+            //var isValidCaptcha = await _recaptchaService.ValidateTokenAsync(recaptchaToken);
 
-            if (!isValidCaptcha)
-            {
-                _logger.LogWarning($"reCAPTCHA failed for IP: {ipAddress}");
-                TempData["FormError"] = "reCAPTCHA validation failed.";
-                return CurrentUmbracoPage();
-            }
+            //if (!isValidCaptcha)
+            //{
+            //    _logger.LogWarning($"reCAPTCHA failed for IP: {ipAddress}");
+            //    TempData["FormError"] = "reCAPTCHA validation failed.";
+            //    return CurrentUmbracoPage();
+            //}
 
             // =========================
             // SPAM / SQL INJECTION FILTER

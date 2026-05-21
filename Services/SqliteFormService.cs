@@ -252,7 +252,7 @@ namespace DotStarkWeb.Services
             // 🔥 Map ResourceId → File Name
             var fileName = resourceId switch
             {
-                "AI_Agent_Architecture_Guide" => "AI_Agent_Architecture_Guide.pdf",
+                "AI_Agent_Architecture_Guide" => "AI Agent Architecture Guide.pdf",
                 _ => null
             };
 
