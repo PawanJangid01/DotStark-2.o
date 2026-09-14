@@ -91,8 +91,7 @@ var pageMetaDescription = seoBlock?.Value<string>("metaDescription");
     var consent = Context.Request.Cookies["cookieConsent"];
 }
 
-@if (consent == "accepted")
-{
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HB5S7MMQ5Q"></script>
 <script>
@@ -102,7 +101,7 @@ var pageMetaDescription = seoBlock?.Value<string>("metaDescription");
  
   gtag('config', 'G-HB5S7MMQ5Q');
 </script>
-}
+
     @{
         var currentUrl = Context.Request.Path.Value?.ToLower();
     }
